@@ -270,7 +270,35 @@ export default function Home() {
       <section id="faq" className="faq shell"><SectionTitle>Preguntas frecuentes</SectionTitle><div className="faq-grid">{landing.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><p><FaqAnswer answer={answer} /></p></details></article>)}</div></section>
 
       <section id="ia-negocios" className="closing shell"><div><h2>¿Necesitas una <em>solución de IA para tu empresa?</em></h2><p>Diseñamos asistentes, automatizaciones y herramientas inteligentes para reducir trabajo manual y mejorar la forma en que trabaja tu equipo.</p><Button>Cuéntanos qué quieres automatizar</Button><small>Asistentes IA · Automatizaciones · Herramientas internas</small></div><div className="device-scene"><div className="laptop"><div className="screen"><b>{siteConfig.name}</b><strong>IA a medida</strong><div className="mini-line" /></div></div><div className="phone"><b>Proyectos</b><span>Activos</span></div><i /><i /></div></section>
-      <footer className="shell"><img className="footer-brand" src={siteConfig.brand.logo} alt={siteConfig.name} width="280" height="90" />© {new Date().getFullYear()} {siteConfig.name}. IA para vendedores y empresas.</footer>
+      <footer className="site-footer shell">
+        <div className="footer-main">
+          <div className="footer-brand-block">
+            <img className="footer-brand" src={siteConfig.brand.logo} alt={siteConfig.name} width={280} height={90} />
+          </div>
+          <nav className="footer-nav" aria-label="Enlaces del pie de página">
+            <div className="footer-column">
+              <h2>Producto</h2>
+              <a href="#funciones"><span>Funciones</span></a>
+              <a href="#planes"><span>Precios</span></a>
+              <a href="#faq"><span>Preguntas frecuentes</span></a>
+            </div>
+            <div className="footer-column">
+              <h2>Soluciones</h2>
+              <a href="#ia-negocios"><span>IA para empresas</span></a>
+              <a href={siteConfig.whatsappUrl}><span>Contacto</span></a>
+            </div>
+            <div className="footer-column">
+              <h2>Legal</h2>
+              <span className="footer-item"><span>Términos y condiciones</span></span>
+              <span className="footer-item"><span>Política de privacidad</span></span>
+            </div>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.</span>
+          <span>{siteConfig.name} es un servicio independiente y no está afiliado a Mercado Libre.</span>
+        </div>
+      </footer>
     </div>
   </main>;
 }
