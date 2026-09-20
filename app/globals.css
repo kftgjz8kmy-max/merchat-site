@@ -302,6 +302,7 @@ main section[id] { scroll-margin-top:98px; }
   box-shadow: 0 16px 36px rgb(37 99 235 / 11%);
   grid-column: 1 / -1;
   transform-origin: top center;
+  will-change: transform, opacity;
   animation: faq-open-expand .48s cubic-bezier(.16, 1, .3, 1) both;
 }
 
@@ -1818,7 +1819,6 @@ main section[id]:not(#inicio) {
     font-size: 12px;
   }
 }
-
 @media(max-width:640px) {
   .site-footer {
     padding: 58px 20px 30px;
