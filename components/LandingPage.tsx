@@ -339,7 +339,7 @@ export default function LandingPage() {
     </section>
 
     <div className="post-pricing-background">
-      <section id="como-funciona" className="steps shell"><SectionTitle>{ui.stepsTitle}</SectionTitle><p className="steps-intro">{ui.stepsIntro}</p><div>{localizedLanding.steps.map(([number, title, description], i) => <article key={number}><div className="step-symbol"><StepIcon step={i} /></div><div className="step-title"><h3>{title}</h3></div><p>{description}</p></article>)}</div></section>
+      <section id="como-funciona" className="steps shell"><SectionTitle>{ui.stepsTitle}</SectionTitle><p className="steps-intro">{ui.stepsIntro}</p><div>{localizedLanding.steps.map(([number, title, description], i) => <article key={number}><div className="step-symbol"><StepIcon step={i} /></div><div className="step-title"><h3>{title}</h3></div><p>{description}</p>{i === 2 && <a className="chatgpt-guide-link" href={siteConfig.chatgptGuideUrl} target="_blank" rel="noopener noreferrer">{ui.chatgptGuideLabel}<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" /></svg></a>}</article>)}</div></section>
 
       <section id="seguridad" className="trust shell"><SectionTitle>{ui.trustTitle}</SectionTitle><div>{localizedLanding.trust.map((item, i) => <article key={item}><span className="trust-icon"><img src={trustIconSources[i] ?? trustIconSources[0]} alt="" width="48" height="48" /></span>{item}</article>)}</div></section>
 

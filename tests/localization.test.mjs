@@ -33,3 +33,16 @@ test("Spanish content is the recursive fallback for every message consumer", asy
   assert.match(landingConfig, /return getLocaleMessages\(locale\)\.landing/);
   assert.match(landingConfig, /return getLocaleMessages\(locale\)\.ui/);
 });
+
+test("the shared onboarding section exposes the ChatGPT guide link", async () => {
+  const [landingPage, site, spanishMessages] = await Promise.all([
+    read("components/LandingPage.tsx"),
+    read("config/site.ts"),
+    read("messages/es.json"),
+  ]);
+
+  assert.match(landingPage, /siteConfig\.chatgptGuideUrl/);
+  assert.match(landingPage, /ui\.chatgptGuideLabel/);
+  assert.match(site, /chatgptGuideUrl: "https:\/\/ml-automation-iota\.vercel\.app\/guia-chatgpt"/);
+  assert.match(spanishMessages, /"chatgptGuideLabel": "Guía para conectar merchat a ChatGPT"/);
+});

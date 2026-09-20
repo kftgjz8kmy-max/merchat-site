@@ -1765,6 +1765,60 @@ main section[id]:not(#inicio) {
   line-height: 1.5;
 }
 
+/* Keep the ChatGPT guide easy to find without competing with the onboarding copy. */
+.chatgpt-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border: 1px solid #cfe1ff;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 82%);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgb(37 99 235 / 9%);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.chatgpt-guide-link svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  transition: transform .2s ease;
+}
+
+.chatgpt-guide-link:hover,
+.chatgpt-guide-link:focus-visible {
+  border-color: #9fc5ff;
+  box-shadow: 0 8px 20px rgb(37 99 235 / 14%);
+  transform: translateY(-1px);
+}
+
+.chatgpt-guide-link:hover svg,
+.chatgpt-guide-link:focus-visible svg {
+  transform: translateX(2px);
+}
+
+.chatgpt-guide-link:focus-visible {
+  outline: 3px solid rgb(37 99 235 / 24%);
+  outline-offset: 3px;
+}
+
+@media(max-width:640px) {
+  .chatgpt-guide-link {
+    margin-top: 16px;
+    font-size: 12px;
+  }
+}
+
 @media(max-width:640px) {
   .site-footer {
     padding: 58px 20px 30px;
