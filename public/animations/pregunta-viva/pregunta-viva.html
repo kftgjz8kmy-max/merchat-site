@@ -111,6 +111,96 @@
       </section>
       <script>
         const previewParams = new URLSearchParams(window.location.search);
+        const locale = previewParams.get("locale") || "es";
+        if (locale === "en") {
+          document.documentElement.lang = "en";
+          document.title = "merchat — Live conversation";
+          document.querySelector("main").setAttribute("aria-label", "Animated merchat conversation");
+          const setText = (selector, value) => {
+            const node = document.querySelector(selector);
+            if (node) node.textContent = value;
+          };
+          const setDataText = (selector, value) => {
+            const node = document.querySelector(selector);
+            if (node) node.dataset.text = value;
+          };
+          const setTrailingText = (selector, value) => {
+            const node = document.querySelector(selector);
+            if (!node) return;
+            const textNode = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE);
+            if (textNode) textNode.textContent = value;
+          };
+          setText(".online", "Online");
+          setDataText(".scene-1 .typing", "What were my best-selling products this month, and how much revenue did each one generate?");
+          setTrailingText(".scene-1 .thinking", "Reviewing your sales…");
+          setDataText(".scene-1 .response-text", "These are your best-selling products this month:");
+          setText(".scene-1 .result-head b", "Best-selling products");
+          setText(".scene-1 .result-head small", "This month");
+          setText(".scene-1 .result-summary", "112 units sold · S/ 21,888 in revenue");
+          setText(".scene-1 .rank-row:nth-of-type(2) span", "Bluetooth headphones");
+          setText(".scene-1 .rank-row:nth-of-type(2) small", "47 units");
+          setText(".scene-1 .rank-row:nth-of-type(3) span", "20W USB-C charger");
+          setText(".scene-1 .rank-row:nth-of-type(3) small", "36 units");
+          setText(".scene-1 .rank-row:nth-of-type(4) span", "Phone stand");
+          setText(".scene-1 .rank-row:nth-of-type(4) small", "29 units");
+          setDataText(".scene-2 .typing", "Create a listing from these photos and ask me only for what is missing.");
+          setTrailingText(".scene-2 .thinking", "Identifying the product…");
+          setDataText(".scene-2 .response-text", "I identified the product. To publish it, I only need:");
+          setText(".scene-2 .photo-copy span", "✓ Product identified");
+          setText(".scene-2 .missing", "Confirm the color and sale price.");
+          setDataText(".scene-3 .typing", "Add this listing to the Deals of the Week promotion.");
+          setTrailingText(".scene-3 .thinking", "Checking requirements…");
+          setDataText(".scene-3 .response-text", "The listing is ready to join this promotion:");
+          setText(".scene-3 .promotion-copy b", "Deals of the Week");
+          setText(".scene-3 .promotion-copy small", "10% off · 7 days");
+          setText(".scene-3 .ready", "Confirm");
+          setDataText(".scene-4 .typing", "Compare my price with similar listings and recommend a competitive price.");
+          setTrailingText(".scene-4 .thinking", "Comparing listings…");
+          setDataText(".scene-4 .response-text", "Your price is above the market. To compete more effectively:");
+          setText(".scene-4 .price-heading small", "Competitive range");
+          setText(".scene-4 .market-badge", "Market");
+          setText(".scene-4 .price-note", "Your current price: S/ 1,399");
+          setText(".scene-4 .recommendation small", "Suggested price");
+          setText(".scene-4 .recommendation span", "More competitive");
+          document.querySelectorAll(".input").forEach((node) => {
+            const icon = node.querySelector("svg");
+            node.textContent = "Type your message… ";
+            if (icon) node.append(icon);
+          });
+        } else if (locale === "pt-BR") {
+          document.documentElement.lang = "pt-BR";
+          document.title = "merchat — Conversa ao vivo";
+          document.querySelector("main").setAttribute("aria-label", "Conversa animada com o merchat");
+          const setText = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+          const setDataText = (selector, value) => { const node = document.querySelector(selector); if (node) node.dataset.text = value; };
+          const setTrailingText = (selector, value) => { const node = document.querySelector(selector); if (!node) return; const textNode = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE); if (textNode) textNode.textContent = value; };
+          setText(".online", "Online");
+          setDataText(".scene-1 .typing", "Quais foram meus produtos mais vendidos este mês e quanto cada um faturou?");
+          setTrailingText(".scene-1 .thinking", "Revisando suas vendas…");
+          setDataText(".scene-1 .response-text", "Estes são os produtos que você mais vendeu este mês:");
+          setText(".scene-1 .result-head b", "Produtos mais vendidos"); setText(".scene-1 .result-head small", "Este mês"); setText(".scene-1 .result-summary", "112 unidades vendidas · S/ 21.888 faturados");
+          setText(".scene-1 .rank-row:nth-of-type(2) span", "Fones de ouvido Bluetooth"); setText(".scene-1 .rank-row:nth-of-type(2) small", "47 unidades");
+          setText(".scene-1 .rank-row:nth-of-type(3) span", "Carregador USB-C 20W"); setText(".scene-1 .rank-row:nth-of-type(3) small", "36 unidades");
+          setText(".scene-1 .rank-row:nth-of-type(4) span", "Suporte para celular"); setText(".scene-1 .rank-row:nth-of-type(4) small", "29 unidades");
+          setDataText(".scene-2 .typing", "Crie um anúncio a partir destas fotos e pergunte apenas o que estiver faltando."); setTrailingText(".scene-2 .thinking", "Identificando o produto…"); setDataText(".scene-2 .response-text", "Identifiquei o produto. Para publicá-lo, preciso apenas de:"); setText(".scene-2 .photo-copy span", "✓ Produto identificado"); setText(".scene-2 .missing", "Confirme a cor e o preço de venda.");
+          setDataText(".scene-3 .typing", "Adicione este anúncio à promoção Ofertas da Semana."); setTrailingText(".scene-3 .thinking", "Verificando requisitos…"); setDataText(".scene-3 .response-text", "O anúncio está pronto para entrar nesta promoção:"); setText(".scene-3 .promotion-copy b", "Ofertas da Semana"); setText(".scene-3 .promotion-copy small", "10% de desconto · 7 dias"); setText(".scene-3 .ready", "Confirmar");
+          setDataText(".scene-4 .typing", "Compare meu preço com anúncios semelhantes e recomende um preço competitivo."); setTrailingText(".scene-4 .thinking", "Comparando anúncios…"); setDataText(".scene-4 .response-text", "Seu preço está acima do mercado. Para competir melhor:"); setText(".scene-4 .price-heading small", "Faixa competitiva"); setText(".scene-4 .market-badge", "Mercado"); setText(".scene-4 .price-note", "Seu preço atual: S/ 1.399"); setText(".scene-4 .recommendation small", "Preço sugerido"); setText(".scene-4 .recommendation span", "Mais competitivo");
+          document.querySelectorAll(".input").forEach((node) => { const icon = node.querySelector("svg"); node.textContent = "Digite sua mensagem… "; if (icon) node.append(icon); });
+        } else if (locale === "zh-CN") {
+          document.documentElement.lang = "zh-CN";
+          document.title = "merchat — 实时对话";
+          document.querySelector("main").setAttribute("aria-label", "merchat 动画对话");
+          const setText = (selector, value) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+          const setDataText = (selector, value) => { const node = document.querySelector(selector); if (node) node.dataset.text = value; };
+          const setTrailingText = (selector, value) => { const node = document.querySelector(selector); if (!node) return; const textNode = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE); if (textNode) textNode.textContent = value; };
+          setText(".online", "在线");
+          setDataText(".scene-1 .typing", "本月哪些商品卖得最好？每件商品的销售额是多少？"); setTrailingText(".scene-1 .thinking", "正在查看你的销售…"); setDataText(".scene-1 .response-text", "这是你本月销量最高的商品："); setText(".scene-1 .result-head b", "畅销商品"); setText(".scene-1 .result-head small", "本月"); setText(".scene-1 .result-summary", "已售 112 件 · 销售额 S/ 21,888");
+          setText(".scene-1 .rank-row:nth-of-type(2) span", "蓝牙耳机"); setText(".scene-1 .rank-row:nth-of-type(2) small", "47 件"); setText(".scene-1 .rank-row:nth-of-type(3) span", "20W USB-C 充电器"); setText(".scene-1 .rank-row:nth-of-type(3) small", "36 件"); setText(".scene-1 .rank-row:nth-of-type(4) span", "手机支架"); setText(".scene-1 .rank-row:nth-of-type(4) small", "29 件");
+          setDataText(".scene-2 .typing", "根据这些照片创建商品刊登，只询问缺少的信息。"); setTrailingText(".scene-2 .thinking", "正在识别商品…"); setDataText(".scene-2 .response-text", "我已识别出商品。要发布它，我只需要："); setText(".scene-2 .photo-copy span", "✓ 商品已识别"); setText(".scene-2 .missing", "请确认颜色和售价。");
+          setDataText(".scene-3 .typing", "将这个刊登加入本周优惠促销。"); setTrailingText(".scene-3 .thinking", "正在检查要求…"); setDataText(".scene-3 .response-text", "该刊登已准备好加入此促销："); setText(".scene-3 .promotion-copy b", "本周优惠"); setText(".scene-3 .promotion-copy small", "10% 折扣 · 7 天"); setText(".scene-3 .ready", "确认");
+          setDataText(".scene-4 .typing", "比较我的价格与相似刊登，并推荐一个有竞争力的价格。"); setTrailingText(".scene-4 .thinking", "正在比较刊登…"); setDataText(".scene-4 .response-text", "你的价格高于市场。为了提高竞争力："); setText(".scene-4 .price-heading small", "竞争区间"); setText(".scene-4 .market-badge", "市场"); setText(".scene-4 .price-note", "你的当前价格：S/ 1,399"); setText(".scene-4 .recommendation small", "建议价格"); setText(".scene-4 .recommendation span", "更具竞争力");
+          document.querySelectorAll(".input").forEach((node) => { const icon = node.querySelector("svg"); node.textContent = "输入你的消息… "; if (icon) node.append(icon); });
+        }
         if (previewParams.has("device")) document.documentElement.classList.add("iphone-preview");
         if (previewParams.has("embed")) document.documentElement.classList.add("desktop-embed");
         const chat = document.querySelector(".chat");

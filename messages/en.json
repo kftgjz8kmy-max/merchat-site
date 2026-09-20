@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "title": "merchat | AI for Mercado Libre sellers",
+    "description": "The AI assistant for managing Mercado Libre."
+  },
+  "language": {
+    "selector": "Select language"
+  },
+  "landing": {
+    "hero": {
+      "eyebrow": "AI assistant for Mercado Libre",
+      "description": "Start selling, improve your listings, and understand your profits with an assistant that works for you."
+    },
+    "useCases": [
+      {
+        "id": "create-listing",
+        "category": "Create a listing",
+        "prompt": "I want to sell this phone. It is new, has 256 GB, and I have three units.",
+        "resultType": "listing",
+        "resultTitle": "Listing ready to review"
+      },
+      {
+        "id": "publish-from-photo",
+        "category": "Publish from a photo",
+        "prompt": "Use these photos, identify the product, and ask me only for what is missing.",
+        "resultType": "photo-identification",
+        "resultTitle": "Only 2 details missing"
+      },
+      {
+        "id": "technical-details",
+        "category": "Complete technical details",
+        "prompt": "Complete the missing attributes and verify that the information is correct.",
+        "resultType": "technical",
+        "resultTitle": "12 attributes verified",
+        "resultDescription": "3 attributes completed"
+      },
+      {
+        "id": "compare-prices",
+        "category": "Compare your prices",
+        "prompt": "Compare my price with similar listings and tell me whether I should adjust it.",
+        "resultType": "price-range",
+        "resultTitle": "4% above the range",
+        "resultDescription": "Current price: S/ 1,399"
+      },
+      {
+        "id": "calculate-discount",
+        "category": "Calculate your discount",
+        "prompt": "Using my costs and fees, tell me how much I can discount without losing money.",
+        "resultType": "discount",
+        "resultTitle": "Your margin stays positive",
+        "resultDescription": "Maximum discount: 11%"
+      },
+      {
+        "id": "create-promotion",
+        "category": "Create a promotion",
+        "prompt": "Create a 10% promotion for these products for seven days.",
+        "resultType": "promotion",
+        "resultTitle": "Promotion ready to confirm",
+        "resultDescription": "Deal of the week"
+      },
+      {
+        "id": "add-to-promotion",
+        "category": "Add to a promotion",
+        "prompt": "Add these products to the Deals of the Week promotion.",
+        "resultType": "eligibility",
+        "resultTitle": "Products prepared",
+        "resultDescription": "5 of 6 added"
+      },
+      {
+        "id": "profit-excel",
+        "category": "Calculate your profit",
+        "prompt": "I will give you my costs. Create an Excel file with net profit after fees and shipping.",
+        "resultType": "excel",
+        "resultTitle": "Net profit calculated",
+        "resultDescription": "126 listings analyzed"
+      },
+      {
+        "id": "bulk-catalog",
+        "category": "Update your catalog",
+        "prompt": "Use this Excel file to update the prices and stock of my listings.",
+        "resultType": "bulk-update",
+        "resultTitle": "Changes ready to approve",
+        "resultDescription": "84 products reviewed"
+      },
+      {
+        "id": "last-sale",
+        "category": "Check your latest sale",
+        "prompt": "Show me my latest sale with the product, buyer, payment, shipping, and status.",
+        "resultType": "sale",
+        "resultTitle": "S/ 1,249",
+        "resultDescription": "12 minutes ago"
+      },
+      {
+        "id": "compare-products",
+        "category": "Compare your products",
+        "prompt": "Show me the three best-selling and three lowest-selling products this quarter.",
+        "resultType": "ranking",
+        "resultTitle": "Best and lowest sellers"
+      },
+      {
+        "id": "restock",
+        "category": "Plan your restocking",
+        "prompt": "Analyze my sales and tell me which products to restock and how many units to buy.",
+        "resultType": "restock",
+        "resultTitle": "Based on turnover and stock"
+      },
+      {
+        "id": "stagnant-products",
+        "category": "Find stagnant products",
+        "prompt": "Show me the listings that had no sales in the last 60 days.",
+        "resultType": "stagnant",
+        "resultTitle": "Needs attention",
+        "resultDescription": "9 listings without sales"
+      },
+      {
+        "id": "improve-listings",
+        "category": "Improve your listings",
+        "prompt": "Find listings with views but few sales and tell me what I should improve.",
+        "resultType": "performance",
+        "resultTitle": "Conversion: 0.24%",
+        "resultDescription": "1,240 views · 3 sales"
+      },
+      {
+        "id": "quarterly-diagnosis",
+        "category": "Review your quarter",
+        "prompt": "Analyze this quarter, compare it with the previous one, and show me a diagnosis with charts.",
+        "resultType": "dashboard",
+        "resultTitle": "Performance is growing",
+        "resultDescription": "S/ 184,500 · +14%"
+      }
+    ],
+    "photoExamples": [
+      {
+        "eyebrow": "Seller in action",
+        "image": "/images/lifestyle/seller-workspace.png",
+        "alt": "Seller working on her online store from a laptop",
+        "note": "Clearer decisions for your operation."
+      },
+      {
+        "eyebrow": "Connected team",
+        "image": "/images/lifestyle/agency-team.png",
+        "alt": "Ecommerce team reviewing sales and orders",
+        "note": "A clear view for every client."
+      },
+      {
+        "eyebrow": "Publish in fewer steps",
+        "image": "/images/lifestyle/publish-from-photo.png",
+        "alt": "Seller photographing a smartphone to publish it in her online store",
+        "note": "From a photo to a listing ready to review."
+      },
+      {
+        "eyebrow": "Your catalog under control",
+        "image": "/images/lifestyle/catalog-control.png",
+        "alt": "Ecommerce operator reviewing inventory and catalog from a laptop",
+        "note": "Prices, stock, and promotions kept up to date."
+      },
+      {
+        "eyebrow": "Turn data into action",
+        "image": "/images/lifestyle/sales-analysis.png",
+        "alt": "Ecommerce team analyzing sales performance",
+        "note": "Spot opportunities to grow with clarity."
+      }
+    ],
+    "features": [
+      [
+        "/images/feature-icons/publishing-v3-transparent.png",
+        "Publish in minutes",
+        [
+          "Create a listing through conversation",
+          "Publish from a photo",
+          "Complete and verify technical details"
+        ]
+      ],
+      [
+        "/images/feature-icons/market-research.png",
+        "Improve your prices",
+        [
+          "Compare your prices",
+          "Calculate discounts",
+          "Create promotions",
+          "Add products to promotions"
+        ]
+      ],
+      [
+        "/images/feature-icons/order-management.png",
+        "Control your operation",
+        [
+          "Calculate profit in Excel",
+          "Update prices and stock",
+          "Check your latest sales",
+          "Identify best and lowest sellers"
+        ]
+      ],
+      [
+        "/images/feature-icons/sales-insights.png",
+        "Analyze your sales",
+        [
+          "Find products that are not selling",
+          "Optimize listings",
+          "Generate a quarterly diagnosis"
+        ]
+      ]
+    ],
+    "steps": [
+      [
+        "1",
+        "Create your account",
+        "Sign up and prepare your workspace."
+      ],
+      [
+        "2",
+        "Connect Mercado Libre",
+        "Authorize access to check your products, listings, and sales."
+      ],
+      [
+        "3",
+        "Install your merchat assistant",
+        "Connect it with ChatGPT, Claude, or another compatible tool."
+      ],
+      [
+        "4",
+        "Manage your business",
+        "Ask, publish, and manage your operation from a conversation."
+      ]
+    ],
+    "plans": [
+      {
+        "name": "Seller",
+        "audience": "For people who want to better understand their operation.",
+        "originalPrice": "58",
+        "price": "29",
+        "prefix": "",
+        "setup": "",
+        "featured": false,
+        "cta": "Free for 14 days",
+        "items": [
+          "Connect one Mercado Libre account",
+          "Check sales, orders, and deliveries",
+          "Review listings, prices, and stock",
+          "Analyze performance and opportunities",
+          "Check promotions and campaigns",
+          "Monthly queries included",
+          "Analyze your account without making changes"
+        ]
+      },
+      {
+        "name": "Seller Pro",
+        "audience": "Your assistant for operating on Mercado Libre.",
+        "originalPrice": "198",
+        "price": "99",
+        "prefix": "",
+        "setup": "",
+        "featured": true,
+        "cta": "Free for 14 days",
+        "items": [
+          "Everything included in Seller",
+          "Connect one Mercado Libre account",
+          "Create and update listings",
+          "Change prices and stock",
+          "Pause and reactivate listings",
+          "Manage promotions and discounts",
+          "Analyze sales and performance",
+          "Review Product Ads opportunities",
+          "Confirm before making changes"
+        ]
+      },
+      {
+        "name": "Seller Ultra",
+        "audience": "For agencies and teams operating multiple accounts.",
+        "originalPrice": "398",
+        "price": "199",
+        "prefix": "",
+        "setup": "",
+        "featured": false,
+        "cta": "Get started with Ultra",
+        "items": [
+          "Everything included in Seller Pro",
+          "Connect up to 3 Mercado Libre accounts",
+          "Review and operate each account separately",
+          "Manage listings, prices, and promotions",
+          "Analyze each business's performance",
+          "Intensive merchat usage",
+          "Priority support",
+          "Add accounts for S/50 per month"
+        ]
+      }
+    ],
+    "trust": [
+      "You connect Mercado Libre through official authorization.",
+      "Each user can access only their own accounts.",
+      "Your data remains separate for each client.",
+      "We ask for confirmation before important actions."
+    ],
+    "faqs": [
+      [
+        "What is merchat?",
+        "merchat is an AI assistant for Mercado Libre. You can talk with it to check sales, review listings, analyze your operation, and—depending on your plan—complete tasks such as creating listings, changing prices, updating stock, or managing promotions."
+      ],
+      [
+        "Do I need technical knowledge to use it?",
+        "No. If you know how to talk with ChatGPT, Claude, or another compatible AI, you can use merchat. Just connect your Mercado Libre account and ask for what you need in your own words."
+      ],
+      [
+        "What is included in the 14-day free trial?",
+        "For 14 days, you can try Seller Pro features with one Mercado Libre account, including queries, analysis, and tools for managing your operation.\n\nNo card is required to get started."
+      ],
+      [
+        "When does my free trial begin?",
+        "Your trial starts when you create your merchat account and lasts 14 days."
+      ],
+      [
+        "What happens after the 14 days?",
+        "You can choose the plan that best fits your operation to continue using merchat."
+      ],
+      [
+        "What is the difference between Seller, Seller Pro, and Seller Ultra?",
+        "**Seller** is designed for checking and analyzing your account without making changes.\n\n**Seller Pro** also lets you operate your account: create and update listings, change prices and stock, manage promotions, and perform other actions with your authorization.\n\n**Seller Ultra** includes Pro features and is designed for people who need to manage multiple Mercado Libre accounts."
+      ],
+      [
+        "Can merchat make changes to my Mercado Libre account?",
+        "Yes, on plans that include operational features. It can help you create listings, update prices or stock, pause listings, and manage promotions, among other tasks.\n\nBefore important actions, merchat shows you what it will do and asks for your confirmation."
+      ],
+      [
+        "Can it change anything without my authorization?",
+        "Important actions require your confirmation before they are carried out. You remain in control of your Mercado Libre account."
+      ],
+      [
+        "How does merchat connect to my Mercado Libre account?",
+        "The connection uses Mercado Libre's official authorization process. You do not need to share your Mercado Libre password with merchat."
+      ],
+      [
+        "Are my data and account protected?",
+        "Yes. Each user can access only their own connected accounts, and data remains separated between clients.\n\nThe Mercado Libre connection also uses its official authorization system."
+      ],
+      [
+        "Can I use merchat with ChatGPT?",
+        "Yes. merchat can connect with ChatGPT and other compatible AI tools.\n\nAfter you create your account and connect Mercado Libre, we guide you through the setup so you can start using it."
+      ],
+      [
+        "How do I start talking with merchat?",
+        "Once connected, type **@merchat** followed by what you need.\n\nFor example:\n\n“@merchat, what were my best-selling products this month?”\n\nThen you can keep talking naturally."
+      ],
+      [
+        "Do I have to install a complicated program?",
+        "No. The process is designed to guide you step by step. Create your account, connect Mercado Libre, install merchat in your AI assistant, and start using it through conversation."
+      ],
+      [
+        "Can I connect multiple Mercado Libre accounts?",
+        "Yes. Seller Ultra lets you connect up to 3 Mercado Libre accounts, and you can add more accounts for S/50 per month each."
+      ],
+      [
+        "Can merchat create new listings?",
+        "Yes. You can describe the product, provide its details, or even work from photos. merchat prepares the listing, completes the required information, and lets you review it before publishing."
+      ],
+      [
+        "Can I use merchat only to check information without allowing changes?",
+        "Yes. The Seller plan is designed for exactly that: checking sales, listings, stock, performance, promotions, and other operational information without making changes to your account."
+      ],
+      [
+        "What can I ask merchat?",
+        "You can ask things like:\n\n“What were my best-selling products this month?”\n\n“Show me the listings that need improvement.”\n\n“How much did I earn after fees?”\n\n“Update the stock for these products.”\n\n“Create a promotion for these listings.”\n\n“I want to publish this product.”\n\nThe idea is to manage Mercado Libre through conversation instead of searching for every function manually."
+      ]
+    ]
+  },
+  "ui": {
+    "heroTitle": "Manage Mercado Libre by talking with an AI that",
+    "heroEmphasis": "understands your business.",
+    "startFree": "Start Free",
+    "trial": "14 days free",
+    "noCard": "No card required",
+    "howItWorks": "See how it works",
+    "featuresTitle": "What you can do with merchat",
+    "showcaseTitle": "Ask merchat for what you need",
+    "stepsTitle": "How it works",
+    "stepsIntro": "Create your account, connect Mercado Libre, and use merchat as your assistant from the AI tool you prefer.",
+    "trustTitle": "Your account and data stay protected",
+    "pricingTitle": "Plans for every kind of operation",
+    "faqTitle": "Frequently asked questions",
+    "languageSelector": "Select language",
+    "currentLanguage": "Current language",
+    "showcaseAria": "Examples of conversations and results in merchat",
+    "showcaseNavigation": "Example navigation",
+    "showcasePage": "View examples",
+    "carouselRole": "carousel",
+    "carouselPrevious": "View previous examples",
+    "carouselNext": "View next examples",
+    "animationLabel": "Animated example of a conversation with merchat",
+    "navHow": "How it works",
+    "navFeatures": "What you can do",
+    "navPricing": "Pricing",
+    "navTrust": "Security",
+    "navFaq": "FAQ",
+    "navSolutions": "Custom AI",
+    "menu": "Open menu",
+    "quickPublish": "Publish without the hassle",
+    "quickHours": "Save hours of manual work",
+    "quickHoursLine1": "Save hours",
+    "quickHoursLine2": "of manual work",
+    "quickNatural": "Manage your account in natural language",
+    "quickNaturalLine1": "Manage your account",
+    "quickNaturalLine2": "in natural language",
+    "pricingIntro": "Start with 14 days free. Discover everything merchat can do for your operation and choose your plan when you are ready.",
+    "pricingOffer": "Get 50% off every plan.",
+    "month": "/month",
+    "discountLabel": "50% OFF",
+    "recommended": "RECOMMENDED",
+    "planNoCard": "No card required",
+    "resultNew": "New",
+    "resultStock": "Stock",
+    "resultUnits": "units",
+    "resultModelIdentified": "Model identified",
+    "resultBrand": "Brand",
+    "resultMemory": "Storage",
+    "resultScreen": "Display",
+    "resultCompetitiveRange": "COMPETITIVE RANGE",
+    "resultCurrentPrice": "Current price",
+    "resultProfitableMinimum": "Profitable minimum",
+    "resultWeeklyOffer": "Deal of the week",
+    "resultProducts": "products",
+    "resultDays": "days",
+    "resultAdded": "added",
+    "resultNeedsPriceAdjustment": "needs a price adjustment",
+    "resultProfitFile": "Profit.xlsx",
+    "resultPrice": "Price",
+    "resultFee": "Fee",
+    "resultShipping": "Shipping",
+    "resultExcelGenerated": "Excel file generated",
+    "resultPrices": "prices",
+    "resultStocks": "stock levels",
+    "resultReview": "to review",
+    "resultPaymentApproved": "Payment approved",
+    "resultReadyToShip": "Ready to ship",
+    "resultBestSellers": "Best sellers",
+    "resultLowestSellers": "Lowest sellers",
+    "resultHeadphones": "Headphones",
+    "resultWebcam": "Webcam",
+    "resultSmartwatch": "Smartwatch",
+    "resultAirFryer": "Air fryer",
+    "resultFrozenStock": "tied up in stock",
+    "resultAboveMarket": "priced above the market",
+    "resultAdjustPrice": "Adjust price",
+    "resultCompleteAttributes": "Complete attributes",
+    "resultReviewPhotos": "Review photos",
+    "resultQuarterSales": "sales this quarter",
+    "closingTitle": "Need a",
+    "closingEmphasis": "custom AI solution for your company?",
+    "closingBody": "We design assistants, automations, and intelligent tools to reduce manual work and improve how your team works.",
+    "closingCta": "Tell us what you want to automate",
+    "closingTags": "AI assistants · Automations · Internal tools",
+    "deviceCustomAi": "Custom AI",
+    "deviceProjects": "Projects",
+    "deviceActive": "Active",
+    "footerNav": "Footer links",
+    "footerProduct": "Product",
+    "footerFeatures": "Features",
+    "footerPricing": "Pricing",
+    "footerFaq": "Frequently asked questions",
+    "footerSolutions": "Solutions",
+    "footerAi": "AI for companies",
+    "footerContact": "Contact",
+    "footerLegal": "Legal",
+    "footerTerms": "Terms and conditions",
+    "footerPrivacy": "Privacy policy",
+    "footerRights": "All rights reserved.",
+    "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre."
+  }
+}

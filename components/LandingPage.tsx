@@ -1,0 +1,382 @@
+"use client";
+/* eslint-disable @next/next/no-img-element -- Vinext's local dev renderer is incompatible with next/image; fixed-dimension local HiDPI assets are intentional. */
+
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
+import { getLanding, getUi, landing as spanishLanding, type LandingUi, type UseCaseCard } from "@/config/landing";
+import { siteConfig } from "@/config/site";
+import { localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
+
+type HeroIconName = "sparkle" | "arrow" | "shield" | "lock" | "check" | "publish" | "clock" | "confirm" | "send" | "double-check" | "globe";
+
+function HeroIcon({ name, size = 18 }: { name: HeroIconName; size?: number }) {
+  const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.9, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  if (name === "sparkle") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path {...common} d="m12 3-1.7 5.3L5 10l5.3 1.7L12 17l1.7-5.3L19 10l-5.3-1.7z"/><path {...common} d="m19 15-.7 2.3L16 18l2.3.7L19 21l.7-2.3L22 18l-2.3-.7z"/></svg>;
+  if (name === "arrow") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path {...common} d="M5 12h14M13 6l6 6-6 6"/></svg>;
+  if (name === "shield") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path {...common} d="M12 3 5 6v5c0 4.6 2.9 8.4 7 10 4.1-1.6 7-5.4 7-10V6z"/><path {...common} d="m8.8 12 2.1 2.1 4.3-4.4"/></svg>;
+  if (name === "lock") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><rect {...common} x="5" y="10" width="14" height="10" rx="2"/><path {...common} d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg>;
+  if (name === "check") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><circle {...common} cx="12" cy="12" r="8.5"/><path {...common} d="m8.5 12 2.3 2.3 4.7-4.8"/></svg>;
+  if (name === "publish") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h7l4 4v11h-11z" fill="currentColor"/><path d="M13.5 4.5v4h4" fill="none" stroke="#FFF8EC" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 17V10m-3 3 3-3 3 3" fill="none" stroke="#FFF8EC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+  if (name === "clock") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><circle cx="11.5" cy="12.5" r="8.5" fill="currentColor"/><path d="M11.5 8.5v4l2.8 1.8" fill="none" stroke="#FFF8EC" strokeWidth="2.2" strokeLinecap="round"/><circle cx="18.3" cy="5.8" r="2" fill="#FBBF24"/></svg>;
+  if (name === "confirm") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="14" rx="3.5" fill="currentColor"/><path d="m8 12.5 2.5 2.5 5.5-5.5" fill="none" stroke="#FFF8EC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="18.2" cy="17.8" r="3.1" fill="#FBBF24"/><path d="M17.4 16.6v2.4m1.6-2.4v2.4" stroke="#2563EB" strokeWidth="1.2" strokeLinecap="round"/></svg>;
+  if (name === "send") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path {...common} d="m4 4 16 8-16 8 3-8z"/><path {...common} d="M7 12h13"/></svg>;
+  if (name === "globe") return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><circle {...common} cx="12" cy="12" r="8.5"/><path {...common} d="M3.8 12h16.4M12 3.5c2.1 2.3 3.2 5.1 3.2 8.5S14.1 18.2 12 20.5C9.9 18.2 8.8 15.4 8.8 12S9.9 5.8 12 3.5"/></svg>;
+  return <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"><path {...common} d="m4 12 3 3 6-7"/><path {...common} d="m11 12 3 3 6-7"/></svg>;
+}
+
+const languages = localeOptions;
+
+type LanguageCode = AppLocale;
+
+function LanguageSwitcher({ selectorLabel, currentLanguageLabel }: { selectorLabel: string; currentLanguageLabel: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedLanguage = useLocale() as LanguageCode;
+  const switcherRef = useRef<HTMLDivElement>(null);
+  const selected = languages.find((language) => language.code === selectedLanguage) ?? languages[0];
+
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!switcherRef.current?.contains(event.target as Node)) setIsOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const selectLanguage = (language: (typeof languages)[number]) => {
+    const hash = window.location.hash;
+    setIsOpen(false);
+    window.location.assign(`${localePaths[language.code]}${hash}`);
+  };
+
+  return <div className="language-switcher" ref={switcherRef}>
+    <button className="language-trigger" type="button" aria-label={`${currentLanguageLabel}: ${selected.label}`} aria-haspopup="true" aria-controls="language-menu" aria-expanded={isOpen} onClick={() => setIsOpen((open) => !open)}>
+      <HeroIcon name="globe" size={18} />
+      <span>{selected.shortLabel}</span>
+    </button>
+    {isOpen && <div className="language-menu" id="language-menu" role="group" aria-label={selectorLabel}>
+      {languages.map((language) => <button className={language.code === selectedLanguage ? "is-selected" : undefined} key={language.code} type="button" aria-pressed={language.code === selectedLanguage} onClick={() => selectLanguage(language)}>
+        <span>{language.label}</span>{language.code === selectedLanguage && <HeroIcon name="check" size={15} />}
+      </button>)}
+    </div>}
+  </div>;
+}
+
+function Button({ children, outline = false, href = siteConfig.whatsappUrl, icon = false }: { children: React.ReactNode; outline?: boolean; href?: string; icon?: boolean }) {
+  return <a className={`button ${outline ? "button-outline" : ""}`} href={href}>{children}{icon && <HeroIcon name="arrow" size={17} />}</a>;
+}
+
+function SectionTitle({ children, id, level = "h2" }: { children: React.ReactNode; id?: string; level?: "h2" | "h3" }) {
+  const Heading = level;
+  return <Heading id={id} className="section-title">{children}</Heading>;
+}
+
+function FaqAnswer({ answer }: { answer: string }) {
+  const paragraphs = answer.split("\n\n");
+  return <>{paragraphs.map((paragraph, paragraphIndex) => <Fragment key={`${paragraphIndex}-${paragraph}`}>
+    {paragraph.split(/(\*\*[^*]+\*\*)/g).map((part, partIndex) => part.startsWith("**") && part.endsWith("**") ? <strong key={`${paragraphIndex}-${partIndex}`}>{part.slice(2, -2)}</strong> : part)}
+    {paragraphIndex < paragraphs.length - 1 && <><br /><br /></>}
+  </Fragment>)}</>;
+}
+
+const stepIconSources = [
+  "/images/step-icons/create-account-v2.png",
+  "/images/step-icons/mercado-libre-connect-v3.png",
+  "/images/step-icons/choose-assistant-v2.png",
+  "/images/step-icons/manage-business-v2.png",
+] as const;
+
+const trustIconSources = [
+  "/images/secondary-icons/secure-connection.png",
+  "/images/secondary-icons/account-control.png",
+  "/images/secondary-icons/data-separation.png",
+  "/images/secondary-icons/confirm-before-action.png",
+] as const;
+
+function StepIcon({ step }: { step: number }) {
+  return <img className="step-icon-image" src={stepIconSources[step] ?? stepIconSources[0]} alt="" width="48" height="48" />;
+}
+
+function UseCaseResult({ card, copy }: { card: UseCaseCard; copy: LandingUi }) {
+  switch (card.resultType) {
+    case "listing": return <div className="listing-preview"><i /><div><b>Samsung Galaxy A56 256 GB</b><small>{copy.resultNew} · {copy.resultStock}: 3 {copy.resultUnits}</small></div></div>;
+    case "photo-identification": return <div className="identified-product"><i aria-hidden="true">⌁</i><div><b>Xiaomi Redmi Note 14</b><small>✓ {copy.resultModelIdentified}</small></div></div>;
+    case "technical": return <div className="technical-list"><span>{copy.resultBrand} <b>Samsung</b></span><span>{copy.resultMemory} <b>256 GB</b></span><span>{copy.resultScreen} <b>6.7″</b></span></div>;
+    case "price-range": return <div className="price-insight"><small>{copy.resultCompetitiveRange}</small><div><i /><b /></div><span>S/ 1,249 — S/ 1,349</span></div>;
+    case "discount": return <div className="metric-pairs"><span>{copy.resultCurrentPrice} <b>S/ 599</b></span><span>{copy.resultProfitableMinimum} <b>S/ 529</b></span></div>;
+    case "promotion": return <div className="promotion-summary"><b>{copy.resultWeeklyOffer}</b><span><strong>10%</strong><small>8 {copy.resultProducts} · 7 {copy.resultDays}</small></span></div>;
+    case "eligibility": return <div className="status-list"><span>✓ 5 {copy.resultAdded}</span><span>! 1 {copy.resultNeedsPriceAdjustment}</span></div>;
+    case "excel": return <div className="excel-preview"><i aria-hidden="true">↙</i><div><b>{copy.resultProfitFile}</b><small>{copy.resultPrice} · {copy.resultFee} · {copy.resultShipping}</small></div><span>{copy.resultExcelGenerated}</span></div>;
+    case "bulk-update": return <div className="metric-grid"><span><b>62</b> {copy.resultPrices}</span><span><b>18</b> {copy.resultStocks}</span><span><b>4</b> {copy.resultReview}</span></div>;
+    case "sale": return <div className="sale-summary"><b>Nintendo Switch OLED</b><span><i aria-hidden="true">✓</i> {copy.resultPaymentApproved}</span><small>{copy.resultReadyToShip}</small></div>;
+    case "ranking": return <div className="ranking"><span><b>{copy.resultBestSellers}</b> {copy.resultHeadphones} · 48</span><span><b>{copy.resultLowestSellers}</b> {copy.resultWebcam} · 1</span></div>;
+    case "restock": return <div className="restock-list"><span>{copy.resultHeadphones} <b>+20</b></span><span>{copy.resultSmartwatch} <b>+12</b></span><span>{copy.resultAirFryer} <b>+8</b></span></div>;
+    case "stagnant": return <div className="alert-summary"><b>S/ 12,480</b><span>{copy.resultFrozenStock}</span><small>3 {copy.resultAboveMarket}</small></div>;
+    case "performance": return <div className="performance-list"><span>{copy.resultAdjustPrice}</span><span>{copy.resultCompleteAttributes}</span><span>{copy.resultReviewPhotos}</span></div>;
+    case "dashboard": return <div className="mini-dashboard"><div><i /><i /><i /></div><span><b>326</b> {copy.resultQuarterSales}</span></div>;
+  }
+}
+
+function UseCaseDemoCard({ card, copy }: { card: UseCaseCard; copy: LandingUi }) { return <article className={`example-card demo-card result-${card.resultType}`}><span>{card.category}</span><div className="example-bubble">{card.prompt}</div><UseCaseResult card={card} copy={copy} /><strong>{card.resultTitle}</strong>{card.resultDescription && <small>{card.resultDescription}</small>}</article>; }
+function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
+function ShowcaseCards({ content, copy, duplicate = false }: { content: ReturnType<typeof getLanding>; copy: LandingUi; duplicate?: boolean }) {
+  const photoAfterCase = [1, 3, 5, 7, 9];
+  const leadPhoto = content.photoExamples[2];
+  return <div className="carousel-set" aria-hidden={duplicate || undefined}>{[<PhotoDemoCard demo={leadPhoto} key={leadPhoto.eyebrow} />, ...content.useCases.flatMap((card, index) => [<UseCaseDemoCard card={card} copy={copy} key={card.id} />, ...(photoAfterCase.includes(index) && index !== 5 ? [<PhotoDemoCard demo={content.photoExamples[photoAfterCase.indexOf(index)]} key={content.photoExamples[photoAfterCase.indexOf(index)].eyebrow} />] : [])])]}</div>;
+}
+
+export default function LandingPage() {
+  const locale = useLocale();
+  const localizedLanding = getLanding(locale);
+  const ui = getUi(locale);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [activeShowcasePage, setActiveShowcasePage] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const showcasePausedRef = useRef(false);
+  const showcaseAutoScrollRef = useRef<number | null>(null);
+  const showcaseResumeTimerRef = useRef<number | null>(null);
+  const showcaseDragRef = useRef({ active: false, pointerId: 0, startX: 0, startScroll: 0 });
+  const showcaseTouchRef = useRef({ active: false, startX: 0, startY: 0, lastX: 0, startScroll: 0 });
+  const [isDraggingShowcase, setIsDraggingShowcase] = useState(false);
+  const showcasePages = 4;
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
+    const updateActiveSection = () => {
+      const anchor = 110;
+      const active = sections.find((section) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= anchor && bounds.bottom > anchor;
+      });
+      setActiveSection(active?.id ?? "");
+    };
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    let previousTime = Date.now();
+    const interval = window.setInterval(() => {
+      const time = Date.now();
+      const carousel = showcaseRef.current;
+      if (carousel && showcasePausedRef.current) {
+        showcaseAutoScrollRef.current = carousel.scrollLeft;
+      } else if (carousel) {
+        const loopWidth = carousel.scrollWidth / 2;
+        const currentPosition = showcaseAutoScrollRef.current ?? carousel.scrollLeft;
+        const nextPosition = currentPosition + (time - previousTime) * 0.018;
+        showcaseAutoScrollRef.current = nextPosition >= loopWidth ? nextPosition - loopWidth : nextPosition;
+        // Keep fractional progress in memory, but assign whole pixels for
+        // WebKit versions that round element.scrollLeft values.
+        carousel.scrollLeft = Math.floor(showcaseAutoScrollRef.current);
+      }
+      previousTime = time;
+    }, 32);
+    return () => window.clearInterval(interval);
+  }, [prefersReducedMotion]);
+  useEffect(() => {
+    const carousel = showcaseRef.current;
+    if (!carousel) return;
+    const pause = () => { showcasePausedRef.current = true; };
+    const resume = () => { showcasePausedRef.current = false; };
+    const handleVisibility = () => { showcasePausedRef.current = document.hidden; };
+    carousel.addEventListener("pointerenter", pause);
+    carousel.addEventListener("pointerleave", resume);
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      carousel.removeEventListener("pointerenter", pause);
+      carousel.removeEventListener("pointerleave", resume);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
+  useEffect(() => () => {
+    if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
+  }, []);
+  const moveShowcase = (page: number) => {
+    const carousel = showcaseRef.current;
+    if (!carousel) return;
+    const loopWidth = carousel.scrollWidth / 2;
+    showcasePausedRef.current = true;
+    carousel.scrollLeft = (loopWidth * page) / showcasePages;
+    setActiveShowcasePage(page);
+    if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
+    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = false; }, 700);
+  };
+  const scheduleShowcaseResume = (delay = 900) => {
+    if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
+    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = false; }, delay);
+  };
+  const startShowcaseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const carousel = event.currentTarget;
+    showcasePausedRef.current = true;
+    showcaseDragRef.current = { active: true, pointerId: event.pointerId, startX: event.clientX, startScroll: carousel.scrollLeft };
+    carousel.setPointerCapture(event.pointerId);
+  };
+  const dragShowcase = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = showcaseDragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+    const distance = event.clientX - drag.startX;
+    if (Math.abs(distance) > 2) setIsDraggingShowcase(true);
+    event.currentTarget.scrollLeft = drag.startScroll - distance;
+  };
+  const stopShowcaseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = showcaseDragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+    showcaseDragRef.current.active = false;
+    setIsDraggingShowcase(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    showcasePausedRef.current = false;
+  };
+  const startShowcaseTouch = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    const carousel = event.currentTarget;
+    showcasePausedRef.current = true;
+    showcaseTouchRef.current = { active: true, startX: touch.clientX, startY: touch.clientY, lastX: touch.clientX, startScroll: carousel.scrollLeft };
+    scheduleShowcaseResume(1800);
+  };
+  const moveShowcaseTouch = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    const drag = showcaseTouchRef.current;
+    if (!drag.active || !touch) return;
+    const distanceX = touch.clientX - drag.startX;
+    const distanceY = touch.clientY - drag.startY;
+    if (Math.abs(distanceY) > Math.abs(distanceX)) {
+      drag.active = false;
+      showcasePausedRef.current = false;
+      return;
+    }
+    event.preventDefault();
+    drag.lastX = touch.clientX;
+    if (Math.abs(distanceX) > 2) setIsDraggingShowcase(true);
+    event.currentTarget.scrollLeft = drag.startScroll - distanceX;
+  };
+  const stopShowcaseTouch = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (!showcaseTouchRef.current.active) return;
+    const drag = showcaseTouchRef.current;
+    const distanceX = drag.lastX - drag.startX;
+    const carousel = event.currentTarget;
+    if (Math.abs(distanceX) > 12) {
+      const direction = distanceX < 0 ? 1 : -1;
+      const step = Math.max(carousel.clientWidth * 0.82, 220);
+      const steps = Math.max(1, Math.round(Math.abs(distanceX) / step));
+      const target = Math.max(0, Math.min(carousel.scrollWidth - carousel.clientWidth, drag.startScroll + direction * steps * step));
+      carousel.scrollTo({ left: target, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+    drag.active = false;
+    setIsDraggingShowcase(false);
+    scheduleShowcaseResume(900);
+  };
+  const navigateToSection = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = event.currentTarget.getAttribute("href");
+    const id = href?.startsWith("#") ? href.slice(1) : "";
+    const section = id ? document.getElementById(id) : null;
+    if (!section) return;
+    event.preventDefault();
+    const anchor = section.querySelector<HTMLElement>(".section-title") ?? section;
+    const headerOffset = 98;
+    const top = anchor.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.history.pushState(null, "", href);
+    setActiveSection(id);
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    setMobileMenuOpen(false);
+  };
+  return <main>
+    <header className="header shell">
+      <a href="#inicio" className="brand" aria-label={siteConfig.name}><img className="brand-logo-full" src={siteConfig.brand.logo} alt={siteConfig.name} width="190" height="56" /><img className="brand-logo-icon" src={siteConfig.brand.icon} alt="" width="48" height="48" /></a>
+      <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#como-funciona", ui.navHow], ["#funciones", ui.navFeatures], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-negocios", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-negocios" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
+      <LanguageSwitcher selectorLabel={ui.languageSelector} currentLanguageLabel={ui.currentLanguage} />
+      <Button href={siteConfig.trialUrl}>{ui.startFree}</Button>
+      <button className="mobile-menu" type="button" aria-label={ui.menu} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((open) => !open)}><span /><span /><span /></button>
+    </header>
+
+    <section id="inicio" className="hero shell">
+      <div className="hero-background" aria-hidden="true">
+        <div className="hero-glow" />
+        <div className="hero-panel" />
+        <div className="hero-dots hero-dots-top" />
+        <div className="hero-dots hero-dots-bottom" />
+      </div>
+      <div className="hero-copy">
+        <p className="eyebrow"><HeroIcon name="sparkle" size={16} />{localizedLanding.hero.eyebrow}</p>
+        <h1>{ui.heroTitle} <em>{ui.heroEmphasis}</em></h1>
+        <p className="hero-description">{localizedLanding.hero.description}</p>
+        <div className="button-row"><div className="primary-cta"><Button icon href={siteConfig.trialUrl}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
+        <div className="quick-points"><span><img src="/images/quick-points/publish.png" alt="" width="28" height="28" /><span>{ui.quickPublish}</span></span><span><img src="/images/quick-points/clock.png" alt="" width="28" height="28" /><span>{ui.quickHoursLine1}<br className="quick-point-break" /> {ui.quickHoursLine2}</span></span><span><img src="/images/quick-points/language.png" alt="" width="28" height="28" /><span>{ui.quickNaturalLine1}<br className="quick-point-break" /> {ui.quickNaturalLine2}</span></span></div>
+      </div>
+      <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
+        <iframe
+          className="hero-animation-frame"
+          src={`/animations/pregunta-viva/pregunta-viva.html?embed=hero&locale=${locale}`}
+          title={ui.animationLabel}
+        />
+      </div>
+    </section>
+
+    <section id="funciones" className="functions-group">
+      <section className="features shell"><SectionTitle>{ui.featuresTitle}</SectionTitle><div>{localizedLanding.features.map(([icon, title, items]) => <article key={title}><span className="feature-icon"><img src={icon} alt="" width="96" height="96" /></span><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
+      <section id="resultados" className="showcase shell"><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = event.currentTarget.scrollWidth / 2; setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} copy={ui} /><ShowcaseCards content={localizedLanding} copy={ui} duplicate /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase((activeShowcasePage + showcasePages - 1) % showcasePages)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase((activeShowcasePage + 1) % showcasePages)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div></section>
+    </section>
+
+    <div className="post-pricing-background">
+      <section id="como-funciona" className="steps shell"><SectionTitle>{ui.stepsTitle}</SectionTitle><p className="steps-intro">{ui.stepsIntro}</p><div>{localizedLanding.steps.map(([number, title, description], i) => <article key={number}><div className="step-symbol"><StepIcon step={i} /></div><div className="step-title"><h3>{title}</h3></div><p>{description}</p></article>)}</div></section>
+
+      <section id="seguridad" className="trust shell"><SectionTitle>{ui.trustTitle}</SectionTitle><div>{localizedLanding.trust.map((item, i) => <article key={item}><span className="trust-icon"><img src={trustIconSources[i] ?? trustIconSources[0]} alt="" width="48" height="48" /></span>{item}</article>)}</div></section>
+
+      <section id="planes" className="pricing shell"><SectionTitle>{ui.pricingTitle}</SectionTitle><p className="pricing-intro">{ui.pricingIntro}<br /><span>{ui.pricingOffer}</span></p><div className="pricing-grid">{localizedLanding.plans.map((plan, planIndex) => { const isTrialPlan = planIndex < 2; return <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}>{plan.featured && <span className="popular">{ui.recommended}</span>}<div className="plan-header"><h3>{plan.name}</h3><p className="audience">{plan.audience}</p></div><p className="price"><del>S/{plan.originalPrice}</del><small>{plan.prefix}</small>S/{plan.price}<small> {ui.month}</small><span className="price-discount">{ui.discountLabel}</span></p><p className="setup">{plan.setup}</p><ul>{plan.items.map((item, itemIndex) => <li className={planIndex > 0 && itemIndex === 0 ? "feature-inherited" : undefined} key={item}><svg className="feature-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4.2 10.2 3.5 3.5 8-8" /></svg><span>{item}</span></li>)}</ul><Button outline={!plan.featured} href={isTrialPlan ? siteConfig.trialUrl : siteConfig.whatsappUrl}>{plan.cta}</Button>{isTrialPlan && <p className="plan-note">{ui.planNoCard}</p>}</article>; })}</div></section>
+
+      <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
+
+      <section id="ia-negocios" className="closing shell"><div><h2>{ui.closingTitle} <em>{ui.closingEmphasis}</em></h2><p>{ui.closingBody}</p><Button>{ui.closingCta}</Button><small>{ui.closingTags}</small></div><div className="device-scene"><div className="laptop"><div className="screen"><b>{siteConfig.name}</b><strong>{ui.deviceCustomAi}</strong><div className="mini-line" /></div></div><div className="phone"><b>{ui.deviceProjects}</b><span>{ui.deviceActive}</span></div><i /><i /></div></section>
+      <footer className="site-footer shell">
+        <div className="footer-main">
+          <div className="footer-brand-block">
+            <img className="footer-brand" src={siteConfig.brand.logo} alt={siteConfig.name} width={280} height={90} />
+          </div>
+          <nav className="footer-nav" aria-label={ui.footerNav}>
+            <div className="footer-column">
+              <h2>{ui.footerProduct}</h2>
+              <a href="#funciones"><span>{ui.footerFeatures}</span></a>
+              <a href="#planes"><span>{ui.footerPricing}</span></a>
+              <a href="#faq"><span>{ui.footerFaq}</span></a>
+            </div>
+            <div className="footer-column">
+              <h2>{ui.footerSolutions}</h2>
+              <a href="#ia-negocios"><span>{ui.footerAi}</span></a>
+              <a href={siteConfig.whatsappUrl}><span>{ui.footerContact}</span></a>
+            </div>
+            <div className="footer-column">
+              <h2>{ui.footerLegal}</h2>
+              <span className="footer-item"><span>{ui.footerTerms}</span></span>
+              <span className="footer-item"><span>{ui.footerPrivacy}</span></span>
+            </div>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} {siteConfig.name}. {ui.footerRights}</span>
+          <span>{ui.footerDisclosure}</span>
+        </div>
+      </footer>
+    </div>
+  </main>;
+}

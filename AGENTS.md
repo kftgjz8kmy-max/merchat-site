@@ -2,7 +2,28 @@
 
 ## Project Structure & Module Organization
 
-This repository contains the merchat marketing landing page. The Next/Vinext App Router entry points are in `app/` (`page.tsx`, `layout.tsx`, and global styles). Shared product copy and navigation live in `config/landing.ts` and `config/site.ts`; update those files instead of scattering marketing text through components. Static assets are under `public/`, with design references in `References/`. The Cloudflare Worker adapter is `worker/index.ts`. Tests are in `tests/`.
+This repository contains the merchat marketing landing page. The Next/Vinext App Router entry points are in `app/` (`page.tsx`, `[locale]/page.tsx`, `layout.tsx`, and global styles). The shared page structure and interactions live in `components/LandingPage.tsx`. Localized product copy lives in `messages/`, with Spanish as the canonical source and recursive fallback. Static assets are under `public/`, with design references in `References/`. The Cloudflare Worker adapter is `worker/index.ts`. Tests are in `tests/`.
+
+## Localization Contract
+
+- Spanish is the default locale at `/`; keep `defaultLocale: "es"` and
+  `localeDetection: false` in `i18n/routing.ts`.
+- All locales must render the shared `components/LandingPage.tsx`. Keep page
+  structure, behavior, and interactions shared; change only message content.
+- Add every new user-facing string to `messages/es.json` first. Add matching
+  translations to `messages/en.json`, `messages/pt-BR.json`, and
+  `messages/zh-CN.json` when available.
+- Do not make a translated file the structural source of truth. Missing locale
+  keys must fall back to Spanish through `i18n/messages.ts`, including nested
+  objects, arrays, metadata, and UI labels.
+- When adding or removing a section, update the shared component and the
+  Spanish message tree. The section must appear on every locale, with Spanish
+  copy shown where a translation is not yet available.
+- Keep supported locale names and paths synchronized through `i18n/locales.ts`.
+  Do not duplicate locale paths in components or metadata.
+- If visible copy is required inside the standalone hero animation, keep its
+  Spanish default in `public/animations/pregunta-viva/pregunta-viva.html` and
+  add locale branches there as translations become available.
 
 Generated output such as `.next/`, `dist/`, `build/`, `.vinext/`, and `.wrangler/` should not be edited or committed.
 

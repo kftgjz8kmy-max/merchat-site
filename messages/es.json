@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "title": "merchat | IA para vendedores de Mercado Libre",
+    "description": "El asistente de IA para gestionar Mercado Libre."
+  },
+  "language": {
+    "selector": "Seleccionar idioma"
+  },
+  "landing": {
+    "hero": {
+      "eyebrow": "Asistente de IA para Mercado Libre",
+      "description": "Empieza a vender, mejora tus publicaciones y entiende tus ganancias con un asistente que trabaja por ti."
+    },
+    "useCases": [
+      {
+        "id": "create-listing",
+        "category": "Crea una publicación",
+        "prompt": "Quiero vender este celular. Está nuevo, tiene 256 GB y tengo tres unidades.",
+        "resultType": "listing",
+        "resultTitle": "Publicación lista para revisar"
+      },
+      {
+        "id": "publish-from-photo",
+        "category": "Publica desde una foto",
+        "prompt": "Usa estas fotos, identifica el producto y pregúntame solo lo que falte.",
+        "resultType": "photo-identification",
+        "resultTitle": "Faltan solo 2 datos"
+      },
+      {
+        "id": "technical-details",
+        "category": "Completa datos técnicos",
+        "prompt": "Completa los atributos faltantes y verifica que los datos sean correctos.",
+        "resultType": "technical",
+        "resultTitle": "12 atributos verificados",
+        "resultDescription": "3 atributos completados"
+      },
+      {
+        "id": "compare-prices",
+        "category": "Compara tus precios",
+        "prompt": "Compara mi precio con publicaciones similares y dime si debo ajustarlo.",
+        "resultType": "price-range",
+        "resultTitle": "4% sobre el rango",
+        "resultDescription": "Precio actual: S/ 1,399"
+      },
+      {
+        "id": "calculate-discount",
+        "category": "Calcula tu descuento",
+        "prompt": "Con mis costos y comisiones, dime hasta cuánto puedo descontar sin perder dinero.",
+        "resultType": "discount",
+        "resultTitle": "Mantienes margen positivo",
+        "resultDescription": "Descuento máximo: 11%"
+      },
+      {
+        "id": "create-promotion",
+        "category": "Crea una promoción",
+        "prompt": "Crea una promoción de 10% para estos productos durante siete días.",
+        "resultType": "promotion",
+        "resultTitle": "Promoción lista para confirmar",
+        "resultDescription": "Oferta de la semana"
+      },
+      {
+        "id": "add-to-promotion",
+        "category": "Agrega a promoción",
+        "prompt": "Agrega estos productos a la promoción Ofertas de la Semana.",
+        "resultType": "eligibility",
+        "resultTitle": "Productos preparados",
+        "resultDescription": "5 de 6 agregados"
+      },
+      {
+        "id": "profit-excel",
+        "category": "Calcula tus ganancias",
+        "prompt": "Te doy mis costos. Crea un Excel con la ganancia neta después de comisiones y envíos.",
+        "resultType": "excel",
+        "resultTitle": "Ganancia neta calculada",
+        "resultDescription": "126 publicaciones analizadas"
+      },
+      {
+        "id": "bulk-catalog",
+        "category": "Actualiza tu catálogo",
+        "prompt": "Usa este Excel para actualizar los precios y el stock de mis publicaciones.",
+        "resultType": "bulk-update",
+        "resultTitle": "Cambios listos para aprobar",
+        "resultDescription": "84 productos revisados"
+      },
+      {
+        "id": "last-sale",
+        "category": "Consulta tu última venta",
+        "prompt": "Muéstrame mi última venta con producto, comprador, pago, envío y estado.",
+        "resultType": "sale",
+        "resultTitle": "S/ 1,249",
+        "resultDescription": "Hace 12 minutos"
+      },
+      {
+        "id": "compare-products",
+        "category": "Compara tus productos",
+        "prompt": "Dame los tres productos más vendidos y los tres menos vendidos del trimestre.",
+        "resultType": "ranking",
+        "resultTitle": "Más y menos vendidos"
+      },
+      {
+        "id": "restock",
+        "category": "Planifica tu reposición",
+        "prompt": "Analiza mis ventas y dime qué productos debo reponer y cuántas unidades comprar.",
+        "resultType": "restock",
+        "resultTitle": "Basado en rotación y stock"
+      },
+      {
+        "id": "stagnant-products",
+        "category": "Detecta productos detenidos",
+        "prompt": "Muéstrame las publicaciones que no tuvieron ventas en los últimos 60 días.",
+        "resultType": "stagnant",
+        "resultTitle": "Requieren atención",
+        "resultDescription": "9 publicaciones sin ventas"
+      },
+      {
+        "id": "improve-listings",
+        "category": "Mejora publicaciones",
+        "prompt": "Encuentra publicaciones con visitas pero pocas ventas y dime qué debería mejorar.",
+        "resultType": "performance",
+        "resultTitle": "Conversión: 0.24%",
+        "resultDescription": "1,240 visitas · 3 ventas"
+      },
+      {
+        "id": "quarterly-diagnosis",
+        "category": "Diagnostica tu trimestre",
+        "prompt": "Analiza este trimestre, compáralo con el anterior y muéstrame un diagnóstico con gráficas.",
+        "resultType": "dashboard",
+        "resultTitle": "Rendimiento en crecimiento",
+        "resultDescription": "S/ 184,500 · +14%"
+      }
+    ],
+    "photoExamples": [
+      {
+        "eyebrow": "Vendedor en acción",
+        "image": "/images/lifestyle/seller-workspace.png",
+        "alt": "Vendedora trabajando en su tienda online desde una laptop",
+        "note": "Decisiones más claras para tu operación."
+      },
+      {
+        "eyebrow": "Equipo conectado",
+        "image": "/images/lifestyle/agency-team.png",
+        "alt": "Equipo de ecommerce revisando ventas y pedidos",
+        "note": "Una vista clara para cada cliente."
+      },
+      {
+        "eyebrow": "Publica con menos pasos",
+        "image": "/images/lifestyle/publish-from-photo.png",
+        "alt": "Vendedora fotografiando un smartphone para publicarlo en su tienda online",
+        "note": "De una foto a una publicación lista para revisar."
+      },
+      {
+        "eyebrow": "Tu catálogo bajo control",
+        "image": "/images/lifestyle/catalog-control.png",
+        "alt": "Operador de ecommerce revisando inventario y catálogo desde una laptop",
+        "note": "Precios, stock y promociones al día."
+      },
+      {
+        "eyebrow": "Convierte datos en acción",
+        "image": "/images/lifestyle/sales-analysis.png",
+        "alt": "Equipo de ecommerce analizando el rendimiento de sus ventas",
+        "note": "Detecta oportunidades para crecer con claridad."
+      }
+    ],
+    "features": [
+      [
+        "/images/feature-icons/publishing-v3-transparent.png",
+        "Publica en minutos",
+        [
+          "Crea una publicación conversando",
+          "Publica desde una foto",
+          "Completa y verifica datos técnicos"
+        ]
+      ],
+      [
+        "/images/feature-icons/market-research.png",
+        "Mejora tus precios",
+        [
+          "Compara tus precios",
+          "Calcula descuentos",
+          "Crea promociones",
+          "Agrega productos a promociones"
+        ]
+      ],
+      [
+        "/images/feature-icons/order-management.png",
+        "Controla tu operación",
+        [
+          "Calcula ganancias en Excel",
+          "Actualiza precios y stock",
+          "Consulta tus últimas ventas",
+          "Identifica los más y menos vendidos"
+        ]
+      ],
+      [
+        "/images/feature-icons/sales-insights.png",
+        "Analiza tus ventas",
+        [
+          "Encuentra productos que no se venden",
+          "Optimiza publicaciones",
+          "Genera un diagnóstico trimestral"
+        ]
+      ]
+    ],
+    "steps": [
+      [
+        "1",
+        "Crea tu cuenta",
+        "Regístrate y prepara tu espacio de trabajo."
+      ],
+      [
+        "2",
+        "Conecta Mercado Libre",
+        "Autoriza el acceso para consultar tus productos, publicaciones y ventas."
+      ],
+      [
+        "3",
+        "Instala tu asistente merchat",
+        "Conéctalo con ChatGPT, Claude u otra herramienta compatible."
+      ],
+      [
+        "4",
+        "Gestiona tu negocio",
+        "Pregunta, publica y gestiona tu operación desde una conversación."
+      ]
+    ],
+    "plans": [
+      {
+        "name": "Vendedor",
+        "audience": "Para quienes quieren entender mejor su operación.",
+        "originalPrice": "58",
+        "price": "29",
+        "prefix": "",
+        "setup": "",
+        "featured": false,
+        "cta": "Gratis por 14 días",
+        "items": [
+          "Conecta una cuenta de Mercado Libre",
+          "Consulta ventas, pedidos y entregas",
+          "Revisa publicaciones, precios y stock",
+          "Analiza rendimiento y oportunidades",
+          "Consulta promociones y campañas",
+          "Consultas mensuales incluidas",
+          "Analizar tu cuenta sin realizar cambios"
+        ]
+      },
+      {
+        "name": "Vendedor Pro",
+        "audience": "Tu asistente para operar Mercado Libre.",
+        "originalPrice": "198",
+        "price": "99",
+        "prefix": "",
+        "setup": "",
+        "featured": true,
+        "cta": "Gratis por 14 días",
+        "items": [
+          "Todo lo incluido en Vendedor",
+          "Conecta una cuenta de Mercado Libre",
+          "Crea y actualiza publicaciones",
+          "Cambia precios y stock",
+          "Pausa y reactiva publicaciones",
+          "Gestiona promociones y descuentos",
+          "Analiza ventas y rendimiento",
+          "Revisa oportunidades en Product Ads",
+          "Confirma antes de ejecutar cambios"
+        ]
+      },
+      {
+        "name": "Vendedor Ultra",
+        "audience": "Para agencias y equipos que operan varias cuentas.",
+        "originalPrice": "398",
+        "price": "199",
+        "prefix": "",
+        "setup": "",
+        "featured": false,
+        "cta": "Comenzar con Ultra",
+        "items": [
+          "Todo lo incluido en Vendedor Pro",
+          "Conecta hasta 3 cuentas de Mercado Libre",
+          "Consulta y opera cada cuenta por separado",
+          "Gestiona publicaciones, precios y promociones",
+          "Analiza el rendimiento de cada negocio",
+          "Uso intensivo de merchat",
+          "Soporte prioritario",
+          "Agrega cuentas adicionales por S/50 / mes"
+        ]
+      }
+    ],
+    "trust": [
+      "Conectas Mercado Libre mediante autorización oficial.",
+      "Cada usuario solo accede a sus propias cuentas.",
+      "Tus datos permanecen separados por cliente.",
+      "Te pedimos confirmación antes de acciones importantes."
+    ],
+    "faqs": [
+      [
+        "¿Qué es merchat?",
+        "merchat es un asistente de IA para Mercado Libre. Puedes conversar con él para consultar ventas, revisar publicaciones, analizar tu operación y, según tu plan, realizar tareas como crear publicaciones, cambiar precios, actualizar stock o gestionar promociones."
+      ],
+      [
+        "¿Necesito conocimientos técnicos para usarlo?",
+        "No. Si sabes conversar con ChatGPT, Claude u otra IA compatible, puedes usar merchat. Solo tienes que conectar tu cuenta de Mercado Libre y pedir lo que necesitas con tus propias palabras."
+      ],
+      [
+        "¿Qué incluye la prueba gratis de 14 días?",
+        "Durante 14 días puedes probar las funciones de Vendedor Pro con una cuenta de Mercado Libre, incluyendo consultas, análisis y herramientas para gestionar tu operación.\n\nNo necesitas tarjeta para comenzar."
+      ],
+      [
+        "¿Cuándo comienza mi prueba gratis?",
+        "La prueba comienza cuando creas tu cuenta en merchat y dura 14 días."
+      ],
+      [
+        "¿Qué pasa cuando terminan los 14 días?",
+        "Puedes elegir el plan que mejor se adapte a tu operación para continuar usando merchat."
+      ],
+      [
+        "¿Cuál es la diferencia entre Vendedor, Vendedor Pro y Vendedor Ultra?",
+        "**Vendedor** está pensado para consultar y analizar tu cuenta sin realizar cambios.\n\n**Vendedor Pro** además te permite operar tu cuenta: crear y actualizar publicaciones, cambiar precios y stock, gestionar promociones y realizar otras acciones con tu autorización.\n\n**Vendedor Ultra** incluye las funciones de Pro y está diseñado para quienes necesitan gestionar varias cuentas de Mercado Libre."
+      ],
+      [
+        "¿merchat puede hacer cambios en mi cuenta de Mercado Libre?",
+        "Sí, en los planes que incluyen funciones de operación. Puede ayudarte a crear publicaciones, actualizar precios o stock, pausar publicaciones y gestionar promociones, entre otras tareas.\n\nAntes de las acciones importantes, merchat te muestra lo que va a hacer y solicita tu confirmación."
+      ],
+      [
+        "¿Puede modificar algo sin que yo lo autorice?",
+        "Las acciones importantes requieren tu confirmación antes de ejecutarse. Tú mantienes el control de tu cuenta de Mercado Libre."
+      ],
+      [
+        "¿Cómo se conecta merchat con mi cuenta de Mercado Libre?",
+        "La conexión se realiza mediante la autorización oficial de Mercado Libre. No necesitas compartir tu contraseña de Mercado Libre con merchat."
+      ],
+      [
+        "¿Mis datos y mi cuenta están protegidos?",
+        "Sí. Cada usuario accede únicamente a sus propias cuentas conectadas y los datos se mantienen separados entre clientes.\n\nAdemás, la conexión con Mercado Libre utiliza su sistema oficial de autorización."
+      ],
+      [
+        "¿Puedo usar merchat con ChatGPT?",
+        "Sí. merchat puede conectarse con ChatGPT y también con otras herramientas de IA compatibles.\n\nDespués de crear tu cuenta y conectar Mercado Libre, te guiamos para dejarlo listo y comenzar a usarlo."
+      ],
+      [
+        "¿Cómo empiezo a hablar con merchat?",
+        "Una vez conectado, escribe **@merchat** seguido de lo que necesitas.\n\nPor ejemplo:\n\n“@merchat, ¿cuáles fueron mis productos más vendidos este mes?”\n\nDespués puedes seguir conversando de forma natural."
+      ],
+      [
+        "¿Tengo que instalar un programa complicado?",
+        "No. El proceso está diseñado para guiarte paso a paso. Creas tu cuenta, conectas Mercado Libre, instalas merchat en tu asistente de IA y puedes comenzar a usarlo conversando."
+      ],
+      [
+        "¿Puedo conectar varias cuentas de Mercado Libre?",
+        "Sí. Vendedor Ultra permite conectar hasta 3 cuentas de Mercado Libre y puedes agregar cuentas adicionales por S/50 al mes cada una."
+      ],
+      [
+        "¿merchat puede crear publicaciones nuevas?",
+        "Sí. Puedes describir el producto, proporcionar sus datos o incluso trabajar a partir de fotos. merchat prepara la publicación, completa la información necesaria y te permite revisarla antes de publicarla."
+      ],
+      [
+        "¿Puedo usar merchat solamente para consultar información sin permitir cambios?",
+        "Sí. El plan Vendedor está diseñado precisamente para eso: consultar ventas, publicaciones, stock, rendimiento, promociones y otra información de tu operación sin realizar cambios en tu cuenta."
+      ],
+      [
+        "¿Qué puedo preguntarle a merchat?",
+        "Puedes pedirle cosas como:\n\n“¿Cuáles fueron mis productos más vendidos este mes?”\n\n“Muéstrame las publicaciones que necesitan mejorar.”\n\n“¿Cuánto gané después de comisiones?”\n\n“Actualiza el stock de estos productos.”\n\n“Crea una promoción para estas publicaciones.”\n\n“Quiero publicar este producto.”\n\nLa idea es que puedas gestionar Mercado Libre conversando, en lugar de buscar cada función manualmente."
+      ]
+    ]
+  },
+  "ui": {
+    "heroTitle": "Gestiona Mercado Libre hablando con una IA que",
+    "heroEmphasis": "entiende tu negocio.",
+    "startFree": "Comienza Gratis",
+    "trial": "14 días gratis",
+    "noCard": "Sin tarjeta",
+    "howItWorks": "Ver cómo funciona",
+    "featuresTitle": "Lo que puedes hacer con merchat",
+    "showcaseTitle": "Pídele a merchat lo que necesitas",
+    "stepsTitle": "Cómo funciona",
+    "stepsIntro": "Crea tu cuenta, conecta Mercado Libre y usa merchat como tu asistente desde la herramienta de IA que prefieras.",
+    "trustTitle": "Tu cuenta y tus datos permanecen protegidos",
+    "pricingTitle": "Planes para cada tipo de operación",
+    "faqTitle": "Preguntas frecuentes",
+    "languageSelector": "Seleccionar idioma",
+    "currentLanguage": "Idioma actual",
+    "showcaseAria": "Ejemplos de conversaciones y resultados en merchat",
+    "showcaseNavigation": "Navegación de ejemplos",
+    "showcasePage": "Ver ejemplos",
+    "carouselRole": "carrusel",
+    "carouselPrevious": "Ver ejemplos anteriores",
+    "carouselNext": "Ver ejemplos siguientes",
+    "animationLabel": "Ejemplo animado de una conversación con merchat",
+    "navHow": "Cómo funciona",
+    "navFeatures": "Qué puedes hacer",
+    "navPricing": "Precios",
+    "navTrust": "Seguridad",
+    "navFaq": "FAQ",
+    "navSolutions": "IA a medida",
+    "menu": "Abrir menú",
+    "quickPublish": "Publica sin complicaciones",
+    "quickHours": "Ahorra horas de trabajo manual",
+    "quickHoursLine1": "Ahorra horas",
+    "quickHoursLine2": "de trabajo manual",
+    "quickNatural": "Gestiona tu cuenta con lenguaje natural",
+    "quickNaturalLine1": "Gestiona tu cuenta con",
+    "quickNaturalLine2": "lenguaje natural",
+    "pricingIntro": "Empieza con 14 días gratis. Descubre todo lo que merchat puede hacer por tu operación y elige tu plan cuando estés listo.",
+    "pricingOffer": "Obtén 50% de descuento en todos los planes.",
+    "month": "/mes",
+    "discountLabel": "50% OFF",
+    "recommended": "RECOMENDADO",
+    "planNoCard": "Sin tarjeta",
+    "resultNew": "Nuevo",
+    "resultStock": "Stock",
+    "resultUnits": "unidades",
+    "resultModelIdentified": "Modelo identificado",
+    "resultBrand": "Marca",
+    "resultMemory": "Memoria",
+    "resultScreen": "Pantalla",
+    "resultCompetitiveRange": "RANGO COMPETITIVO",
+    "resultCurrentPrice": "Precio actual",
+    "resultProfitableMinimum": "Mínimo rentable",
+    "resultWeeklyOffer": "Oferta de la semana",
+    "resultProducts": "productos",
+    "resultDays": "días",
+    "resultAdded": "agregados",
+    "resultNeedsPriceAdjustment": "requiere ajuste de precio",
+    "resultProfitFile": "Ganancias.xlsx",
+    "resultPrice": "Precio",
+    "resultFee": "Comisión",
+    "resultShipping": "Envío",
+    "resultExcelGenerated": "Excel generado",
+    "resultPrices": "precios",
+    "resultStocks": "stocks",
+    "resultReview": "revisar",
+    "resultPaymentApproved": "Pago aprobado",
+    "resultReadyToShip": "Listo para despachar",
+    "resultBestSellers": "Más vendidos",
+    "resultLowestSellers": "Menos vendidos",
+    "resultHeadphones": "Audífonos",
+    "resultWebcam": "Cámara web",
+    "resultSmartwatch": "Smartwatch",
+    "resultAirFryer": "Freidora",
+    "resultFrozenStock": "inmovilizados en stock",
+    "resultAboveMarket": "con precio sobre el mercado",
+    "resultAdjustPrice": "Ajustar precio",
+    "resultCompleteAttributes": "Completar atributos",
+    "resultReviewPhotos": "Revisar fotos",
+    "resultQuarterSales": "ventas este trimestre",
+    "closingTitle": "¿Necesitas una",
+    "closingEmphasis": "solución de IA para tu empresa?",
+    "closingBody": "Diseñamos asistentes, automatizaciones y herramientas inteligentes para reducir trabajo manual y mejorar la forma en que trabaja tu equipo.",
+    "closingCta": "Cuéntanos qué quieres automatizar",
+    "closingTags": "Asistentes IA · Automatizaciones · Herramientas internas",
+    "deviceCustomAi": "IA a medida",
+    "deviceProjects": "Proyectos",
+    "deviceActive": "Activos",
+    "footerNav": "Enlaces del pie de página",
+    "footerProduct": "Producto",
+    "footerFeatures": "Funciones",
+    "footerPricing": "Precios",
+    "footerFaq": "Preguntas frecuentes",
+    "footerSolutions": "Soluciones",
+    "footerAi": "IA para empresas",
+    "footerContact": "Contacto",
+    "footerLegal": "Legal",
+    "footerTerms": "Términos y condiciones",
+    "footerPrivacy": "Política de privacidad",
+    "footerRights": "Todos los derechos reservados.",
+    "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre."
+  }
+}
