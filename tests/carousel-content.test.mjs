@@ -6,11 +6,11 @@ const root = new URL("../", import.meta.url);
 const locales = ["es", "en", "pt-BR", "zh-CN"];
 const readMessages = async (locale) => JSON.parse(await readFile(new URL(`messages/${locale}.json`, root), "utf8"));
 
-test("every locale has the same 32 workflows and four distinct existing photos", async () => {
+test("every locale has the same 40 workflows and four distinct existing photos", async () => {
   const messages = await Promise.all(locales.map(readMessages));
   const ids = messages[0].landing.useCases.map((card) => card.id);
-  assert.equal(ids.length, 32);
-  assert.equal(new Set(ids).size, 32);
+  assert.equal(ids.length, 40);
+  assert.equal(new Set(ids).size, 40);
   for (const { landing, ui } of messages) {
     assert.deepEqual(landing.useCases.map((card) => card.id), ids);
     assert.equal(new Set(landing.useCases.map((card) => card.resultType)).size, 14);
@@ -21,7 +21,6 @@ test("every locale has the same 32 workflows and four distinct existing photos",
       assert.ok(Array.isArray(card.preview.items));
     }
     assert.ok(ui.showcaseIntro && ui.showcaseDisclaimer);
-    assert.match(ui.showcaseToolCount, /11/);
     assert.match(ui.showcaseToolCount, /91/);
     for (const photo of landing.photoExamples) await access(new URL(`public${photo.image}`, root));
   }

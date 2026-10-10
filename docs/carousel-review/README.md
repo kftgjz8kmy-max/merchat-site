@@ -1,12 +1,12 @@
 # Capability carousel review
 
-The `#resultados` carousel shows 32 conversational workflows, including 20 advanced examples and four existing lifestyle photographs. Spanish, English, Brazilian Portuguese and Simplified Chinese retain complete datasets with matching stable IDs. The first four workflows lead the sequence. Advanced examples are interleaved with the original examples. The introduction highlights 11 tools and 91 actions, using the corrected count in the user-supplied October 10, 2026 capabilities overview. This is document-based, not a live catalog audit.
+The `#resultados` carousel shows 40 conversational workflows for beginners and experienced sellers and four existing lifestyle photographs. Spanish, English, Brazilian Portuguese and Simplified Chinese retain complete datasets with matching stable IDs. The first four workflows lead the sequence. Seller-focused examples lead with photos, Excel publication preparation, specifications and multi-SKU updates. Reports are interleaved throughout the collection. The introduction highlights 91 actions, using the corrected count in the user-supplied October 10, 2026 capabilities overview. This is document-based, not a live catalog audit.
 
 ## Final presentation
 
 Desktop keeps two staggered rows with 280px-wide overview cards, 232–273px tall in Spanish. Requests and answers remain fully visible. Each native disclosure uses the existing preview label and opens the complete preview and supporting description. One example can be open at a time. Autoplay pauses while an example is open, as well as during hover, focus, dragging, touch and offscreen states. Duplicate loop content is hidden from assistive technology and inert.
 
-Mobile uses one horizontal row, with no staggered translation. The original requests and answers are preserved; the introduction and capability availability notes were updated in all four locales. The four lifestyle photographs remain in the loop at positions 5, 14, 23 and 32, now 232px tall. Product previews, figures, approval states, cost assumptions and estimates remain available in the expanded examples.
+Mobile uses one horizontal row, with no staggered translation. The original requests and answers are preserved; the introduction and capability availability notes were updated in all four locales. The four lifestyle photographs remain in the loop at positions 5, 16, 27 and 38, now 232px tall. Product previews, figures, approval states, cost assumptions and estimates remain available in the expanded examples.
 
 `UseCaseDemoCard`, `UseCaseResult`, `PhotoDemoCard` and `ShowcaseCards` remain the shared rendering structure. No runtime dependency, seller API or backend was added. Local product imagery sources are documented in `public/images/products/SOURCES.md`.
 
@@ -22,13 +22,13 @@ The carousel header now follows the page rhythm: 28px between heading and introd
 - Spanish was checked at 390px; the other three locales were checked at 360px in this update. New revision and fee previews opened without overflow and keyboard disclosure toggling passed. Earlier all-four-locale checks at 360px remain recorded.
 - Previously, all four locales checked at 360px. Expanded listing, diagnosis, price comparison, advertising and account previews had no overflow. Only one disclosure remained open.
 - Click expands a preview; Enter collapses it. Expanded content includes the original preview and supporting description. Clone disclosures are inert.
-- Arrows now advance by visible column blocks, accounting for the staggered lower row; four dots still jump to quarter positions. All 32 examples were reachable with the next arrow at 1440, 768 and 390px. First dot returned to the start. Dragging moved the carousel 165px. Temporary viewport overrides were restored.
+- Arrows now advance by visible column blocks, accounting for the staggered lower row; four dots still jump to quarter positions. The previous 32-example set was reachable with the next arrow at 1440, 768 and 390px. First dot returned to the start. Dragging moved the carousel 165px. Temporary viewport overrides were restored.
 - Earlier interaction verification also covered horizontal and vertical touch, reduced motion and loop wrapping with browser emulation; physical-device testing was not performed.
 - Full test suite previously recorded 6 passes and 2 existing failures, both reproduced on baseline `610e0f4`: old assertions expect an inline logo instead of `BrandLogo` and the former icon path. Unrelated branding/tests remain unchanged.
 
 ## Scope
 
-Layout refinements affect the shared carousel component, `#resultados` styles and the functions-group wrapper padding. The current update adds 20 advanced examples in every message file. The broader PR contains the approved carousel datasets and copy work. Hero, navigation, other sections, pricing and its fonts, routing, metadata and integrations retain the saved styling baseline.
+Layout refinements affect the shared carousel component, `#resultados` styles and the functions-group wrapper padding. The current update replaces technical terminology with seller outcomes and adds Excel publication preparation plus seven reports, in every message file. The broader PR contains the approved carousel datasets and copy work. Hero, navigation, other sections, pricing and its fonts, routing, metadata and integrations retain the saved styling baseline.
 
 ## Screenshots
 
@@ -39,3 +39,7 @@ Layout refinements affect the shared carousel component, `#resultados` styles an
 - [Expanded desktop example](after-desktop-results.png)
 - [Single-row mobile overview](after-mobile.png)
 - [Expanded mobile example](after-mobile-results.png)
+
+## Seller-language update
+
+The current 40-example build passed TypeScript, production build, lint (existing BrandLogo warning only), and all six content/localization tests. Desktop at 1440px and mobile at 390px show the new 91-action introduction and seller-focused leading examples without page overflow. Excel and specification disclosures show missing data and review requirements; keyboard collapse works. Screenshot files were refreshed for this update.

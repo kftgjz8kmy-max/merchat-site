@@ -33,25 +33,55 @@
         }
       },
       {
-        "id": "batch-campaign",
-        "category": "Crea una campaña",
-        "prompt": "Pon estos 21 productos en la campaña con 10% de descuento.",
-        "resultType": "promotion",
-        "resultTitle": "Apliqué el descuento a los 21 productos.",
-        "resultDescription": "Aprobaste los precios antes de aplicarlos.",
+        "id": "excel-publication",
+        "category": "Publica desde Excel",
+        "prompt": "Prepara publicaciones con los productos de este Excel.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé los borradores para que los revises.",
+        "resultDescription": "La IA lee el archivo y prepara cada publicación con MerChat. Te muestra los datos que faltan antes de publicar.",
         "preview": {
-          "label": "10% de descuento",
+          "label": "Publicaciones por revisar",
           "items": [
             {
-              "value": "21",
-              "label": "Productos"
+              "value": "1",
+              "label": "Productos del Excel"
             },
             {
-              "value": "21/21",
-              "label": "Revisados"
+              "value": "2",
+              "label": "Precio y stock"
+            },
+            {
+              "value": "3",
+              "label": "Datos que faltan"
             }
           ],
-          "status": "Aplicado después de aprobar · Según disponibilidad de tu cuenta"
+          "status": "Publicación con tu aprobación"
+        }
+      },
+      {
+        "id": "category-requirements",
+        "category": "Completa las características",
+        "prompt": "Completa las características de esta laptop con su modelo y ficha.",
+        "resultType": "workflow",
+        "resultTitle": "Completé los datos disponibles y marqué lo que falta.",
+        "resultDescription": "La IA usa el modelo y la información que compartes, y revisa los requisitos de Mercado Libre. Los datos que no se pueden confirmar quedan para tu revisión.",
+        "preview": {
+          "label": "Características por revisar",
+          "items": [
+            {
+              "value": "1",
+              "label": "Marca y modelo"
+            },
+            {
+              "value": "2",
+              "label": "Datos de la ficha"
+            },
+            {
+              "value": "3",
+              "label": "Datos por confirmar"
+            }
+          ],
+          "status": "Revisa los datos antes de aprobar"
         }
       },
       {
@@ -81,6 +111,54 @@
         }
       },
       {
+        "id": "revision-verification",
+        "category": "Actualiza varios SKU",
+        "prompt": "Prepara nuevos precios y stock para estos 30 SKU.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé los cambios de cada producto para revisar.",
+        "resultDescription": "Revisa cada SKU antes de aprobar. Después, MerChat comprueba qué cambios quedaron guardados y te muestra los pendientes.",
+        "preview": {
+          "label": "Cambios por producto",
+          "items": [
+            {
+              "value": "1",
+              "label": "SKU seleccionados"
+            },
+            {
+              "value": "2",
+              "label": "Nuevo precio y stock"
+            },
+            {
+              "value": "3",
+              "label": "Cambios confirmados"
+            }
+          ],
+          "status": "Verificación después de aprobar"
+        }
+      },
+      {
+        "id": "batch-campaign",
+        "category": "Crea una campaña",
+        "prompt": "Pon estos 21 productos en la campaña con 10% de descuento.",
+        "resultType": "promotion",
+        "resultTitle": "Apliqué el descuento a los 21 productos.",
+        "resultDescription": "Aprobaste los precios antes de aplicarlos.",
+        "preview": {
+          "label": "10% de descuento",
+          "items": [
+            {
+              "value": "21",
+              "label": "Productos"
+            },
+            {
+              "value": "21/21",
+              "label": "Revisados"
+            }
+          ],
+          "status": "Aplicado después de aprobar · Según disponibilidad de tu cuenta"
+        }
+      },
+      {
         "id": "photo-order",
         "category": "Ordena tus fotos",
         "prompt": "Quiero cambiar el orden de las fotos de esta publicación.",
@@ -99,7 +177,7 @@
         "prompt": "Elige la categoría, revisa requisitos y comisiones, y prepara esta laptop.",
         "resultType": "workflow",
         "resultTitle": "Preparé el borrador y lo que falta revisar.",
-        "resultDescription": "La ruta y los datos se confirman antes de publicar.",
+        "resultDescription": "La forma de publicar y los datos se confirman antes de publicar.",
         "preview": {
           "label": "Revisión antes de publicar",
           "items": [
@@ -224,6 +302,32 @@
         }
       },
       {
+        "id": "profit-report",
+        "category": "Pide un reporte de ganancias",
+        "prompt": "Con mis costos, compara cuánto me dejan estos SKU.",
+        "resultType": "report",
+        "resultTitle": "Comparé la ganancia estimada de cada producto.",
+        "resultDescription": "Combino los costos que aportas con las comisiones disponibles. Puedes incluir otros gastos para afinar la estimación.",
+        "preview": {
+          "label": "Ganancia estimada por SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Costos que aportaste"
+            },
+            {
+              "value": "2",
+              "label": "Comisiones y gastos"
+            },
+            {
+              "value": "3",
+              "label": "Ganancia estimada"
+            }
+          ],
+          "status": "Estimación según costos y datos disponibles"
+        }
+      },
+      {
         "id": "market-research",
         "category": "Compara tus precios",
         "prompt": "Busca iPhones similares y compara sus precios con los míos.",
@@ -251,25 +355,25 @@
       },
       {
         "id": "product-family",
-        "category": "Entiende tus familias de productos",
-        "prompt": "¿Qué publicaciones pertenecen a la misma familia de este producto?",
+        "category": "Revisa tus versiones de un producto",
+        "prompt": "Muéstrame las publicaciones relacionadas de este producto.",
         "resultType": "report",
-        "resultTitle": "Reuní los IDs relacionados de la familia.",
-        "resultDescription": "Uso las relaciones oficiales de User Products, sin agrupar por parecido.",
+        "resultTitle": "Reuní las publicaciones para que las compares.",
+        "resultDescription": "Uso las relaciones oficiales de Mercado Libre para mostrar las publicaciones del mismo grupo.",
         "preview": {
-          "label": "Familia oficial del producto",
+          "label": "Publicaciones relacionadas",
           "items": [
             {
               "value": "1",
-              "label": "User Product"
+              "label": "Producto principal"
             },
             {
               "value": "2",
-              "label": "Familia oficial"
+              "label": "Versiones relacionadas"
             },
             {
               "value": "3",
-              "label": "Publicaciones relacionadas"
+              "label": "Publicaciones del grupo"
             }
           ],
           "status": "Relaciones reportadas por Mercado Libre"
@@ -277,13 +381,13 @@
       },
       {
         "id": "user-product-options",
-        "category": "Añade opciones de venta",
-        "prompt": "Añade una opción de venta a este User Product con otro precio y stock.",
+        "category": "Vende con distintas condiciones",
+        "prompt": "Prepara otra opción para este producto con diferente precio y stock.",
         "resultType": "workflow",
         "resultTitle": "Preparé la nueva opción para que la revises.",
-        "resultDescription": "La opción se vincula al producto existente cuando Mercado Libre lo permite.",
+        "resultDescription": "Cuando Mercado Libre lo permite, puedes añadir otra opción de venta al mismo producto.",
         "preview": {
-          "label": "Opción de venta propuesta",
+          "label": "Nueva opción de venta",
           "items": [
             {
               "value": "1",
@@ -295,10 +399,10 @@
             },
             {
               "value": "3",
-              "label": "Stock de la opción"
+              "label": "Stock disponible"
             }
           ],
-          "status": "Según soporte del producto · Requiere aprobación"
+          "status": "Requiere aprobación · Según disponibilidad"
         }
       },
       {
@@ -325,6 +429,32 @@
             }
           ],
           "status": "Revisión solicitada por ti"
+        }
+      },
+      {
+        "id": "sales-report",
+        "category": "Pide un reporte de ventas",
+        "prompt": "Haz un reporte de ventas por producto y SKU de este mes.",
+        "resultType": "report",
+        "resultTitle": "Organicé ventas, unidades e ingresos por producto.",
+        "resultDescription": "Puedes pedir un resumen por período y comparar productos con los datos disponibles de tu cuenta.",
+        "preview": {
+          "label": "Ventas por producto y SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Productos y SKU"
+            },
+            {
+              "value": "2",
+              "label": "Unidades vendidas"
+            },
+            {
+              "value": "3",
+              "label": "Ingresos del período"
+            }
+          ],
+          "status": "Datos de tu cuenta · Período elegido"
         }
       },
       {
@@ -406,29 +536,29 @@
         }
       },
       {
-        "id": "category-requirements",
-        "category": "Consulta requisitos reales",
-        "prompt": "¿Qué datos exige Mercado Libre para publicar esta laptop?",
-        "resultType": "workflow",
-        "resultTitle": "Consulté los requisitos de la categoría.",
-        "resultDescription": "Los requisitos vienen de Mercado Libre, no de una lista genérica.",
+        "id": "quality-report",
+        "category": "Pide un reporte de publicaciones",
+        "prompt": "Revisa mis publicaciones y resume cuáles necesitan mejoras.",
+        "resultType": "report",
+        "resultTitle": "Ordené las publicaciones que conviene revisar.",
+        "resultDescription": "Reúno calidad, visitas y ventas disponibles para ayudarte a priorizar. Las sugerencias se basan en esos datos.",
         "preview": {
-          "label": "Requisitos de la categoría",
+          "label": "Publicaciones por mejorar",
           "items": [
             {
               "value": "1",
-              "label": "Atributos obligatorios"
+              "label": "Calidad y datos faltantes"
             },
             {
               "value": "2",
-              "label": "Valores admitidos"
+              "label": "Visitas y ventas"
             },
             {
               "value": "3",
-              "label": "Datos por completar"
+              "label": "Mejoras sugeridas"
             }
           ],
-          "status": "Según la categoría y el marketplace"
+          "status": "Según datos disponibles · Cambios con tu aprobación"
         }
       },
       {
@@ -480,29 +610,29 @@
         }
       },
       {
-        "id": "revision-verification",
-        "category": "Comprueba los cambios",
-        "prompt": "Después de aprobar, confirma que Mercado Libre guardó los cambios.",
-        "resultType": "workflow",
-        "resultTitle": "Revisé el estado final de la publicación.",
-        "resultDescription": "La comprobación consulta datos nuevos después de aplicar la revisión.",
+        "id": "ads-report",
+        "category": "Pide un reporte de anuncios",
+        "prompt": "Resume el gasto y las ventas de mis anuncios este mes.",
+        "resultType": "report",
+        "resultTitle": "Preparé el resumen con las métricas disponibles.",
+        "resultDescription": "Consulta gastos, ventas atribuidas y rendimiento cuando los reportes están disponibles para tu cuenta.",
         "preview": {
-          "label": "Verificación final",
+          "label": "Rendimiento de anuncios",
           "items": [
             {
               "value": "1",
-              "label": "Leer estado actual"
+              "label": "Gasto publicitario"
             },
             {
               "value": "2",
-              "label": "Comparar con lo aprobado"
+              "label": "Ventas atribuidas"
             },
             {
               "value": "3",
-              "label": "Mostrar diferencias"
+              "label": "Rendimiento disponible"
             }
           ],
-          "status": "Verificación después de aprobar"
+          "status": "Según disponibilidad · No modifica campañas"
         }
       },
       {
@@ -555,28 +685,28 @@
       },
       {
         "id": "publication-route",
-        "category": "Elige cómo publicar",
-        "prompt": "¿Catálogo o User Product? Revisa las opciones para este equipo.",
+        "category": "Encuentra cómo publicar",
+        "prompt": "¿Puedo vender este equipo en el catálogo o debo crear una publicación?",
         "resultType": "workflow",
-        "resultTitle": "Te muestro las rutas para que elijas.",
-        "resultDescription": "Si la ruta no está clara, MerChat te pide que la confirmes.",
+        "resultTitle": "Revisé las opciones para que elijas.",
+        "resultDescription": "MerChat busca el producto y te explica las alternativas. Si no está claro, te pide confirmar cómo quieres publicarlo.",
         "preview": {
-          "label": "Rutas de publicación",
+          "label": "Opciones para publicar",
           "items": [
             {
               "value": "1",
-              "label": "Catálogo"
+              "label": "Producto en el catálogo"
             },
             {
               "value": "2",
-              "label": "User Product"
+              "label": "Publicación propia"
             },
             {
               "value": "3",
               "label": "Tu elección"
             }
           ],
-          "status": "Ruta por confirmar contigo"
+          "status": "Opción por confirmar contigo"
         }
       },
       {
@@ -628,6 +758,32 @@
         }
       },
       {
+        "id": "orders-report",
+        "category": "Pide un reporte de pedidos",
+        "prompt": "Resume mis pedidos, pagos y envíos pendientes de esta semana.",
+        "resultType": "report",
+        "resultTitle": "Organicé los pedidos según lo que falta atender.",
+        "resultDescription": "Reúno el estado de pagos y envíos disponible para preparar el despacho.",
+        "preview": {
+          "label": "Pedidos por atender",
+          "items": [
+            {
+              "value": "1",
+              "label": "Estado del pago"
+            },
+            {
+              "value": "2",
+              "label": "Estado del envío"
+            },
+            {
+              "value": "3",
+              "label": "Datos para el despacho"
+            }
+          ],
+          "status": "Solo consulta · No cambia el estado de los pedidos"
+        }
+      },
+      {
         "id": "promotion-eligibility",
         "category": "Busca productos elegibles",
         "prompt": "¿Cuáles de mis productos pueden entrar en esta campaña?",
@@ -651,6 +807,32 @@
             }
           ],
           "status": "Según elegibilidad de Mercado Libre"
+        }
+      },
+      {
+        "id": "promotions-report",
+        "category": "Pide un reporte de descuentos",
+        "prompt": "Resume las campañas y descuentos de mis productos.",
+        "resultType": "report",
+        "resultTitle": "Organicé las ofertas y los productos participantes.",
+        "resultDescription": "Consulta campañas, descuentos y productos que pueden participar, según disponibilidad de tu cuenta.",
+        "preview": {
+          "label": "Campañas y descuentos",
+          "items": [
+            {
+              "value": "1",
+              "label": "Campañas disponibles"
+            },
+            {
+              "value": "2",
+              "label": "Descuentos vigentes"
+            },
+            {
+              "value": "3",
+              "label": "Productos participantes"
+            }
+          ],
+          "status": "Según disponibilidad · No aplica cambios"
         }
       },
       {
@@ -703,6 +885,32 @@
             }
           ],
           "status": "Si continúa el ritmo de ventas reciente"
+        }
+      },
+      {
+        "id": "inventory-report",
+        "category": "Pide un reporte de stock",
+        "prompt": "Resume el stock de mis SKU y dime cuáles reponer primero.",
+        "resultType": "report",
+        "resultTitle": "Ordené el stock y las prioridades de reposición.",
+        "resultDescription": "Comparo el stock disponible con tus ventas. La duración estimada depende de que el ritmo de ventas se mantenga.",
+        "preview": {
+          "label": "Stock y reposición",
+          "items": [
+            {
+              "value": "1",
+              "label": "Stock por SKU"
+            },
+            {
+              "value": "2",
+              "label": "Ventas recientes"
+            },
+            {
+              "value": "3",
+              "label": "Prioridad de reposición"
+            }
+          ],
+          "status": "Duración estimada si continúa el ritmo de ventas"
         }
       },
       {
@@ -760,9 +968,9 @@
       {
         "id": "sales-drop",
         "category": "Investiga una caída de ventas",
-        "prompt": "¿Por qué bajaron mis ventas? Compara períodos y separa datos de hipótesis.",
+        "prompt": "¿Por qué bajaron mis ventas? Compara este mes con el anterior.",
         "resultType": "report",
-        "resultTitle": "Separé las señales de las posibles causas.",
+        "resultTitle": "Encontré señales que pueden explicar la caída.",
         "resultDescription": "Comparo ventas, visitas y conversión cuando esos datos están disponibles.",
         "preview": {
           "label": "Comparación entre períodos",
@@ -1132,8 +1340,8 @@
     "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre.",
     "pricingOffer": "Ahorra 50% en Vendedor y Vendedor Pro, y 83% en Vendedor Max Anual.",
     "discountLabel": "50% OFF",
-    "showcaseIntro": "Con MerChat, tu IA puede investigar, publicar, analizar y gestionar tu negocio en Mercado Libre. De una consulta a un flujo completo, solo tienes que pedirlo.",
+    "showcaseIntro": "Publica desde fotos o Excel, completa características, gestiona varios SKU y pide reportes de ventas, ganancias, stock y más. Para empezar o llevar tu tienda al siguiente nivel, solo tienes que pedirlo.",
     "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles.",
-    "showcaseToolCount": "11 herramientas y 91 acciones."
+    "showcaseToolCount": "91 acciones para tu negocio."
   }
 }

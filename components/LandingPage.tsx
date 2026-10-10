@@ -156,7 +156,7 @@ function UseCaseDemoCard({ card }: { card: UseCaseCard }) {
 function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
 function ShowcaseCards({ content, duplicate = false }: { content: ReturnType<typeof getLanding>; duplicate?: boolean }) {
   // Lead with four workflows; distribute the four photo breaks across the full collection.
-  const photoAfterCase = [3, 11, 19, 27];
+  const photoAfterCase = [3, 13, 23, 33];
   return <div className="carousel-set" aria-hidden={duplicate || undefined} inert={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
     const photoIndex = photoAfterCase.indexOf(index);
     return [<UseCaseDemoCard card={card} key={card.id} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];

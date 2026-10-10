@@ -33,25 +33,55 @@
         }
       },
       {
-        "id": "batch-campaign",
-        "category": "Create a campaign",
-        "prompt": "Add these 21 products to the campaign with 10% off.",
-        "resultType": "promotion",
-        "resultTitle": "I applied the discount to all 21 products.",
-        "resultDescription": "You approved the prices before they were applied.",
+        "id": "excel-publication",
+        "category": "Publish from Excel",
+        "prompt": "Prepare listings for the products in this Excel file.",
+        "resultType": "workflow",
+        "resultTitle": "I prepared the drafts for you to review.",
+        "resultDescription": "Your AI reads the file and prepares each listing with MerChat, showing missing information before publishing.",
         "preview": {
-          "label": "10% discount",
+          "label": "Listings to review",
           "items": [
             {
-              "value": "21",
-              "label": "Products"
+              "value": "1",
+              "label": "Products from Excel"
             },
             {
-              "value": "21/21",
-              "label": "Checked"
+              "value": "2",
+              "label": "Price and stock"
+            },
+            {
+              "value": "3",
+              "label": "Missing information"
             }
           ],
-          "status": "Applied after approval · Depends on account availability"
+          "status": "Publishing requires your approval"
+        }
+      },
+      {
+        "id": "category-requirements",
+        "category": "Complete product specifications",
+        "prompt": "Fill in this laptop’s specifications using its model and product sheet.",
+        "resultType": "workflow",
+        "resultTitle": "I filled in available details and flagged what is missing.",
+        "resultDescription": "Your AI uses the model and information you provide and checks Mercado Libre requirements. Unconfirmed details are left for your review.",
+        "preview": {
+          "label": "Specifications to review",
+          "items": [
+            {
+              "value": "1",
+              "label": "Brand and model"
+            },
+            {
+              "value": "2",
+              "label": "Product sheet details"
+            },
+            {
+              "value": "3",
+              "label": "Details to confirm"
+            }
+          ],
+          "status": "Review the details before approving"
         }
       },
       {
@@ -81,6 +111,54 @@
         }
       },
       {
+        "id": "revision-verification",
+        "category": "Update several SKUs",
+        "prompt": "Prepare new prices and stock for these 30 SKUs.",
+        "resultType": "workflow",
+        "resultTitle": "I prepared each product’s changes for review.",
+        "resultDescription": "Review each SKU before approving. MerChat then checks which changes were saved and shows anything pending.",
+        "preview": {
+          "label": "Changes by product",
+          "items": [
+            {
+              "value": "1",
+              "label": "Selected SKUs"
+            },
+            {
+              "value": "2",
+              "label": "New price and stock"
+            },
+            {
+              "value": "3",
+              "label": "Confirmed changes"
+            }
+          ],
+          "status": "Verification after approval"
+        }
+      },
+      {
+        "id": "batch-campaign",
+        "category": "Create a campaign",
+        "prompt": "Add these 21 products to the campaign with 10% off.",
+        "resultType": "promotion",
+        "resultTitle": "I applied the discount to all 21 products.",
+        "resultDescription": "You approved the prices before they were applied.",
+        "preview": {
+          "label": "10% discount",
+          "items": [
+            {
+              "value": "21",
+              "label": "Products"
+            },
+            {
+              "value": "21/21",
+              "label": "Checked"
+            }
+          ],
+          "status": "Applied after approval · Depends on account availability"
+        }
+      },
+      {
         "id": "photo-order",
         "category": "Reorder your photos",
         "prompt": "I want to change the order of this listing’s photos.",
@@ -99,7 +177,7 @@
         "prompt": "Choose the category, check requirements and fees, and prepare this laptop.",
         "resultType": "workflow",
         "resultTitle": "I prepared the draft and what needs review.",
-        "resultDescription": "Confirm the route and details before publishing.",
+        "resultDescription": "The listing choice and details are confirmed before publishing.",
         "preview": {
           "label": "Pre-publication review",
           "items": [
@@ -224,6 +302,32 @@
         }
       },
       {
+        "id": "profit-report",
+        "category": "Get a profit report",
+        "prompt": "Using my costs, compare how much these SKUs earn me.",
+        "resultType": "report",
+        "resultTitle": "I compared each product’s estimated profit.",
+        "resultDescription": "I combine your supplied costs with available fees. Include other expenses to refine the estimate.",
+        "preview": {
+          "label": "Estimated profit by SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Your supplied costs"
+            },
+            {
+              "value": "2",
+              "label": "Fees and expenses"
+            },
+            {
+              "value": "3",
+              "label": "Estimated profit"
+            }
+          ],
+          "status": "Estimate based on costs and available data"
+        }
+      },
+      {
         "id": "market-research",
         "category": "Compare your prices",
         "prompt": "Find similar iPhones and compare their prices with mine.",
@@ -251,25 +355,25 @@
       },
       {
         "id": "product-family",
-        "category": "Understand product families",
-        "prompt": "Which listings belong to the same family as this product?",
+        "category": "Review versions of a product",
+        "prompt": "Show me the related listings for this product.",
         "resultType": "report",
-        "resultTitle": "I gathered the family’s related IDs.",
-        "resultDescription": "I use official User Product relationships, not visual similarity.",
+        "resultTitle": "I gathered the listings for you to compare.",
+        "resultDescription": "I use Mercado Libre’s official relationships to show listings in the same group.",
         "preview": {
-          "label": "Official product family",
+          "label": "Related listings",
           "items": [
             {
               "value": "1",
-              "label": "User Product"
+              "label": "Main product"
             },
             {
               "value": "2",
-              "label": "Official family"
+              "label": "Related versions"
             },
             {
               "value": "3",
-              "label": "Related listings"
+              "label": "Listings in the group"
             }
           ],
           "status": "Relationships reported by Mercado Libre"
@@ -277,13 +381,13 @@
       },
       {
         "id": "user-product-options",
-        "category": "Add selling options",
-        "prompt": "Add a selling option to this User Product with a different price and stock.",
+        "category": "Sell with different terms",
+        "prompt": "Prepare another option for this product with a different price and stock.",
         "resultType": "workflow",
         "resultTitle": "I prepared the new option for you to review.",
-        "resultDescription": "The option links to the existing product where Mercado Libre supports it.",
+        "resultDescription": "Where Mercado Libre supports it, you can add another selling option for the same product.",
         "preview": {
-          "label": "Proposed selling option",
+          "label": "New selling option",
           "items": [
             {
               "value": "1",
@@ -295,10 +399,10 @@
             },
             {
               "value": "3",
-              "label": "Option stock"
+              "label": "Available stock"
             }
           ],
-          "status": "Depends on product support · Approval required"
+          "status": "Approval required · Subject to availability"
         }
       },
       {
@@ -325,6 +429,32 @@
             }
           ],
           "status": "Review requested by you"
+        }
+      },
+      {
+        "id": "sales-report",
+        "category": "Get a sales report",
+        "prompt": "Make a sales report by product and SKU for this month.",
+        "resultType": "report",
+        "resultTitle": "I organized sales, units and revenue by product.",
+        "resultDescription": "Request a period summary and compare products using available account data.",
+        "preview": {
+          "label": "Sales by product and SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Products and SKUs"
+            },
+            {
+              "value": "2",
+              "label": "Units sold"
+            },
+            {
+              "value": "3",
+              "label": "Period revenue"
+            }
+          ],
+          "status": "Your account data · Selected period"
         }
       },
       {
@@ -406,29 +536,29 @@
         }
       },
       {
-        "id": "category-requirements",
-        "category": "Check live requirements",
-        "prompt": "What details does Mercado Libre require to list this laptop?",
-        "resultType": "workflow",
-        "resultTitle": "I checked the category requirements.",
-        "resultDescription": "Requirements come from Mercado Libre, not a generic checklist.",
+        "id": "quality-report",
+        "category": "Get a listing report",
+        "prompt": "Review my listings and summarize which need improvement.",
+        "resultType": "report",
+        "resultTitle": "I organized the listings worth reviewing.",
+        "resultDescription": "I gather available quality, visits and sales data to help you prioritize. Suggestions are based on that evidence.",
         "preview": {
-          "label": "Category requirements",
+          "label": "Listings to improve",
           "items": [
             {
               "value": "1",
-              "label": "Required attributes"
+              "label": "Quality and missing details"
             },
             {
               "value": "2",
-              "label": "Allowed values"
+              "label": "Visits and sales"
             },
             {
               "value": "3",
-              "label": "Missing details"
+              "label": "Suggested improvements"
             }
           ],
-          "status": "Depends on category and marketplace"
+          "status": "Available data · Changes require approval"
         }
       },
       {
@@ -480,29 +610,29 @@
         }
       },
       {
-        "id": "revision-verification",
-        "category": "Verify your changes",
-        "prompt": "After I approve, confirm Mercado Libre saved the changes.",
-        "resultType": "workflow",
-        "resultTitle": "I checked the listing’s final state.",
-        "resultDescription": "Verification reads fresh data after the revision is applied.",
+        "id": "ads-report",
+        "category": "Get an advertising report",
+        "prompt": "Summarize my ads’ spending and sales this month.",
+        "resultType": "report",
+        "resultTitle": "I prepared a summary using available metrics.",
+        "resultDescription": "Review spending, attributed sales and performance where reporting is available for your account.",
         "preview": {
-          "label": "Final verification",
+          "label": "Advertising performance",
           "items": [
             {
               "value": "1",
-              "label": "Read current state"
+              "label": "Ad spending"
             },
             {
               "value": "2",
-              "label": "Compare with approved changes"
+              "label": "Attributed sales"
             },
             {
               "value": "3",
-              "label": "Show differences"
+              "label": "Available performance"
             }
           ],
-          "status": "Verification after approval"
+          "status": "Subject to availability · No campaign changes"
         }
       },
       {
@@ -555,28 +685,28 @@
       },
       {
         "id": "publication-route",
-        "category": "Choose how to list",
-        "prompt": "Catalog or User Product? Check the options for this device.",
+        "category": "Find how to list a product",
+        "prompt": "Can I sell this device in the catalog or should I create a listing?",
         "resultType": "workflow",
-        "resultTitle": "Here are the routes for you to choose.",
-        "resultDescription": "If the route is unclear, MerChat asks you to confirm it.",
+        "resultTitle": "I checked the options for you to choose.",
+        "resultDescription": "MerChat looks up the product and explains your options. If unclear, it asks you to confirm how you want to list it.",
         "preview": {
-          "label": "Listing routes",
+          "label": "Listing options",
           "items": [
             {
               "value": "1",
-              "label": "Catalog"
+              "label": "Catalog product"
             },
             {
               "value": "2",
-              "label": "User Product"
+              "label": "Your own listing"
             },
             {
               "value": "3",
               "label": "Your choice"
             }
           ],
-          "status": "Route to confirm with you"
+          "status": "Option to confirm with you"
         }
       },
       {
@@ -628,6 +758,32 @@
         }
       },
       {
+        "id": "orders-report",
+        "category": "Get an order report",
+        "prompt": "Summarize this week’s orders, payments and pending shipments.",
+        "resultType": "report",
+        "resultTitle": "I organized orders by what needs attention.",
+        "resultDescription": "I gather available payment and shipping status to help you prepare dispatch.",
+        "preview": {
+          "label": "Orders needing attention",
+          "items": [
+            {
+              "value": "1",
+              "label": "Payment status"
+            },
+            {
+              "value": "2",
+              "label": "Shipping status"
+            },
+            {
+              "value": "3",
+              "label": "Dispatch information"
+            }
+          ],
+          "status": "Read only · Does not change order status"
+        }
+      },
+      {
         "id": "promotion-eligibility",
         "category": "Find eligible products",
         "prompt": "Which of my products can join this campaign?",
@@ -651,6 +807,32 @@
             }
           ],
           "status": "Depends on Mercado Libre eligibility"
+        }
+      },
+      {
+        "id": "promotions-report",
+        "category": "Get a promotion report",
+        "prompt": "Summarize campaigns and discounts for my products.",
+        "resultType": "report",
+        "resultTitle": "I organized offers and participating products.",
+        "resultDescription": "Review campaigns, discounts and eligible products where available for your account.",
+        "preview": {
+          "label": "Campaigns and discounts",
+          "items": [
+            {
+              "value": "1",
+              "label": "Available campaigns"
+            },
+            {
+              "value": "2",
+              "label": "Current discounts"
+            },
+            {
+              "value": "3",
+              "label": "Participating products"
+            }
+          ],
+          "status": "Subject to availability · No changes applied"
         }
       },
       {
@@ -703,6 +885,32 @@
             }
           ],
           "status": "If the recent sales rate continues"
+        }
+      },
+      {
+        "id": "inventory-report",
+        "category": "Get a stock report",
+        "prompt": "Summarize my SKUs’ stock and tell me what to restock first.",
+        "resultType": "report",
+        "resultTitle": "I organized stock and restocking priorities.",
+        "resultDescription": "I compare available stock with your sales. Estimated coverage assumes the sales pace continues.",
+        "preview": {
+          "label": "Stock and restocking",
+          "items": [
+            {
+              "value": "1",
+              "label": "Stock by SKU"
+            },
+            {
+              "value": "2",
+              "label": "Recent sales"
+            },
+            {
+              "value": "3",
+              "label": "Restocking priority"
+            }
+          ],
+          "status": "Estimated coverage if sales pace continues"
         }
       },
       {
@@ -760,9 +968,9 @@
       {
         "id": "sales-drop",
         "category": "Investigate declining sales",
-        "prompt": "Why did sales fall? Compare periods and separate facts from hypotheses.",
+        "prompt": "Why did my sales fall? Compare this month with last month.",
         "resultType": "report",
-        "resultTitle": "I separated signals from possible causes.",
+        "resultTitle": "I found signs that may explain the drop.",
         "resultDescription": "I compare sales, visits and conversion where data is available.",
         "preview": {
           "label": "Period comparison",
@@ -1132,8 +1340,8 @@
     "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre.",
     "pricingOffer": "Save 50% on Vendedor and Vendedor Pro, and 83% on Vendedor Max Anual.",
     "discountLabel": "50% OFF",
-    "showcaseIntro": "With MerChat, your AI can research, publish, analyze and manage your Mercado Libre business. From a question to a complete workflow, just ask.",
+    "showcaseIntro": "Publish from photos or Excel, fill in specifications, manage multiple SKUs and request sales, profit, stock reports and more. To get started or grow your store, just ask.",
     "showcaseDisclaimer": "Illustrative examples. Features and results depend on available data and permissions.",
-    "showcaseToolCount": "11 tools and 91 actions."
+    "showcaseToolCount": "91 actions for your business."
   }
 }
