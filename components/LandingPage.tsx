@@ -217,6 +217,7 @@ export default function LandingPage() {
   const showcaseHoveredRef = useRef(false);
   const showcaseFocusedRef = useRef(false);
   const showcaseVisibleRef = useRef(false);
+  const showcaseAutoStartRef = useRef(0);
   const showcaseAutoScrollRef = useRef<number | null>(null);
   const showcaseResumeTimerRef = useRef<number | null>(null);
   const showcaseDragRef = useRef({ active: false, pointerId: 0, startX: 0, startScroll: 0 });
@@ -260,12 +261,12 @@ export default function LandingPage() {
     const interval = window.setInterval(() => {
       const time = Date.now();
       const carousel = showcaseRef.current;
-      if (carousel && (showcasePausedRef.current || !showcaseVisibleRef.current || activeShowcaseIndex !== null)) {
+      if (carousel && (showcasePausedRef.current || !showcaseVisibleRef.current || time < showcaseAutoStartRef.current || activeShowcaseIndex !== null)) {
         showcaseAutoScrollRef.current = carousel.scrollLeft;
       } else if (carousel) {
         const loopWidth = getShowcaseLoopWidth(carousel);
         const currentPosition = showcaseAutoScrollRef.current ?? carousel.scrollLeft;
-        const nextPosition = currentPosition + (time - previousTime) * 0.018;
+        const nextPosition = currentPosition + (time - previousTime) * 0.012;
         showcaseAutoScrollRef.current = nextPosition >= loopWidth ? nextPosition - loopWidth : nextPosition;
         // Keep fractional progress in memory, but assign whole pixels for
         // WebKit versions that round element.scrollLeft values.
@@ -278,7 +279,11 @@ export default function LandingPage() {
   useEffect(() => {
     const carousel = showcaseRef.current;
     if (!carousel) return;
-    const observer = new IntersectionObserver(([entry]) => { showcaseVisibleRef.current = entry.isIntersecting; }, { threshold: 0 });
+    const observer = new IntersectionObserver(([entry]) => {
+      const visible = entry.isIntersecting && entry.intersectionRatio >= .35;
+      if (visible && !showcaseVisibleRef.current) showcaseAutoStartRef.current = Date.now() + 6000;
+      showcaseVisibleRef.current = visible;
+    }, { threshold: .35 });
     observer.observe(carousel);
     return () => observer.disconnect();
   }, []);
