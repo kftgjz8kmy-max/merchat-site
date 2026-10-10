@@ -281,7 +281,7 @@ export default function LandingPage() {
     if (!carousel) return;
     const observer = new IntersectionObserver(([entry]) => {
       const visible = entry.isIntersecting && entry.intersectionRatio >= .35;
-      if (visible && !showcaseVisibleRef.current) showcaseAutoStartRef.current = Date.now() + 6000;
+      if (visible && !showcaseVisibleRef.current) showcaseAutoStartRef.current = Date.now() + 3000;
       showcaseVisibleRef.current = visible;
     }, { threshold: .35 });
     observer.observe(carousel);
