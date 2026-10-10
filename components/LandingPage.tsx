@@ -218,6 +218,7 @@ export default function LandingPage() {
   const showcaseFocusedRef = useRef(false);
   const showcaseVisibleRef = useRef(false);
   const showcaseAutoStartRef = useRef(0);
+  const showcaseResumeOnCloseRef = useRef(false);
   const showcaseAutoScrollRef = useRef<number | null>(null);
   const showcaseResumeTimerRef = useRef<number | null>(null);
   const showcaseDragRef = useRef({ active: false, pointerId: 0, startX: 0, startScroll: 0 });
@@ -225,7 +226,25 @@ export default function LandingPage() {
   const [isDraggingShowcase, setIsDraggingShowcase] = useState(false);
   const showcasePages = 4;
   const [activeShowcaseIndex, setActiveShowcaseIndex] = useState<number | null>(null);
-  const closeShowcase = useCallback(() => setActiveShowcaseIndex(null), [setActiveShowcaseIndex]);
+  const closeShowcase = useCallback(() => {
+    showcaseResumeOnCloseRef.current = true;
+    setActiveShowcaseIndex(null);
+  }, [setActiveShowcaseIndex]);
+  useEffect(() => {
+    if (activeShowcaseIndex !== null || !showcaseResumeOnCloseRef.current) return;
+    // Resume after the dialog restores focus to its opener.
+    const frame = window.requestAnimationFrame(() => {
+      showcaseResumeOnCloseRef.current = false;
+      if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
+      showcaseResumeTimerRef.current = null;
+      showcaseAutoStartRef.current = 0;
+      showcaseAutoScrollRef.current = showcaseRef.current?.scrollLeft ?? null;
+      showcaseFocusedRef.current = false;
+      showcaseHoveredRef.current = false;
+      showcasePausedRef.current = false;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeShowcaseIndex]);
   const openShowcase = (id: string) => {
     const index = localizedLanding.useCases.findIndex((card) => card.id === id);
     if (index >= 0) setActiveShowcaseIndex(index);
