@@ -10,6 +10,8 @@ Carousel changes keep dragging, swiping, arrows, four dots and reduced motion. L
 
 Cards use content-driven heights, tighter preview spacing and outcomes directly beneath their previews. The four lifestyle photos occupy positions 5, 8, 11 and 14, alternating between rows and aligning to each row start. Photos remain shorter visual pauses. Diagnosis previews distinguish the three conditions; the advertising bar reflects the supplied ACOS value rather than arbitrary decorative columns. Final responsive checks passed at all five widths and all four locales at 360px.
 
+The 12 workflow requests and answers now use everyday, conversational wording. Answers state the concrete result; preview labels avoid jargon where possible and explain ACOS as ad spend divided by sales. Photo captions follow the same plain language. All four translations are updated. Copy outside the carousel is unchanged. Mobile checks at 360px found no overflow in any locale; the latest screenshots show the revised copy.
+
 ## Validation
 
 - `npm run typecheck`: passed.

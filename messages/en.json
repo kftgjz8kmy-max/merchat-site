@@ -14,19 +14,19 @@
     "useCases": [
       {
         "id": "photo-listing",
-        "category": "From photos to a listing",
-        "prompt": "Here are the photos of this MacBook. Help me prepare everything to list it.",
+        "category": "List from your photos",
+        "prompt": "Help me list this MacBook using these photos.",
         "resultType": "listing",
-        "resultTitle": "Listing ready for review",
-        "resultDescription": "Photos, specifications and terms prepared.",
+        "resultTitle": "I prepared the listing for you to review.",
+        "resultDescription": "It includes photos, specifications and terms.",
         "preview": {
           "label": "MacBook Pro 14″",
           "items": [
             {
-              "label": "Specifications prepared"
+              "label": "Specifications ready"
             },
             {
-              "label": "Photos prepared"
+              "label": "Photos ready"
             }
           ],
           "status": "Listing awaiting approval"
@@ -34,21 +34,21 @@
       },
       {
         "id": "batch-campaign",
-        "category": "21 products. One campaign.",
-        "prompt": "Add these 21 products to the campaign with a 10% discount.",
+        "category": "Create a campaign",
+        "prompt": "Add these 21 products to the campaign with 10% off.",
         "resultType": "promotion",
-        "resultTitle": "21 offers applied and verified",
-        "resultDescription": "Prices reviewed and approved before applying.",
+        "resultTitle": "I applied the discount to all 21 products.",
+        "resultDescription": "You approved the prices before they were applied.",
         "preview": {
           "label": "10% discount",
           "items": [
             {
               "value": "21",
-              "label": "Products processed"
+              "label": "Products"
             },
             {
               "value": "21/21",
-              "label": "Verified"
+              "label": "Checked"
             }
           ],
           "status": "Applied after approval"
@@ -56,21 +56,21 @@
       },
       {
         "id": "inventory-file",
-        "category": "One Excel file. Dozens of changes.",
-        "prompt": "Here are my new prices and stock. Compare them with my listings and prepare the changes.",
+        "category": "Update from Excel",
+        "prompt": "Use this Excel file to prepare my new prices and stock.",
         "resultType": "excel",
-        "resultTitle": "From Excel to your listings",
-        "resultDescription": "Changes are reviewed before they are applied.",
+        "resultTitle": "I prepared the changes for your approval.",
+        "resultDescription": "4 rows need a closer look.",
         "preview": {
           "label": "Inventory.xlsx",
           "items": [
             {
               "value": "62",
-              "label": "Rows analyzed"
+              "label": "Rows checked"
             },
             {
               "value": "58",
-              "label": "Changes prepared"
+              "label": "Changes ready"
             },
             {
               "value": "4",
@@ -82,11 +82,11 @@
       },
       {
         "id": "photo-order",
-        "category": "Edit your photos in chat",
-        "prompt": "Show me the photos in this listing. I want to change their order.",
+        "category": "Reorder your photos",
+        "prompt": "I want to change the order of this listing’s photos.",
         "resultType": "gallery",
-        "resultTitle": "New order ready for approval",
-        "resultDescription": "Drag your photos directly in chat.",
+        "resultTitle": "The new order is ready for your approval.",
+        "resultDescription": "You can drag the photos in the chat.",
         "preview": {
           "label": "Photo order",
           "items": [],
@@ -95,25 +95,25 @@
       },
       {
         "id": "margin-diagnosis",
-        "category": "Find where you lose margin",
-        "prompt": "Cross-check my sales, costs and advertising. Tell me which products need attention.",
+        "category": "Check your profits",
+        "prompt": "Review my sales, costs and ads. Which products need attention?",
         "resultType": "diagnosis",
-        "resultTitle": "Issues found. Actions suggested.",
-        "resultDescription": "Decisions based on your available data.",
+        "resultTitle": "I found 3 products that need attention.",
+        "resultDescription": "Here is what to check for each one.",
         "preview": {
           "label": "3 products to review",
           "items": [
             {
               "value": "Product A",
-              "label": "Possibly insufficient margin"
+              "label": "Profit may be low"
             },
             {
               "value": "Product B",
-              "label": "Costly advertising"
+              "label": "Costly ads"
             },
             {
               "value": "Product C",
-              "label": "Profitability to confirm"
+              "label": "Profit unconfirmed"
             }
           ],
           "status": "Costs supplied by the seller"
@@ -121,17 +121,17 @@
       },
       {
         "id": "market-research",
-        "category": "Research the market for you",
-        "prompt": "Find public prices for similar iPhones and compare them with mine.",
+        "category": "Compare your prices",
+        "prompt": "Find similar iPhones and compare their prices with mine.",
         "resultType": "price-range",
-        "resultTitle": "See how your prices compare",
-        "resultDescription": "Compare references before deciding.",
+        "resultTitle": "Your price is S/ 50 above the range.",
+        "resultDescription": "Compare similar products before changing it.",
         "preview": {
           "label": "Public references",
           "items": [
             {
               "value": "S/ 1,249–1,349",
-              "label": "Public references"
+              "label": "Public prices"
             },
             {
               "value": "S/ 1,399",
@@ -139,7 +139,7 @@
             },
             {
               "value": "+S/ 50",
-              "label": "Above the highest reference"
+              "label": "Above the maximum"
             }
           ],
           "status": "Illustrative comparison · Depends on your AI tools"
@@ -147,11 +147,11 @@
       },
       {
         "id": "daily-priorities",
-        "category": "What needs attention today?",
-        "prompt": "Review my account and tell me where I should start today.",
+        "category": "Plan your day",
+        "prompt": "Check my account. What should I deal with first today?",
         "resultType": "priorities",
-        "resultTitle": "Your priorities are ready",
-        "resultDescription": "Start with what needs the most attention.",
+        "resultTitle": "Here are your priorities for today.",
+        "resultDescription": "Start with the unanswered questions.",
         "preview": {
           "label": "Today’s priorities",
           "items": [
@@ -161,11 +161,11 @@
             },
             {
               "value": "3",
-              "label": "Quality warnings"
+              "label": "Quality alerts"
             },
             {
               "value": "5",
-              "label": "Improvement opportunities"
+              "label": "Possible improvements"
             }
           ],
           "status": "Review requested by you"
@@ -173,25 +173,25 @@
       },
       {
         "id": "listing-improvements",
-        "category": "Find what to improve",
-        "prompt": "Find listings with views but few sales and suggest improvements.",
+        "category": "Improve your listings",
+        "prompt": "Which listings get views but few sales? Tell me what to improve.",
         "resultType": "performance",
-        "resultTitle": "Improvement plan prepared",
-        "resultDescription": "Analyze first. Decide next.",
+        "resultTitle": "Check the price, photos and details.",
+        "resultDescription": "I found 4 listings to review.",
         "preview": {
           "label": "4 listings to review",
           "items": [
             {
               "value": "Price",
-              "label": "Assess competitiveness"
+              "label": "Compare prices"
             },
             {
               "value": "Photos",
-              "label": "Review presentation"
+              "label": "Improve photos"
             },
             {
               "value": "Specifications",
-              "label": "Check missing details"
+              "label": "Fill in details"
             }
           ],
           "status": "Recommendations for review"
@@ -199,17 +199,17 @@
       },
       {
         "id": "product-ads",
-        "category": "Take a closer look at your ads",
-        "prompt": "Are my Product Ads delivering results? Analyze my campaigns.",
+        "category": "Check your ads",
+        "prompt": "Are my ads working? Review my campaigns.",
         "resultType": "ads",
-        "resultTitle": "Advertising analyzed",
-        "resultDescription": "Identify campaigns that need attention.",
+        "resultTitle": "2 campaigns are worth a closer look.",
+        "resultDescription": "I reviewed the available Product Ads data.",
         "preview": {
           "label": "Product Ads",
           "items": [
             {
               "value": "28%",
-              "label": "ACOS"
+              "label": "Ad spend / sales (ACOS)"
             },
             {
               "value": "2",
@@ -221,11 +221,11 @@
       },
       {
         "id": "account-comparison",
-        "category": "Two stores. One AI.",
-        "prompt": "Compare my two Mercado Libre accounts and tell me which sold more this month.",
+        "category": "Compare your stores",
+        "prompt": "Which of my two stores sold more this month?",
         "resultType": "accounts",
-        "resultTitle": "A clearer view of your businesses",
-        "resultDescription": "Each account with its own data.",
+        "resultTitle": "Store A sold S/ 6,400 more.",
+        "resultDescription": "I compared sales from your two authorized accounts.",
         "preview": {
           "label": "Authorized accounts",
           "items": [
@@ -243,11 +243,11 @@
       },
       {
         "id": "order-status",
-        "category": "Resolve your orders",
-        "prompt": "Review my latest sale. Has it been paid, and what is left before shipping?",
+        "category": "Check your orders",
+        "prompt": "Has my latest sale been paid? What is left before shipping?",
         "resultType": "sale",
-        "resultTitle": "You know the next step",
-        "resultDescription": "Order and shipping reviewed.",
+        "resultTitle": "Payment is approved. Prepare the shipment next.",
+        "resultDescription": "I checked the order and shipping status.",
         "preview": {
           "label": "Samsung Galaxy A56",
           "items": [
@@ -257,7 +257,7 @@
             },
             {
               "value": "Shipping",
-              "label": "Awaiting preparation"
+              "label": "Pending preparation"
             }
           ],
           "status": "Illustrative order status"
@@ -265,11 +265,11 @@
       },
       {
         "id": "stock-coverage",
-        "category": "Restock before you run out",
-        "prompt": "Using my sales and stock, tell me which products could run out soon.",
+        "category": "Plan your restock",
+        "prompt": "Which products might run out soon? Check my sales and stock.",
         "resultType": "restock",
-        "resultTitle": "Review your next replenishment",
-        "resultDescription": "Estimate based on sales and stock.",
+        "resultTitle": "These headphones could last about 6 days.",
+        "resultDescription": "This estimate uses your recent sales.",
         "preview": {
           "label": "Bluetooth headphones",
           "items": [
@@ -279,11 +279,11 @@
             },
             {
               "value": "5",
-              "label": "Current stock"
+              "label": "Units available"
             },
             {
               "value": "≈6",
-              "label": "Days of coverage"
+              "label": "Estimated days"
             }
           ],
           "status": "If the recent sales rate continues"
@@ -293,25 +293,25 @@
     "photoExamples": [
       {
         "eyebrow": "List with fewer steps",
-        "note": "From photos to a listing prepared to sell.",
+        "note": "Turn your photos into a listing ready to review.",
         "image": "/images/lifestyle/publish-from-photo.png",
         "alt": "Seller photographing a smartphone to publish it in her online store"
       },
       {
         "eyebrow": "A clearer view of your business",
-        "note": "Ask questions. Get useful answers. Make decisions.",
+        "note": "Ask what you need to know about your business.",
         "image": "/images/lifestyle/seller-workspace.png",
         "alt": "Seller working on her online store from a laptop"
       },
       {
         "eyebrow": "Think bigger",
-        "note": "Turn information into decisions that help you grow.",
+        "note": "Understand your sales and decide what to do next.",
         "image": "/images/lifestyle/sales-analysis.png",
         "alt": "Ecommerce team analyzing sales performance"
       },
       {
         "eyebrow": "One AI for your businesses",
-        "note": "Less repetitive work. More time to grow.",
+        "note": "Fewer repetitive tasks. More time for your business.",
         "image": "/images/lifestyle/agency-team.png",
         "alt": "Ecommerce team reviewing sales and orders"
       }
