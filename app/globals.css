@@ -2458,7 +2458,6 @@ main .functions-group section#resultados { padding-block: 32px 56px; scroll-marg
 #resultados .example-photo .photo-overlay strong { font-size: 19px; }
 
 /* Result explorer: explicit actions and concrete illustrative outputs. */
-#resultados .showcase-intro { margin-bottom: 18px; }
 #resultados .showcase-hint { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 30px; color: #405678; font-size: 14px; line-height: 1.5; }
 #resultados .showcase-hint svg { flex-shrink: 0; color: var(--blue); }
 #resultados .demo-card { transition: box-shadow .18s ease, border-color .18s ease; }
