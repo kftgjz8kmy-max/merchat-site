@@ -2483,7 +2483,8 @@ main .functions-group section#resultados { padding-block: 32px 56px; scroll-marg
 #resultados .cap-speaker { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; color: #405678; font-size: 12px; font-weight: 500; }
 #resultados .cap-speaker svg { color: var(--blue); }
 #resultados .cap-conversation blockquote { margin: 0; padding: 16px 18px; border: 1px solid #D6E1FF; border-radius: 16px 16px 4px 16px; background: #EEF3FF; color: #172554; font-size: 16px; line-height: 1.55; }
-#resultados .cap-response { margin-top: 24px; }
+#resultados .cap-response { margin-top: 24px; text-align: right; }
+#resultados .cap-response .cap-speaker { justify-content: flex-end; }
 #resultados .cap-answer { margin: 0; font-size: 18px; line-height: 1.5; font-weight: 600; text-wrap: pretty; }
 #resultados .cap-method { margin-top: 24px; font-size: 13px; color: #405678; }
 #resultados .cap-method summary { width: fit-content; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; line-height: 44px; }
