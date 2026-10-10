@@ -19,8 +19,17 @@ test("every locale has the same 42 workflows and six distinct lifestyle photos",
     for (const card of landing.useCases) {
       for (const value of [card.category, card.prompt, card.resultTitle, card.resultDescription, card.preview.label, card.preview.status]) assert.ok(value?.trim());
       assert.ok(Array.isArray(card.preview.items));
+      const example = card.preview.example;
+      assert.ok(example?.conclusion?.trim(), `${card.id} needs a concrete takeaway`);
+      assert.ok(example.columns.length >= 2);
+      assert.ok(example.rows.length >= 2, `${card.id} needs sample results`);
+      for (const row of example.rows) {
+        assert.equal(row.length, example.columns.length);
+        assert.ok(row.every((cell) => typeof cell === "string" && cell.trim()));
+      }
+      assert.ok(example.rows.flat().some((cell) => /\d/.test(cell)), `${card.id} needs concrete data`);
     }
-    assert.ok(ui.showcaseIntro && ui.showcaseDisclaimer);
+    assert.ok(ui.showcaseIntro && ui.showcaseDisclaimer && ui.showcaseOpen && ui.showcaseDataNote);
     assert.match(ui.showcaseToolCount, /91/);
     for (const photo of landing.photoExamples) await access(new URL(`public${photo.image}`, root));
   }

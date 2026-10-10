@@ -13,6 +13,12 @@ export type UseCaseCard = {
     label: string;
     items: { label: string; value?: string }[];
     status: string;
+    example: {
+      columns: string[];
+      rows: string[][];
+      conclusion: string;
+      media?: "product" | "gallery";
+    };
   };
 };
 

@@ -29,7 +29,29 @@
               "label": "Photos ready"
             }
           ],
-          "status": "Listing awaiting approval"
+          "status": "Listing awaiting approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Model",
+                "MacBook Pro 14″ M3"
+              ],
+              [
+                "Price",
+                "S/ 6,499"
+              ],
+              [
+                "Stock",
+                "3 units"
+              ]
+            ],
+            "conclusion": "Draft with 3 photos, price and stock. Ready for your review.",
+            "media": "product"
+          }
         }
       },
       {
@@ -55,7 +77,32 @@
               "label": "Missing information"
             }
           ],
-          "status": "Publishing requires your approval"
+          "status": "Publishing requires your approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Status"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "Ready to review"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "Ready to review"
+              ],
+              [
+                "iPhone 15",
+                "S/ 2,799",
+                "Confirm the color"
+              ]
+            ],
+            "conclusion": "2 drafts ready; 1 needs its color confirmed."
+          }
         }
       },
       {
@@ -81,7 +128,32 @@
               "label": "Details to confirm"
             }
           ],
-          "status": "Review the details before approving"
+          "status": "Review the details before approving",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Processor",
+                "Apple M3",
+                "From the spec sheet"
+              ],
+              [
+                "Memory",
+                "16 GB",
+                "From the spec sheet"
+              ],
+              [
+                "Keyboard",
+                "Language not confirmed",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Processor and memory filled in; confirm the keyboard language."
+          }
         }
       },
       {
@@ -107,7 +179,32 @@
               "label": "Need review"
             }
           ],
-          "status": "Awaiting approval"
+          "status": "Awaiting approval",
+          "example": {
+            "columns": [
+              "SKU",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "Unchanged",
+                "SKU not found"
+              ]
+            ],
+            "conclusion": "58 of 62 rows ready. The other 4 need review."
+          }
         }
       },
       {
@@ -133,7 +230,32 @@
               "label": "Confirmed changes"
             }
           ],
-          "status": "Verification after approval"
+          "status": "Verification after approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "S/ 2,799 → 2,699",
+                "6 → 10"
+              ]
+            ],
+            "conclusion": "Preview of 3 of your 30 products. Review before applying."
+          }
         }
       },
       {
@@ -155,7 +277,32 @@
               "label": "Checked"
             }
           ],
-          "status": "Discounts applied after approval"
+          "status": "Discounts applied after approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Before",
+              "With 10% off"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "S/ 1,259.10"
+              ],
+              [
+                "iPhone 15",
+                "S/ 2,799",
+                "S/ 2,519.10"
+              ],
+              [
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "S/ 5,849.10"
+              ]
+            ],
+            "conclusion": "21 of 21 discounts applied after your approval."
+          }
         }
       },
       {
@@ -168,7 +315,33 @@
         "preview": {
           "label": "Photo order",
           "items": [],
-          "status": "Awaiting approval"
+          "status": "Awaiting approval",
+          "example": {
+            "columns": [
+              "Position",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "1",
+                "Open product",
+                "Side photo"
+              ],
+              [
+                "2",
+                "Keyboard photo",
+                "Open product"
+              ],
+              [
+                "3",
+                "Side photo",
+                "Keyboard photo"
+              ]
+            ],
+            "conclusion": "The side photo becomes the main image. Review the new order.",
+            "media": "gallery"
+          }
         }
       },
       {
@@ -194,7 +367,33 @@
               "label": "Selected photos"
             }
           ],
-          "status": "Subject to your AI’s tools · Publishing requires approval."
+          "status": "Subject to your AI’s tools · Publishing requires approval.",
+          "example": {
+            "columns": [
+              "Photo",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "1",
+                "MacBook Pro 14″ · front view",
+                "Model matches"
+              ],
+              [
+                "2",
+                "MacBook Pro 14″ · keyboard",
+                "Model matches"
+              ],
+              [
+                "3",
+                "MacBook Pro 14″ · side",
+                "Choose which to use"
+              ]
+            ],
+            "conclusion": "MerChat’s guide helps your AI search. Check the model and usage rights.",
+            "media": "gallery"
+          }
         }
       },
       {
@@ -220,7 +419,29 @@
               "label": "Draft to review"
             }
           ],
-          "status": "Requires image generation in your AI · Changes require approval."
+          "status": "Requires image generation in your AI · Changes require approval.",
+          "example": {
+            "columns": [
+              "Field",
+              "Result"
+            ],
+            "rows": [
+              [
+                "Product",
+                "MacBook Pro 14″"
+              ],
+              [
+                "Requested background",
+                "White"
+              ],
+              [
+                "Destination",
+                "Draft’s main photo"
+              ]
+            ],
+            "conclusion": "Example of a product photo in the draft. Your AI generates the image; you review it.",
+            "media": "product"
+          }
         }
       },
       {
@@ -246,7 +467,32 @@
               "label": "Prepare draft"
             }
           ],
-          "status": "Pending approval"
+          "status": "Pending approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Photos",
+                "3 photos uploaded",
+                "Ready to review"
+              ],
+              [
+                "Price",
+                "S/ 6,499",
+                "Ready to review"
+              ],
+              [
+                "Warranty",
+                "Duration missing",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Confirm the warranty before approving the listing."
+          }
         }
       },
       {
@@ -272,7 +518,32 @@
               "label": "Shipping"
             }
           ],
-          "status": "Nothing is applied without your approval"
+          "status": "Nothing is applied without your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Price",
+                "S/ 1,399",
+                "S/ 1,349"
+              ],
+              [
+                "Stock",
+                "8",
+                "12"
+              ],
+              [
+                "Free shipping",
+                "No",
+                "Yes"
+              ]
+            ],
+            "conclusion": "Price, stock and shipping together in one review."
+          }
         }
       },
       {
@@ -298,7 +569,32 @@
               "label": "Profit unconfirmed"
             }
           ],
-          "status": "Costs supplied by the seller"
+          "status": "Costs supplied by the seller",
+          "example": {
+            "columns": [
+              "Product",
+              "Profit",
+              "What to check"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "S/ 42",
+                "Product cost"
+              ],
+              [
+                "Bluetooth headphones",
+                "S/ 8",
+                "Ad spend"
+              ],
+              [
+                "MacBook Pro 14″",
+                "To calculate",
+                "Your cost is missing"
+              ]
+            ],
+            "conclusion": "Profit per unit: two low margins and one missing cost."
+          }
         }
       },
       {
@@ -324,7 +620,28 @@
               "label": "Mercado Libre fees"
             }
           ],
-          "status": "Your supplied costs · Estimated profit"
+          "status": "Your supplied costs · Estimated profit",
+          "example": {
+            "columns": [
+              "Detail",
+              "Amount"
+            ],
+            "rows": [
+              [
+                "Sale price",
+                "S/ 1,500"
+              ],
+              [
+                "Your cost",
+                "− S/ 1,000"
+              ],
+              [
+                "Example fee",
+                "− S/ 180"
+              ]
+            ],
+            "conclusion": "Estimated profit: S/ 320. Other expenses excluded."
+          }
         }
       },
       {
@@ -350,7 +667,28 @@
               "label": "Estimated price"
             }
           ],
-          "status": "Estimate using your costs and available data"
+          "status": "Estimate using your costs and available data",
+          "example": {
+            "columns": [
+              "Detail",
+              "Amount"
+            ],
+            "rows": [
+              [
+                "Product cost",
+                "S/ 1,000"
+              ],
+              [
+                "Illustrative fee",
+                "12%"
+              ],
+              [
+                "Price to cover both",
+                "S/ 1,136.37"
+              ]
+            ],
+            "conclusion": "Below S/ 1,136.37, this example would not cover cost and fee. Other expenses excluded."
+          }
         }
       },
       {
@@ -376,7 +714,32 @@
               "label": "Estimated profit"
             }
           ],
-          "status": "Estimate based on costs and available data"
+          "status": "Estimate based on costs and available data",
+          "example": {
+            "columns": [
+              "Product",
+              "Sales",
+              "Profit"
+            ],
+            "rows": [
+              [
+                "A56-256",
+                "S/ 13,990",
+                "S/ 1,420"
+              ],
+              [
+                "IP15-128",
+                "S/ 16,794",
+                "S/ 2,100"
+              ],
+              [
+                "MBP-14",
+                "S/ 19,497",
+                "S/ 3,060"
+              ]
+            ],
+            "conclusion": "MacBook Pro contributes the highest estimated profit this period."
+          }
         }
       },
       {
@@ -402,7 +765,32 @@
               "label": "Above the maximum"
             }
           ],
-          "status": "Illustrative comparison · Depends on your AI tools"
+          "status": "Illustrative comparison · Depends on your AI tools",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "iPhone 13 · 128 GB",
+                "S/ 1,249",
+                "Reference 1"
+              ],
+              [
+                "iPhone 13 · 128 GB",
+                "S/ 1,349",
+                "Reference 2"
+              ],
+              [
+                "Your iPhone 13 · 128 GB",
+                "S/ 1,399",
+                "Your listing"
+              ]
+            ],
+            "conclusion": "Your price is S/ 50 above the highest reference."
+          }
         }
       },
       {
@@ -428,7 +816,28 @@
               "label": "Listings in the group"
             }
           ],
-          "status": "Relationships reported by Mercado Libre"
+          "status": "Relationships reported by Mercado Libre",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″ M3 · 512 GB",
+                "S/ 6,499",
+                "3 available"
+              ],
+              [
+                "MacBook Pro 14″ M3 · 1 TB",
+                "S/ 7,499",
+                "2 available"
+              ]
+            ],
+            "conclusion": "Example of two linked listings: same model, different storage.",
+            "media": "product"
+          }
         }
       },
       {
@@ -454,7 +863,32 @@
               "label": "Available stock"
             }
           ],
-          "status": "Approval required · Subject to availability"
+          "status": "Approval required · Subject to availability",
+          "example": {
+            "columns": [
+              "Field",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Product",
+                "Samsung Galaxy A56",
+                "Samsung Galaxy A56"
+              ],
+              [
+                "Price",
+                "S/ 1,399",
+                "S/ 1,349"
+              ],
+              [
+                "Stock",
+                "8",
+                "12"
+              ]
+            ],
+            "conclusion": "The original option stays; review the new option before approving."
+          }
         }
       },
       {
@@ -480,7 +914,32 @@
               "label": "Possible improvements"
             }
           ],
-          "status": "Review requested by you"
+          "status": "Review requested by you",
+          "example": {
+            "columns": [
+              "Priority",
+              "Detail",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "1",
+                "2 unanswered questions",
+                "Reply today"
+              ],
+              [
+                "2",
+                "3 incomplete listings",
+                "Fill in specifications"
+              ],
+              [
+                "3",
+                "5 products to improve",
+                "Review price and photos"
+              ]
+            ],
+            "conclusion": "Start with customer questions, then complete your listings."
+          }
         }
       },
       {
@@ -506,7 +965,32 @@
               "label": "Period revenue"
             }
           ],
-          "status": "Your account data · Selected period"
+          "status": "Your account data · Selected period",
+          "example": {
+            "columns": [
+              "Product",
+              "Units",
+              "Sales"
+            ],
+            "rows": [
+              [
+                "A56-256",
+                "18",
+                "S/ 25,182"
+              ],
+              [
+                "IP15-128",
+                "12",
+                "S/ 33,588"
+              ],
+              [
+                "MBP-14",
+                "4",
+                "S/ 25,996"
+              ]
+            ],
+            "conclusion": "34 units sold · S/ 84,766 in sales this month."
+          }
         }
       },
       {
@@ -532,7 +1016,32 @@
               "label": "Differences to review"
             }
           ],
-          "status": "Read-only · Depends on available records"
+          "status": "Read-only · Depends on available records",
+          "example": {
+            "columns": [
+              "Order",
+              "Sales",
+              "Recorded payment"
+            ],
+            "rows": [
+              [
+                "#1042",
+                "S/ 1,399",
+                "S/ 1,399"
+              ],
+              [
+                "#1043",
+                "S/ 2,799",
+                "S/ 2,799"
+              ],
+              [
+                "#1044",
+                "S/ 1,399",
+                "Not found"
+              ]
+            ],
+            "conclusion": "Order #1044 needs review: no linked payment found."
+          }
         }
       },
       {
@@ -558,7 +1067,28 @@
               "label": "Available report"
             }
           ],
-          "status": "Approval required · No transfers"
+          "status": "Approval required · No transfers",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Period",
+                "September 1–30"
+              ],
+              [
+                "Status",
+                "Available after request"
+              ],
+              [
+                "File",
+                "liquidaciones-septiembre.csv"
+              ]
+            ],
+            "conclusion": "Report available to review payments and deductions for the period."
+          }
         }
       },
       {
@@ -584,7 +1114,32 @@
               "label": "Fill in details"
             }
           ],
-          "status": "Recommendations for review"
+          "status": "Recommendations for review",
+          "example": {
+            "columns": [
+              "Product",
+              "Visits / sales",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "420 / 3",
+                "Review price"
+              ],
+              [
+                "MacBook Pro 14″",
+                "310 / 1",
+                "Add a side photo"
+              ],
+              [
+                "iPhone 15",
+                "280 / 2",
+                "Fill in storage size"
+              ]
+            ],
+            "conclusion": "3 of the 4 flagged listings, with a specific improvement for each."
+          }
         }
       },
       {
@@ -610,7 +1165,32 @@
               "label": "Suggested improvements"
             }
           ],
-          "status": "Available data · Changes require approval"
+          "status": "Available data · Changes require approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Issue",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″",
+                "Warranty unspecified",
+                "Confirm duration"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "Storage size missing",
+                "Add 256 GB"
+              ],
+              [
+                "iPhone 15",
+                "Only one photo",
+                "Add other views"
+              ]
+            ],
+            "conclusion": "Fill in missing information first, then improve the photos."
+          }
         }
       },
       {
@@ -636,7 +1216,29 @@
               "label": "New draft"
             }
           ],
-          "status": "Pending approval"
+          "status": "Pending approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Source",
+                "MacBook Pro 14″ · 512 GB"
+              ],
+              [
+                "New draft",
+                "MacBook Pro 14″ · 1 TB"
+              ],
+              [
+                "Reused photos",
+                "3 photos of the same model"
+              ]
+            ],
+            "conclusion": "All 3 photos are in the new draft for your review.",
+            "media": "gallery"
+          }
         }
       },
       {
@@ -658,7 +1260,27 @@
               "label": "Campaigns to review"
             }
           ],
-          "status": "Reporting depends on availability · Does not modify campaigns"
+          "status": "Reporting depends on availability · Does not modify campaigns",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Spend / sales",
+              "Spend as % of sales"
+            ],
+            "rows": [
+              [
+                "MacBook Pro",
+                "S/ 300 / 1,000",
+                "30%"
+              ],
+              [
+                "Headphones",
+                "S/ 120 / 500",
+                "24%"
+              ]
+            ],
+            "conclusion": "Total spend: S/ 420 on S/ 1,500 in attributed sales (28%)."
+          }
         }
       },
       {
@@ -684,7 +1306,27 @@
               "label": "Available performance"
             }
           ],
-          "status": "Subject to availability · No campaign changes"
+          "status": "Subject to availability · No campaign changes",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Spend",
+              "Attributed sales"
+            ],
+            "rows": [
+              [
+                "MacBook Pro",
+                "S/ 300",
+                "S/ 1,000"
+              ],
+              [
+                "Headphones",
+                "S/ 120",
+                "S/ 500"
+              ]
+            ],
+            "conclusion": "These campaigns generated S/ 3.57 in attributed sales per S/ 1 in ad spend."
+          }
         }
       },
       {
@@ -706,7 +1348,27 @@
               "label": "Store B"
             }
           ],
-          "status": "Store A sold S/ 6,400 more"
+          "status": "Store A sold S/ 6,400 more",
+          "example": {
+            "columns": [
+              "Store",
+              "Sales",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Store A",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "Store B",
+                "S/ 18,200",
+                "31"
+              ]
+            ],
+            "conclusion": "Store A sold S/ 6,400 more than Store B."
+          }
         }
       },
       {
@@ -732,7 +1394,27 @@
               "label": "Sales in local currency"
             }
           ],
-          "status": "Accounts you connected · Subject to availability by country."
+          "status": "Accounts you connected · Subject to availability by country.",
+          "example": {
+            "columns": [
+              "Store",
+              "Sales",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Peru · Lima",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "Brazil · São Paulo",
+                "R$ 31,200",
+                "56"
+              ]
+            ],
+            "conclusion": "Each store is reviewed separately. Amounts stay in their own currency."
+          }
         }
       },
       {
@@ -758,7 +1440,28 @@
               "label": "Your choice"
             }
           ],
-          "status": "Option to confirm with you"
+          "status": "Option to confirm with you",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Product",
+                "Samsung Galaxy A56 · 256 GB"
+              ],
+              [
+                "Match",
+                "Model and storage match"
+              ],
+              [
+                "Available option",
+                "Review catalog listing"
+              ]
+            ],
+            "conclusion": "Found a catalog match. Confirm it is your product before continuing."
+          }
         }
       },
       {
@@ -784,7 +1487,32 @@
               "label": "Final review"
             }
           ],
-          "status": "Nothing is published without your approval"
+          "status": "Nothing is published without your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Product",
+                "MacBook Pro 14″",
+                "Saved"
+              ],
+              [
+                "Price",
+                "S/ 6,499",
+                "Saved"
+              ],
+              [
+                "Color",
+                "Not confirmed",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Recovered your photos and price. Confirm the color and review."
+          }
         }
       },
       {
@@ -806,7 +1534,28 @@
               "label": "Pending preparation"
             }
           ],
-          "status": "Illustrative order status"
+          "status": "Illustrative order status",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Order",
+                "#1042 · Samsung Galaxy A56"
+              ],
+              [
+                "Payment",
+                "S/ 1,399 · approved"
+              ],
+              [
+                "Shipping",
+                "Awaiting preparation"
+              ]
+            ],
+            "conclusion": "Next step: prepare the package for dispatch."
+          }
         }
       },
       {
@@ -832,7 +1581,32 @@
               "label": "Dispatch information"
             }
           ],
-          "status": "Read only · Does not change order status"
+          "status": "Read only · Does not change order status",
+          "example": {
+            "columns": [
+              "Order",
+              "Product",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "#1042",
+                "Samsung Galaxy A56",
+                "Prepare shipment"
+              ],
+              [
+                "#1043",
+                "iPhone 15",
+                "Wait for payment approval"
+              ],
+              [
+                "#1044",
+                "MacBook Pro 14″",
+                "Hand over to carrier"
+              ]
+            ],
+            "conclusion": "3 orders, each with its next step identified."
+          }
         }
       },
       {
@@ -858,7 +1632,32 @@
               "label": "Products to review"
             }
           ],
-          "status": "Subject to Mercado Libre requirements"
+          "status": "Subject to Mercado Libre requirements",
+          "example": {
+            "columns": [
+              "Product",
+              "Status",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "Eligible",
+                "10%"
+              ],
+              [
+                "iPhone 15",
+                "Eligible",
+                "10%"
+              ],
+              [
+                "MacBook Pro 14″",
+                "Needs review",
+                "Check minimum price"
+              ]
+            ],
+            "conclusion": "2 products meet the requirements; check the MacBook price."
+          }
         }
       },
       {
@@ -884,7 +1683,27 @@
               "label": "Participating products"
             }
           ],
-          "status": "Subject to availability · No changes applied"
+          "status": "Subject to availability · No changes applied",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Discount",
+              "Products"
+            ],
+            "rows": [
+              [
+                "October offer",
+                "10%",
+                "21"
+              ],
+              [
+                "Weekend offer",
+                "15%",
+                "8"
+              ]
+            ],
+            "conclusion": "29 product participations across 2 campaigns. Review each product."
+          }
         }
       },
       {
@@ -910,7 +1729,32 @@
               "label": "To verify"
             }
           ],
-          "status": "Check of the current state"
+          "status": "Check of the current state",
+          "example": {
+            "columns": [
+              "Product",
+              "Discount",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "10%",
+                "Applied"
+              ],
+              [
+                "iPhone 15",
+                "10%",
+                "Applied"
+              ],
+              [
+                "MacBook Pro 14″",
+                "10%",
+                "To verify"
+              ]
+            ],
+            "conclusion": "20 of 21 discounts confirmed. The MacBook still needs verification."
+          }
         }
       },
       {
@@ -936,7 +1780,28 @@
               "label": "Estimated days"
             }
           ],
-          "status": "If the recent sales rate continues"
+          "status": "If the recent sales rate continues",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Sales in 30 days",
+                "24 headphones"
+              ],
+              [
+                "Stock",
+                "5 units"
+              ],
+              [
+                "Estimated coverage",
+                "About 6 days"
+              ]
+            ],
+            "conclusion": "Prioritize headphone restocking if this pace continues."
+          }
         }
       },
       {
@@ -962,7 +1827,32 @@
               "label": "Restocking priority"
             }
           ],
-          "status": "Estimated coverage if sales pace continues"
+          "status": "Estimated coverage if sales pace continues",
+          "example": {
+            "columns": [
+              "Product",
+              "Stock",
+              "Estimated coverage"
+            ],
+            "rows": [
+              [
+                "Bluetooth headphones",
+                "5",
+                "≈ 6 days"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "12",
+                "≈ 20 days"
+              ],
+              [
+                "iPhone 15",
+                "10",
+                "≈ 25 days"
+              ]
+            ],
+            "conclusion": "Restock headphones first: they have the shortest estimated coverage."
+          }
         }
       },
       {
@@ -988,7 +1878,28 @@
               "label": "Proposed terms"
             }
           ],
-          "status": "Subject to offer availability · Requires your approval"
+          "status": "Subject to offer availability · Requires your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Product",
+                "USB-C charger"
+              ],
+              [
+                "Minimum purchase",
+                "3 units"
+              ],
+              [
+                "Price",
+                "S/ 59 → S/ 53.10 per unit"
+              ]
+            ],
+            "conclusion": "Proposal: 10% off when buying 3 units. Review before approving."
+          }
         }
       },
       {
@@ -1014,7 +1925,32 @@
               "label": "Recorded withdrawals"
             }
           ],
-          "status": "Read-only · Does not move money"
+          "status": "Read-only · Does not move money",
+          "example": {
+            "columns": [
+              "Transaction",
+              "Amount",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Received",
+                "+ S/ 24,600",
+                "Sales"
+              ],
+              [
+                "Deducted",
+                "− S/ 2,952",
+                "Recorded fees"
+              ],
+              [
+                "Withdrawn",
+                "− S/ 15,000",
+                "Period withdrawals"
+              ]
+            ],
+            "conclusion": "Inflows and outflows grouped for review; no transfers are made."
+          }
         }
       },
       {
@@ -1040,7 +1976,32 @@
               "label": "Possible causes"
             }
           ],
-          "status": "Verified facts and hypotheses kept separate"
+          "status": "Verified facts and hypotheses kept separate",
+          "example": {
+            "columns": [
+              "Field",
+              "Previous month",
+              "This month"
+            ],
+            "rows": [
+              [
+                "Sales",
+                "S/ 32,000",
+                "S/ 24,600"
+              ],
+              [
+                "Visits",
+                "4,000",
+                "3,100"
+              ],
+              [
+                "Conversion",
+                "2.0%",
+                "2.0%"
+              ]
+            ],
+            "conclusion": "Sales fell 23%, as did visits. Hypothesis: lower traffic; investigate further."
+          }
         }
       },
       {
@@ -1066,7 +2027,32 @@
               "label": "Changes to review"
             }
           ],
-          "status": "Your supplied costs · Changes require approval"
+          "status": "Your supplied costs · Changes require approval",
+          "example": {
+            "columns": [
+              "Priority",
+              "Product",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "1",
+                "MacBook Pro 14″",
+                "Confirm the warranty"
+              ],
+              [
+                "2",
+                "MacBook Pro 14″",
+                "Add a side photo"
+              ],
+              [
+                "3",
+                "MacBook Pro 14″",
+                "Review price against your costs"
+              ]
+            ],
+            "conclusion": "Fill in what is missing first, then review photos and price."
+          }
         }
       }
     ],
@@ -1407,6 +2393,12 @@
     "showcaseIntro": "Publish from photos or Excel, fill in specifications, manage multiple SKUs and request sales, profit, stock reports and more. To get started or grow your store, just ask.",
     "showcaseDisclaimer": "Illustrative examples. Features and results depend on available data and permissions.",
     "showcaseToolCount": "91 actions for your business.",
-    "showcaseClose": "Close example"
+    "showcaseClose": "Close example",
+    "showcaseOpen": "View example",
+    "showcaseHint": "Open any example to see the full result.",
+    "showcaseIllustrative": "Illustrative result",
+    "showcaseQuestion": "Your question",
+    "showcaseHow": "How it works",
+    "showcaseDataNote": "Example products and amounts; not data from a real account."
   }
 }

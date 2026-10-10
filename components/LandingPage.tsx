@@ -113,40 +113,38 @@ function StepIcon({ step }: { step: number }) {
 
 const productPhotos = ["open", "keyboard", "side", "closed"] as const;
 
-function ProductPhotos({ gallery = false }: { gallery?: boolean }) {
-  return <div className={gallery ? "cap-gallery" : "cap-product-photos"} aria-hidden="true">
-    {productPhotos.slice(0, gallery ? 4 : 3).map((photo, index) => <div key={photo}>
+function ProductPhotos({ count = 4 }: { count?: number }) {
+  return <div className="cap-gallery" aria-hidden="true">
+    {productPhotos.slice(0, count).map((photo, index) => <div key={photo}>
       <img src={`/images/products/macbook-${photo}.jpg`} alt="" width="160" height="100" loading="lazy" decoding="async" />
-      {gallery && <span>{index + 1}</span>}
+      <span>{index + 1}</span>
     </div>)}
   </div>;
 }
 
-function PreviewItems({ card }: { card: UseCaseCard }) {
-  return <div className="cap-items">{card.preview.items.map((item, index) => <div key={item.label} className={`cap-item cap-item-${index}`}>
-    {item.value && <b>{item.value}</b>}<span>{item.label}</span>
-  </div>)}</div>;
+function UseCaseResult({ card, ui }: { card: UseCaseCard; ui: ReturnType<typeof getUi> }) {
+  const { label, status, example } = card.preview;
+  return <section className="cap-output" aria-label={label}>
+    <div className="cap-output-heading"><HeroIcon name="confirm" size={24} /><h3>{label}</h3></div>
+    {example.media === "product" && <img className="cap-output-product" src="/images/products/macbook-open.jpg" alt="MacBook Pro 14″" width="560" height="320" loading="lazy" decoding="async" />}
+    {example.media === "gallery" && <ProductPhotos count={card.id === "photo-order" ? 4 : 3} />}
+    {card.id === "photo-listing" && <ProductPhotos count={3} />}
+    <table className="cap-table">
+      <caption>{ui.showcaseIllustrative}</caption>
+      <thead><tr>{example.columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
+      <tbody>{example.rows.map((row, index) => <tr key={index}>{row.map((cell, columnIndex) => columnIndex === 0 ? <th key={columnIndex} scope="row">{cell}</th> : <td key={columnIndex}>{cell}</td>)}</tr>)}</tbody>
+    </table>
+    <p className="cap-takeaway"><HeroIcon name="arrow" size={18} />{example.conclusion}</p>
+    <p className="cap-output-status"><HeroIcon name="shield" size={16} />{status}</p>
+  </section>;
 }
 
-function UseCaseResult({ card }: { card: UseCaseCard }) {
-  const { label, status } = card.preview;
-  return <div className={`cap-preview cap-${card.resultType}`}>
-    <b className="cap-label">{label}</b>
-    {card.resultType === "listing" && <><div className="cap-product-gallery"><img className="cap-product-main" src="/images/products/macbook-open.jpg" alt="MacBook Pro 14″" width="240" height="140" loading="lazy" decoding="async" /><ProductPhotos /></div></>}
-    {card.resultType === "gallery" ? <><ProductPhotos gallery /><div className="cap-order" aria-hidden="true"><span>1 · 2 · 3 · 4</span><HeroIcon name="arrow" /><b>3 · 1 · 2 · 4</b></div></> : <PreviewItems card={card} />}
-    {card.resultType === "price-range" && <div className="cap-range" aria-hidden="true"><span /><i /></div>}
-    {card.resultType === "ads" && <div className="cap-ad-chart" aria-hidden="true"><div><i style={{ width: `${Math.min(100, Math.max(0, Number.parseFloat(card.preview.items[0].value ?? "0")))}%` }} /></div><span>0%</span><span>100%</span></div>}
-    {card.resultType === "restock" && <div className="cap-stock" aria-hidden="true"><span /></div>}
-    <span className="cap-status">{card.resultType === "promotion" && <HeroIcon name="check" size={15} />}{status}</span>
-  </div>;
-}
-
-function UseCaseDemoCard({ card, onOpen }: { card: UseCaseCard; onOpen: (id: string) => void }) {
+function UseCaseDemoCard({ card, ui, onOpen }: { card: UseCaseCard; ui: ReturnType<typeof getUi>; onOpen: (id: string) => void }) {
   return <article className={`example-card demo-card result-${card.resultType}`} data-capability={card.id}>
     <span>{card.category}</span><div className="example-bubble">{card.prompt}</div>
     <strong>{card.resultTitle}</strong>
-    <button className="cap-open" type="button" aria-haspopup="dialog" onClick={() => onOpen(card.id)}>
-      <span>{card.preview.label}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6" /></svg>
+    <button className="cap-open" type="button" aria-haspopup="dialog" aria-label={`${ui.showcaseOpen}: ${card.category}`} onClick={() => onOpen(card.id)}>
+      <span>{ui.showcaseOpen}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6" /></svg>
     </button>
   </article>;
 }
@@ -174,25 +172,29 @@ function CapabilityDialog({ card, index, total, ui, onClose, onMove }: { card: U
       previousFocus?.focus({ preventScroll: true });
     };
   }, [isOpen, onClose]);
+  useEffect(() => {
+    dialogRef.current?.scrollTo({ top: 0 });
+    dialogRef.current?.querySelector<HTMLElement>(".cap-dialog-content")?.scrollTo({ top: 0 });
+  }, [card?.id]);
   return <dialog ref={dialogRef} className="cap-dialog" aria-labelledby="cap-dialog-title" onCancel={onClose}>
     {card && <div className="cap-dialog-inner">
       <header className="cap-dialog-toolbar"><BrandLogo /><button className="cap-close" type="button" aria-label={ui.showcaseClose} onClick={onClose}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></header>
       <div className="cap-dialog-content" key={card.id}>
-        <div className="cap-conversation"><h2 id="cap-dialog-title">{card.category}</h2><blockquote>{card.prompt}</blockquote><p className="cap-answer"><HeroIcon name="sparkle" size={22} />{card.resultTitle}</p></div>
-        <div className="cap-result"><UseCaseResult card={card} /><p className="cap-explanation">{card.resultDescription}</p></div>
+        <div className="cap-conversation"><h2 id="cap-dialog-title">{card.category}</h2><div className="cap-question"><span className="cap-speaker">{ui.showcaseQuestion}</span><blockquote>{card.prompt}</blockquote></div><div className="cap-response"><span className="cap-speaker"><HeroIcon name="sparkle" size={16} />{siteConfig.name}</span><p className="cap-answer">{card.resultTitle}</p></div>{card.resultDescription && <details className="cap-method"><summary>{ui.showcaseHow}</summary><p>{card.resultDescription}</p></details>}</div>
+        <div className="cap-result"><UseCaseResult card={card} ui={ui} /></div>
       </div>
-      <footer className="cap-dialog-footer"><p>{ui.showcaseDisclaimer}</p><div className="cap-dialog-nav"><button type="button" aria-label={ui.carouselPrevious} onClick={() => onMove(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6" /></svg></button><span aria-live="polite" aria-atomic="true">{index + 1} / {total}</span><button type="button" aria-label={ui.carouselNext} onClick={() => onMove(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6" /></svg></button></div></footer>
+      <footer className="cap-dialog-footer"><p>{ui.showcaseDataNote}</p><div className="cap-dialog-nav"><button type="button" aria-label={ui.carouselPrevious} onClick={() => onMove(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6" /></svg></button><span aria-live="polite" aria-atomic="true">{index + 1} / {total}</span><button type="button" aria-label={ui.carouselNext} onClick={() => onMove(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6" /></svg></button></div></footer>
     </div>}
   </dialog>;
 }
 
 function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
-function ShowcaseCards({ content, duplicate = false, onOpen }: { content: ReturnType<typeof getLanding>; duplicate?: boolean; onOpen: (id: string) => void }) {
+function ShowcaseCards({ content, ui, duplicate = false, onOpen }: { content: ReturnType<typeof getLanding>; ui: ReturnType<typeof getUi>; duplicate?: boolean; onOpen: (id: string) => void }) {
   // Lead with four workflows; distribute the six photo breaks across the full collection.
   const photoAfterCase = [3, 10, 17, 24, 31, 38];
   return <div className="carousel-set" aria-hidden={duplicate || undefined} inert={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
     const photoIndex = photoAfterCase.indexOf(index);
-    return [<UseCaseDemoCard card={card} key={card.id} onOpen={onOpen} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];
+    return [<UseCaseDemoCard card={card} ui={ui} key={card.id} onOpen={onOpen} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];
   })}</div>;
 }
 
@@ -438,7 +440,7 @@ export default function LandingPage() {
 
     <section id="funciones" className="functions-group">
       <section className="features shell"><SectionTitle>{ui.featuresTitle}</SectionTitle><div>{localizedLanding.features.map(([, title, items], featureIndex) => <article key={title}><span className="feature-icon"><img src={brandFeatureIcons[featureIndex]} alt="" width="96" height="96" /></span><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
-      <section id="resultados" className="showcase shell" onFocusCapture={() => { showcaseFocusedRef.current = true; showcasePausedRef.current = true; }} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { showcaseFocusedRef.current = false; scheduleShowcaseResume(); } }}><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><p className="showcase-intro"><strong>{ui.showcaseToolCount}</strong> {ui.showcaseIntro}</p><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = getShowcaseLoopWidth(event.currentTarget); setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} onOpen={openShowcase} /><ShowcaseCards content={localizedLanding} duplicate onOpen={openShowcase} /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div><p className="showcase-disclaimer">{ui.showcaseDisclaimer}</p><CapabilityDialog card={activeShowcaseIndex === null ? null : localizedLanding.useCases[activeShowcaseIndex]} index={activeShowcaseIndex ?? 0} total={localizedLanding.useCases.length} ui={ui} onClose={closeShowcase} onMove={(direction) => setActiveShowcaseIndex((index) => index === null ? null : (index + direction + localizedLanding.useCases.length) % localizedLanding.useCases.length)} /></section>
+      <section id="resultados" className="showcase shell" onFocusCapture={() => { showcaseFocusedRef.current = true; showcasePausedRef.current = true; }} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { showcaseFocusedRef.current = false; scheduleShowcaseResume(); } }}><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><p className="showcase-intro"><strong>{ui.showcaseToolCount}</strong> {ui.showcaseIntro}</p><p className="showcase-hint"><HeroIcon name="confirm" size={16} />{ui.showcaseHint}</p><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = getShowcaseLoopWidth(event.currentTarget); setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} ui={ui} onOpen={openShowcase} /><ShowcaseCards content={localizedLanding} ui={ui} duplicate onOpen={openShowcase} /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div><p className="showcase-disclaimer">{ui.showcaseDisclaimer}</p><CapabilityDialog card={activeShowcaseIndex === null ? null : localizedLanding.useCases[activeShowcaseIndex]} index={activeShowcaseIndex ?? 0} total={localizedLanding.useCases.length} ui={ui} onClose={closeShowcase} onMove={(direction) => setActiveShowcaseIndex((index) => index === null ? null : (index + direction + localizedLanding.useCases.length) % localizedLanding.useCases.length)} /></section>
     </section>
 
     <div className="post-pricing-background">
