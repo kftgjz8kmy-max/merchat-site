@@ -47,3 +47,7 @@ The current 40-example build passed TypeScript, production build, lint (existing
 ## Approved copy clarification
 
 Applied the exact seller-language revisions approved in chat across all four locales, including expanded labels and explanations. Kept 40 examples, 91 actions, approval boundaries and the compact design. Lint and TypeScript passed; all six content/localization tests passed. The running development preview at port 3000 was checked at 1440px and 390px: no page overflow; longest Spanish overview card was 273px; the expanded advertising explanation had no overflow. Current desktop/mobile overview screenshots are refreshed. The previous production build and expanded-example screenshots belong to the prior update.
+
+## User-supplied wording
+
+Applied the October 10 attachment to all 40 Spanish card titles, questions, responses, descriptions, preview headings and statuses. Six changed meaning-bearing fields are synchronized across translations. The previous uncommitted selling-fees question is included. Content/localization tests, lint and TypeScript passed. Live preview shows the net-profit title, updated profit-report request and campaign status with no page overflow. [Current net-profit preview](user-copy-net-profit.png).

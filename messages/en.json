@@ -18,7 +18,7 @@
         "prompt": "Help me list this MacBook using these photos.",
         "resultType": "listing",
         "resultTitle": "I prepared the listing for you to review.",
-        "resultDescription": "It includes photos, specifications and terms.",
+        "resultDescription": "Photos, specifications and terms included.",
         "preview": {
           "label": "MacBook Pro 14″",
           "items": [
@@ -142,7 +142,7 @@
         "prompt": "Add these 21 products to the campaign with a 10% discount.",
         "resultType": "promotion",
         "resultTitle": "I applied the discount to all 21 products after your approval.",
-        "resultDescription": "You approved the prices before they were applied.",
+        "resultDescription": "You approve the prices before they are applied.",
         "preview": {
           "label": "10% discount",
           "items": [
@@ -155,7 +155,7 @@
               "label": "Checked"
             }
           ],
-          "status": "Applied after approval · Depends on account availability"
+          "status": "Discounts applied after approval"
         }
       },
       {
@@ -251,8 +251,8 @@
       },
       {
         "id": "selling-fees",
-        "category": "Calculate what you keep",
-        "prompt": "With my cost and selling fees, how much would I keep from selling this device?",
+        "category": "Calculate net profit",
+        "prompt": "How much would I earn from selling this device after deducting my cost and selling fees?",
         "resultType": "report",
         "resultTitle": "I calculated what you would keep after cost and selling fees.",
         "resultDescription": "I combine your cost with fees reported by Mercado Libre.",
@@ -304,7 +304,7 @@
       {
         "id": "profit-report",
         "category": "Get a profit report",
-        "prompt": "Using my costs, compare how much each product earns me.",
+        "prompt": "Using my costs, compare how much net profit each product earns me.",
         "resultType": "report",
         "resultTitle": "I compared each product’s estimated profit.",
         "resultDescription": "I combine your supplied costs with available fees. Include other expenses to refine the estimate.",

@@ -18,7 +18,7 @@
         "prompt": "Ayúdame a publicar esta MacBook con estas fotos.",
         "resultType": "listing",
         "resultTitle": "Preparé la publicación para que la revises.",
-        "resultDescription": "Incluye fotos, características y condiciones.",
+        "resultDescription": "Incluidos fotos, características y condiciones.",
         "preview": {
           "label": "MacBook Pro 14″",
           "items": [
@@ -29,7 +29,7 @@
               "label": "Fotos listas"
             }
           ],
-          "status": "Publicación pendiente de aprobación"
+          "status": "Publicación pendiente de aprobación."
         }
       },
       {
@@ -55,7 +55,7 @@
               "label": "Datos que faltan"
             }
           ],
-          "status": "Publicación con tu aprobación"
+          "status": "Publicación con tu aprobación."
         }
       },
       {
@@ -66,7 +66,7 @@
         "resultTitle": "Completé los datos disponibles y marqué lo que falta confirmar.",
         "resultDescription": "La IA usa el modelo y la información que compartes, y revisa los requisitos de Mercado Libre. Los datos que no se pueden confirmar quedan para tu revisión.",
         "preview": {
-          "label": "Características por revisar",
+          "label": "Características para revisar",
           "items": [
             {
               "value": "1",
@@ -81,7 +81,7 @@
               "label": "Datos por confirmar"
             }
           ],
-          "status": "Revisa los datos antes de aprobar"
+          "status": "Revisa los datos antes de aprobar."
         }
       },
       {
@@ -107,7 +107,7 @@
               "label": "Por revisar"
             }
           ],
-          "status": "Pendiente de aprobación"
+          "status": "Pendiente de aprobación."
         }
       },
       {
@@ -133,7 +133,7 @@
               "label": "Cambios confirmados"
             }
           ],
-          "status": "Verificación después de aprobar"
+          "status": "Verificación después de aprobar."
         }
       },
       {
@@ -142,7 +142,7 @@
         "prompt": "Añade estos 21 productos a la campaña con 10% de descuento.",
         "resultType": "promotion",
         "resultTitle": "Apliqué el descuento a los 21 productos después de tu aprobación.",
-        "resultDescription": "Aprobaste los precios antes de aplicarlos.",
+        "resultDescription": "Apruebas los precios antes de aplicarlos.",
         "preview": {
           "label": "10% de descuento",
           "items": [
@@ -155,7 +155,7 @@
               "label": "Revisados"
             }
           ],
-          "status": "Aplicado después de aprobar · Según disponibilidad de tu cuenta"
+          "status": "Descuentos aplicados después de aprobar"
         }
       },
       {
@@ -168,7 +168,7 @@
         "preview": {
           "label": "Orden de las fotos",
           "items": [],
-          "status": "Pendiente de aprobación"
+          "status": "Pendiente de aprobación."
         }
       },
       {
@@ -194,7 +194,7 @@
               "label": "Preparar borrador"
             }
           ],
-          "status": "Pendiente de aprobación"
+          "status": "Pendiente de aprobación."
         }
       },
       {
@@ -220,7 +220,7 @@
               "label": "Envío"
             }
           ],
-          "status": "Nada se aplica sin tu aprobación"
+          "status": "Nada se aplica sin tu aprobación."
         }
       },
       {
@@ -246,13 +246,13 @@
               "label": "Ganancia por confirmar"
             }
           ],
-          "status": "Costos aportados por el vendedor"
+          "status": "Costos aportados por el vendedor."
         }
       },
       {
         "id": "selling-fees",
-        "category": "Calcula lo que te queda",
-        "prompt": "Con mi costo y las comisiones, ¿cuánto me quedaría al vender este equipo?",
+        "category": "Calcula la ganancia neta",
+        "prompt": "¿Cuánto ganaría al vender este equipo después de descontar mi costo y las comisiones?",
         "resultType": "report",
         "resultTitle": "Calculé cuánto te quedaría después del costo y las comisiones.",
         "resultDescription": "Combino tu costo con las comisiones que informa Mercado Libre.",
@@ -272,7 +272,7 @@
               "label": "Comisiones de Mercado Libre"
             }
           ],
-          "status": "Costos aportados por ti · Ganancia estimada"
+          "status": "Costos aportados por ti · Ganancia estimada."
         }
       },
       {
@@ -298,13 +298,13 @@
               "label": "Precio estimado"
             }
           ],
-          "status": "Estimación con tus costos y datos disponibles"
+          "status": "Estimación con tus costos y datos disponibles."
         }
       },
       {
         "id": "profit-report",
         "category": "Pide un reporte de ganancias",
-        "prompt": "Con mis costos, compara cuánto me deja cada producto.",
+        "prompt": "Con mis costos, compara cuánta ganancia neta me deja cada producto.",
         "resultType": "report",
         "resultTitle": "Comparé la ganancia estimada de cada producto.",
         "resultDescription": "Combino los costos que aportas con las comisiones disponibles. Puedes incluir otros gastos para afinar la estimación.",
@@ -324,7 +324,7 @@
               "label": "Ganancia estimada"
             }
           ],
-          "status": "Estimación según costos y datos disponibles"
+          "status": "Estimación según costos y datos disponibles."
         }
       },
       {
@@ -350,7 +350,7 @@
               "label": "Sobre el máximo"
             }
           ],
-          "status": "Comparación ilustrativa · Según herramientas de tu IA"
+          "status": "Comparación ilustrativa · Según herramientas de tu IA."
         }
       },
       {
@@ -376,7 +376,7 @@
               "label": "Publicaciones del grupo"
             }
           ],
-          "status": "Relaciones reportadas por Mercado Libre"
+          "status": "Relaciones reportadas por Mercado Libre."
         }
       },
       {
@@ -402,7 +402,7 @@
               "label": "Stock disponible"
             }
           ],
-          "status": "Requiere aprobación · Según disponibilidad"
+          "status": "Requiere aprobación · Según disponibilidad."
         }
       },
       {
@@ -428,7 +428,7 @@
               "label": "Mejoras posibles"
             }
           ],
-          "status": "Revisión solicitada por ti"
+          "status": "Revisión solicitada por ti."
         }
       },
       {
@@ -454,7 +454,7 @@
               "label": "Ingresos del período"
             }
           ],
-          "status": "Datos de tu cuenta · Período elegido"
+          "status": "Datos de tu cuenta · Período elegido."
         }
       },
       {
@@ -480,7 +480,7 @@
               "label": "Diferencias por revisar"
             }
           ],
-          "status": "Solo consulta · Según registros disponibles"
+          "status": "Solo consulta · Según registros disponibles."
         }
       },
       {
@@ -506,7 +506,7 @@
               "label": "Reporte disponible"
             }
           ],
-          "status": "Requiere aprobación · No hace transferencias"
+          "status": "Requiere aprobación · No hace transferencias."
         }
       },
       {
@@ -532,7 +532,7 @@
               "label": "Completar datos"
             }
           ],
-          "status": "Recomendaciones para revisar"
+          "status": "Recomendaciones para revisar."
         }
       },
       {
@@ -558,7 +558,7 @@
               "label": "Mejoras sugeridas"
             }
           ],
-          "status": "Según datos disponibles · Cambios con tu aprobación"
+          "status": "Según datos disponibles · Cambios con tu aprobación."
         }
       },
       {
@@ -584,7 +584,7 @@
               "label": "Nuevo borrador"
             }
           ],
-          "status": "Pendiente de aprobación"
+          "status": "Pendiente de aprobación."
         }
       },
       {
@@ -606,7 +606,7 @@
               "label": "Campañas por revisar"
             }
           ],
-          "status": "Consulta según disponibilidad · No modifica campañas"
+          "status": "Consulta según disponibilidad · No modifica campañas."
         }
       },
       {
@@ -632,7 +632,7 @@
               "label": "Rendimiento disponible"
             }
           ],
-          "status": "Según disponibilidad · No modifica campañas"
+          "status": "Según disponibilidad · No modifica campañas."
         }
       },
       {
@@ -658,7 +658,7 @@
               "label": "Incierto"
             }
           ],
-          "status": "No repito un cambio sin comprobar qué ocurrió"
+          "status": "No repito un cambio sin comprobar qué ocurrió."
         }
       },
       {
@@ -680,7 +680,7 @@
               "label": "Tienda B"
             }
           ],
-          "status": "Tienda A vendió S/ 6,400 más"
+          "status": "Tienda A vendió S/ 6,400 más."
         }
       },
       {
@@ -706,7 +706,7 @@
               "label": "Tu elección"
             }
           ],
-          "status": "Opción por confirmar contigo"
+          "status": "Opción por confirmar contigo."
         }
       },
       {
@@ -732,7 +732,7 @@
               "label": "Revisión final"
             }
           ],
-          "status": "No se publica sin tu aprobación"
+          "status": "No se publica sin tu aprobación."
         }
       },
       {
@@ -754,7 +754,7 @@
               "label": "Pendiente de preparación"
             }
           ],
-          "status": "Estado ilustrativo del pedido"
+          "status": "Estado ilustrativo del pedido."
         }
       },
       {
@@ -780,7 +780,7 @@
               "label": "Datos para el despacho"
             }
           ],
-          "status": "Solo consulta · No cambia el estado de los pedidos"
+          "status": "Solo consulta · No cambia el estado de los pedidos."
         }
       },
       {
@@ -806,7 +806,7 @@
               "label": "Productos por revisar"
             }
           ],
-          "status": "Según las condiciones de Mercado Libre"
+          "status": "Según las condiciones de Mercado Libre."
         }
       },
       {
@@ -832,7 +832,7 @@
               "label": "Productos participantes"
             }
           ],
-          "status": "Según disponibilidad · No aplica cambios"
+          "status": "Según disponibilidad · No aplica cambios."
         }
       },
       {
@@ -858,7 +858,7 @@
               "label": "Por verificar"
             }
           ],
-          "status": "Comprobación del estado actual"
+          "status": "Comprobación del estado actual."
         }
       },
       {
@@ -884,7 +884,7 @@
               "label": "Días estimados"
             }
           ],
-          "status": "Si continúa el ritmo de ventas reciente"
+          "status": "Si continúa el ritmo de ventas reciente."
         }
       },
       {
@@ -910,7 +910,7 @@
               "label": "Prioridad de reposición"
             }
           ],
-          "status": "Duración estimada si continúa el ritmo de ventas"
+          "status": "Duración estimada si continúa el ritmo de ventas."
         }
       },
       {
@@ -936,7 +936,7 @@
               "label": "Condiciones propuestas"
             }
           ],
-          "status": "Según disponibilidad de la oferta · Requiere tu aprobación"
+          "status": "Según disponibilidad de la oferta · Requiere tu aprobación."
         }
       },
       {
@@ -962,7 +962,7 @@
               "label": "Retiros registrados"
             }
           ],
-          "status": "Solo consulta · No mueve dinero"
+          "status": "Solo consulta · No mueve dinero."
         }
       },
       {
@@ -988,7 +988,7 @@
               "label": "Posibles causas"
             }
           ],
-          "status": "Datos verificados e hipótesis por separado"
+          "status": "Datos verificados e hipótesis por separado."
         }
       },
       {
@@ -1014,7 +1014,7 @@
               "label": "Cambios para revisar"
             }
           ],
-          "status": "Costos aportados por ti · Cambios sujetos a aprobación"
+          "status": "Costos aportados por ti · Cambios sujetos a aprobación."
         }
       }
     ],

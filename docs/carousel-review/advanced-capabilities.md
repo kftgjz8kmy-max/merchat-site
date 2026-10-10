@@ -16,9 +16,9 @@ La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 
 | Prepara una publicación completa | Prepara esta laptop para publicar y dime qué falta. | El borrador está listo. Te muestro qué falta completar. |
 | Revisa varios cambios juntos | Cambia el precio, stock y envío. Muéstrame el antes y después. | Preparé los cambios en una sola revisión. |
 | Revisa tus ganancias | Con mis ventas, costos y anuncios, ¿qué productos me dejan poca ganancia? | Encontré 3 productos cuya ganancia conviene revisar. |
-| Calcula lo que te queda | Con mi costo y las comisiones, ¿cuánto me quedaría al vender este equipo? | Calculé cuánto te quedaría después del costo y las comisiones. |
+| Calcula la ganancia neta | ¿Cuánto ganaría al vender este equipo después de descontar mi costo y las comisiones? | Calculé cuánto te quedaría después del costo y las comisiones. |
 | Calcula tu precio mínimo | ¿A cuánto debo vender para cubrir mi costo y las comisiones? | Estimé el precio mínimo para cubrir esos costos. |
-| Pide un reporte de ganancias | Con mis costos, compara cuánto me deja cada producto. | Comparé la ganancia estimada de cada producto. |
+| Pide un reporte de ganancias | Con mis costos, compara cuánta ganancia neta me deja cada producto. | Comparé la ganancia estimada de cada producto. |
 | Compara tus precios | Busca iPhones similares y compara sus precios con los míos. | Tu precio supera en S/ 50 el más alto de los productos comparados. |
 | Encuentra publicaciones relacionadas | ¿Qué otras publicaciones están vinculadas a este producto? | Te muestro las publicaciones que Mercado Libre vincula con este producto. |
 | Añade otra opción de venta | Quiero ofrecer este mismo producto con otro precio y stock. | La nueva opción de venta está lista para que la revises. |
