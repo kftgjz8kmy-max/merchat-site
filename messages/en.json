@@ -172,6 +172,58 @@
         }
       },
       {
+        "id": "find-product-photos",
+        "category": "Find photos for your product",
+        "prompt": "Help me find photos of this model for my listing.",
+        "resultTitle": "Here are the photos found for you to choose.",
+        "resultDescription": "Your AI searches for photos using its available tools. Check that they match the model; MerChat can use the photos you choose in your listing draft.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Photos to choose",
+          "items": [
+            {
+              "value": "1",
+              "label": "Product model"
+            },
+            {
+              "value": "2",
+              "label": "Photos found"
+            },
+            {
+              "value": "3",
+              "label": "Selected photos"
+            }
+          ],
+          "status": "Subject to your AI’s tools · Publishing requires approval."
+        }
+      },
+      {
+        "id": "ai-product-photos",
+        "category": "Create AI photos and use them",
+        "prompt": "Create a white-background photo of this product and use it in my listing.",
+        "resultTitle": "The created photo is in the draft for your review.",
+        "resultDescription": "Your AI creates the image if it supports that feature. Check that it accurately represents the product; MerChat can upload it and prepare the photo change for your approval.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Created photo for your listing",
+          "items": [
+            {
+              "value": "1",
+              "label": "Reference product"
+            },
+            {
+              "value": "2",
+              "label": "AI-created photo"
+            },
+            {
+              "value": "3",
+              "label": "Draft to review"
+            }
+          ],
+          "status": "Requires image generation in your AI · Changes require approval."
+        }
+      },
+      {
         "id": "listing-preflight",
         "category": "Prepare a complete listing",
         "prompt": "Prepare this laptop’s listing and tell me what is missing.",
@@ -681,6 +733,32 @@
             }
           ],
           "status": "Store A sold S/ 6,400 more"
+        }
+      },
+      {
+        "id": "multi-country",
+        "category": "Manage stores across countries",
+        "prompt": "Review sales for my stores in Peru and Brazil separately.",
+        "resultTitle": "Here are each store’s sales in its own currency.",
+        "resultDescription": "Work with your connected accounts in different countries and choose which to review. Each store keeps its own data; available features depend on the country and account.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Your stores by country",
+          "items": [
+            {
+              "value": "1",
+              "label": "Store in Peru"
+            },
+            {
+              "value": "2",
+              "label": "Store in Brazil"
+            },
+            {
+              "value": "3",
+              "label": "Sales in local currency"
+            }
+          ],
+          "status": "Accounts you connected · Subject to availability by country."
         }
       },
       {

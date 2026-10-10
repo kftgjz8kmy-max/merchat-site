@@ -172,6 +172,58 @@
         }
       },
       {
+        "id": "find-product-photos",
+        "category": "Busca fotos para tu producto",
+        "prompt": "Ayúdame a buscar fotos de este modelo para mi publicación.",
+        "resultTitle": "Te muestro las fotos encontradas para que elijas.",
+        "resultDescription": "Tu IA busca fotos con sus herramientas disponibles. Revisa que correspondan al modelo; MerChat puede usar las que elijas en el borrador de tu publicación.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Fotos para elegir",
+          "items": [
+            {
+              "value": "1",
+              "label": "Modelo del producto"
+            },
+            {
+              "value": "2",
+              "label": "Fotos encontradas"
+            },
+            {
+              "value": "3",
+              "label": "Fotos seleccionadas"
+            }
+          ],
+          "status": "Según las herramientas de tu IA · Publicación con tu aprobación."
+        }
+      },
+      {
+        "id": "ai-product-photos",
+        "category": "Crea fotos con IA y úsalas",
+        "prompt": "Crea una foto de este producto con fondo blanco y úsala en mi publicación.",
+        "resultTitle": "La foto creada está en el borrador para que la revises.",
+        "resultDescription": "Tu IA crea la imagen si tiene esa función. Comprueba que muestre fielmente el producto; MerChat puede cargarla y preparar el cambio de fotos para tu aprobación.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Foto creada para tu publicación",
+          "items": [
+            {
+              "value": "1",
+              "label": "Producto de referencia"
+            },
+            {
+              "value": "2",
+              "label": "Foto creada con IA"
+            },
+            {
+              "value": "3",
+              "label": "Borrador para revisar"
+            }
+          ],
+          "status": "Requiere generación de imágenes en tu IA · Cambios con tu aprobación."
+        }
+      },
+      {
         "id": "listing-preflight",
         "category": "Prepara una publicación completa",
         "prompt": "Prepara esta laptop para publicar y dime qué falta.",
@@ -681,6 +733,32 @@
             }
           ],
           "status": "Tienda A vendió S/ 6,400 más."
+        }
+      },
+      {
+        "id": "multi-country",
+        "category": "Gestiona tiendas en varios países",
+        "prompt": "Revisa las ventas de mis tiendas de Perú y Brasil por separado.",
+        "resultTitle": "Te muestro las ventas de cada tienda en su moneda.",
+        "resultDescription": "Puedes trabajar con tus cuentas conectadas de distintos países y elegir cuál consultar. Cada tienda conserva sus propios datos; las funciones disponibles dependen del país y de la cuenta.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Tus tiendas por país",
+          "items": [
+            {
+              "value": "1",
+              "label": "Tienda de Perú"
+            },
+            {
+              "value": "2",
+              "label": "Tienda de Brasil"
+            },
+            {
+              "value": "3",
+              "label": "Ventas en su moneda"
+            }
+          ],
+          "status": "Cuentas conectadas por ti · Según disponibilidad por país."
         }
       },
       {

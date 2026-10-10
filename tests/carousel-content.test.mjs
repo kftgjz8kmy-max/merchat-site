@@ -6,11 +6,11 @@ const root = new URL("../", import.meta.url);
 const locales = ["es", "en", "pt-BR", "zh-CN"];
 const readMessages = async (locale) => JSON.parse(await readFile(new URL(`messages/${locale}.json`, root), "utf8"));
 
-test("every locale has the same 40 workflows and four distinct existing photos", async () => {
+test("every locale has the same 43 workflows and four distinct existing photos", async () => {
   const messages = await Promise.all(locales.map(readMessages));
   const ids = messages[0].landing.useCases.map((card) => card.id);
-  assert.equal(ids.length, 40);
-  assert.equal(new Set(ids).size, 40);
+  assert.equal(ids.length, 43);
+  assert.equal(new Set(ids).size, 43);
   for (const { landing, ui } of messages) {
     assert.deepEqual(landing.useCases.map((card) => card.id), ids);
     assert.equal(new Set(landing.useCases.map((card) => card.resultType)).size, 14);
@@ -39,6 +39,9 @@ test("advanced workflows preserve approval, financial read-only boundaries and u
   assert.match(byId["bank-movements"].preview.status, /Solo consulta.*No mueve dinero/);
   assert.match(byId["settlement-report"].preview.status, /Requiere aprobación.*No hace transferencias/);
   assert.match(byId["sales-drop"].preview.status, /Datos verificados e hipótesis por separado/);
+  assert.match(byId["multi-country"].preview.status, /Cuentas conectadas.*disponibilidad por país/);
+  assert.match(byId["find-product-photos"].preview.status, /herramientas de tu IA.*aprobación/);
+  assert.match(byId["ai-product-photos"].preview.status, /generación de imágenes en tu IA.*aprobación/);
 });
 
 test("illustrative previews preserve approval gates, uncertainty and account separation", async () => {

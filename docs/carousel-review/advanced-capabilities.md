@@ -1,6 +1,6 @@
 # Ejemplos para vendedores
 
-40 ejemplos para quienes empiezan y quienes gestionan varios SKU. Las primeras tarjetas muestran publicación desde fotos y Excel, características y cambios de precio y stock. Los reportes se distribuyen entre los demás usos.
+43 ejemplos para quienes empiezan y quienes gestionan varios SKU. Las primeras tarjetas muestran publicación desde fotos y Excel, características y cambios de precio y stock. Los reportes se distribuyen entre los demás usos.
 
 La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 10 de octubre de 2026, no de una auditoría en vivo. Excel se presenta como preparación mediante la IA y MerChat, con revisión antes de publicar; no como un importador nativo de un solo paso. Las características pendientes de confirmar quedan visibles. Los reportes usan datos disponibles, costos proporcionados y estimaciones identificadas.
 
@@ -13,6 +13,8 @@ La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 
 | Actualiza varios SKU | Prepara nuevos precios y stock para estos 30 productos. | Los cambios de cada producto están listos para que los revises. |
 | Aplica descuentos a varios productos | Añade estos 21 productos a la campaña con 10% de descuento. | Apliqué el descuento a los 21 productos después de tu aprobación. |
 | Ordena tus fotos | Quiero cambiar el orden de las fotos de esta publicación. | El nuevo orden está listo para que lo apruebes. |
+| Busca fotos para tu producto | Ayúdame a buscar fotos de este modelo para mi publicación. | Te muestro las fotos encontradas para que elijas. |
+| Crea fotos con IA y úsalas | Crea una foto de este producto con fondo blanco y úsala en mi publicación. | La foto creada está en el borrador para que la revises. |
 | Prepara una publicación completa | Prepara esta laptop para publicar y dime qué falta. | El borrador está listo. Te muestro qué falta completar. |
 | Revisa varios cambios juntos | Cambia el precio, stock y envío. Muéstrame el antes y después. | Preparé los cambios en una sola revisión. |
 | Revisa tus ganancias | Con mis ventas, costos y anuncios, ¿qué productos me dejan poca ganancia? | Encontré 3 productos cuya ganancia conviene revisar. |
@@ -33,6 +35,7 @@ La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 
 | Pide un reporte de anuncios | Resume cuánto gasté y qué ventas generaron mis anuncios este mes. | Te muestro el gasto y las ventas atribuidas a tus anuncios. |
 | Revisa una campaña con errores | La campaña dio un error. Comprueba qué descuentos se aplicaron. | Te muestro cuáles se aplicaron y cuáles falta comprobar. |
 | Compara tus tiendas | ¿Cuál de mis dos tiendas vendió más este mes? | La tienda A vendió S/ 6,400 más. |
+| Gestiona tiendas en varios países | Revisa las ventas de mis tiendas de Perú y Brasil por separado. | Te muestro las ventas de cada tienda en su moneda. |
 | Encuentra tu producto en el catálogo | ¿Este equipo ya está en el catálogo de Mercado Libre? | Revisé el catálogo y te muestro las opciones para publicarlo. |
 | Retoma un borrador | Retoma la publicación que dejamos a medias y dime qué falta. | Recuperé el borrador y los pasos pendientes. |
 | Consulta tus pedidos | ¿Ya pagaron mi última venta? ¿Qué falta para enviarla? | El pago está aprobado. Falta preparar el envío. |

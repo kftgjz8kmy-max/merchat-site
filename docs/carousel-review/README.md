@@ -51,3 +51,7 @@ Applied the exact seller-language revisions approved in chat across all four loc
 ## User-supplied wording
 
 Applied the October 10 attachment to all 40 Spanish card titles, questions, responses, descriptions, preview headings and statuses. Six changed meaning-bearing fields are synchronized across translations. The previous uncommitted selling-fees question is included. Content/localization tests, lint and TypeScript passed. Live preview shows the net-profit title, updated profit-report request and campaign status with no page overflow. [Current net-profit preview](user-copy-net-profit.png).
+
+## Multi-country and photo workflows
+
+The carousel now contains 43 examples in all four locales. Added connected stores in Peru/Brazil with separate data and currencies, finding product photos through the connected AI tools, and creating an AI photo for an approved listing draft. Search/generation are attributed to the AI client; MerChat handles upload/association. Country/account feature availability is explicit. Lint, TypeScript and six content/localization tests passed. Desktop AI-photo and mobile country disclosures have no page/detail overflow. [Current preview](country-ai-photos.png).
