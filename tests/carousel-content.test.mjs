@@ -6,7 +6,7 @@ const root = new URL("../", import.meta.url);
 const locales = ["es", "en", "pt-BR", "zh-CN"];
 const readMessages = async (locale) => JSON.parse(await readFile(new URL(`messages/${locale}.json`, root), "utf8"));
 
-test("every locale has the same 42 workflows and four distinct existing photos", async () => {
+test("every locale has the same 42 workflows and six distinct lifestyle photos", async () => {
   const messages = await Promise.all(locales.map(readMessages));
   const ids = messages[0].landing.useCases.map((card) => card.id);
   assert.equal(ids.length, 42);
@@ -14,8 +14,8 @@ test("every locale has the same 42 workflows and four distinct existing photos",
   for (const { landing, ui } of messages) {
     assert.deepEqual(landing.useCases.map((card) => card.id), ids);
     assert.equal(new Set(landing.useCases.map((card) => card.resultType)).size, 14);
-    assert.equal(landing.photoExamples.length, 4);
-    assert.equal(new Set(landing.photoExamples.map((photo) => photo.image)).size, 4);
+    assert.equal(landing.photoExamples.length, 6);
+    assert.equal(new Set(landing.photoExamples.map((photo) => photo.image)).size, 6);
     for (const card of landing.useCases) {
       for (const value of [card.category, card.prompt, card.resultTitle, card.resultDescription, card.preview.label, card.preview.status]) assert.ok(value?.trim());
       assert.ok(Array.isArray(card.preview.items));

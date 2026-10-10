@@ -1,61 +1,34 @@
 # Capability carousel review
 
-The `#resultados` carousel shows 40 conversational workflows for beginners and experienced sellers and four existing lifestyle photographs. Spanish, English, Brazilian Portuguese and Simplified Chinese retain complete datasets with matching stable IDs. The first four workflows lead the sequence. Seller-focused examples lead with photos, Excel publication preparation, specifications and multi-SKU updates. Reports are interleaved throughout the collection. The introduction highlights 91 actions, using the corrected count in the user-supplied October 10, 2026 capabilities overview. This is document-based, not a live catalog audit.
+The shared carousel contains 42 conversational examples and six lifestyle photos in Spanish, English, Brazilian Portuguese and Simplified Chinese. It addresses beginners and experienced sellers with publication preparation, Excel, specifications, multiple SKUs, reports, connected countries and client-AI photo workflows. The introduction highlights 91 actions from the user-supplied capabilities overview, rather than a live catalog audit.
 
-## Final presentation
+## Presentation
 
-Desktop keeps two staggered rows with 280px-wide overview cards, 232–273px tall in Spanish. Requests and answers remain fully visible. Each native disclosure uses the existing preview label and opens the complete preview and supporting description. One example can be open at a time. Autoplay pauses while an example is open, as well as during hover, focus, dragging, touch and offscreen states. Duplicate loop content is hidden from assistive technology and inert.
+Desktop retains two staggered rows of compact cards; mobile retains one horizontal row. Existing questions and answers remain visible. Each result button opens a native modal dialog, separating the conversation from its detailed result on desktop. Mobile uses a bottom sheet with one column and a sticky close toolbar. Product photos, metrics and report contents use their corresponding result layouts. Previous/next controls navigate all 42 examples inside the dialog.
 
-Mobile uses one horizontal row, with no staggered translation. The original requests and answers are preserved; the introduction and capability availability notes were updated in all four locales. The four lifestyle photographs remain in the loop at positions 5, 16, 27 and 38, now 232px tall. Product previews, figures, approval states, cost assumptions and estimates remain available in the expanded examples.
+Escape, the close button and a backdrop click dismiss the dialog. Opening pauses autoplay and locks page scrolling; closing restores focus and preserves the carousel position. The duplicated loop remains hidden from assistive technology and inert. Reduced-motion preferences disable the entrance animation.
 
-`UseCaseDemoCard`, `UseCaseResult`, `PhotoDemoCard` and `ShowcaseCards` remain the shared rendering structure. No runtime dependency, seller API or backend was added. Local product imagery sources are documented in `public/images/products/SOURCES.md`.
+Two generated photos add experienced-seller contexts: scanning inventory among packed orders and reviewing sales/stock reports with products and a calculator. Six photos are distributed after example indexes 3, 10, 17, 24, 31 and 38. Asset prompts and provenance are recorded in `public/images/lifestyle/GENERATED.md`.
 
-The carousel header now follows the page rhythm: 28px between heading and introduction and 40px before the cards on desktop; 24px and 32px on mobile. The containing functions group has no extra outer padding, preventing doubled section spacing. The rendered gap from the feature content to the carousel heading is 64px; from the carousel note to the next section heading it is 112px on desktop. The compact card styling is retained.
+All user-approved example copy remains unchanged in this update. The MerChat photo-search guide helps the connected AI find photos; the client AI creates images and MerChat associates them with listing drafts. Approval requirements and country/account limitations remain explicit. Pricing and its typography remain unchanged.
 
-## Validation
+## Current validation
 
-- Production build and TypeScript checks passed.
-- ESLint: no errors; existing `BrandLogo.tsx` image warning.
-- Carousel/content and localization tests: all 6 passed. `git diff --check` passed.
-- Five widths checked: 1440, 1024, 768, 390 and 360px. No page or card overflow. Desktop has two rows; mobile has one.
-- The current desktop screenshot is 1440 × 1000 and includes both rows, heading, controls and illustrative-results note. At 390 × 844, the heading, overview card, controls and note fit together.
-- Spanish was checked at 390px; the other three locales were checked at 360px in this update. New revision and fee previews opened without overflow and keyboard disclosure toggling passed. Earlier all-four-locale checks at 360px remain recorded.
-- Previously, all four locales checked at 360px. Expanded listing, diagnosis, price comparison, advertising and account previews had no overflow. Only one disclosure remained open.
-- Click expands a preview; Enter collapses it. Expanded content includes the original preview and supporting description. Clone disclosures are inert.
-- Arrows now advance by visible column blocks, accounting for the staggered lower row; four dots still jump to quarter positions. The previous 32-example set was reachable with the next arrow at 1440, 768 and 390px. First dot returned to the start. Dragging moved the carousel 165px. Temporary viewport overrides were restored.
-- Earlier interaction verification also covered horizontal and vertical touch, reduced motion and loop wrapping with browser emulation; physical-device testing was not performed.
-- Full test suite previously recorded 6 passes and 2 existing failures, both reproduced on baseline `610e0f4`: old assertions expect an inline logo instead of `BrandLogo` and the former icon path. Unrelated branding/tests remain unchanged.
-
-## Scope
-
-Layout refinements affect the shared carousel component, `#resultados` styles and the functions-group wrapper padding. The current update replaces technical terminology with seller outcomes and adds Excel publication preparation plus seven reports, in every message file. The broader PR contains the approved carousel datasets and copy work. Hero, navigation, other sections, pricing and its fonts, routing, metadata and integrations retain the saved styling baseline.
+- Production build, TypeScript and ESLint passed; the existing BrandLogo image warning remains.
+- All six carousel/content and localization tests passed.
+- All 42 dialogs navigated at 390 × 844 and 1440 × 1000 with no horizontal dialog overflow or missing content.
+- Next/previous, Escape, backdrop dismissal, keyboard focus inside the dialog, focus restoration and preserved carousel position checked in the integrated browser.
+- New inventory and analysis photographs inspected in the running carousel. Temporary viewport overrides reset.
+- The development preview runs at `http://localhost:3000/#resultados` with webpack for integrated-browser compatibility. The production preview also verified the dialog; initial Turbopack preview did not respond to React controls in this browser.
+- Earlier full-suite checks recorded two baseline logo/icon assertion failures at `610e0f4`; these unrelated assertions are unchanged.
 
 ## Screenshots
 
-- [Before desktop](before-desktop.png)
-- [Before mobile](before-mobile.png)
-- [Compact desktop overview](after-desktop.png)
-- [Advanced desktop overview](power-users-desktop.png)
-- [Expanded desktop example](after-desktop-results.png)
-- [Single-row mobile overview](after-mobile.png)
-- [Expanded mobile example](after-mobile-results.png)
+- [Desktop result dialog](dialog-desktop.png)
+- [Mobile result sheet](dialog-mobile.png)
+- [Inventory photo in the compact carousel](powerseller-inventory.png)
+- [Sales/stock analysis photo](powerseller-analysis.png)
 
-## Seller-language update
+## Scope
 
-The current 40-example build passed TypeScript, production build, lint (existing BrandLogo warning only), and all six content/localization tests. Desktop at 1440px and mobile at 390px show the new 91-action introduction and seller-focused leading examples without page overflow. Excel and specification disclosures show missing data and review requirements; keyboard collapse works. Screenshot files were refreshed for this update.
-
-## Approved copy clarification
-
-Applied the exact seller-language revisions approved in chat across all four locales, including expanded labels and explanations. Kept 40 examples, 91 actions, approval boundaries and the compact design. Lint and TypeScript passed; all six content/localization tests passed. The running development preview at port 3000 was checked at 1440px and 390px: no page overflow; longest Spanish overview card was 273px; the expanded advertising explanation had no overflow. Current desktop/mobile overview screenshots are refreshed. The previous production build and expanded-example screenshots belong to the prior update.
-
-## User-supplied wording
-
-Applied the October 10 attachment to all 40 Spanish card titles, questions, responses, descriptions, preview headings and statuses. Six changed meaning-bearing fields are synchronized across translations. The previous uncommitted selling-fees question is included. Content/localization tests, lint and TypeScript passed. Live preview shows the net-profit title, updated profit-report request and campaign status with no page overflow. [Current net-profit preview](user-copy-net-profit.png).
-
-## Multi-country and photo workflows
-
-The carousel now contains 43 examples in all four locales. Added connected stores in Peru/Brazil with separate data and currencies, finding product photos through the connected AI tools, and creating an AI photo for an approved listing draft. Search/generation are attributed to the AI client; MerChat handles upload/association. Country/account feature availability is explicit. Lint, TypeScript and six content/localization tests passed. Desktop AI-photo and mobile country disclosures have no page/detail overflow. [Current preview](country-ai-photos.png).
-
-## Photo guide correction
-
-42 examples remain after removing the campaign-error card in every locale. The photo-search explanation now attributes a guide to MerChat that helps the connected AI find model photos. Lint, TypeScript and six content/localization tests passed. The live preview confirms the guide wording and absence of the removed card. [Photo guide preview](photo-search-guide.png).
+Changes affect the shared carousel component, its styles, close-button translations, photo data/assets and carousel content test. No seller API, backend or runtime dependency was added. The broader PR retains its previously approved seller copy and 91-action introduction. Base: `codex/visual-work-20260902` at `610e0f4`. No merge performed.

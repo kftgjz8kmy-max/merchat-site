@@ -1084,10 +1084,22 @@
         "alt": "Vendedora trabajando en su tienda online desde una laptop"
       },
       {
+        "eyebrow": "Tu operación, bajo control",
+        "note": "Gestiona varios SKU y prepara tu operación.",
+        "image": "/images/lifestyle/powerseller-inventory.png",
+        "alt": "Vendedora escaneando un producto entre inventario y paquetes listos para despacho"
+      },
+      {
         "eyebrow": "Piensa en grande",
         "note": "Entiende tus ventas y decide tu próximo paso.",
         "image": "/images/lifestyle/sales-analysis.png",
         "alt": "Equipo de ecommerce analizando el rendimiento de sus ventas"
+      },
+      {
+        "eyebrow": "Decide con tus datos",
+        "note": "Decide qué vender, qué mejorar y qué reponer.",
+        "image": "/images/lifestyle/powerseller-analysis.png",
+        "alt": "Vendedor revisando reportes de ventas y stock junto a productos y una calculadora"
       },
       {
         "eyebrow": "Una IA para tus negocios",
@@ -1394,6 +1406,7 @@
     "discountLabel": "50% OFF",
     "showcaseIntro": "Publica desde fotos o Excel, completa características, gestiona varios SKU y pide reportes de ventas, ganancias, stock y más. Para empezar o llevar tu tienda al siguiente nivel, solo tienes que pedirlo.",
     "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles.",
-    "showcaseToolCount": "91 acciones para tu negocio."
+    "showcaseToolCount": "91 acciones para tu negocio.",
+    "showcaseClose": "Cerrar ejemplo"
   }
 }

@@ -2530,14 +2530,69 @@ main .functions-group section#resultados { padding-block: 32px 56px; scroll-marg
 #resultados :is(.cap-workflow,.cap-report) .cap-item b { display: grid; place-items: center; flex: 0 0 24px; height: 24px; border-radius: 50%; background: #E8EEFC; color: #1E40AF; font-size: 12px; }
 
 /* Requests and answers form the overview; the complete example stays one click away. */
-#resultados .cap-detail { margin-top: auto; border-top: 1px solid #E1E7F2; }
-#resultados .cap-detail summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 0 0; list-style: none; cursor: pointer; color: var(--blue); font-size: 13px; font-weight: 600; line-height: 1.35; }
-#resultados .cap-detail summary::-webkit-details-marker { display: none; }
-#resultados .cap-detail summary svg { flex: 0 0 18px; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-#resultados .cap-detail[open] summary svg { transform: rotate(180deg); }
-#resultados .cap-detail summary:hover { color: var(--brand-blue-hover); }
-#resultados .cap-detail summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
-#resultados .cap-detail-body { display: grid; gap: 10px; padding-top: 12px; }
-#resultados .cap-detail-body > small { font-size: 14px; line-height: 1.5; color: var(--muted); }
 #resultados .example-photo .photo-overlay { padding: 16px; }
 #resultados .example-photo .photo-overlay strong { font-size: 19px; }
+
+/* Result explorer: compact triggers, stable carousel, native modal focus. */
+#resultados .cap-open { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; min-height:44px; padding:8px 0 0; border:0; border-top:1px solid #E1E7F2; border-radius:0; background:transparent; color:var(--blue); text-align:left; font-family:inherit; font-size:13px; font-weight:600; line-height:1.35; cursor:pointer; }
+#resultados .cap-open span { font-size:13px; }
+#resultados .cap-open svg { width:18px; height:18px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+#resultados .cap-open:hover { color:var(--brand-blue-hover); }
+#resultados .cap-open:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
+#resultados .cap-dialog { width:min(960px, calc(100vw - 64px)); max-width:none; max-height:calc(100dvh - 64px); margin:auto; padding:0; border:1px solid #DDE4F0; border-radius:26px; background:#FFFEFC; color:var(--ink); box-shadow:0 24px 80px rgb(15 23 42 / 25%); overflow:auto; overscroll-behavior:contain; }
+#resultados .cap-dialog::backdrop { background:rgb(12 22 46 / 50%); }
+#resultados .cap-dialog[open] { animation:cap-dialog-arrive .22s ease-out; }
+#resultados .cap-dialog-inner { padding:28px 36px 24px; }
+#resultados .cap-dialog-toolbar { display:flex; align-items:center; justify-content:space-between; gap:20px; position:static; width:auto; height:auto; min-height:0; padding:0 0 28px; border:0; box-shadow:none; background:none; }
+#resultados .cap-dialog-toolbar .brand-lockup { transform:scale(.75); transform-origin:left center; }
+#resultados .cap-close { display:grid; place-items:center; width:40px; height:40px; border:1px solid #DFE5EF; border-radius:50%; background:#fff; color:#405678; cursor:pointer; }
+#resultados .cap-close svg { width:18px; height:18px; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; }
+#resultados .cap-dialog-content { display:grid; grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr); gap:40px; align-items:start; }
+#resultados .cap-conversation h2 { margin:0 0 26px; font-size:30px; line-height:1.15; font-weight:600; letter-spacing:-.025em; text-wrap:balance; }
+#resultados .cap-conversation blockquote { margin:0 0 24px; padding:18px 20px; border:1px solid #D6E1FF; border-radius:18px 18px 4px 18px; background:#EEF3FF; color:#172554; font-size:17px; line-height:1.5; }
+#resultados .cap-answer { display:flex; align-items:start; gap:10px; margin:0; font-size:20px; line-height:1.4; font-weight:600; text-wrap:pretty; }
+#resultados .cap-answer svg { flex-shrink:0; margin-top:3px; color:var(--blue); }
+#resultados .cap-dialog .cap-preview { padding:0; border:0; border-radius:0; background:none; gap:20px; font-size:16px; line-height:1.5; }
+#resultados .cap-dialog .cap-label { font-size:18px; color:var(--ink); font-weight:600; }
+#resultados .cap-dialog .cap-items { gap:0; }
+#resultados .cap-dialog .cap-item { padding:14px 0; border-bottom:1px solid #E1E7F2; min-width:0; }
+#resultados .cap-dialog .cap-item:last-child { border-bottom:0; }
+#resultados .cap-dialog :is(.cap-workflow,.cap-report) .cap-item { align-items:center; justify-content:flex-start; gap:16px; }
+#resultados .cap-dialog .cap-workflow .cap-item b { display:grid; place-items:center; width:30px; height:30px; flex:0 0 30px; border-radius:50%; background:#E9EFFF; color:var(--blue); font-size:14px; }
+#resultados .cap-dialog .cap-report .cap-item b { display:none; }
+#resultados .cap-dialog .cap-item span { color:#40506A; }
+#resultados .cap-dialog .cap-status { font-size:13px; padding-top:16px; }
+#resultados .cap-dialog .cap-explanation { margin:18px 0 0; color:var(--muted); font-size:14px; line-height:1.6; }
+#resultados .cap-dialog .cap-product-gallery { display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
+#resultados .cap-dialog .cap-product-photos { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+#resultados .cap-dialog .cap-product-main { width:100%; height:200px; object-fit:contain; background:#fff; }
+#resultados .cap-dialog .cap-product-photos img { height:70px; }
+#resultados .cap-dialog .cap-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+#resultados .cap-dialog .cap-gallery img { height:125px; object-fit:contain; background:#fff; }
+#resultados .cap-dialog :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-items { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+#resultados .cap-dialog :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-item { flex-direction:column; align-items:flex-start; border:0; border-radius:0; background:none; padding:0; gap:7px; }
+#resultados .cap-dialog :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-item b { font-size:32px; line-height:1.15; }
+#resultados .cap-dialog .cap-dialog-footer { display:flex; align-items:center; justify-content:space-between; gap:24px; margin:32px 0 0; padding:20px 0 0; border-top:1px solid #E1E7F2; background:none; }
+#resultados .cap-dialog-footer > p { max-width:55ch; margin:0; font-size:12px; line-height:1.5; color:var(--muted); }
+#resultados .cap-dialog-nav { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+#resultados .cap-dialog-nav span { min-width:48px; font-size:13px; text-align:center; font-variant-numeric:tabular-nums; color:#405678; }
+#resultados .cap-dialog-nav button { display:grid; place-items:center; width:40px; height:40px; border:1px solid #DFE5EF; border-radius:50%; background:#fff; color:#405678; cursor:pointer; }
+#resultados .cap-dialog-nav svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+#resultados :is(.cap-close,.cap-dialog-nav button):hover { background:#EEF3FF; border-color:#BECFFF; color:var(--blue); }
+#resultados :is(.cap-close,.cap-dialog-nav button):focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+@keyframes cap-dialog-arrive { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@media(max-width:700px) {
+  #resultados .cap-dialog { width:100%; max-height:calc(100dvh - 20px); margin:auto 0 0; border-radius:24px 24px 0 0; border-bottom:0; }
+  #resultados .cap-dialog-inner { padding:20px 24px 24px; }
+  #resultados .cap-dialog-toolbar { padding-bottom:24px; }
+  #resultados .cap-dialog-content { grid-template-columns:minmax(0,1fr); gap:28px; }
+  #resultados .cap-conversation h2 { font-size:26px; margin-bottom:20px; }
+  #resultados .cap-conversation blockquote { padding:14px 16px; font-size:16px; margin-bottom:20px; }
+  #resultados .cap-answer { font-size:18px; }
+  #resultados .cap-dialog .cap-preview { font-size:15px; gap:16px; }
+  #resultados .cap-dialog .cap-label { font-size:17px; }
+  #resultados .cap-dialog .cap-dialog-footer { flex-direction:column-reverse; align-items:stretch; gap:18px; margin-top:24px; }
+  #resultados .cap-dialog-nav { justify-content:center; }
+  #resultados .cap-dialog-toolbar { position:sticky; top:-20px; z-index:1; padding-top:4px; background:#FFFEFC; }
+}
+@media(prefers-reduced-motion:reduce) { #resultados .cap-dialog[open] { animation:none; } }

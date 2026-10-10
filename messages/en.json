@@ -1084,10 +1084,22 @@
         "alt": "Seller working on her online store from a laptop"
       },
       {
+        "eyebrow": "Your operations under control",
+        "note": "Manage multiple SKUs and prepare your operations.",
+        "image": "/images/lifestyle/powerseller-inventory.png",
+        "alt": "Seller scanning a product among inventory and packages ready for dispatch"
+      },
+      {
         "eyebrow": "Think bigger",
         "note": "Understand your sales and decide what to do next.",
         "image": "/images/lifestyle/sales-analysis.png",
         "alt": "Ecommerce team analyzing sales performance"
+      },
+      {
+        "eyebrow": "Decide with your data",
+        "note": "Decide what to sell, improve and restock.",
+        "image": "/images/lifestyle/powerseller-analysis.png",
+        "alt": "Seller reviewing sales and stock reports beside products and a calculator"
       },
       {
         "eyebrow": "One AI for your businesses",
@@ -1394,6 +1406,7 @@
     "discountLabel": "50% OFF",
     "showcaseIntro": "Publish from photos or Excel, fill in specifications, manage multiple SKUs and request sales, profit, stock reports and more. To get started or grow your store, just ask.",
     "showcaseDisclaimer": "Illustrative examples. Features and results depend on available data and permissions.",
-    "showcaseToolCount": "91 actions for your business."
+    "showcaseToolCount": "91 actions for your business.",
+    "showcaseClose": "Close example"
   }
 }
