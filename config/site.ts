@@ -6,7 +6,7 @@ export const siteConfig = {
   chatgptGuideUrl: "https://ml-automation-iota.vercel.app/guia-chatgpt",
   brand: {
     logo: "/brand/merchat-logo.png",
-    icon: "/brand/merchat-icon.png",
+    icon: "/brand/merchat-chat-icon.png",
   },
   navigation: [
     { label: "Cómo funciona", href: "#como-funciona" },

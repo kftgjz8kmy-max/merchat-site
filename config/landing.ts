@@ -24,8 +24,7 @@ type LandingContent = {
     audience: string;
     originalPrice: string;
     price: string;
-    prefix: string;
-    setup: string;
+    billingPeriod: string;
     featured: boolean;
     cta: string;
     items: string[];

@@ -227,34 +227,31 @@
       {
         "name": "Vendedor",
         "audience": "Para quienes quieren entender mejor su operación.",
-        "originalPrice": "58",
-        "price": "29",
-        "prefix": "",
-        "setup": "",
+        "originalPrice": "19.99",
+        "price": "9.99",
         "featured": false,
         "cta": "Gratis por 14 días",
         "items": [
-          "Conecta una cuenta de Mercado Libre",
+          "Conecta hasta 2 cuentas de Mercado Libre",
           "Consulta ventas, pedidos y entregas",
           "Revisa publicaciones, precios y stock",
           "Analiza rendimiento y oportunidades",
           "Consulta promociones y campañas",
           "Consultas mensuales incluidas",
           "Analizar tu cuenta sin realizar cambios"
-        ]
+        ],
+        "billingPeriod": "/mes"
       },
       {
         "name": "Vendedor Pro",
         "audience": "Tu asistente para operar Mercado Libre.",
-        "originalPrice": "198",
-        "price": "99",
-        "prefix": "",
-        "setup": "",
-        "featured": true,
+        "originalPrice": "39.99",
+        "price": "19.99",
+        "featured": false,
         "cta": "Gratis por 14 días",
         "items": [
           "Todo lo incluido en Vendedor",
-          "Conecta una cuenta de Mercado Libre",
+          "Conecta hasta 2 cuentas de Mercado Libre",
           "Crea y actualiza publicaciones",
           "Cambia precios y stock",
           "Pausa y reactiva publicaciones",
@@ -262,26 +259,21 @@
           "Analiza ventas y rendimiento",
           "Revisa oportunidades en Product Ads",
           "Confirma antes de ejecutar cambios"
-        ]
+        ],
+        "billingPeriod": "/mes"
       },
       {
-        "name": "Vendedor Ultra",
-        "audience": "Para agencias y equipos que operan varias cuentas.",
-        "originalPrice": "398",
-        "price": "199",
-        "prefix": "",
-        "setup": "",
-        "featured": false,
-        "cta": "Comenzar con Ultra",
+        "name": "Vendedor Max Anual",
+        "audience": "Todo lo incluido en Vendedor Pro, con hasta 4 cuentas y facturación anual.",
+        "originalPrice": "959.76",
+        "price": "159.99",
+        "billingPeriod": "/año",
+        "featured": true,
+        "cta": "Comenzar con Vendedor Max Anual",
         "items": [
           "Todo lo incluido en Vendedor Pro",
-          "Conecta hasta 3 cuentas de Mercado Libre",
-          "Consulta y opera cada cuenta por separado",
-          "Gestiona publicaciones, precios y promociones",
-          "Analiza el rendimiento de cada negocio",
-          "Uso intensivo de merchat",
-          "Soporte prioritario",
-          "Agrega cuentas adicionales por S/50 / mes"
+          "Conecta hasta 4 cuentas de Mercado Libre",
+          "Consulta y opera cada cuenta por separado"
         ]
       }
     ],
@@ -302,7 +294,7 @@
       ],
       [
         "¿Qué incluye la prueba gratis de 14 días?",
-        "Durante 14 días puedes probar las funciones de Vendedor Pro con una cuenta de Mercado Libre, incluyendo consultas, análisis y herramientas para gestionar tu operación.\n\nNo necesitas tarjeta para comenzar."
+        "Durante 14 días puedes probar las funciones de Pro con una cuenta de Mercado Libre, incluyendo consultas, análisis y herramientas para gestionar tu operación.\n\nNo necesitas tarjeta para comenzar."
       ],
       [
         "¿Cuándo comienza mi prueba gratis?",
@@ -313,8 +305,8 @@
         "Puedes elegir el plan que mejor se adapte a tu operación para continuar usando merchat."
       ],
       [
-        "¿Cuál es la diferencia entre Vendedor, Vendedor Pro y Vendedor Ultra?",
-        "**Vendedor** está pensado para consultar y analizar tu cuenta sin realizar cambios.\n\n**Vendedor Pro** además te permite operar tu cuenta: crear y actualizar publicaciones, cambiar precios y stock, gestionar promociones y realizar otras acciones con tu autorización.\n\n**Vendedor Ultra** incluye las funciones de Pro y está diseñado para quienes necesitan gestionar varias cuentas de Mercado Libre."
+        "¿Cuál es la diferencia entre Read, Pro y Pro Anual?",
+        "**Read (US$9/mes)** permite consultar y analizar hasta 2 cuentas sin hacer cambios.\n\n**Pro (US$20/mes)** incluye lectura y escritura para hasta 2 cuentas: puedes crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones.\n\n**Pro Anual (US$159/año)** incluye todo lo de Pro para hasta 4 cuentas y ahorra US$799.77 frente a pagar US$79.98 al mes por 2 cuentas Vendedor Pro durante 12 meses (US$959.76)."
       ],
       [
         "¿merchat puede hacer cambios en mi cuenta de Mercado Libre?",
@@ -345,8 +337,8 @@
         "No. El proceso está diseñado para guiarte paso a paso. Creas tu cuenta, conectas Mercado Libre, instalas merchat en tu asistente de IA y puedes comenzar a usarlo conversando."
       ],
       [
-        "¿Puedo conectar varias cuentas de Mercado Libre?",
-        "Sí. Vendedor Ultra permite conectar hasta 3 cuentas de Mercado Libre y puedes agregar cuentas adicionales por S/50 al mes cada una."
+        "¿Cuál es la diferencia entre Vendedor, Vendedor Pro y Vendedor Max Anual?",
+        "**Vendedor** está pensado para consultar y analizar tu cuenta sin realizar cambios.\n\n**Vendedor Pro** además te permite operar tu cuenta: crear y actualizar publicaciones, cambiar precios y stock, gestionar promociones y realizar otras acciones con tu autorización.\n\n**Vendedor Max Anual** incluye las funciones de Vendedor Pro para hasta 4 cuentas de Mercado Libre, con facturación anual."
       ],
       [
         "¿merchat puede crear publicaciones nuevas?",
@@ -401,10 +393,9 @@
     "quickNaturalLine1": "Gestiona tu cuenta con",
     "quickNaturalLine2": "lenguaje natural",
     "pricingIntro": "Empieza con 14 días gratis. Descubre todo lo que merchat puede hacer por tu operación y elige tu plan cuando estés listo.",
-    "pricingOffer": "Obtén 50% de descuento en todos los planes.",
-    "month": "/mes",
-    "discountLabel": "50% OFF",
-    "recommended": "RECOMENDADO",
+    "recommended": "MÁS POPULAR",
+    "planSavingsMonthly": "Ahorra 50%",
+    "planSavingsAnnual": "Ahorra 83%",
     "planNoCard": "Sin tarjeta",
     "resultNew": "Nuevo",
     "resultStock": "Stock",
@@ -463,6 +454,8 @@
     "footerTerms": "Términos y condiciones",
     "footerPrivacy": "Política de privacidad",
     "footerRights": "Todos los derechos reservados.",
-    "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre."
+    "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre.",
+    "pricingOffer": "Ahorra 50% en Vendedor y Vendedor Pro, y 83% en Vendedor Max Anual.",
+    "discountLabel": "50% OFF"
   }
 }

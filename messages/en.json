@@ -225,36 +225,33 @@
     ],
     "plans": [
       {
-        "name": "Seller",
+        "name": "Vendedor",
         "audience": "For people who want to better understand their operation.",
-        "originalPrice": "58",
-        "price": "29",
-        "prefix": "",
-        "setup": "",
+        "originalPrice": "19.99",
+        "price": "9.99",
         "featured": false,
         "cta": "Free for 14 days",
         "items": [
-          "Connect one Mercado Libre account",
+          "Connect up to 2 Mercado Libre accounts",
           "Check sales, orders, and deliveries",
           "Review listings, prices, and stock",
           "Analyze performance and opportunities",
           "Check promotions and campaigns",
           "Monthly queries included",
           "Analyze your account without making changes"
-        ]
+        ],
+        "billingPeriod": "/month"
       },
       {
-        "name": "Seller Pro",
+        "name": "Vendedor Pro",
         "audience": "Your assistant for operating on Mercado Libre.",
-        "originalPrice": "198",
-        "price": "99",
-        "prefix": "",
-        "setup": "",
-        "featured": true,
+        "originalPrice": "39.99",
+        "price": "19.99",
+        "featured": false,
         "cta": "Free for 14 days",
         "items": [
-          "Everything included in Seller",
-          "Connect one Mercado Libre account",
+          "Everything included in Vendedor",
+          "Connect up to 2 Mercado Libre accounts",
           "Create and update listings",
           "Change prices and stock",
           "Pause and reactivate listings",
@@ -262,26 +259,21 @@
           "Analyze sales and performance",
           "Review Product Ads opportunities",
           "Confirm before making changes"
-        ]
+        ],
+        "billingPeriod": "/month"
       },
       {
-        "name": "Seller Ultra",
-        "audience": "For agencies and teams operating multiple accounts.",
-        "originalPrice": "398",
-        "price": "199",
-        "prefix": "",
-        "setup": "",
-        "featured": false,
-        "cta": "Get started with Ultra",
+        "name": "Vendedor Max Anual",
+        "audience": "Everything in Vendedor Pro, with up to 4 accounts and annual billing.",
+        "originalPrice": "959.76",
+        "price": "159.99",
+        "billingPeriod": "/year",
+        "featured": true,
+        "cta": "Get started with Vendedor Max Anual",
         "items": [
-          "Everything included in Seller Pro",
-          "Connect up to 3 Mercado Libre accounts",
-          "Review and operate each account separately",
-          "Manage listings, prices, and promotions",
-          "Analyze each business's performance",
-          "Intensive merchat usage",
-          "Priority support",
-          "Add accounts for S/50 per month"
+          "Everything included in Vendedor Pro",
+          "Connect up to 5 Mercado Libre accounts",
+          "Review and operate each account separately"
         ]
       }
     ],
@@ -302,7 +294,7 @@
       ],
       [
         "What is included in the 14-day free trial?",
-        "For 14 days, you can try Seller Pro features with one Mercado Libre account, including queries, analysis, and tools for managing your operation.\n\nNo card is required to get started."
+        "For 14 days, you can try Pro features with one Mercado Libre account, including queries, analysis, and tools for managing your operation.\n\nNo card is required to get started."
       ],
       [
         "When does my free trial begin?",
@@ -313,8 +305,8 @@
         "You can choose the plan that best fits your operation to continue using merchat."
       ],
       [
-        "What is the difference between Seller, Seller Pro, and Seller Ultra?",
-        "**Seller** is designed for checking and analyzing your account without making changes.\n\n**Seller Pro** also lets you operate your account: create and update listings, change prices and stock, manage promotions, and perform other actions with your authorization.\n\n**Seller Ultra** includes Pro features and is designed for people who need to manage multiple Mercado Libre accounts."
+        "What is the difference between Read, Pro, and Pro Annual?",
+        "**Read (US$9/month)** lets you check and analyze up to 2 accounts without making changes.\n\n**Pro (US$20/month)** includes read and write access for up to 2 accounts: create and update listings, change prices and stock, and manage promotions.\n\n**Pro Annual (US$159/year)** includes everything in Pro for up to 4 accounts and saves US$799.77 compared with paying US$79.98/month for 2 Vendedor Pro accounts for 12 months (US$959.76)."
       ],
       [
         "Can merchat make changes to my Mercado Libre account?",
@@ -345,8 +337,8 @@
         "No. The process is designed to guide you step by step. Create your account, connect Mercado Libre, install merchat in your AI assistant, and start using it through conversation."
       ],
       [
-        "Can I connect multiple Mercado Libre accounts?",
-        "Yes. Seller Ultra lets you connect up to 3 Mercado Libre accounts, and you can add more accounts for S/50 per month each."
+        "What is the difference between Vendedor, Vendedor Pro, and Vendedor Max Anual?",
+        "**Vendedor** is designed for checking and analyzing your account without making changes.\n\n**Vendedor Pro** also lets you operate your account: create and update listings, change prices and stock, manage promotions, and perform other actions with your authorization.\n\n**Vendedor Max Anual** includes Vendedor Pro features for up to 5 Mercado Libre accounts, billed annually."
       ],
       [
         "Can merchat create new listings?",
@@ -354,7 +346,7 @@
       ],
       [
         "Can I use merchat only to check information without allowing changes?",
-        "Yes. The Seller plan is designed for exactly that: checking sales, listings, stock, performance, promotions, and other operational information without making changes to your account."
+        "Yes. Vendedor is designed for exactly that: checking sales, listings, stock, performance, promotions, and other operational information without making changes to your account."
       ],
       [
         "What can I ask merchat?",
@@ -401,10 +393,9 @@
     "quickNaturalLine1": "Manage your account",
     "quickNaturalLine2": "in natural language",
     "pricingIntro": "Start with 14 days free. Discover everything merchat can do for your operation and choose your plan when you are ready.",
-    "pricingOffer": "Get 50% off every plan.",
-    "month": "/month",
-    "discountLabel": "50% OFF",
     "recommended": "RECOMMENDED",
+    "planSavingsMonthly": "Save 50%",
+    "planSavingsAnnual": "Save 83%",
     "planNoCard": "No card required",
     "resultNew": "New",
     "resultStock": "Stock",
@@ -463,6 +454,8 @@
     "footerTerms": "Terms and conditions",
     "footerPrivacy": "Privacy policy",
     "footerRights": "All rights reserved.",
-    "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre."
+    "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre.",
+    "pricingOffer": "Save 50% on Vendedor and Vendedor Pro, and 83% on Vendedor Max Anual.",
+    "discountLabel": "50% OFF"
   }
 }
