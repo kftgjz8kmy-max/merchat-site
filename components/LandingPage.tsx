@@ -327,7 +327,7 @@ export default function LandingPage() {
       </div>
       <div className="hero-copy">
         <p className="eyebrow"><HeroIcon name="sparkle" size={16} />{localizedLanding.hero.eyebrow}</p>
-        <h1>{ui.heroTitle} <em>{ui.heroEmphasis}</em></h1>
+        <h1>{ui.heroTitle.split(/(Mercado Libre|Mercado Livre)/).map((part, index) => /^(Mercado Libre|Mercado Livre)$/.test(part) ? <span className="hero-marketplace-name" key={index}>{part}</span> : <Fragment key={index}>{part}</Fragment>)} <em>{ui.heroEmphasis}</em></h1>
         <p className="hero-description">{localizedLanding.hero.description}</p>
         <div className="button-row"><div className="primary-cta"><Button icon href={siteConfig.trialUrl}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
         <div className="quick-points"><span><img src="/images/quick-points/publish.png" alt="" width="28" height="28" /><span>{ui.quickPublish}</span></span><span><img src="/images/quick-points/clock.png" alt="" width="28" height="28" /><span>{ui.quickHoursLine1}<br className="quick-point-break" /> {ui.quickHoursLine2}</span></span><span><img src="/images/quick-points/language.png" alt="" width="28" height="28" /><span>{ui.quickNaturalLine1}<br className="quick-point-break" /> {ui.quickNaturalLine2}</span></span></div>
