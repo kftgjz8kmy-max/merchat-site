@@ -1,42 +1,37 @@
 # Capability carousel review
 
-Scope: `#resultados`. The carousel now contains 12 deterministic conversational workflow examples and four existing lifestyle photographs. All four locales replace the complete datasets in the same stable ID order. The first four workflows occupy the first two staggered columns.
+The `#resultados` carousel shows 12 conversational workflows and four existing lifestyle photographs. Spanish, English, Brazilian Portuguese and Simplified Chinese retain complete datasets with matching stable IDs. The first four workflows lead the sequence.
 
-`UseCaseDemoCard`, `UseCaseResult`, `PhotoDemoCard` and `ShowcaseCards` remain the rendering structure. Small shared `PreviewItems` and `ProductPhotos` primitives provide distinct previews without a visualization library. No seller APIs or runtime dependencies were added. New local product thumbnails are documented in `public/images/products/SOURCES.md`.
+## Final presentation
 
-Carousel changes keep dragging, swiping, arrows, four dots and reduced motion. Loop width now measures the distance between duplicated sets, including their gap. Autoplay pauses outside the viewport and during hover, keyboard focus and touch/drag; resume timers respect active interactions. The duplicate set remains `aria-hidden` and contains no interactive controls.
+Desktop keeps two staggered rows with 280px-wide overview cards, typically 232–251px tall in Spanish. Requests and answers remain fully visible. Each native disclosure uses the existing preview label and opens the complete preview and supporting description. One example can be open at a time. Autoplay pauses while an example is open, as well as during hover, focus, dragging, touch and offscreen states. Duplicate loop content is hidden from assistive technology and inert.
 
-## Final visual refinements
+Mobile uses one horizontal row, with no staggered translation. The original copy in all four locales is unchanged by this layout refinement. The four lifestyle photographs remain in the loop at positions 5, 8, 11 and 14, now 232px tall. Product previews, figures, approval states, cost assumptions and estimates remain available in the expanded examples.
 
-Cards use content-driven heights, tighter preview spacing and outcomes directly beneath their previews. The four lifestyle photos occupy positions 5, 8, 11 and 14, alternating between rows and aligning to each row start. Photos remain shorter visual pauses. Diagnosis previews distinguish the three conditions; the advertising bar reflects the supplied ACOS value rather than arbitrary decorative columns. Final responsive checks passed at all five widths and all four locales at 360px.
-
-The 12 workflow requests and answers now use everyday, conversational wording. Answers state the concrete result; preview labels avoid jargon where possible and explain ACOS as ad spend divided by sales. Photo captions follow the same plain language. All four translations are updated. Copy outside the carousel is unchanged. Mobile checks at 360px found no overflow in any locale; the latest screenshots show the revised copy.
+`UseCaseDemoCard`, `UseCaseResult`, `PhotoDemoCard` and `ShowcaseCards` remain the shared rendering structure. No runtime dependency, seller API or backend was added. Local product imagery sources are documented in `public/images/products/SOURCES.md`.
 
 ## Validation
 
-- `npm run typecheck`: passed.
-- `npm run lint`: zero errors; existing `BrandLogo.tsx` image warning.
-- `npm run build`: passed.
-- `npm test`: 6 passed, 2 failed. Both failures are reproduced against baseline commit `610e0f4`: old tests expect the logo image directly in `LandingPage.tsx` rather than `BrandLogo`, and expect the old icon path rather than `merchat-chat-icon.png`. Neither production branding nor unrelated tests were changed in this PR.
-- `node --test tests/carousel-content.test.mjs tests/localization.test.mjs`: all 5 passed. Checks cover stable IDs, exact dataset sizes, distinct previews/photos, approval gates, illustrative research, cost inputs, inventory uncertainty and separate seller accounts.
-- `git diff --check`: passed.
-- Spanish rendered at 1440, 1024, 768, 390 and 360px; no card clipping or page overflow. A narrow priority-preview overflow found at 360px was corrected.
-- All four locale routes checked at 360px after the correction: 12 aligned capability IDs each, zero clipped cards and zero overflowing previews.
-- Mouse drag verified in the integrated browser; arrows and dots move to the corresponding quarters and return to the first page. Focus keeps autoplay paused.
-- Chrome 390px mobile emulation: horizontal touch moved the carousel from 0 to 287px; vertical touch changed page scroll while preserving the carousel position. No warning/error logs were observed.
-- Chrome reduced-motion emulation: preference was true and carousel position remained unchanged during subsequent interactions. Normal autoplay resumed after clearing the preference. A final-quarter position of 2071.5px wrapped past a 2762px loop seam and was subsequently observed at 605px.
-- Native accessibility snapshot announces the 16 unique cards, not the duplicate set. Decorative previews are non-interactive; meaningful main product and lifestyle images retain alt text.
-- Browser emulation settings were restored after testing. Touch checks use browser emulation, not physical-device testing.
+- Production build and TypeScript checks passed.
+- ESLint: no errors; existing `BrandLogo.tsx` image warning.
+- Carousel/content and localization tests: all 5 passed. `git diff --check` passed.
+- Five widths checked: 1440, 1024, 768, 390 and 360px. No page or card overflow. Desktop has two rows; mobile has one.
+- At 1440 × 900, both rows, heading, controls and illustrative-results note fit in the overview screenshot. At 390 × 844, the heading, overview card, controls and note fit together.
+- All four locales checked at 360px. Expanded listing, diagnosis, price comparison, advertising and account previews had no overflow. Only one disclosure remained open.
+- Click expands a preview; Enter collapses it. Expanded content includes the original preview and supporting description. Clone disclosures are inert.
+- Next arrow moved to quarter two; first dot returned to the start. Dragging moved the carousel 165px. Temporary viewport overrides were restored.
+- Earlier interaction verification also covered horizontal and vertical touch, reduced motion and loop wrapping with browser emulation; physical-device testing was not performed.
+- Full test suite previously recorded 6 passes and 2 existing failures, both reproduced on baseline `610e0f4`: old assertions expect an inline logo instead of `BrandLogo` and the former icon path. Unrelated branding/tests remain unchanged.
 
-## Regression scope
+## Scope
 
-Compared with the saved styling baseline, all message content outside `useCases`, `photoExamples`, `showcaseTitle`, `showcaseIntro` and `showcaseDisclaimer` is unchanged. New CSS is scoped to `#resultados`. Hero/animation, navigation, feature overview, onboarding, pricing/fonts, trust, FAQ, footer, trial/WhatsApp links, routing, metadata and integrations are unchanged.
+Layout refinements affect only the shared carousel component and `#resultados` styles. No message file changed in the compact-layout commit. The broader PR contains the approved carousel datasets and copy work. Hero, navigation, other sections, pricing and its fonts, routing, metadata and integrations retain the saved styling baseline.
 
 ## Screenshots
 
 - [Before desktop](before-desktop.png)
 - [Before mobile](before-mobile.png)
-- [After desktop](after-desktop.png)
-- [After desktop outcomes](after-desktop-results.png)
-- [After mobile](after-mobile.png)
-- [After mobile outcomes](after-mobile-results.png)
+- [Compact desktop overview](after-desktop.png)
+- [Expanded desktop example](after-desktop-results.png)
+- [Single-row mobile overview](after-mobile.png)
+- [Expanded mobile example](after-mobile-results.png)

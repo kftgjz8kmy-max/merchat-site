@@ -144,15 +144,20 @@ function UseCaseResult({ card }: { card: UseCaseCard }) {
 function UseCaseDemoCard({ card }: { card: UseCaseCard }) {
   return <article className={`example-card demo-card result-${card.resultType}`} data-capability={card.id}>
     <span>{card.category}</span><div className="example-bubble">{card.prompt}</div>
-    <UseCaseResult card={card} /><strong>{card.resultTitle}</strong>
-    {card.resultDescription && <small>{card.resultDescription}</small>}
+    <strong>{card.resultTitle}</strong>
+    <details className="cap-detail" name="capability-preview">
+      <summary><span>{card.preview.label}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" /></svg></summary>
+      <div className="cap-detail-body"><UseCaseResult card={card} />
+        {card.resultDescription && <small>{card.resultDescription}</small>}
+      </div>
+    </details>
   </article>;
 }
 function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
 function ShowcaseCards({ content, duplicate = false }: { content: ReturnType<typeof getLanding>; duplicate?: boolean }) {
   // Lead with four workflows, then alternate photo breaks between the two rows.
   const photoAfterCase = [3, 5, 7, 9];
-  return <div className="carousel-set" aria-hidden={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
+  return <div className="carousel-set" aria-hidden={duplicate || undefined} inert={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
     const photoIndex = photoAfterCase.indexOf(index);
     return [<UseCaseDemoCard card={card} key={card.id} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];
   })}</div>;
@@ -213,7 +218,7 @@ export default function LandingPage() {
     const interval = window.setInterval(() => {
       const time = Date.now();
       const carousel = showcaseRef.current;
-      if (carousel && (showcasePausedRef.current || !showcaseVisibleRef.current)) {
+      if (carousel && (showcasePausedRef.current || !showcaseVisibleRef.current || carousel.querySelector("details[open]"))) {
         showcaseAutoScrollRef.current = carousel.scrollLeft;
       } else if (carousel) {
         const loopWidth = getShowcaseLoopWidth(carousel);
@@ -269,6 +274,7 @@ export default function LandingPage() {
   };
   const startShowcaseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if ((event.target as Element).closest("summary")) return;
     const carousel = event.currentTarget;
     showcasePausedRef.current = true;
     showcaseDragRef.current = { active: true, pointerId: event.pointerId, startX: event.clientX, startScroll: carousel.scrollLeft };

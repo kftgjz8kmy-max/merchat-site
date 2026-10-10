@@ -2416,15 +2416,17 @@ body, main { background: var(--bg); }
 .features h3 { min-height: 2.6em; }
 
 /* Capability stories: the request leads, the preview makes the outcome concrete. */
-#resultados .section-title { max-width: 30ch; margin-bottom: 18px; }
-#resultados .showcase-intro { max-width: 64ch; margin: 0 auto 36px; text-align: center; font-size: 17px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
-#resultados .showcase-disclaimer { max-width: 72ch; margin: 22px auto 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
-#resultados .carousel-set { grid-auto-columns: 320px; grid-template-rows: repeat(2, max-content); padding-right: 169px; }
-#resultados .carousel-set .example-card { width: 320px; min-height: 0; padding: 18px; gap: 12px; }
+main .functions-group section#resultados { padding-block: 24px 32px; scroll-margin-top: 80px; }
+#resultados .section-title { max-width: 38ch; margin-bottom: 12px; }
+#resultados .showcase-intro { max-width: 80ch; margin: 0 auto 24px; text-align: center; font-size: 17px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+#resultados .showcase-disclaimer { max-width: 72ch; margin: 12px auto 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
+#resultados .carousel-set { grid-auto-columns: 280px; grid-template-rows: repeat(2, max-content); gap: 16px; padding-right: 148px; }
+#resultados .carousel-set .example-card { width: 280px; min-height: 232px; padding: 14px; gap: 8px; }
+#resultados .carousel-set > .example-card:nth-child(even) { transform: translateX(148px); }
 #resultados .demo-card { align-self: start; }
-#resultados .demo-card > span { padding: 0; font-size: 17px; font-weight: 600; line-height: 1.35; }
-#resultados .example-bubble { padding: 11px 13px; font-size: 15px; line-height: 1.5; }
-#resultados .demo-card > strong { margin-top: 0; font-size: 17px; line-height: 1.35; }
+#resultados .demo-card > span { align-self: flex-start; padding: 0; font-size: 16px; font-weight: 600; line-height: 1.35; }
+#resultados .example-bubble { padding: 10px 12px; font-size: 15px; line-height: 1.45; }
+#resultados .demo-card > strong { margin-top: 0; font-size: 16px; line-height: 1.35; }
 #resultados .demo-card > small { font-size: 14px; line-height: 1.5; color: var(--muted); }
 #resultados .cap-preview { display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid #E1E7F2; border-radius: 14px; background: #F8FAFE; font-size: 14px; line-height: 1.4; color: #172554; }
 #resultados .cap-label { font-size: 14px; font-weight: 600; }
@@ -2475,9 +2477,10 @@ body, main { background: var(--bg); }
 #resultados .example-photo .photo-overlay strong { font-size: 23px; line-height: 1.25; }
 #resultados .carousel-arrow:focus-visible, #resultados .dots button:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
 @media(max-width:640px) {
-  #resultados .carousel-set { grid-auto-columns: calc(88vw - 32px); padding-right: calc(44vw - 9px); grid-template-rows: repeat(2, max-content); }
-  #resultados .carousel-set .example-card { width: calc(88vw - 32px); padding: 16px; gap: 12px; }
-  #resultados .showcase-intro { font-size: 16px; margin-bottom: 28px; }
+  #resultados .carousel-set { grid-auto-columns: calc(88vw - 32px); padding-right: 0; grid-template-rows: max-content; gap: 12px; }
+  #resultados .carousel-set > .example-card:nth-child(even) { transform: none; }
+  #resultados .carousel-set .example-card { width: calc(88vw - 32px); padding: 14px; gap: 8px; }
+  #resultados .showcase-intro { font-size: 16px; margin-bottom: 20px; }
   #resultados .cap-preview { padding: 12px; font-size: 13px; }
   #resultados .cap-accounts .cap-item { padding: 7px; }
   #resultados .cap-accounts .cap-item b { font-size: 16px; }
@@ -2497,7 +2500,7 @@ body, main { background: var(--bg); }
 #resultados .cap-priorities .cap-item b { min-width: 22px; }
 
 /* Photos alternate rows at a steady cadence; each reads as a compact visual pause. */
-#resultados .carousel-set .example-photo { align-self: start; height: 360px; min-height: 0; }
+#resultados .carousel-set .example-photo { align-self: start; height: 232px; min-height: 0; padding: 0; }
 #resultados .cap-listing .cap-items { flex-direction: row; gap: 8px; flex-wrap: wrap; font-size: 13px; }
 #resultados .cap-listing .cap-item { flex: 1; }
 #resultados .cap-diagnosis { background: #FFFBF2; border-color: #ECE1C7; }
@@ -2509,7 +2512,7 @@ body, main { background: var(--bg); }
 #resultados .cap-diagnosis .cap-item-2 { background: #F1F3F7; }
 #resultados .cap-diagnosis .cap-item-2::before { background: #64748B; }
 @media(max-width:640px) {
-  #resultados .carousel-set .example-photo { height: 330px; }
+  #resultados .carousel-set .example-photo { height: 232px; }
 }
 
 #resultados .cap-price-range .cap-item { flex-direction: row; align-items: center; }
@@ -2519,3 +2522,16 @@ body, main { background: var(--bg); }
 #resultados .cap-diagnosis .cap-item { flex-direction: row; align-items: center; gap: 8px; }
 #resultados .cap-diagnosis .cap-item b { flex: 0 0 66px; }
 #resultados .cap-diagnosis .cap-item::before { top: 50%; transform: translateY(-50%); }
+
+/* Requests and answers form the overview; the complete example stays one click away. */
+#resultados .cap-detail { margin-top: auto; border-top: 1px solid #E1E7F2; }
+#resultados .cap-detail summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 0 0; list-style: none; cursor: pointer; color: var(--blue); font-size: 13px; font-weight: 600; line-height: 1.35; }
+#resultados .cap-detail summary::-webkit-details-marker { display: none; }
+#resultados .cap-detail summary svg { flex: 0 0 18px; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#resultados .cap-detail[open] summary svg { transform: rotate(180deg); }
+#resultados .cap-detail summary:hover { color: var(--brand-blue-hover); }
+#resultados .cap-detail summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+#resultados .cap-detail-body { display: grid; gap: 10px; padding-top: 12px; }
+#resultados .cap-detail-body > small { font-size: 14px; line-height: 1.5; color: var(--muted); }
+#resultados .example-photo .photo-overlay { padding: 16px; }
+#resultados .example-photo .photo-overlay strong { font-size: 19px; }
