@@ -14,7 +14,7 @@ User-approved questions and responses remain unchanged. The newly added sample p
 
 ## Visual refinement
 
-The final polish aligns cards and photographs within each desktop row, keeps all 42 desktop text cards between 252 and 271 px high, and reduces competing blue surfaces. Titles use the existing navy, question bubbles are quieter, and each footer has a clear opening action with a circular arrow. The dialog title spans both columns; the result surface uses lighter borders, aligned numeric values and a warm takeaway highlight. Existing fonts, approved copy and pricing remain unchanged.
+The final polish aligns cards and photographs within each desktop row, keeps all 42 desktop text cards between 252 and 286 px high, and reduces competing blue surfaces. Titles use the existing navy, question bubbles are quieter, and each footer has a clear opening action with a circular arrow. The dialog title spans both columns; the result surface uses lighter borders, aligned numeric values and a warm takeaway highlight. Questions and responses are separated by 16 px, with 1.5 line-height for easier reading; compact responses align to the right. Existing fonts, approved copy and pricing remain unchanged.
 
 Desktop overview and Excel detail visually confirmed at 1440 × 1000; the mobile Excel detail confirmed at 390 × 844 with visible fixed navigation and no horizontal overflow. The production build, lint and TypeScript pass after refinement.
 
