@@ -51,7 +51,7 @@
               "label": "Revisados"
             }
           ],
-          "status": "Aplicado después de aprobar"
+          "status": "Aplicado después de aprobar · Según disponibilidad de tu cuenta"
         }
       },
       {
@@ -94,6 +94,58 @@
         }
       },
       {
+        "id": "listing-preflight",
+        "category": "Prepara una publicación completa",
+        "prompt": "Elige la categoría, revisa requisitos y comisiones, y prepara esta laptop.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé el borrador y lo que falta revisar.",
+        "resultDescription": "La ruta y los datos se confirman antes de publicar.",
+        "preview": {
+          "label": "Revisión antes de publicar",
+          "items": [
+            {
+              "value": "1",
+              "label": "Consultar requisitos"
+            },
+            {
+              "value": "2",
+              "label": "Revisar comisiones"
+            },
+            {
+              "value": "3",
+              "label": "Preparar borrador"
+            }
+          ],
+          "status": "Pendiente de aprobación"
+        }
+      },
+      {
+        "id": "revision-review",
+        "category": "Revisa varios cambios juntos",
+        "prompt": "Cambia el precio, stock y envío. Muéstrame el antes y después.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé los cambios en una sola revisión.",
+        "resultDescription": "Comparas el estado actual con la propuesta antes de aprobar.",
+        "preview": {
+          "label": "Actual vs. propuesto",
+          "items": [
+            {
+              "value": "1",
+              "label": "Precio"
+            },
+            {
+              "value": "2",
+              "label": "Stock"
+            },
+            {
+              "value": "3",
+              "label": "Envío"
+            }
+          ],
+          "status": "Nada se aplica sin tu aprobación"
+        }
+      },
+      {
         "id": "margin-diagnosis",
         "category": "Revisa tus ganancias",
         "prompt": "Revisa mis ventas, costos y anuncios. ¿Qué productos debo revisar?",
@@ -117,6 +169,58 @@
             }
           ],
           "status": "Costos aportados por el vendedor"
+        }
+      },
+      {
+        "id": "selling-fees",
+        "category": "Calcula lo que te queda",
+        "prompt": "Con mi costo y las comisiones, ¿cuánto me quedaría al vender este equipo?",
+        "resultType": "report",
+        "resultTitle": "Separé costos, comisiones y ganancia estimada.",
+        "resultDescription": "Combino tu costo con las comisiones que informa Mercado Libre.",
+        "preview": {
+          "label": "Desglose de la venta",
+          "items": [
+            {
+              "value": "1",
+              "label": "Precio de venta"
+            },
+            {
+              "value": "2",
+              "label": "Tu costo"
+            },
+            {
+              "value": "3",
+              "label": "Comisiones de Mercado Libre"
+            }
+          ],
+          "status": "Costos aportados por ti · Ganancia estimada"
+        }
+      },
+      {
+        "id": "price-floor",
+        "category": "Encuentra tu precio de equilibrio",
+        "prompt": "¿Qué precio cubriría mi costo y las comisiones de este producto?",
+        "resultType": "report",
+        "resultTitle": "Estimé el precio para cubrir esos costos.",
+        "resultDescription": "Es un cálculo con los costos que aportas; revisa otros gastos antes de decidir.",
+        "preview": {
+          "label": "Precio de equilibrio",
+          "items": [
+            {
+              "value": "1",
+              "label": "Costo del producto"
+            },
+            {
+              "value": "2",
+              "label": "Comisiones disponibles"
+            },
+            {
+              "value": "3",
+              "label": "Precio estimado"
+            }
+          ],
+          "status": "Estimación con tus costos y datos disponibles"
         }
       },
       {
@@ -146,6 +250,58 @@
         }
       },
       {
+        "id": "product-family",
+        "category": "Entiende tus familias de productos",
+        "prompt": "¿Qué publicaciones pertenecen a la misma familia de este producto?",
+        "resultType": "report",
+        "resultTitle": "Reuní los IDs relacionados de la familia.",
+        "resultDescription": "Uso las relaciones oficiales de User Products, sin agrupar por parecido.",
+        "preview": {
+          "label": "Familia oficial del producto",
+          "items": [
+            {
+              "value": "1",
+              "label": "User Product"
+            },
+            {
+              "value": "2",
+              "label": "Familia oficial"
+            },
+            {
+              "value": "3",
+              "label": "Publicaciones relacionadas"
+            }
+          ],
+          "status": "Relaciones reportadas por Mercado Libre"
+        }
+      },
+      {
+        "id": "user-product-options",
+        "category": "Añade opciones de venta",
+        "prompt": "Añade una opción de venta a este User Product con otro precio y stock.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé la nueva opción para que la revises.",
+        "resultDescription": "La opción se vincula al producto existente cuando Mercado Libre lo permite.",
+        "preview": {
+          "label": "Opción de venta propuesta",
+          "items": [
+            {
+              "value": "1",
+              "label": "Producto existente"
+            },
+            {
+              "value": "2",
+              "label": "Nuevo precio"
+            },
+            {
+              "value": "3",
+              "label": "Stock de la opción"
+            }
+          ],
+          "status": "Según soporte del producto · Requiere aprobación"
+        }
+      },
+      {
         "id": "daily-priorities",
         "category": "Organiza tu día",
         "prompt": "Revisa mi cuenta. ¿Qué debería atender primero hoy?",
@@ -169,6 +325,58 @@
             }
           ],
           "status": "Revisión solicitada por ti"
+        }
+      },
+      {
+        "id": "payment-reconciliation",
+        "category": "Compara ventas y cobros",
+        "prompt": "Compara mis ventas con los cobros de Mercado Pago. ¿Qué debo revisar?",
+        "resultType": "report",
+        "resultTitle": "Preparé una comparación de ventas y cobros.",
+        "resultDescription": "Las diferencias se revisan con los registros e identificadores disponibles.",
+        "preview": {
+          "label": "Ventas vs. cobros",
+          "items": [
+            {
+              "value": "1",
+              "label": "Ventas del período"
+            },
+            {
+              "value": "2",
+              "label": "Cobros registrados"
+            },
+            {
+              "value": "3",
+              "label": "Diferencias por revisar"
+            }
+          ],
+          "status": "Solo consulta · Según registros disponibles"
+        }
+      },
+      {
+        "id": "settlement-report",
+        "category": "Pide un reporte financiero",
+        "prompt": "Genera el reporte de liquidaciones de este mes y revisa si está listo.",
+        "resultType": "workflow",
+        "resultTitle": "Solicité el reporte con tu aprobación.",
+        "resultDescription": "Puedes consultar el estado de la tarea y recuperar el reporte cuando esté listo.",
+        "preview": {
+          "label": "Reporte de liquidaciones",
+          "items": [
+            {
+              "value": "1",
+              "label": "Período solicitado"
+            },
+            {
+              "value": "2",
+              "label": "Estado de la tarea"
+            },
+            {
+              "value": "3",
+              "label": "Reporte disponible"
+            }
+          ],
+          "status": "Requiere aprobación · No hace transferencias"
         }
       },
       {
@@ -198,6 +406,58 @@
         }
       },
       {
+        "id": "category-requirements",
+        "category": "Consulta requisitos reales",
+        "prompt": "¿Qué datos exige Mercado Libre para publicar esta laptop?",
+        "resultType": "workflow",
+        "resultTitle": "Consulté los requisitos de la categoría.",
+        "resultDescription": "Los requisitos vienen de Mercado Libre, no de una lista genérica.",
+        "preview": {
+          "label": "Requisitos de la categoría",
+          "items": [
+            {
+              "value": "1",
+              "label": "Atributos obligatorios"
+            },
+            {
+              "value": "2",
+              "label": "Valores admitidos"
+            },
+            {
+              "value": "3",
+              "label": "Datos por completar"
+            }
+          ],
+          "status": "Según la categoría y el marketplace"
+        }
+      },
+      {
+        "id": "reuse-listing-photos",
+        "category": "Reutiliza las fotos exactas",
+        "prompt": "Prepara otra publicación con las fotos exactas de esta.",
+        "resultType": "workflow",
+        "resultTitle": "Incluí las mismas fotos en el borrador.",
+        "resultDescription": "Se conservan las referencias verificadas de las fotos disponibles.",
+        "preview": {
+          "label": "Fotos de la publicación original",
+          "items": [
+            {
+              "value": "1",
+              "label": "Leer fotos originales"
+            },
+            {
+              "value": "2",
+              "label": "Conservar referencias"
+            },
+            {
+              "value": "3",
+              "label": "Preparar borrador"
+            }
+          ],
+          "status": "Pendiente de aprobación"
+        }
+      },
+      {
         "id": "product-ads",
         "category": "Revisa tus anuncios",
         "prompt": "¿Mis anuncios están funcionando? Revisa mis campañas.",
@@ -216,7 +476,59 @@
               "label": "Campañas por revisar"
             }
           ],
-          "status": "Recomendaciones listas · Datos disponibles"
+          "status": "Consulta según disponibilidad · No modifica campañas"
+        }
+      },
+      {
+        "id": "revision-verification",
+        "category": "Comprueba los cambios",
+        "prompt": "Después de aprobar, confirma que Mercado Libre guardó los cambios.",
+        "resultType": "workflow",
+        "resultTitle": "Revisé el estado final de la publicación.",
+        "resultDescription": "La comprobación consulta datos nuevos después de aplicar la revisión.",
+        "preview": {
+          "label": "Verificación final",
+          "items": [
+            {
+              "value": "1",
+              "label": "Leer estado actual"
+            },
+            {
+              "value": "2",
+              "label": "Comparar con lo aprobado"
+            },
+            {
+              "value": "3",
+              "label": "Mostrar diferencias"
+            }
+          ],
+          "status": "Verificación después de aprobar"
+        }
+      },
+      {
+        "id": "uncertain-promotions",
+        "category": "Aclara una campaña con errores",
+        "prompt": "La campaña dio un error. Revisa qué se aplicó antes de repetir cambios.",
+        "resultType": "report",
+        "resultTitle": "Separé los resultados confirmados y pendientes.",
+        "resultDescription": "Un resultado incierto no significa que la operación haya fallado.",
+        "preview": {
+          "label": "Resultado de la operación",
+          "items": [
+            {
+              "value": "1",
+              "label": "Confirmado"
+            },
+            {
+              "value": "2",
+              "label": "Pendiente"
+            },
+            {
+              "value": "3",
+              "label": "Incierto"
+            }
+          ],
+          "status": "No se repiten automáticamente cambios inciertos"
         }
       },
       {
@@ -242,6 +554,58 @@
         }
       },
       {
+        "id": "publication-route",
+        "category": "Elige cómo publicar",
+        "prompt": "¿Catálogo o User Product? Revisa las opciones para este equipo.",
+        "resultType": "workflow",
+        "resultTitle": "Te muestro las rutas para que elijas.",
+        "resultDescription": "Si la ruta no está clara, MerChat te pide que la confirmes.",
+        "preview": {
+          "label": "Rutas de publicación",
+          "items": [
+            {
+              "value": "1",
+              "label": "Catálogo"
+            },
+            {
+              "value": "2",
+              "label": "User Product"
+            },
+            {
+              "value": "3",
+              "label": "Tu elección"
+            }
+          ],
+          "status": "Ruta por confirmar contigo"
+        }
+      },
+      {
+        "id": "publication-resume",
+        "category": "Retoma un borrador",
+        "prompt": "Retoma la publicación que dejamos a medias y dime qué falta.",
+        "resultType": "workflow",
+        "resultTitle": "Recuperé el borrador y los pasos pendientes.",
+        "resultDescription": "Puedes continuar la sesión o cancelarla antes de publicar.",
+        "preview": {
+          "label": "Sesión de publicación",
+          "items": [
+            {
+              "value": "1",
+              "label": "Datos guardados"
+            },
+            {
+              "value": "2",
+              "label": "Datos pendientes"
+            },
+            {
+              "value": "3",
+              "label": "Revisión final"
+            }
+          ],
+          "status": "No se publica sin tu aprobación"
+        }
+      },
+      {
         "id": "order-status",
         "category": "Consulta tus pedidos",
         "prompt": "¿Ya pagaron mi última venta? ¿Qué falta para enviarla?",
@@ -261,6 +625,58 @@
             }
           ],
           "status": "Estado ilustrativo del pedido"
+        }
+      },
+      {
+        "id": "promotion-eligibility",
+        "category": "Busca productos elegibles",
+        "prompt": "¿Cuáles de mis productos pueden entrar en esta campaña?",
+        "resultType": "report",
+        "resultTitle": "Separé los elegibles de los que debes revisar.",
+        "resultDescription": "La elegibilidad depende de las reglas de cada campaña.",
+        "preview": {
+          "label": "Elegibilidad de la campaña",
+          "items": [
+            {
+              "value": "1",
+              "label": "Productos elegibles"
+            },
+            {
+              "value": "2",
+              "label": "Condiciones de la oferta"
+            },
+            {
+              "value": "3",
+              "label": "Productos por revisar"
+            }
+          ],
+          "status": "Según elegibilidad de Mercado Libre"
+        }
+      },
+      {
+        "id": "promotion-propagation",
+        "category": "Verifica tus descuentos",
+        "prompt": "Confirma si los descuentos de esta campaña ya se aplicaron.",
+        "resultType": "report",
+        "resultTitle": "Revisé qué descuentos aparecen aplicados.",
+        "resultDescription": "Distingo resultados confirmados de operaciones aún pendientes.",
+        "preview": {
+          "label": "Estado de las promociones",
+          "items": [
+            {
+              "value": "1",
+              "label": "Confirmadas"
+            },
+            {
+              "value": "2",
+              "label": "Pendientes"
+            },
+            {
+              "value": "3",
+              "label": "Por verificar"
+            }
+          ],
+          "status": "Comprobación del estado actual"
         }
       },
       {
@@ -287,6 +703,110 @@
             }
           ],
           "status": "Si continúa el ritmo de ventas reciente"
+        }
+      },
+      {
+        "id": "volume-promotion",
+        "category": "Crea ofertas por cantidad",
+        "prompt": "Prepara una oferta por cantidad para estos productos.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé las condiciones para que las apruebes.",
+        "resultDescription": "Las ofertas dependen del tipo de promoción que admita Mercado Libre.",
+        "preview": {
+          "label": "Oferta por cantidad",
+          "items": [
+            {
+              "value": "1",
+              "label": "Productos"
+            },
+            {
+              "value": "2",
+              "label": "Cantidad requerida"
+            },
+            {
+              "value": "3",
+              "label": "Condiciones propuestas"
+            }
+          ],
+          "status": "Según soporte de la promoción · Requiere aprobación"
+        }
+      },
+      {
+        "id": "bank-movements",
+        "category": "Ordena tus movimientos",
+        "prompt": "Separa los movimientos de Mercado Pago por banco y período.",
+        "resultType": "report",
+        "resultTitle": "Agrupé los movimientos por banco y fecha.",
+        "resultDescription": "Puedes revisar créditos, débitos y retiros ya registrados.",
+        "preview": {
+          "label": "Movimientos de Mercado Pago",
+          "items": [
+            {
+              "value": "1",
+              "label": "Créditos"
+            },
+            {
+              "value": "2",
+              "label": "Débitos"
+            },
+            {
+              "value": "3",
+              "label": "Retiros registrados"
+            }
+          ],
+          "status": "Solo consulta · No mueve dinero"
+        }
+      },
+      {
+        "id": "sales-drop",
+        "category": "Investiga una caída de ventas",
+        "prompt": "¿Por qué bajaron mis ventas? Compara períodos y separa datos de hipótesis.",
+        "resultType": "report",
+        "resultTitle": "Separé las señales de las posibles causas.",
+        "resultDescription": "Comparo ventas, visitas y conversión cuando esos datos están disponibles.",
+        "preview": {
+          "label": "Comparación entre períodos",
+          "items": [
+            {
+              "value": "1",
+              "label": "Ventas"
+            },
+            {
+              "value": "2",
+              "label": "Visitas y conversión"
+            },
+            {
+              "value": "3",
+              "label": "Posibles causas"
+            }
+          ],
+          "status": "Datos verificados e hipótesis por separado"
+        }
+      },
+      {
+        "id": "growth-roadmap",
+        "category": "Combina análisis y cambios",
+        "prompt": "Revisa conversión, calidad y costos de mis MacBooks. Prepara un plan de mejora.",
+        "resultType": "report",
+        "resultTitle": "Preparé un plan con prioridades y cambios.",
+        "resultDescription": "Combino rendimiento, calidad y tus costos; tú revisas las propuestas.",
+        "preview": {
+          "label": "Plan de mejora del negocio",
+          "items": [
+            {
+              "value": "1",
+              "label": "Rendimiento"
+            },
+            {
+              "value": "2",
+              "label": "Calidad y costos"
+            },
+            {
+              "value": "3",
+              "label": "Cambios propuestos"
+            }
+          ],
+          "status": "Costos aportados por ti · Cambios sujetos a aprobación"
         }
       }
     ],
@@ -612,7 +1132,8 @@
     "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre.",
     "pricingOffer": "Ahorra 50% en Vendedor y Vendedor Pro, y 83% en Vendedor Max Anual.",
     "discountLabel": "50% OFF",
-    "showcaseIntro": "Con MerChat, tu IA puede ayudarte a investigar, publicar, analizar y gestionar tu negocio en Mercado Libre. Desde una simple consulta hasta tareas complejas, solo tienes que pedirlo.",
-    "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles."
+    "showcaseIntro": "Con MerChat, tu IA puede investigar, publicar, analizar y gestionar tu negocio en Mercado Libre. De una consulta a un flujo completo, solo tienes que pedirlo.",
+    "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles.",
+    "showcaseToolCount": "11 herramientas y 91 acciones."
   }
 }

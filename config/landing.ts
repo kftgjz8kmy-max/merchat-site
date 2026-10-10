@@ -1,6 +1,6 @@
 import { getLocaleMessages } from "@/i18n/messages";
 
-export type UseCaseResultType = "listing" | "promotion" | "excel" | "gallery" | "diagnosis" | "price-range" | "priorities" | "performance" | "ads" | "accounts" | "sale" | "restock";
+export type UseCaseResultType = "listing" | "promotion" | "excel" | "gallery" | "diagnosis" | "price-range" | "priorities" | "performance" | "ads" | "accounts" | "sale" | "restock" | "workflow" | "report";
 
 export type UseCaseCard = {
   id: string;

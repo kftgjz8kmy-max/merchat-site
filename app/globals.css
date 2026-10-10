@@ -2420,6 +2420,7 @@ main section#funciones.functions-group { padding-block: 0; }
 main .functions-group section#resultados { padding-block: 32px 56px; scroll-margin-top: 80px; }
 #resultados .section-title { max-width: 38ch; margin-bottom: 28px; }
 #resultados .showcase-intro { max-width: 80ch; margin: 0 auto 40px; text-align: center; font-size: 17px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+#resultados .showcase-intro strong { color: var(--ink); font-weight: 600; }
 #resultados .showcase-disclaimer { max-width: 72ch; margin: 12px auto 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
 #resultados .carousel-set { grid-auto-columns: 280px; grid-template-rows: repeat(2, max-content); gap: 16px; padding-right: 148px; }
 #resultados .carousel-set .example-card { width: 280px; min-height: 232px; padding: 14px; gap: 8px; }
@@ -2525,6 +2526,8 @@ main .functions-group section#resultados { padding-block: 32px 56px; scroll-marg
 #resultados .cap-diagnosis .cap-item { flex-direction: row; align-items: center; gap: 8px; }
 #resultados .cap-diagnosis .cap-item b { flex: 0 0 66px; }
 #resultados .cap-diagnosis .cap-item::before { top: 50%; transform: translateY(-50%); }
+#resultados :is(.cap-workflow,.cap-report) .cap-item { align-items: center; justify-content: flex-start; gap: 10px; }
+#resultados :is(.cap-workflow,.cap-report) .cap-item b { display: grid; place-items: center; flex: 0 0 24px; height: 24px; border-radius: 50%; background: #E8EEFC; color: #1E40AF; font-size: 12px; }
 
 /* Requests and answers form the overview; the complete example stays one click away. */
 #resultados .cap-detail { margin-top: auto; border-top: 1px solid #E1E7F2; }
