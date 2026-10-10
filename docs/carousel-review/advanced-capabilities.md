@@ -1,6 +1,6 @@
 # Ejemplos para vendedores
 
-43 ejemplos para quienes empiezan y quienes gestionan varios SKU. Las primeras tarjetas muestran publicación desde fotos y Excel, características y cambios de precio y stock. Los reportes se distribuyen entre los demás usos.
+42 ejemplos para quienes empiezan y quienes gestionan varios SKU. Las primeras tarjetas muestran publicación desde fotos y Excel, características y cambios de precio y stock. Los reportes se distribuyen entre los demás usos.
 
 La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 10 de octubre de 2026, no de una auditoría en vivo. Excel se presenta como preparación mediante la IA y MerChat, con revisión antes de publicar; no como un importador nativo de un solo paso. Las características pendientes de confirmar quedan visibles. Los reportes usan datos disponibles, costos proporcionados y estimaciones identificadas.
 
@@ -33,7 +33,6 @@ La cifra de **91 acciones** procede del resumen proporcionado por el usuario el 
 | Reutiliza tus fotos | Prepara otra publicación con las mismas fotos de esta. | Incluí las mismas fotos en el nuevo borrador. |
 | Revisa tus anuncios | ¿Mis anuncios están funcionando? Revisa mis campañas. | Encontré 2 campañas cuyo rendimiento conviene revisar. |
 | Pide un reporte de anuncios | Resume cuánto gasté y qué ventas generaron mis anuncios este mes. | Te muestro el gasto y las ventas atribuidas a tus anuncios. |
-| Revisa una campaña con errores | La campaña dio un error. Comprueba qué descuentos se aplicaron. | Te muestro cuáles se aplicaron y cuáles falta comprobar. |
 | Compara tus tiendas | ¿Cuál de mis dos tiendas vendió más este mes? | La tienda A vendió S/ 6,400 más. |
 | Gestiona tiendas en varios países | Revisa las ventas de mis tiendas de Perú y Brasil por separado. | Te muestro las ventas de cada tienda en su moneda. |
 | Encuentra tu producto en el catálogo | ¿Este equipo ya está en el catálogo de Mercado Libre? | Revisé el catálogo y te muestro las opciones para publicarlo. |

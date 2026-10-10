@@ -6,11 +6,11 @@ const root = new URL("../", import.meta.url);
 const locales = ["es", "en", "pt-BR", "zh-CN"];
 const readMessages = async (locale) => JSON.parse(await readFile(new URL(`messages/${locale}.json`, root), "utf8"));
 
-test("every locale has the same 43 workflows and four distinct existing photos", async () => {
+test("every locale has the same 42 workflows and four distinct existing photos", async () => {
   const messages = await Promise.all(locales.map(readMessages));
   const ids = messages[0].landing.useCases.map((card) => card.id);
-  assert.equal(ids.length, 43);
-  assert.equal(new Set(ids).size, 43);
+  assert.equal(ids.length, 42);
+  assert.equal(new Set(ids).size, 42);
   for (const { landing, ui } of messages) {
     assert.deepEqual(landing.useCases.map((card) => card.id), ids);
     assert.equal(new Set(landing.useCases.map((card) => card.resultType)).size, 14);
@@ -26,7 +26,7 @@ test("every locale has the same 43 workflows and four distinct existing photos",
   }
 });
 
-test("advanced workflows preserve approval, financial read-only boundaries and uncertain results", async () => {
+test("advanced workflows preserve approval, financial read-only boundaries and photo prerequisites", async () => {
   const { landing } = await readMessages("es");
   const byId = Object.fromEntries(landing.useCases.map((card) => [card.id, card]));
   assert.match(byId["revision-review"].preview.status, /sin tu aprobación/);
@@ -35,7 +35,6 @@ test("advanced workflows preserve approval, financial read-only boundaries and u
   assert.match(byId["product-family"].resultDescription, /según Mercado Libre/);
   assert.match(byId["selling-fees"].preview.status, /Costos aportados.*estimada/);
   assert.match(byId["price-floor"].resultDescription, /otros gastos/);
-  assert.match(byId["uncertain-promotions"].preview.status, /No repito un cambio sin comprobar/);
   assert.match(byId["bank-movements"].preview.status, /Solo consulta.*No mueve dinero/);
   assert.match(byId["settlement-report"].preview.status, /Requiere aprobación.*No hace transferencias/);
   assert.match(byId["sales-drop"].preview.status, /Datos verificados e hipótesis por separado/);

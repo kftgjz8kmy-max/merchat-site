@@ -176,7 +176,7 @@
         "category": "Find photos for your product",
         "prompt": "Help me find photos of this model for my listing.",
         "resultTitle": "Here are the photos found for you to choose.",
-        "resultDescription": "Your AI searches for photos using its available tools. Check that they match the model; MerChat can use the photos you choose in your listing draft.",
+        "resultDescription": "MerChat provides a guide to help your AI find photos of the model. Check that they match the product; MerChat can use the photos you choose in your listing draft.",
         "resultType": "workflow",
         "preview": {
           "label": "Photos to choose",
@@ -685,32 +685,6 @@
             }
           ],
           "status": "Subject to availability · No campaign changes"
-        }
-      },
-      {
-        "id": "uncertain-promotions",
-        "category": "Review a campaign with errors",
-        "prompt": "The campaign returned an error. Check which discounts were applied.",
-        "resultType": "report",
-        "resultTitle": "Here is what was applied and what still needs checking.",
-        "resultDescription": "An uncertain result does not mean the operation failed.",
-        "preview": {
-          "label": "Operation result",
-          "items": [
-            {
-              "value": "1",
-              "label": "Confirmed"
-            },
-            {
-              "value": "2",
-              "label": "Pending"
-            },
-            {
-              "value": "3",
-              "label": "Uncertain"
-            }
-          ],
-          "status": "I do not repeat a change without checking what happened"
         }
       },
       {

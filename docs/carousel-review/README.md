@@ -55,3 +55,7 @@ Applied the October 10 attachment to all 40 Spanish card titles, questions, resp
 ## Multi-country and photo workflows
 
 The carousel now contains 43 examples in all four locales. Added connected stores in Peru/Brazil with separate data and currencies, finding product photos through the connected AI tools, and creating an AI photo for an approved listing draft. Search/generation are attributed to the AI client; MerChat handles upload/association. Country/account feature availability is explicit. Lint, TypeScript and six content/localization tests passed. Desktop AI-photo and mobile country disclosures have no page/detail overflow. [Current preview](country-ai-photos.png).
+
+## Photo guide correction
+
+42 examples remain after removing the campaign-error card in every locale. The photo-search explanation now attributes a guide to MerChat that helps the connected AI find model photos. Lint, TypeScript and six content/localization tests passed. The live preview confirms the guide wording and absence of the removed card. [Photo guide preview](photo-search-guide.png).
