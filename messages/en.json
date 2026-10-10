@@ -61,9 +61,9 @@
       {
         "id": "category-requirements",
         "category": "Complete product specifications",
-        "prompt": "Fill in this laptop’s specifications using its model and product sheet.",
+        "prompt": "Fill in this laptop’s specifications using its model and technical sheet.",
         "resultType": "workflow",
-        "resultTitle": "I filled in available details and flagged what is missing.",
+        "resultTitle": "I filled in available details and flagged what still needs confirmation.",
         "resultDescription": "Your AI uses the model and information you provide and checks Mercado Libre requirements. Unconfirmed details are left for your review.",
         "preview": {
           "label": "Specifications to review",
@@ -113,9 +113,9 @@
       {
         "id": "revision-verification",
         "category": "Update several SKUs",
-        "prompt": "Prepare new prices and stock for these 30 SKUs.",
+        "prompt": "Prepare new prices and stock for these 30 products.",
         "resultType": "workflow",
-        "resultTitle": "I prepared each product’s changes for review.",
+        "resultTitle": "Each product’s changes are ready for your review.",
         "resultDescription": "Review each SKU before approving. MerChat then checks which changes were saved and shows anything pending.",
         "preview": {
           "label": "Changes by product",
@@ -138,10 +138,10 @@
       },
       {
         "id": "batch-campaign",
-        "category": "Create a campaign",
-        "prompt": "Add these 21 products to the campaign with 10% off.",
+        "category": "Apply discounts to several products",
+        "prompt": "Add these 21 products to the campaign with a 10% discount.",
         "resultType": "promotion",
-        "resultTitle": "I applied the discount to all 21 products.",
+        "resultTitle": "I applied the discount to all 21 products after your approval.",
         "resultDescription": "You approved the prices before they were applied.",
         "preview": {
           "label": "10% discount",
@@ -174,9 +174,9 @@
       {
         "id": "listing-preflight",
         "category": "Prepare a complete listing",
-        "prompt": "Choose the category, check requirements and fees, and prepare this laptop.",
+        "prompt": "Prepare this laptop’s listing and tell me what is missing.",
         "resultType": "workflow",
-        "resultTitle": "I prepared the draft and what needs review.",
+        "resultTitle": "The draft is ready. Here is what still needs completing.",
         "resultDescription": "The listing choice and details are confirmed before publishing.",
         "preview": {
           "label": "Pre-publication review",
@@ -205,7 +205,7 @@
         "resultTitle": "I prepared the changes in one review.",
         "resultDescription": "Compare the current state with the proposal before approving.",
         "preview": {
-          "label": "Current vs. proposed",
+          "label": "Before and after",
           "items": [
             {
               "value": "1",
@@ -225,10 +225,10 @@
       },
       {
         "id": "margin-diagnosis",
-        "category": "Check your profits",
-        "prompt": "Review my sales, costs and ads. Which products need attention?",
+        "category": "Review your profits",
+        "prompt": "Based on my sales, costs and ads, which products earn me little profit?",
         "resultType": "diagnosis",
-        "resultTitle": "I found 3 products that need attention.",
+        "resultTitle": "I found 3 products whose profit is worth reviewing.",
         "resultDescription": "Here is what to check for each one.",
         "preview": {
           "label": "3 products to review",
@@ -252,9 +252,9 @@
       {
         "id": "selling-fees",
         "category": "Calculate what you keep",
-        "prompt": "With my cost and fees, how much would I keep from selling this device?",
+        "prompt": "With my cost and selling fees, how much would I keep from selling this device?",
         "resultType": "report",
-        "resultTitle": "I separated costs, fees and estimated profit.",
+        "resultTitle": "I calculated what you would keep after cost and selling fees.",
         "resultDescription": "I combine your cost with fees reported by Mercado Libre.",
         "preview": {
           "label": "Sale breakdown",
@@ -277,13 +277,13 @@
       },
       {
         "id": "price-floor",
-        "category": "Find your break-even price",
-        "prompt": "What price would cover my cost and this product’s fees?",
+        "category": "Calculate your minimum price",
+        "prompt": "What price would cover my cost and selling fees?",
         "resultType": "report",
-        "resultTitle": "I estimated the price to cover those costs.",
-        "resultDescription": "The calculation uses your costs; review other expenses before deciding.",
+        "resultTitle": "I estimated the minimum price to cover those costs.",
+        "resultDescription": "The calculation includes the costs you share. Add other expenses for a more complete estimate.",
         "preview": {
-          "label": "Break-even price",
+          "label": "Estimated minimum price",
           "items": [
             {
               "value": "1",
@@ -304,7 +304,7 @@
       {
         "id": "profit-report",
         "category": "Get a profit report",
-        "prompt": "Using my costs, compare how much these SKUs earn me.",
+        "prompt": "Using my costs, compare how much each product earns me.",
         "resultType": "report",
         "resultTitle": "I compared each product’s estimated profit.",
         "resultDescription": "I combine your supplied costs with available fees. Include other expenses to refine the estimate.",
@@ -332,7 +332,7 @@
         "category": "Compare your prices",
         "prompt": "Find similar iPhones and compare their prices with mine.",
         "resultType": "price-range",
-        "resultTitle": "Your price is S/ 50 above the range.",
+        "resultTitle": "Your price is S/ 50 above the highest-priced product compared.",
         "resultDescription": "Compare similar products before changing it.",
         "preview": {
           "label": "Public references",
@@ -355,11 +355,11 @@
       },
       {
         "id": "product-family",
-        "category": "Review versions of a product",
-        "prompt": "Show me the related listings for this product.",
+        "category": "Find related listings",
+        "prompt": "Which other listings are linked to this product?",
         "resultType": "report",
-        "resultTitle": "I gathered the listings for you to compare.",
-        "resultDescription": "I use Mercado Libre’s official relationships to show listings in the same group.",
+        "resultTitle": "Here are the listings Mercado Libre links to this product.",
+        "resultDescription": "I show related listings according to Mercado Libre; I do not group them just because they look similar.",
         "preview": {
           "label": "Related listings",
           "items": [
@@ -381,11 +381,11 @@
       },
       {
         "id": "user-product-options",
-        "category": "Sell with different terms",
-        "prompt": "Prepare another option for this product with a different price and stock.",
+        "category": "Add another selling option",
+        "prompt": "I want to offer this same product with a different price and stock.",
         "resultType": "workflow",
-        "resultTitle": "I prepared the new option for you to review.",
-        "resultDescription": "Where Mercado Libre supports it, you can add another selling option for the same product.",
+        "resultTitle": "The new selling option is ready for your review.",
+        "resultDescription": "You can prepare another selling option for the same product where Mercado Libre supports it. Review the price and stock before approving.",
         "preview": {
           "label": "New selling option",
           "items": [
@@ -434,9 +434,9 @@
       {
         "id": "sales-report",
         "category": "Get a sales report",
-        "prompt": "Make a sales report by product and SKU for this month.",
+        "prompt": "Make a report of this month’s sales by product.",
         "resultType": "report",
-        "resultTitle": "I organized sales, units and revenue by product.",
+        "resultTitle": "Here are the units sold and revenue for each product.",
         "resultDescription": "Request a period summary and compare products using available account data.",
         "preview": {
           "label": "Sales by product and SKU",
@@ -460,10 +460,10 @@
       {
         "id": "payment-reconciliation",
         "category": "Compare sales and payments",
-        "prompt": "Compare my sales with Mercado Pago payments. What should I review?",
+        "prompt": "Compare my sales with Mercado Pago payments. Are there differences?",
         "resultType": "report",
-        "resultTitle": "I prepared a sales and payments comparison.",
-        "resultDescription": "Review differences using available records and identifiers.",
+        "resultTitle": "Here are the sales, payments and differences to review.",
+        "resultDescription": "I compare available records and flag differences needing review.",
         "preview": {
           "label": "Sales vs. payments",
           "items": [
@@ -485,11 +485,11 @@
       },
       {
         "id": "settlement-report",
-        "category": "Request a financial report",
-        "prompt": "Generate this month’s settlement report and check if it is ready.",
+        "category": "Get a Mercado Pago report",
+        "prompt": "Request this month’s settlement report from Mercado Pago.",
         "resultType": "workflow",
-        "resultTitle": "I requested the report with your approval.",
-        "resultDescription": "Check the task status and retrieve the report when ready.",
+        "resultTitle": "I requested the report with your approval and checked whether it is available.",
+        "resultDescription": "The report shows settlements recorded by Mercado Pago during your chosen period. Requesting it does not move your money.",
         "preview": {
           "label": "Settlement report",
           "items": [
@@ -537,10 +537,10 @@
       },
       {
         "id": "quality-report",
-        "category": "Get a listing report",
-        "prompt": "Review my listings and summarize which need improvement.",
+        "category": "Find listings to improve",
+        "prompt": "Review my listings and tell me which to improve first.",
         "resultType": "report",
-        "resultTitle": "I organized the listings worth reviewing.",
+        "resultTitle": "I ranked the listings by improvement priority.",
         "resultDescription": "I gather available quality, visits and sales data to help you prioritize. Suggestions are based on that evidence.",
         "preview": {
           "label": "Listings to improve",
@@ -563,25 +563,25 @@
       },
       {
         "id": "reuse-listing-photos",
-        "category": "Reuse the exact photos",
-        "prompt": "Prepare another listing with the exact photos from this one.",
+        "category": "Reuse your photos",
+        "prompt": "Prepare another listing with the same photos as this one.",
         "resultType": "workflow",
-        "resultTitle": "I included the same photos in the draft.",
-        "resultDescription": "Verified references to the available photos are preserved.",
+        "resultTitle": "I included the same photos in the new draft.",
+        "resultDescription": "The new draft uses the same photos as the original listing.",
         "preview": {
           "label": "Original listing photos",
           "items": [
             {
               "value": "1",
-              "label": "Read original photos"
+              "label": "Original photos"
             },
             {
               "value": "2",
-              "label": "Keep references"
+              "label": "Same photos"
             },
             {
               "value": "3",
-              "label": "Prepare draft"
+              "label": "New draft"
             }
           ],
           "status": "Pending approval"
@@ -589,17 +589,17 @@
       },
       {
         "id": "product-ads",
-        "category": "Check your ads",
+        "category": "Review your ads",
         "prompt": "Are my ads working? Review my campaigns.",
         "resultType": "ads",
-        "resultTitle": "2 campaigns are worth a closer look.",
-        "resultDescription": "I reviewed the available Product Ads data.",
+        "resultTitle": "I found 2 campaigns whose performance is worth reviewing.",
+        "resultDescription": "I reviewed available data for your ads on Mercado Libre.",
         "preview": {
-          "label": "Product Ads",
+          "label": "Advertising on Mercado Libre",
           "items": [
             {
               "value": "28%",
-              "label": "Ad spend / sales (ACOS)"
+              "label": "Ad spending relative to sales"
             },
             {
               "value": "2",
@@ -612,10 +612,10 @@
       {
         "id": "ads-report",
         "category": "Get an advertising report",
-        "prompt": "Summarize my ads’ spending and sales this month.",
+        "prompt": "Summarize my spending and the sales my ads generated this month.",
         "resultType": "report",
-        "resultTitle": "I prepared a summary using available metrics.",
-        "resultDescription": "Review spending, attributed sales and performance where reporting is available for your account.",
+        "resultTitle": "Here are your spending and sales attributed to your ads.",
+        "resultDescription": "These are the sales Mercado Libre links to your advertising, based on available data.",
         "preview": {
           "label": "Advertising performance",
           "items": [
@@ -625,7 +625,7 @@
             },
             {
               "value": "2",
-              "label": "Attributed sales"
+              "label": "Sales attributed to ads"
             },
             {
               "value": "3",
@@ -637,10 +637,10 @@
       },
       {
         "id": "uncertain-promotions",
-        "category": "Clarify campaign errors",
-        "prompt": "The campaign returned an error. Check what applied before repeating changes.",
+        "category": "Review a campaign with errors",
+        "prompt": "The campaign returned an error. Check which discounts were applied.",
         "resultType": "report",
-        "resultTitle": "I separated confirmed and pending results.",
+        "resultTitle": "Here is what was applied and what still needs checking.",
         "resultDescription": "An uncertain result does not mean the operation failed.",
         "preview": {
           "label": "Operation result",
@@ -658,7 +658,7 @@
               "label": "Uncertain"
             }
           ],
-          "status": "Uncertain changes are not automatically repeated"
+          "status": "I do not repeat a change without checking what happened"
         }
       },
       {
@@ -685,10 +685,10 @@
       },
       {
         "id": "publication-route",
-        "category": "Find how to list a product",
-        "prompt": "Can I sell this device in the catalog or should I create a listing?",
+        "category": "Find your product in the catalog",
+        "prompt": "Is this device already in Mercado Libre’s catalog?",
         "resultType": "workflow",
-        "resultTitle": "I checked the options for you to choose.",
+        "resultTitle": "I checked the catalog. Here are your options for listing it.",
         "resultDescription": "MerChat looks up the product and explains your options. If unclear, it asks you to confirm how you want to list it.",
         "preview": {
           "label": "Listing options",
@@ -717,7 +717,7 @@
         "resultTitle": "I recovered the draft and remaining steps.",
         "resultDescription": "Continue the session or cancel it before publishing.",
         "preview": {
-          "label": "Listing session",
+          "label": "Saved draft",
           "items": [
             {
               "value": "1",
@@ -785,28 +785,28 @@
       },
       {
         "id": "promotion-eligibility",
-        "category": "Find eligible products",
+        "category": "Find products for a campaign",
         "prompt": "Which of my products can join this campaign?",
         "resultType": "report",
-        "resultTitle": "I separated eligible products from those to review.",
-        "resultDescription": "Eligibility depends on each campaign’s rules.",
+        "resultTitle": "Here is what can participate and what needs review.",
+        "resultDescription": "Each campaign has its own participation requirements.",
         "preview": {
-          "label": "Campaign eligibility",
+          "label": "Products for the campaign",
           "items": [
             {
               "value": "1",
-              "label": "Eligible products"
+              "label": "Products that can participate"
             },
             {
               "value": "2",
-              "label": "Offer conditions"
+              "label": "Campaign terms"
             },
             {
               "value": "3",
               "label": "Products to review"
             }
           ],
-          "status": "Depends on Mercado Libre eligibility"
+          "status": "Subject to Mercado Libre requirements"
         }
       },
       {
@@ -863,10 +863,10 @@
       },
       {
         "id": "stock-coverage",
-        "category": "Plan your restock",
-        "prompt": "Which products might run out soon? Check my sales and stock.",
+        "category": "Plan ahead for restocking",
+        "prompt": "Which products could run out soon? Review my sales and stock.",
         "resultType": "restock",
-        "resultTitle": "These headphones could last about 6 days.",
+        "resultTitle": "These headphones’ stock could last about 6 days.",
         "resultDescription": "This estimate uses your recent sales.",
         "preview": {
           "label": "Bluetooth headphones",
@@ -890,9 +890,9 @@
       {
         "id": "inventory-report",
         "category": "Get a stock report",
-        "prompt": "Summarize my SKUs’ stock and tell me what to restock first.",
+        "prompt": "Summarize my products’ stock and tell me what to restock first.",
         "resultType": "report",
-        "resultTitle": "I organized stock and restocking priorities.",
+        "resultTitle": "Here is your stock and what is worth restocking first.",
         "resultDescription": "I compare available stock with your sales. Estimated coverage assumes the sales pace continues.",
         "preview": {
           "label": "Stock and restocking",
@@ -915,10 +915,10 @@
       },
       {
         "id": "volume-promotion",
-        "category": "Create quantity offers",
-        "prompt": "Prepare a quantity offer for these products.",
+        "category": "Create quantity discounts",
+        "prompt": "Prepare a discount for customers buying 3 units of these products.",
         "resultType": "workflow",
-        "resultTitle": "I prepared the terms for your approval.",
+        "resultTitle": "I prepared the offer for you to review its terms.",
         "resultDescription": "Offers depend on the promotion types Mercado Libre supports.",
         "preview": {
           "label": "Quantity offer",
@@ -936,26 +936,26 @@
               "label": "Proposed terms"
             }
           ],
-          "status": "Depends on promotion support · Approval required"
+          "status": "Subject to offer availability · Requires your approval"
         }
       },
       {
         "id": "bank-movements",
-        "category": "Organize account movements",
-        "prompt": "Group Mercado Pago movements by bank and period.",
+        "category": "Review your money in Mercado Pago",
+        "prompt": "Group what I received, was deducted and withdrew this month.",
         "resultType": "report",
-        "resultTitle": "I grouped movements by bank and date.",
-        "resultDescription": "Review recorded credits, debits and withdrawals.",
+        "resultTitle": "I organized the transactions for you to review each amount.",
+        "resultDescription": "You can review received, deducted and withdrawn money already recorded.",
         "preview": {
           "label": "Mercado Pago movements",
           "items": [
             {
               "value": "1",
-              "label": "Credits"
+              "label": "Money received"
             },
             {
               "value": "2",
-              "label": "Debits"
+              "label": "Money deducted"
             },
             {
               "value": "3",
@@ -971,7 +971,7 @@
         "prompt": "Why did my sales fall? Compare this month with last month.",
         "resultType": "report",
         "resultTitle": "I found signs that may explain the drop.",
-        "resultDescription": "I compare sales, visits and conversion where data is available.",
+        "resultDescription": "I compare sales, visits and how many visits lead to purchases, where data is available.",
         "preview": {
           "label": "Period comparison",
           "items": [
@@ -993,25 +993,25 @@
       },
       {
         "id": "growth-roadmap",
-        "category": "Combine analysis and changes",
-        "prompt": "Review my MacBooks’ conversion, quality and costs. Prepare an improvement plan.",
+        "category": "Make a plan to sell better",
+        "prompt": "Review my MacBooks and tell me what to improve first.",
         "resultType": "report",
-        "resultTitle": "I prepared a plan with priorities and changes.",
+        "resultTitle": "I prepared a plan with priorities and changes for your review.",
         "resultDescription": "I combine performance, quality and your costs; you review proposals.",
         "preview": {
           "label": "Business improvement plan",
           "items": [
             {
               "value": "1",
-              "label": "Performance"
+              "label": "What to improve first"
             },
             {
               "value": "2",
-              "label": "Quality and costs"
+              "label": "Why it matters"
             },
             {
               "value": "3",
-              "label": "Proposed changes"
+              "label": "Changes to review"
             }
           ],
           "status": "Your supplied costs · Changes require approval"

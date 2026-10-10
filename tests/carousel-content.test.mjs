@@ -32,10 +32,10 @@ test("advanced workflows preserve approval, financial read-only boundaries and u
   assert.match(byId["revision-review"].preview.status, /sin tu aprobación/);
   assert.match(byId["revision-verification"].preview.status, /después de aprobar/);
   assert.match(byId["publication-route"].preview.status, /confirmar contigo/);
-  assert.match(byId["product-family"].resultDescription, /relaciones oficiales/);
+  assert.match(byId["product-family"].resultDescription, /según Mercado Libre/);
   assert.match(byId["selling-fees"].preview.status, /Costos aportados.*estimada/);
   assert.match(byId["price-floor"].resultDescription, /otros gastos/);
-  assert.match(byId["uncertain-promotions"].preview.status, /No se repiten automáticamente/);
+  assert.match(byId["uncertain-promotions"].preview.status, /No repito un cambio sin comprobar/);
   assert.match(byId["bank-movements"].preview.status, /Solo consulta.*No mueve dinero/);
   assert.match(byId["settlement-report"].preview.status, /Requiere aprobación.*No hace transferencias/);
   assert.match(byId["sales-drop"].preview.status, /Datos verificados e hipótesis por separado/);

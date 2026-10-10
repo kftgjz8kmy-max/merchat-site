@@ -43,3 +43,7 @@ Layout refinements affect the shared carousel component, `#resultados` styles an
 ## Seller-language update
 
 The current 40-example build passed TypeScript, production build, lint (existing BrandLogo warning only), and all six content/localization tests. Desktop at 1440px and mobile at 390px show the new 91-action introduction and seller-focused leading examples without page overflow. Excel and specification disclosures show missing data and review requirements; keyboard collapse works. Screenshot files were refreshed for this update.
+
+## Approved copy clarification
+
+Applied the exact seller-language revisions approved in chat across all four locales, including expanded labels and explanations. Kept 40 examples, 91 actions, approval boundaries and the compact design. Lint and TypeScript passed; all six content/localization tests passed. The running development preview at port 3000 was checked at 1440px and 390px: no page overflow; longest Spanish overview card was 273px; the expanded advertising explanation had no overflow. Current desktop/mobile overview screenshots are refreshed. The previous production build and expanded-example screenshots belong to the prior update.

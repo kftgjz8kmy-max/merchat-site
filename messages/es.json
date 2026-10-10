@@ -61,9 +61,9 @@
       {
         "id": "category-requirements",
         "category": "Completa las características",
-        "prompt": "Completa las características de esta laptop con su modelo y ficha.",
+        "prompt": "Completa las características de esta laptop con su modelo y ficha técnica.",
         "resultType": "workflow",
-        "resultTitle": "Completé los datos disponibles y marqué lo que falta.",
+        "resultTitle": "Completé los datos disponibles y marqué lo que falta confirmar.",
         "resultDescription": "La IA usa el modelo y la información que compartes, y revisa los requisitos de Mercado Libre. Los datos que no se pueden confirmar quedan para tu revisión.",
         "preview": {
           "label": "Características por revisar",
@@ -113,9 +113,9 @@
       {
         "id": "revision-verification",
         "category": "Actualiza varios SKU",
-        "prompt": "Prepara nuevos precios y stock para estos 30 SKU.",
+        "prompt": "Prepara nuevos precios y stock para estos 30 productos.",
         "resultType": "workflow",
-        "resultTitle": "Preparé los cambios de cada producto para revisar.",
+        "resultTitle": "Los cambios de cada producto están listos para que los revises.",
         "resultDescription": "Revisa cada SKU antes de aprobar. Después, MerChat comprueba qué cambios quedaron guardados y te muestra los pendientes.",
         "preview": {
           "label": "Cambios por producto",
@@ -138,10 +138,10 @@
       },
       {
         "id": "batch-campaign",
-        "category": "Crea una campaña",
-        "prompt": "Pon estos 21 productos en la campaña con 10% de descuento.",
+        "category": "Aplica descuentos a varios productos",
+        "prompt": "Añade estos 21 productos a la campaña con 10% de descuento.",
         "resultType": "promotion",
-        "resultTitle": "Apliqué el descuento a los 21 productos.",
+        "resultTitle": "Apliqué el descuento a los 21 productos después de tu aprobación.",
         "resultDescription": "Aprobaste los precios antes de aplicarlos.",
         "preview": {
           "label": "10% de descuento",
@@ -174,9 +174,9 @@
       {
         "id": "listing-preflight",
         "category": "Prepara una publicación completa",
-        "prompt": "Elige la categoría, revisa requisitos y comisiones, y prepara esta laptop.",
+        "prompt": "Prepara esta laptop para publicar y dime qué falta.",
         "resultType": "workflow",
-        "resultTitle": "Preparé el borrador y lo que falta revisar.",
+        "resultTitle": "El borrador está listo. Te muestro qué falta completar.",
         "resultDescription": "La forma de publicar y los datos se confirman antes de publicar.",
         "preview": {
           "label": "Revisión antes de publicar",
@@ -205,7 +205,7 @@
         "resultTitle": "Preparé los cambios en una sola revisión.",
         "resultDescription": "Comparas el estado actual con la propuesta antes de aprobar.",
         "preview": {
-          "label": "Actual vs. propuesto",
+          "label": "Antes y después",
           "items": [
             {
               "value": "1",
@@ -226,9 +226,9 @@
       {
         "id": "margin-diagnosis",
         "category": "Revisa tus ganancias",
-        "prompt": "Revisa mis ventas, costos y anuncios. ¿Qué productos debo revisar?",
+        "prompt": "Con mis ventas, costos y anuncios, ¿qué productos me dejan poca ganancia?",
         "resultType": "diagnosis",
-        "resultTitle": "Encontré 3 productos que necesitan atención.",
+        "resultTitle": "Encontré 3 productos cuya ganancia conviene revisar.",
         "resultDescription": "Te sugiero qué revisar en cada uno.",
         "preview": {
           "label": "3 productos para revisar",
@@ -254,7 +254,7 @@
         "category": "Calcula lo que te queda",
         "prompt": "Con mi costo y las comisiones, ¿cuánto me quedaría al vender este equipo?",
         "resultType": "report",
-        "resultTitle": "Separé costos, comisiones y ganancia estimada.",
+        "resultTitle": "Calculé cuánto te quedaría después del costo y las comisiones.",
         "resultDescription": "Combino tu costo con las comisiones que informa Mercado Libre.",
         "preview": {
           "label": "Desglose de la venta",
@@ -277,13 +277,13 @@
       },
       {
         "id": "price-floor",
-        "category": "Encuentra tu precio de equilibrio",
-        "prompt": "¿Qué precio cubriría mi costo y las comisiones de este producto?",
+        "category": "Calcula tu precio mínimo",
+        "prompt": "¿A cuánto debo vender para cubrir mi costo y las comisiones?",
         "resultType": "report",
-        "resultTitle": "Estimé el precio para cubrir esos costos.",
-        "resultDescription": "Es un cálculo con los costos que aportas; revisa otros gastos antes de decidir.",
+        "resultTitle": "Estimé el precio mínimo para cubrir esos costos.",
+        "resultDescription": "El cálculo incluye los costos que compartes. Añade otros gastos para obtener una estimación más completa.",
         "preview": {
-          "label": "Precio de equilibrio",
+          "label": "Precio mínimo estimado",
           "items": [
             {
               "value": "1",
@@ -304,7 +304,7 @@
       {
         "id": "profit-report",
         "category": "Pide un reporte de ganancias",
-        "prompt": "Con mis costos, compara cuánto me dejan estos SKU.",
+        "prompt": "Con mis costos, compara cuánto me deja cada producto.",
         "resultType": "report",
         "resultTitle": "Comparé la ganancia estimada de cada producto.",
         "resultDescription": "Combino los costos que aportas con las comisiones disponibles. Puedes incluir otros gastos para afinar la estimación.",
@@ -332,7 +332,7 @@
         "category": "Compara tus precios",
         "prompt": "Busca iPhones similares y compara sus precios con los míos.",
         "resultType": "price-range",
-        "resultTitle": "Tu precio está S/ 50 por encima del rango.",
+        "resultTitle": "Tu precio supera en S/ 50 el más alto de los productos comparados.",
         "resultDescription": "Compara productos similares antes de cambiarlo.",
         "preview": {
           "label": "Referencias públicas",
@@ -355,11 +355,11 @@
       },
       {
         "id": "product-family",
-        "category": "Revisa tus versiones de un producto",
-        "prompt": "Muéstrame las publicaciones relacionadas de este producto.",
+        "category": "Encuentra publicaciones relacionadas",
+        "prompt": "¿Qué otras publicaciones están vinculadas a este producto?",
         "resultType": "report",
-        "resultTitle": "Reuní las publicaciones para que las compares.",
-        "resultDescription": "Uso las relaciones oficiales de Mercado Libre para mostrar las publicaciones del mismo grupo.",
+        "resultTitle": "Te muestro las publicaciones que Mercado Libre vincula con este producto.",
+        "resultDescription": "Muestro las publicaciones relacionadas según Mercado Libre; no las agrupo solo porque se parecen.",
         "preview": {
           "label": "Publicaciones relacionadas",
           "items": [
@@ -381,11 +381,11 @@
       },
       {
         "id": "user-product-options",
-        "category": "Vende con distintas condiciones",
-        "prompt": "Prepara otra opción para este producto con diferente precio y stock.",
+        "category": "Añade otra opción de venta",
+        "prompt": "Quiero ofrecer este mismo producto con otro precio y stock.",
         "resultType": "workflow",
-        "resultTitle": "Preparé la nueva opción para que la revises.",
-        "resultDescription": "Cuando Mercado Libre lo permite, puedes añadir otra opción de venta al mismo producto.",
+        "resultTitle": "La nueva opción de venta está lista para que la revises.",
+        "resultDescription": "Puedes preparar otra opción de venta para el mismo producto, cuando Mercado Libre lo permita. Revisas el precio y el stock antes de aprobar.",
         "preview": {
           "label": "Nueva opción de venta",
           "items": [
@@ -434,9 +434,9 @@
       {
         "id": "sales-report",
         "category": "Pide un reporte de ventas",
-        "prompt": "Haz un reporte de ventas por producto y SKU de este mes.",
+        "prompt": "Haz un reporte de las ventas de este mes por producto.",
         "resultType": "report",
-        "resultTitle": "Organicé ventas, unidades e ingresos por producto.",
+        "resultTitle": "Te muestro las unidades vendidas y los ingresos de cada producto.",
         "resultDescription": "Puedes pedir un resumen por período y comparar productos con los datos disponibles de tu cuenta.",
         "preview": {
           "label": "Ventas por producto y SKU",
@@ -460,10 +460,10 @@
       {
         "id": "payment-reconciliation",
         "category": "Compara ventas y cobros",
-        "prompt": "Compara mis ventas con los cobros de Mercado Pago. ¿Qué debo revisar?",
+        "prompt": "Compara mis ventas con los cobros de Mercado Pago. ¿Hay diferencias?",
         "resultType": "report",
-        "resultTitle": "Preparé una comparación de ventas y cobros.",
-        "resultDescription": "Las diferencias se revisan con los registros e identificadores disponibles.",
+        "resultTitle": "Te muestro las ventas, los cobros y las diferencias por revisar.",
+        "resultDescription": "Comparo los registros disponibles y señalo las diferencias que necesitan revisión.",
         "preview": {
           "label": "Ventas vs. cobros",
           "items": [
@@ -485,11 +485,11 @@
       },
       {
         "id": "settlement-report",
-        "category": "Pide un reporte financiero",
-        "prompt": "Genera el reporte de liquidaciones de este mes y revisa si está listo.",
+        "category": "Pide un reporte de Mercado Pago",
+        "prompt": "Pide el reporte de liquidaciones de este mes en Mercado Pago.",
         "resultType": "workflow",
-        "resultTitle": "Solicité el reporte con tu aprobación.",
-        "resultDescription": "Puedes consultar el estado de la tarea y recuperar el reporte cuando esté listo.",
+        "resultTitle": "Solicité el reporte con tu aprobación y comprobé si ya está disponible.",
+        "resultDescription": "El reporte muestra las liquidaciones registradas por Mercado Pago durante el período elegido. Solicitarlo no mueve tu dinero.",
         "preview": {
           "label": "Reporte de liquidaciones",
           "items": [
@@ -537,10 +537,10 @@
       },
       {
         "id": "quality-report",
-        "category": "Pide un reporte de publicaciones",
-        "prompt": "Revisa mis publicaciones y resume cuáles necesitan mejoras.",
+        "category": "Detecta publicaciones por mejorar",
+        "prompt": "Revisa mis publicaciones y dime cuáles mejorar primero.",
         "resultType": "report",
-        "resultTitle": "Ordené las publicaciones que conviene revisar.",
+        "resultTitle": "Ordené las publicaciones por prioridad de mejora.",
         "resultDescription": "Reúno calidad, visitas y ventas disponibles para ayudarte a priorizar. Las sugerencias se basan en esos datos.",
         "preview": {
           "label": "Publicaciones por mejorar",
@@ -563,25 +563,25 @@
       },
       {
         "id": "reuse-listing-photos",
-        "category": "Reutiliza las fotos exactas",
-        "prompt": "Prepara otra publicación con las fotos exactas de esta.",
+        "category": "Reutiliza tus fotos",
+        "prompt": "Prepara otra publicación con las mismas fotos de esta.",
         "resultType": "workflow",
-        "resultTitle": "Incluí las mismas fotos en el borrador.",
-        "resultDescription": "Se conservan las referencias verificadas de las fotos disponibles.",
+        "resultTitle": "Incluí las mismas fotos en el nuevo borrador.",
+        "resultDescription": "El nuevo borrador usa las mismas fotos de la publicación original.",
         "preview": {
           "label": "Fotos de la publicación original",
           "items": [
             {
               "value": "1",
-              "label": "Leer fotos originales"
+              "label": "Fotos originales"
             },
             {
               "value": "2",
-              "label": "Conservar referencias"
+              "label": "Mismas fotos"
             },
             {
               "value": "3",
-              "label": "Preparar borrador"
+              "label": "Nuevo borrador"
             }
           ],
           "status": "Pendiente de aprobación"
@@ -592,14 +592,14 @@
         "category": "Revisa tus anuncios",
         "prompt": "¿Mis anuncios están funcionando? Revisa mis campañas.",
         "resultType": "ads",
-        "resultTitle": "Hay 2 campañas que conviene revisar.",
-        "resultDescription": "Analicé los datos disponibles de Product Ads.",
+        "resultTitle": "Encontré 2 campañas cuyo rendimiento conviene revisar.",
+        "resultDescription": "Revisé los datos disponibles de tus anuncios en Mercado Libre.",
         "preview": {
-          "label": "Product Ads",
+          "label": "Publicidad en Mercado Libre",
           "items": [
             {
               "value": "28%",
-              "label": "Gasto en anuncios / ventas (ACOS)"
+              "label": "Gasto en anuncios respecto a las ventas"
             },
             {
               "value": "2",
@@ -612,10 +612,10 @@
       {
         "id": "ads-report",
         "category": "Pide un reporte de anuncios",
-        "prompt": "Resume el gasto y las ventas de mis anuncios este mes.",
+        "prompt": "Resume cuánto gasté y qué ventas generaron mis anuncios este mes.",
         "resultType": "report",
-        "resultTitle": "Preparé el resumen con las métricas disponibles.",
-        "resultDescription": "Consulta gastos, ventas atribuidas y rendimiento cuando los reportes están disponibles para tu cuenta.",
+        "resultTitle": "Te muestro el gasto y las ventas atribuidas a tus anuncios.",
+        "resultDescription": "Son las ventas que Mercado Libre relaciona con tu publicidad, según los datos disponibles.",
         "preview": {
           "label": "Rendimiento de anuncios",
           "items": [
@@ -625,7 +625,7 @@
             },
             {
               "value": "2",
-              "label": "Ventas atribuidas"
+              "label": "Ventas atribuidas a los anuncios"
             },
             {
               "value": "3",
@@ -637,10 +637,10 @@
       },
       {
         "id": "uncertain-promotions",
-        "category": "Aclara una campaña con errores",
-        "prompt": "La campaña dio un error. Revisa qué se aplicó antes de repetir cambios.",
+        "category": "Revisa una campaña con errores",
+        "prompt": "La campaña dio un error. Comprueba qué descuentos se aplicaron.",
         "resultType": "report",
-        "resultTitle": "Separé los resultados confirmados y pendientes.",
+        "resultTitle": "Te muestro cuáles se aplicaron y cuáles falta comprobar.",
         "resultDescription": "Un resultado incierto no significa que la operación haya fallado.",
         "preview": {
           "label": "Resultado de la operación",
@@ -658,7 +658,7 @@
               "label": "Incierto"
             }
           ],
-          "status": "No se repiten automáticamente cambios inciertos"
+          "status": "No repito un cambio sin comprobar qué ocurrió"
         }
       },
       {
@@ -685,10 +685,10 @@
       },
       {
         "id": "publication-route",
-        "category": "Encuentra cómo publicar",
-        "prompt": "¿Puedo vender este equipo en el catálogo o debo crear una publicación?",
+        "category": "Encuentra tu producto en el catálogo",
+        "prompt": "¿Este equipo ya está en el catálogo de Mercado Libre?",
         "resultType": "workflow",
-        "resultTitle": "Revisé las opciones para que elijas.",
+        "resultTitle": "Revisé el catálogo y te muestro las opciones para publicarlo.",
         "resultDescription": "MerChat busca el producto y te explica las alternativas. Si no está claro, te pide confirmar cómo quieres publicarlo.",
         "preview": {
           "label": "Opciones para publicar",
@@ -717,7 +717,7 @@
         "resultTitle": "Recuperé el borrador y los pasos pendientes.",
         "resultDescription": "Puedes continuar la sesión o cancelarla antes de publicar.",
         "preview": {
-          "label": "Sesión de publicación",
+          "label": "Borrador guardado",
           "items": [
             {
               "value": "1",
@@ -785,28 +785,28 @@
       },
       {
         "id": "promotion-eligibility",
-        "category": "Busca productos elegibles",
-        "prompt": "¿Cuáles de mis productos pueden entrar en esta campaña?",
+        "category": "Encuentra productos para una campaña",
+        "prompt": "¿Cuáles de mis productos pueden participar en esta campaña?",
         "resultType": "report",
-        "resultTitle": "Separé los elegibles de los que debes revisar.",
-        "resultDescription": "La elegibilidad depende de las reglas de cada campaña.",
+        "resultTitle": "Te muestro cuáles pueden participar y cuáles necesitan revisión.",
+        "resultDescription": "Cada campaña tiene sus propias condiciones para participar.",
         "preview": {
-          "label": "Elegibilidad de la campaña",
+          "label": "Productos para la campaña",
           "items": [
             {
               "value": "1",
-              "label": "Productos elegibles"
+              "label": "Productos que pueden participar"
             },
             {
               "value": "2",
-              "label": "Condiciones de la oferta"
+              "label": "Condiciones de la campaña"
             },
             {
               "value": "3",
               "label": "Productos por revisar"
             }
           ],
-          "status": "Según elegibilidad de Mercado Libre"
+          "status": "Según las condiciones de Mercado Libre"
         }
       },
       {
@@ -866,7 +866,7 @@
         "category": "Anticipa la reposición",
         "prompt": "¿Qué productos podrían agotarse pronto? Revisa mis ventas y stock.",
         "resultType": "restock",
-        "resultTitle": "Estos audífonos podrían durar unos 6 días.",
+        "resultTitle": "El stock de estos audífonos podría alcanzar para unos 6 días.",
         "resultDescription": "Es una estimación según tus ventas recientes.",
         "preview": {
           "label": "Audífonos Bluetooth",
@@ -890,9 +890,9 @@
       {
         "id": "inventory-report",
         "category": "Pide un reporte de stock",
-        "prompt": "Resume el stock de mis SKU y dime cuáles reponer primero.",
+        "prompt": "Resume el stock de mis productos y dime qué reponer primero.",
         "resultType": "report",
-        "resultTitle": "Ordené el stock y las prioridades de reposición.",
+        "resultTitle": "Te muestro cuánto stock tienes y qué conviene reponer primero.",
         "resultDescription": "Comparo el stock disponible con tus ventas. La duración estimada depende de que el ritmo de ventas se mantenga.",
         "preview": {
           "label": "Stock y reposición",
@@ -915,10 +915,10 @@
       },
       {
         "id": "volume-promotion",
-        "category": "Crea ofertas por cantidad",
-        "prompt": "Prepara una oferta por cantidad para estos productos.",
+        "category": "Crea descuentos por cantidad",
+        "prompt": "Prepara un descuento para quienes compren 3 unidades de estos productos.",
         "resultType": "workflow",
-        "resultTitle": "Preparé las condiciones para que las apruebes.",
+        "resultTitle": "Preparé la oferta para que revises las condiciones.",
         "resultDescription": "Las ofertas dependen del tipo de promoción que admita Mercado Libre.",
         "preview": {
           "label": "Oferta por cantidad",
@@ -936,26 +936,26 @@
               "label": "Condiciones propuestas"
             }
           ],
-          "status": "Según soporte de la promoción · Requiere aprobación"
+          "status": "Según disponibilidad de la oferta · Requiere tu aprobación"
         }
       },
       {
         "id": "bank-movements",
-        "category": "Ordena tus movimientos",
-        "prompt": "Separa los movimientos de Mercado Pago por banco y período.",
+        "category": "Revisa tu dinero en Mercado Pago",
+        "prompt": "Agrupa lo que recibí, me descontaron y retiré este mes.",
         "resultType": "report",
-        "resultTitle": "Agrupé los movimientos por banco y fecha.",
-        "resultDescription": "Puedes revisar créditos, débitos y retiros ya registrados.",
+        "resultTitle": "Organicé los movimientos para que revises cada importe.",
+        "resultDescription": "Puedes revisar el dinero recibido, descontado y retirado que ya está registrado.",
         "preview": {
           "label": "Movimientos de Mercado Pago",
           "items": [
             {
               "value": "1",
-              "label": "Créditos"
+              "label": "Dinero recibido"
             },
             {
               "value": "2",
-              "label": "Débitos"
+              "label": "Dinero descontado"
             },
             {
               "value": "3",
@@ -971,7 +971,7 @@
         "prompt": "¿Por qué bajaron mis ventas? Compara este mes con el anterior.",
         "resultType": "report",
         "resultTitle": "Encontré señales que pueden explicar la caída.",
-        "resultDescription": "Comparo ventas, visitas y conversión cuando esos datos están disponibles.",
+        "resultDescription": "Comparo ventas, visitas y cuántas de esas visitas terminan en compras, cuando los datos están disponibles.",
         "preview": {
           "label": "Comparación entre períodos",
           "items": [
@@ -993,25 +993,25 @@
       },
       {
         "id": "growth-roadmap",
-        "category": "Combina análisis y cambios",
-        "prompt": "Revisa conversión, calidad y costos de mis MacBooks. Prepara un plan de mejora.",
+        "category": "Prepara un plan para vender mejor",
+        "prompt": "Revisa mis MacBooks y dime qué mejorar primero.",
         "resultType": "report",
-        "resultTitle": "Preparé un plan con prioridades y cambios.",
+        "resultTitle": "Preparé un plan con prioridades y cambios para que los revises.",
         "resultDescription": "Combino rendimiento, calidad y tus costos; tú revisas las propuestas.",
         "preview": {
           "label": "Plan de mejora del negocio",
           "items": [
             {
               "value": "1",
-              "label": "Rendimiento"
+              "label": "Qué mejorar primero"
             },
             {
               "value": "2",
-              "label": "Calidad y costos"
+              "label": "Por qué conviene"
             },
             {
               "value": "3",
-              "label": "Cambios propuestos"
+              "label": "Cambios para revisar"
             }
           ],
           "status": "Costos aportados por ti · Cambios sujetos a aprobación"
