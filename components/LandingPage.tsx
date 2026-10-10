@@ -135,7 +135,7 @@ function UseCaseResult({ card }: { card: UseCaseCard }) {
     {card.resultType === "listing" && <><div className="cap-product-gallery"><img className="cap-product-main" src="/images/products/macbook-open.jpg" alt="MacBook Pro 14″" width="240" height="140" loading="lazy" decoding="async" /><ProductPhotos /></div></>}
     {card.resultType === "gallery" ? <><ProductPhotos gallery /><div className="cap-order" aria-hidden="true"><span>1 · 2 · 3 · 4</span><HeroIcon name="arrow" /><b>3 · 1 · 2 · 4</b></div></> : <PreviewItems card={card} />}
     {card.resultType === "price-range" && <div className="cap-range" aria-hidden="true"><span /><i /></div>}
-    {card.resultType === "ads" && <div className="cap-bars" aria-hidden="true">{[38, 72, 48, 88, 60, 43].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</div>}
+    {card.resultType === "ads" && <div className="cap-ad-chart" aria-hidden="true"><div><i style={{ width: `${Math.min(100, Math.max(0, Number.parseFloat(card.preview.items[0].value ?? "0")))}%` }} /></div><span>0%</span><span>100%</span></div>}
     {card.resultType === "restock" && <div className="cap-stock" aria-hidden="true"><span /></div>}
     <span className="cap-status">{card.resultType === "promotion" && <HeroIcon name="check" size={15} />}{status}</span>
   </div>;
@@ -150,8 +150,8 @@ function UseCaseDemoCard({ card }: { card: UseCaseCard }) {
 }
 function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
 function ShowcaseCards({ content, duplicate = false }: { content: ReturnType<typeof getLanding>; duplicate?: boolean }) {
-  // First two columns contain the four strongest workflows. Photos break up later pairs.
-  const photoAfterCase = [3, 5, 8, 11];
+  // Lead with four workflows, then alternate photo breaks between the two rows.
+  const photoAfterCase = [3, 5, 7, 9];
   return <div className="carousel-set" aria-hidden={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
     const photoIndex = photoAfterCase.indexOf(index);
     return [<UseCaseDemoCard card={card} key={card.id} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];

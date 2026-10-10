@@ -2419,13 +2419,14 @@ body, main { background: var(--bg); }
 #resultados .section-title { max-width: 30ch; margin-bottom: 18px; }
 #resultados .showcase-intro { max-width: 64ch; margin: 0 auto 36px; text-align: center; font-size: 17px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
 #resultados .showcase-disclaimer { max-width: 72ch; margin: 22px auto 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
-#resultados .carousel-set { grid-auto-columns: 320px; grid-template-rows: repeat(2, minmax(500px, max-content)); padding-right: 169px; }
-#resultados .carousel-set .example-card { width: 320px; padding: 20px; gap: 16px; }
+#resultados .carousel-set { grid-auto-columns: 320px; grid-template-rows: repeat(2, max-content); padding-right: 169px; }
+#resultados .carousel-set .example-card { width: 320px; min-height: 0; padding: 18px; gap: 12px; }
+#resultados .demo-card { align-self: start; }
 #resultados .demo-card > span { padding: 0; font-size: 17px; font-weight: 600; line-height: 1.35; }
-#resultados .example-bubble { padding: 13px 15px; font-size: 15px; line-height: 1.5; }
-#resultados .demo-card > strong { margin-top: auto; font-size: 17px; line-height: 1.35; }
+#resultados .example-bubble { padding: 11px 13px; font-size: 15px; line-height: 1.5; }
+#resultados .demo-card > strong { margin-top: 0; font-size: 17px; line-height: 1.35; }
 #resultados .demo-card > small { font-size: 14px; line-height: 1.5; color: var(--muted); }
-#resultados .cap-preview { display: flex; flex-direction: column; gap: 12px; padding: 14px; border: 1px solid #E1E7F2; border-radius: 14px; background: #F8FAFE; font-size: 14px; line-height: 1.4; color: #172554; }
+#resultados .cap-preview { display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid #E1E7F2; border-radius: 14px; background: #F8FAFE; font-size: 14px; line-height: 1.4; color: #172554; }
 #resultados .cap-label { font-size: 14px; font-weight: 600; }
 #resultados .cap-items { display: flex; flex-direction: column; gap: 10px; }
 #resultados .cap-item { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
@@ -2454,9 +2455,10 @@ body, main { background: var(--bg); }
 #resultados .cap-range { position: relative; height: 16px; margin: 5px 0; background: #E3EAF7; border-radius: 8px; }
 #resultados .cap-range span { position: absolute; left: 10%; right: 30%; top: 0; bottom: 0; border-radius: 8px; background: #B9CEF9; }
 #resultados .cap-range i { position: absolute; left: 87%; top: -4px; height: 24px; width: 3px; border-radius: 2px; background: var(--blue); }
-#resultados .cap-bars { height: 50px; display: flex; align-items: end; gap: 10px; border-bottom: 1px solid #CCD7EB; }
-#resultados .cap-bars i { flex: 1; border-radius: 4px 4px 0 0; background: #AFC6F6; }
-#resultados .cap-bars i:nth-child(4) { background: var(--blue); }
+#resultados .cap-ad-chart { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 11px; color: #475569; font-variant-numeric: tabular-nums; }
+#resultados .cap-ad-chart > div { grid-column: 1 / -1; height: 12px; border-radius: 4px; background: #DEE7F7; overflow: hidden; }
+#resultados .cap-ad-chart i { display: block; height: 100%; background: var(--blue); border-radius: 4px; }
+#resultados .cap-ad-chart > span:last-child { text-align: right; }
 #resultados .cap-stock { height: 8px; background: #E4EAF4; border-radius: 6px; overflow: hidden; }
 #resultados .cap-stock span { display: block; width: 21%; height: 100%; background: #D97706; }
 #resultados .cap-product-main { width: 100%; height: 100px; object-fit: cover; border-radius: 9px; }
@@ -2473,8 +2475,8 @@ body, main { background: var(--bg); }
 #resultados .example-photo .photo-overlay strong { font-size: 23px; line-height: 1.25; }
 #resultados .carousel-arrow:focus-visible, #resultados .dots button:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
 @media(max-width:640px) {
-  #resultados .carousel-set { grid-auto-columns: calc(88vw - 32px); padding-right: calc(44vw - 9px); grid-template-rows: repeat(2, minmax(500px, max-content)); }
-  #resultados .carousel-set .example-card { width: calc(88vw - 32px); padding: 17px; gap: 14px; }
+  #resultados .carousel-set { grid-auto-columns: calc(88vw - 32px); padding-right: calc(44vw - 9px); grid-template-rows: repeat(2, max-content); }
+  #resultados .carousel-set .example-card { width: calc(88vw - 32px); padding: 16px; gap: 12px; }
   #resultados .showcase-intro { font-size: 16px; margin-bottom: 28px; }
   #resultados .cap-preview { padding: 12px; font-size: 13px; }
   #resultados .cap-accounts .cap-item { padding: 7px; }
@@ -2484,12 +2486,36 @@ body, main { background: var(--bg); }
 #resultados .showcase-carousel { scroll-snap-type: none; }
 #resultados .cap-listing { gap: 8px; }
 #resultados .cap-product-gallery { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 7px; }
-#resultados .cap-product-main { height: 96px; }
+#resultados .cap-product-main { height: 78px; }
 #resultados .cap-product-photos { flex-direction: column; gap: 3px; }
-#resultados .cap-product-photos img { display: block; height: 30px; }
+#resultados .cap-product-photos img { display: block; height: 24px; }
 #resultados .example-photo .photo-overlay strong { max-width: none; width: auto; }
 #resultados .cap-item { min-width: 0; }
 #resultados .cap-item span { overflow-wrap: anywhere; }
 #resultados .cap-priorities .cap-items { flex-direction: column; }
 #resultados .cap-priorities .cap-item { flex-direction: row; align-items: center; }
 #resultados .cap-priorities .cap-item b { min-width: 22px; }
+
+/* Photos alternate rows at a steady cadence; each reads as a compact visual pause. */
+#resultados .carousel-set .example-photo { align-self: start; height: 360px; min-height: 0; }
+#resultados .cap-listing .cap-items { flex-direction: row; gap: 8px; flex-wrap: wrap; font-size: 13px; }
+#resultados .cap-listing .cap-item { flex: 1; }
+#resultados .cap-diagnosis { background: #FFFBF2; border-color: #ECE1C7; }
+#resultados .cap-diagnosis .cap-label { color: #78350F; }
+#resultados .cap-diagnosis .cap-item { padding: 7px 9px 7px 21px; border-radius: 7px; background: #FFF3D8; }
+#resultados .cap-diagnosis .cap-item::before { left: 9px; top: 14px; }
+#resultados .cap-diagnosis .cap-item-1 { background: #FFF0EC; }
+#resultados .cap-diagnosis .cap-item-1::before { background: #9F1239; }
+#resultados .cap-diagnosis .cap-item-2 { background: #F1F3F7; }
+#resultados .cap-diagnosis .cap-item-2::before { background: #64748B; }
+@media(max-width:640px) {
+  #resultados .carousel-set .example-photo { height: 330px; }
+}
+
+#resultados .cap-price-range .cap-item { flex-direction: row; align-items: center; }
+#resultados .cap-price-range .cap-item b { font-size: 16px; white-space: nowrap; }
+#resultados .cap-price-range .cap-item-1 b { font-size: 21px; color: var(--blue); }
+#resultados .cap-price-range .cap-item span { text-align: right; }
+#resultados .cap-diagnosis .cap-item { flex-direction: row; align-items: center; gap: 8px; }
+#resultados .cap-diagnosis .cap-item b { flex: 0 0 66px; }
+#resultados .cap-diagnosis .cap-item::before { top: 50%; transform: translateY(-50%); }

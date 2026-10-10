@@ -6,6 +6,10 @@ Scope: `#resultados`. The carousel now contains 12 deterministic conversational 
 
 Carousel changes keep dragging, swiping, arrows, four dots and reduced motion. Loop width now measures the distance between duplicated sets, including their gap. Autoplay pauses outside the viewport and during hover, keyboard focus and touch/drag; resume timers respect active interactions. The duplicate set remains `aria-hidden` and contains no interactive controls.
 
+## Final visual refinements
+
+Cards use content-driven heights, tighter preview spacing and outcomes directly beneath their previews. The four lifestyle photos occupy positions 5, 8, 11 and 14, alternating between rows and aligning to each row start. Photos remain shorter visual pauses. Diagnosis previews distinguish the three conditions; the advertising bar reflects the supplied ACOS value rather than arbitrary decorative columns. Final responsive checks passed at all five widths and all four locales at 360px.
+
 ## Validation
 
 - `npm run typecheck`: passed.
