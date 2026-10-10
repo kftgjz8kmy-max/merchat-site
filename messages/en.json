@@ -13,152 +13,307 @@
     },
     "useCases": [
       {
-        "id": "create-listing",
-        "category": "Create a listing",
-        "prompt": "I want to sell this phone. It is new, has 256 GB, and I have three units.",
+        "id": "photo-listing",
+        "category": "From photos to a listing",
+        "prompt": "Here are the photos of this MacBook. Help me prepare everything to list it.",
         "resultType": "listing",
-        "resultTitle": "Listing ready to review"
+        "resultTitle": "Listing ready for review",
+        "resultDescription": "Photos, specifications and terms prepared.",
+        "preview": {
+          "label": "MacBook Pro 14″",
+          "items": [
+            {
+              "label": "Specifications prepared"
+            },
+            {
+              "label": "Photos prepared"
+            }
+          ],
+          "status": "Listing awaiting approval"
+        }
       },
       {
-        "id": "publish-from-photo",
-        "category": "Publish from a photo",
-        "prompt": "Use these photos, identify the product, and ask me only for what is missing.",
-        "resultType": "photo-identification",
-        "resultTitle": "Only 2 details missing"
-      },
-      {
-        "id": "technical-details",
-        "category": "Complete technical details",
-        "prompt": "Complete the missing attributes and verify that the information is correct.",
-        "resultType": "technical",
-        "resultTitle": "12 attributes verified",
-        "resultDescription": "3 attributes completed"
-      },
-      {
-        "id": "compare-prices",
-        "category": "Compare your prices",
-        "prompt": "Compare my price with similar listings and tell me whether I should adjust it.",
-        "resultType": "price-range",
-        "resultTitle": "4% above the range",
-        "resultDescription": "Current price: S/ 1,399"
-      },
-      {
-        "id": "calculate-discount",
-        "category": "Calculate your discount",
-        "prompt": "Using my costs and fees, tell me how much I can discount without losing money.",
-        "resultType": "discount",
-        "resultTitle": "Your margin stays positive",
-        "resultDescription": "Maximum discount: 11%"
-      },
-      {
-        "id": "create-promotion",
-        "category": "Create a promotion",
-        "prompt": "Create a 10% promotion for these products for seven days.",
+        "id": "batch-campaign",
+        "category": "21 products. One campaign.",
+        "prompt": "Add these 21 products to the campaign with a 10% discount.",
         "resultType": "promotion",
-        "resultTitle": "Promotion ready to confirm",
-        "resultDescription": "Deal of the week"
+        "resultTitle": "21 offers applied and verified",
+        "resultDescription": "Prices reviewed and approved before applying.",
+        "preview": {
+          "label": "10% discount",
+          "items": [
+            {
+              "value": "21",
+              "label": "Products processed"
+            },
+            {
+              "value": "21/21",
+              "label": "Verified"
+            }
+          ],
+          "status": "Applied after approval"
+        }
       },
       {
-        "id": "add-to-promotion",
-        "category": "Add to a promotion",
-        "prompt": "Add these products to the Deals of the Week promotion.",
-        "resultType": "eligibility",
-        "resultTitle": "Products prepared",
-        "resultDescription": "5 of 6 added"
-      },
-      {
-        "id": "profit-excel",
-        "category": "Calculate your profit",
-        "prompt": "I will give you my costs. Create an Excel file with net profit after fees and shipping.",
+        "id": "inventory-file",
+        "category": "One Excel file. Dozens of changes.",
+        "prompt": "Here are my new prices and stock. Compare them with my listings and prepare the changes.",
         "resultType": "excel",
-        "resultTitle": "Net profit calculated",
-        "resultDescription": "126 listings analyzed"
+        "resultTitle": "From Excel to your listings",
+        "resultDescription": "Changes are reviewed before they are applied.",
+        "preview": {
+          "label": "Inventory.xlsx",
+          "items": [
+            {
+              "value": "62",
+              "label": "Rows analyzed"
+            },
+            {
+              "value": "58",
+              "label": "Changes prepared"
+            },
+            {
+              "value": "4",
+              "label": "Need review"
+            }
+          ],
+          "status": "Awaiting approval"
+        }
       },
       {
-        "id": "bulk-catalog",
-        "category": "Update your catalog",
-        "prompt": "Use this Excel file to update the prices and stock of my listings.",
-        "resultType": "bulk-update",
-        "resultTitle": "Changes ready to approve",
-        "resultDescription": "84 products reviewed"
+        "id": "photo-order",
+        "category": "Edit your photos in chat",
+        "prompt": "Show me the photos in this listing. I want to change their order.",
+        "resultType": "gallery",
+        "resultTitle": "New order ready for approval",
+        "resultDescription": "Drag your photos directly in chat.",
+        "preview": {
+          "label": "Photo order",
+          "items": [],
+          "status": "Awaiting approval"
+        }
       },
       {
-        "id": "last-sale",
-        "category": "Check your latest sale",
-        "prompt": "Show me my latest sale with the product, buyer, payment, shipping, and status.",
-        "resultType": "sale",
-        "resultTitle": "S/ 1,249",
-        "resultDescription": "12 minutes ago"
+        "id": "margin-diagnosis",
+        "category": "Find where you lose margin",
+        "prompt": "Cross-check my sales, costs and advertising. Tell me which products need attention.",
+        "resultType": "diagnosis",
+        "resultTitle": "Issues found. Actions suggested.",
+        "resultDescription": "Decisions based on your available data.",
+        "preview": {
+          "label": "3 products to review",
+          "items": [
+            {
+              "value": "Product A",
+              "label": "Possibly insufficient margin"
+            },
+            {
+              "value": "Product B",
+              "label": "Costly advertising"
+            },
+            {
+              "value": "Product C",
+              "label": "Profitability to confirm"
+            }
+          ],
+          "status": "Costs supplied by the seller"
+        }
       },
       {
-        "id": "compare-products",
-        "category": "Compare your products",
-        "prompt": "Show me the three best-selling and three lowest-selling products this quarter.",
-        "resultType": "ranking",
-        "resultTitle": "Best and lowest sellers"
+        "id": "market-research",
+        "category": "Research the market for you",
+        "prompt": "Find public prices for similar iPhones and compare them with mine.",
+        "resultType": "price-range",
+        "resultTitle": "See how your prices compare",
+        "resultDescription": "Compare references before deciding.",
+        "preview": {
+          "label": "Public references",
+          "items": [
+            {
+              "value": "S/ 1,249–1,349",
+              "label": "Public references"
+            },
+            {
+              "value": "S/ 1,399",
+              "label": "Your price"
+            },
+            {
+              "value": "+S/ 50",
+              "label": "Above the highest reference"
+            }
+          ],
+          "status": "Illustrative comparison · Depends on your AI tools"
+        }
       },
       {
-        "id": "restock",
-        "category": "Plan your restocking",
-        "prompt": "Analyze my sales and tell me which products to restock and how many units to buy.",
-        "resultType": "restock",
-        "resultTitle": "Based on turnover and stock"
+        "id": "daily-priorities",
+        "category": "What needs attention today?",
+        "prompt": "Review my account and tell me where I should start today.",
+        "resultType": "priorities",
+        "resultTitle": "Your priorities are ready",
+        "resultDescription": "Start with what needs the most attention.",
+        "preview": {
+          "label": "Today’s priorities",
+          "items": [
+            {
+              "value": "2",
+              "label": "Unanswered questions"
+            },
+            {
+              "value": "3",
+              "label": "Quality warnings"
+            },
+            {
+              "value": "5",
+              "label": "Improvement opportunities"
+            }
+          ],
+          "status": "Review requested by you"
+        }
       },
       {
-        "id": "stagnant-products",
-        "category": "Find stagnant products",
-        "prompt": "Show me the listings that had no sales in the last 60 days.",
-        "resultType": "stagnant",
-        "resultTitle": "Needs attention",
-        "resultDescription": "9 listings without sales"
-      },
-      {
-        "id": "improve-listings",
-        "category": "Improve your listings",
-        "prompt": "Find listings with views but few sales and tell me what I should improve.",
+        "id": "listing-improvements",
+        "category": "Find what to improve",
+        "prompt": "Find listings with views but few sales and suggest improvements.",
         "resultType": "performance",
-        "resultTitle": "Conversion: 0.24%",
-        "resultDescription": "1,240 views · 3 sales"
+        "resultTitle": "Improvement plan prepared",
+        "resultDescription": "Analyze first. Decide next.",
+        "preview": {
+          "label": "4 listings to review",
+          "items": [
+            {
+              "value": "Price",
+              "label": "Assess competitiveness"
+            },
+            {
+              "value": "Photos",
+              "label": "Review presentation"
+            },
+            {
+              "value": "Specifications",
+              "label": "Check missing details"
+            }
+          ],
+          "status": "Recommendations for review"
+        }
       },
       {
-        "id": "quarterly-diagnosis",
-        "category": "Review your quarter",
-        "prompt": "Analyze this quarter, compare it with the previous one, and show me a diagnosis with charts.",
-        "resultType": "dashboard",
-        "resultTitle": "Performance is growing",
-        "resultDescription": "S/ 184,500 · +14%"
+        "id": "product-ads",
+        "category": "Take a closer look at your ads",
+        "prompt": "Are my Product Ads delivering results? Analyze my campaigns.",
+        "resultType": "ads",
+        "resultTitle": "Advertising analyzed",
+        "resultDescription": "Identify campaigns that need attention.",
+        "preview": {
+          "label": "Product Ads",
+          "items": [
+            {
+              "value": "28%",
+              "label": "ACOS"
+            },
+            {
+              "value": "2",
+              "label": "Campaigns to review"
+            }
+          ],
+          "status": "Recommendations ready · Available data"
+        }
+      },
+      {
+        "id": "account-comparison",
+        "category": "Two stores. One AI.",
+        "prompt": "Compare my two Mercado Libre accounts and tell me which sold more this month.",
+        "resultType": "accounts",
+        "resultTitle": "A clearer view of your businesses",
+        "resultDescription": "Each account with its own data.",
+        "preview": {
+          "label": "Authorized accounts",
+          "items": [
+            {
+              "value": "S/ 24,600",
+              "label": "Store A"
+            },
+            {
+              "value": "S/ 18,200",
+              "label": "Store B"
+            }
+          ],
+          "status": "Store A sold S/ 6,400 more"
+        }
+      },
+      {
+        "id": "order-status",
+        "category": "Resolve your orders",
+        "prompt": "Review my latest sale. Has it been paid, and what is left before shipping?",
+        "resultType": "sale",
+        "resultTitle": "You know the next step",
+        "resultDescription": "Order and shipping reviewed.",
+        "preview": {
+          "label": "Samsung Galaxy A56",
+          "items": [
+            {
+              "value": "Payment",
+              "label": "Approved"
+            },
+            {
+              "value": "Shipping",
+              "label": "Awaiting preparation"
+            }
+          ],
+          "status": "Illustrative order status"
+        }
+      },
+      {
+        "id": "stock-coverage",
+        "category": "Restock before you run out",
+        "prompt": "Using my sales and stock, tell me which products could run out soon.",
+        "resultType": "restock",
+        "resultTitle": "Review your next replenishment",
+        "resultDescription": "Estimate based on sales and stock.",
+        "preview": {
+          "label": "Bluetooth headphones",
+          "items": [
+            {
+              "value": "24",
+              "label": "Sold in 30 days"
+            },
+            {
+              "value": "5",
+              "label": "Current stock"
+            },
+            {
+              "value": "≈6",
+              "label": "Days of coverage"
+            }
+          ],
+          "status": "If the recent sales rate continues"
+        }
       }
     ],
     "photoExamples": [
       {
-        "eyebrow": "Seller in action",
-        "image": "/images/lifestyle/seller-workspace.png",
-        "alt": "Seller working on her online store from a laptop",
-        "note": "Clearer decisions for your operation."
-      },
-      {
-        "eyebrow": "Connected team",
-        "image": "/images/lifestyle/agency-team.png",
-        "alt": "Ecommerce team reviewing sales and orders",
-        "note": "A clear view for every client."
-      },
-      {
-        "eyebrow": "Publish in fewer steps",
+        "eyebrow": "List with fewer steps",
+        "note": "From photos to a listing prepared to sell.",
         "image": "/images/lifestyle/publish-from-photo.png",
-        "alt": "Seller photographing a smartphone to publish it in her online store",
-        "note": "From a photo to a listing ready to review."
+        "alt": "Seller photographing a smartphone to publish it in her online store"
       },
       {
-        "eyebrow": "Your catalog under control",
-        "image": "/images/lifestyle/catalog-control.png",
-        "alt": "Ecommerce operator reviewing inventory and catalog from a laptop",
-        "note": "Prices, stock, and promotions kept up to date."
+        "eyebrow": "A clearer view of your business",
+        "note": "Ask questions. Get useful answers. Make decisions.",
+        "image": "/images/lifestyle/seller-workspace.png",
+        "alt": "Seller working on her online store from a laptop"
       },
       {
-        "eyebrow": "Turn data into action",
+        "eyebrow": "Think bigger",
+        "note": "Turn information into decisions that help you grow.",
         "image": "/images/lifestyle/sales-analysis.png",
-        "alt": "Ecommerce team analyzing sales performance",
-        "note": "Spot opportunities to grow with clarity."
+        "alt": "Ecommerce team analyzing sales performance"
+      },
+      {
+        "eyebrow": "One AI for your businesses",
+        "note": "Less repetitive work. More time to grow.",
+        "image": "/images/lifestyle/agency-team.png",
+        "alt": "Ecommerce team reviewing sales and orders"
       }
     ],
     "features": [
@@ -362,7 +517,7 @@
     "noCard": "No card required",
     "howItWorks": "See how it works",
     "featuresTitle": "What you can do with merchat",
-    "showcaseTitle": "Ask merchat for what you need",
+    "showcaseTitle": "One question. Much more than an answer.",
     "stepsTitle": "How it works",
     "stepsIntro": "Create your account, connect Mercado Libre, and use merchat as your assistant from the AI tool you prefer.",
     "chatgptGuideLabel": "Guide to connect merchat to ChatGPT",
@@ -456,6 +611,8 @@
     "footerRights": "All rights reserved.",
     "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre.",
     "pricingOffer": "Save 50% on Vendedor and Vendedor Pro, and 83% on Vendedor Max Anual.",
-    "discountLabel": "50% OFF"
+    "discountLabel": "50% OFF",
+    "showcaseIntro": "With MerChat, your AI can help you research, list products, analyze and manage your business on Mercado Libre. From a simple question to complex tasks, all you have to do is ask.",
+    "showcaseDisclaimer": "Illustrative examples. Features and results depend on available data and permissions."
   }
 }

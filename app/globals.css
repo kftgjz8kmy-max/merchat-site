@@ -2414,3 +2414,82 @@ body, main { background: var(--bg); }
   .closing p { font-size: 16px; margin-top: 18px; }
 }
 .features h3 { min-height: 2.6em; }
+
+/* Capability stories: the request leads, the preview makes the outcome concrete. */
+#resultados .section-title { max-width: 30ch; margin-bottom: 18px; }
+#resultados .showcase-intro { max-width: 64ch; margin: 0 auto 36px; text-align: center; font-size: 17px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
+#resultados .showcase-disclaimer { max-width: 72ch; margin: 22px auto 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
+#resultados .carousel-set { grid-auto-columns: 320px; grid-template-rows: repeat(2, minmax(500px, max-content)); padding-right: 169px; }
+#resultados .carousel-set .example-card { width: 320px; padding: 20px; gap: 16px; }
+#resultados .demo-card > span { padding: 0; font-size: 17px; font-weight: 600; line-height: 1.35; }
+#resultados .example-bubble { padding: 13px 15px; font-size: 15px; line-height: 1.5; }
+#resultados .demo-card > strong { margin-top: auto; font-size: 17px; line-height: 1.35; }
+#resultados .demo-card > small { font-size: 14px; line-height: 1.5; color: var(--muted); }
+#resultados .cap-preview { display: flex; flex-direction: column; gap: 12px; padding: 14px; border: 1px solid #E1E7F2; border-radius: 14px; background: #F8FAFE; font-size: 14px; line-height: 1.4; color: #172554; }
+#resultados .cap-label { font-size: 14px; font-weight: 600; }
+#resultados .cap-items { display: flex; flex-direction: column; gap: 10px; }
+#resultados .cap-item { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+#resultados .cap-item b { font-size: inherit; font-weight: 600; }
+#resultados .cap-item span { color: #475569; }
+#resultados .cap-status { display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 1.45; color: #475569; border-top: 1px solid #E1E7F2; padding-top: 10px; }
+#resultados :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-items { flex-direction: row; gap: 12px; }
+#resultados :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-item { flex: 1; flex-direction: column; gap: 5px; }
+#resultados :is(.cap-promotion,.cap-excel,.cap-priorities,.cap-ads,.cap-accounts,.cap-restock) .cap-item b { font-size: 26px; line-height: 1.1; letter-spacing: -.025em; font-variant-numeric: tabular-nums; }
+#resultados .cap-promotion .cap-item:last-child b, #resultados .cap-promotion .cap-status { color: #166534; }
+#resultados .cap-promotion .cap-label { display: inline-flex; align-self: flex-start; padding: 5px 9px; border-radius: 8px; background: #FFF0B8; color: #55420A; }
+#resultados .cap-excel .cap-label { padding: 9px 12px; border: 1px solid #CDE3D6; border-radius: 8px; background: #F0FDF4; color: #166534; }
+#resultados .cap-excel .cap-item:last-child b { color: #92400E; }
+#resultados :is(.cap-diagnosis,.cap-performance,.cap-sale) .cap-item { flex-direction: column; gap: 3px; padding-left: 12px; position: relative; }
+#resultados :is(.cap-diagnosis,.cap-performance,.cap-sale) .cap-item::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #B45309; position: absolute; left: 0; top: 7px; }
+#resultados .cap-performance .cap-item::before { background: var(--blue); }
+#resultados .cap-sale .cap-item:first-child::before { background: #15803D; }
+#resultados .cap-priorities .cap-item-0 b { color: #9F1239; }
+#resultados .cap-priorities .cap-item-1 b { color: #92400E; }
+#resultados .cap-priorities .cap-item-2 b { color: var(--blue); }
+#resultados .cap-accounts .cap-items { gap: 8px; }
+#resultados .cap-accounts .cap-item { background: white; border: 1px solid #DFE7F5; border-radius: 9px; padding: 10px; }
+#resultados .cap-accounts .cap-item b { font-size: 19px; white-space: nowrap; }
+#resultados .cap-price-range .cap-item { flex-direction: column; gap: 3px; }
+#resultados .cap-price-range .cap-item b { font-size: 19px; font-variant-numeric: tabular-nums; }
+#resultados .cap-range { position: relative; height: 16px; margin: 5px 0; background: #E3EAF7; border-radius: 8px; }
+#resultados .cap-range span { position: absolute; left: 10%; right: 30%; top: 0; bottom: 0; border-radius: 8px; background: #B9CEF9; }
+#resultados .cap-range i { position: absolute; left: 87%; top: -4px; height: 24px; width: 3px; border-radius: 2px; background: var(--blue); }
+#resultados .cap-bars { height: 50px; display: flex; align-items: end; gap: 10px; border-bottom: 1px solid #CCD7EB; }
+#resultados .cap-bars i { flex: 1; border-radius: 4px 4px 0 0; background: #AFC6F6; }
+#resultados .cap-bars i:nth-child(4) { background: var(--blue); }
+#resultados .cap-stock { height: 8px; background: #E4EAF4; border-radius: 6px; overflow: hidden; }
+#resultados .cap-stock span { display: block; width: 21%; height: 100%; background: #D97706; }
+#resultados .cap-product-main { width: 100%; height: 100px; object-fit: cover; border-radius: 9px; }
+#resultados .cap-product-photos, #resultados .cap-gallery { display: flex; gap: 7px; }
+#resultados .cap-product-photos > div, #resultados .cap-gallery > div { flex: 1; min-width: 0; }
+#resultados .cap-product-photos img, #resultados .cap-gallery img { width: 100%; height: 40px; object-fit: cover; border-radius: 6px; }
+#resultados .cap-gallery img { height: 60px; }
+#resultados .cap-gallery span { display: block; text-align: center; font-size: 12px; margin-top: 4px; }
+#resultados .cap-gallery > div:nth-child(3) { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+#resultados .cap-order { display: flex; gap: 10px; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; padding: 10px 0; }
+#resultados .cap-order b { color: var(--blue); font-size: 14px; }
+#resultados .example-photo .photo-overlay { padding: 22px; }
+#resultados .example-photo .photo-overlay span { font-size: 14px; }
+#resultados .example-photo .photo-overlay strong { font-size: 23px; line-height: 1.25; }
+#resultados .carousel-arrow:focus-visible, #resultados .dots button:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+@media(max-width:640px) {
+  #resultados .carousel-set { grid-auto-columns: calc(88vw - 32px); padding-right: calc(44vw - 9px); grid-template-rows: repeat(2, minmax(500px, max-content)); }
+  #resultados .carousel-set .example-card { width: calc(88vw - 32px); padding: 17px; gap: 14px; }
+  #resultados .showcase-intro { font-size: 16px; margin-bottom: 28px; }
+  #resultados .cap-preview { padding: 12px; font-size: 13px; }
+  #resultados .cap-accounts .cap-item { padding: 7px; }
+  #resultados .cap-accounts .cap-item b { font-size: 16px; }
+  #resultados .cap-order { gap: 6px; font-size: 12px; }
+}
+#resultados .showcase-carousel { scroll-snap-type: none; }
+#resultados .cap-listing { gap: 8px; }
+#resultados .cap-product-gallery { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 7px; }
+#resultados .cap-product-main { height: 96px; }
+#resultados .cap-product-photos { flex-direction: column; gap: 3px; }
+#resultados .cap-product-photos img { display: block; height: 30px; }
+#resultados .example-photo .photo-overlay strong { max-width: none; width: auto; }
+#resultados .cap-item { min-width: 0; }
+#resultados .cap-item span { overflow-wrap: anywhere; }
+#resultados .cap-priorities .cap-items { flex-direction: column; }
+#resultados .cap-priorities .cap-item { flex-direction: row; align-items: center; }
+#resultados .cap-priorities .cap-item b { min-width: 22px; }

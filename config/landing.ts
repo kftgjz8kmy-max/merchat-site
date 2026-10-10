@@ -1,6 +1,6 @@
 import { getLocaleMessages } from "@/i18n/messages";
 
-export type UseCaseResultType = "listing" | "photo-identification" | "technical" | "price-range" | "discount" | "promotion" | "eligibility" | "excel" | "bulk-update" | "sale" | "ranking" | "restock" | "stagnant" | "performance" | "dashboard";
+export type UseCaseResultType = "listing" | "promotion" | "excel" | "gallery" | "diagnosis" | "price-range" | "priorities" | "performance" | "ads" | "accounts" | "sale" | "restock";
 
 export type UseCaseCard = {
   id: string;
@@ -9,6 +9,11 @@ export type UseCaseCard = {
   resultType: UseCaseResultType;
   resultTitle: string;
   resultDescription?: string;
+  preview: {
+    label: string;
+    items: { label: string; value?: string }[];
+    status: string;
+  };
 };
 
 export type LandingUi = { [key: string]: string };

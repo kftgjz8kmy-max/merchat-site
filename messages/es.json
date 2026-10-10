@@ -13,152 +13,307 @@
     },
     "useCases": [
       {
-        "id": "create-listing",
-        "category": "Crea una publicación",
-        "prompt": "Quiero vender este celular. Está nuevo, tiene 256 GB y tengo tres unidades.",
+        "id": "photo-listing",
+        "category": "De fotos a una publicación",
+        "prompt": "Te paso las fotos de esta MacBook. Ayúdame a preparar todo para publicarla.",
         "resultType": "listing",
-        "resultTitle": "Publicación lista para revisar"
+        "resultTitle": "Publicación lista para revisar",
+        "resultDescription": "Fotos, características y condiciones preparadas.",
+        "preview": {
+          "label": "MacBook Pro 14″",
+          "items": [
+            {
+              "label": "Características preparadas"
+            },
+            {
+              "label": "Fotos preparadas"
+            }
+          ],
+          "status": "Publicación pendiente de aprobación"
+        }
       },
       {
-        "id": "publish-from-photo",
-        "category": "Publica desde una foto",
-        "prompt": "Usa estas fotos, identifica el producto y pregúntame solo lo que falte.",
-        "resultType": "photo-identification",
-        "resultTitle": "Faltan solo 2 datos"
-      },
-      {
-        "id": "technical-details",
-        "category": "Completa datos técnicos",
-        "prompt": "Completa los atributos faltantes y verifica que los datos sean correctos.",
-        "resultType": "technical",
-        "resultTitle": "12 atributos verificados",
-        "resultDescription": "3 atributos completados"
-      },
-      {
-        "id": "compare-prices",
-        "category": "Compara tus precios",
-        "prompt": "Compara mi precio con publicaciones similares y dime si debo ajustarlo.",
-        "resultType": "price-range",
-        "resultTitle": "4% sobre el rango",
-        "resultDescription": "Precio actual: S/ 1,399"
-      },
-      {
-        "id": "calculate-discount",
-        "category": "Calcula tu descuento",
-        "prompt": "Con mis costos y comisiones, dime hasta cuánto puedo descontar sin perder dinero.",
-        "resultType": "discount",
-        "resultTitle": "Mantienes margen positivo",
-        "resultDescription": "Descuento máximo: 11%"
-      },
-      {
-        "id": "create-promotion",
-        "category": "Crea una promoción",
-        "prompt": "Crea una promoción de 10% para estos productos durante siete días.",
+        "id": "batch-campaign",
+        "category": "21 productos. Una campaña.",
+        "prompt": "Agrega estos 21 productos a la campaña con 10% de descuento.",
         "resultType": "promotion",
-        "resultTitle": "Promoción lista para confirmar",
-        "resultDescription": "Oferta de la semana"
+        "resultTitle": "21 ofertas aplicadas y verificadas",
+        "resultDescription": "Precios revisados y aprobados antes de aplicar.",
+        "preview": {
+          "label": "10% de descuento",
+          "items": [
+            {
+              "value": "21",
+              "label": "Productos procesados"
+            },
+            {
+              "value": "21/21",
+              "label": "Verificados"
+            }
+          ],
+          "status": "Aplicado después de aprobar"
+        }
       },
       {
-        "id": "add-to-promotion",
-        "category": "Agrega a promoción",
-        "prompt": "Agrega estos productos a la promoción Ofertas de la Semana.",
-        "resultType": "eligibility",
-        "resultTitle": "Productos preparados",
-        "resultDescription": "5 de 6 agregados"
-      },
-      {
-        "id": "profit-excel",
-        "category": "Calcula tus ganancias",
-        "prompt": "Te doy mis costos. Crea un Excel con la ganancia neta después de comisiones y envíos.",
+        "id": "inventory-file",
+        "category": "Un Excel. Decenas de cambios.",
+        "prompt": "Aquí están mis nuevos precios y stock. Compáralos con mis publicaciones y prepara los cambios.",
         "resultType": "excel",
-        "resultTitle": "Ganancia neta calculada",
-        "resultDescription": "126 publicaciones analizadas"
+        "resultTitle": "Del Excel a tus publicaciones",
+        "resultDescription": "Los cambios se revisan antes de aplicarse.",
+        "preview": {
+          "label": "Inventario.xlsx",
+          "items": [
+            {
+              "value": "62",
+              "label": "Filas analizadas"
+            },
+            {
+              "value": "58",
+              "label": "Cambios preparados"
+            },
+            {
+              "value": "4",
+              "label": "Requieren revisión"
+            }
+          ],
+          "status": "Pendiente de aprobación"
+        }
       },
       {
-        "id": "bulk-catalog",
-        "category": "Actualiza tu catálogo",
-        "prompt": "Usa este Excel para actualizar los precios y el stock de mis publicaciones.",
-        "resultType": "bulk-update",
-        "resultTitle": "Cambios listos para aprobar",
-        "resultDescription": "84 productos revisados"
+        "id": "photo-order",
+        "category": "Edita tus fotos desde el chat",
+        "prompt": "Muéstrame las fotos de esta publicación. Quiero cambiar el orden.",
+        "resultType": "gallery",
+        "resultTitle": "Nuevo orden listo para aprobar",
+        "resultDescription": "Arrastra tus fotos directamente en el chat.",
+        "preview": {
+          "label": "Orden de las fotos",
+          "items": [],
+          "status": "Pendiente de aprobación"
+        }
       },
       {
-        "id": "last-sale",
-        "category": "Consulta tu última venta",
-        "prompt": "Muéstrame mi última venta con producto, comprador, pago, envío y estado.",
-        "resultType": "sale",
-        "resultTitle": "S/ 1,249",
-        "resultDescription": "Hace 12 minutos"
+        "id": "margin-diagnosis",
+        "category": "Descubre dónde pierdes margen",
+        "prompt": "Cruza mis ventas, costos y publicidad. Dime qué productos necesitan atención.",
+        "resultType": "diagnosis",
+        "resultTitle": "Problemas detectados. Acciones sugeridas.",
+        "resultDescription": "Decisiones basadas en tus datos disponibles.",
+        "preview": {
+          "label": "3 productos para revisar",
+          "items": [
+            {
+              "value": "Producto A",
+              "label": "Posible margen insuficiente"
+            },
+            {
+              "value": "Producto B",
+              "label": "Publicidad costosa"
+            },
+            {
+              "value": "Producto C",
+              "label": "Rentabilidad por confirmar"
+            }
+          ],
+          "status": "Costos aportados por el vendedor"
+        }
       },
       {
-        "id": "compare-products",
-        "category": "Compara tus productos",
-        "prompt": "Dame los tres productos más vendidos y los tres menos vendidos del trimestre.",
-        "resultType": "ranking",
-        "resultTitle": "Más y menos vendidos"
+        "id": "market-research",
+        "category": "Investiga el mercado por ti",
+        "prompt": "Busca precios públicos de iPhones similares y compáralos con los míos.",
+        "resultType": "price-range",
+        "resultTitle": "Descubre cómo están tus precios",
+        "resultDescription": "Compara referencias antes de decidir.",
+        "preview": {
+          "label": "Referencias públicas",
+          "items": [
+            {
+              "value": "S/ 1,249–1,349",
+              "label": "Referencias públicas"
+            },
+            {
+              "value": "S/ 1,399",
+              "label": "Tu precio"
+            },
+            {
+              "value": "+S/ 50",
+              "label": "Frente al máximo"
+            }
+          ],
+          "status": "Comparación ilustrativa · Según herramientas de tu IA"
+        }
       },
       {
-        "id": "restock",
-        "category": "Planifica tu reposición",
-        "prompt": "Analiza mis ventas y dime qué productos debo reponer y cuántas unidades comprar.",
-        "resultType": "restock",
-        "resultTitle": "Basado en rotación y stock"
+        "id": "daily-priorities",
+        "category": "¿Qué necesita tu negocio hoy?",
+        "prompt": "Revisa mi cuenta y dime por dónde debería empezar hoy.",
+        "resultType": "priorities",
+        "resultTitle": "Tu lista de prioridades está lista",
+        "resultDescription": "Empieza por lo que más atención necesita.",
+        "preview": {
+          "label": "Prioridades de hoy",
+          "items": [
+            {
+              "value": "2",
+              "label": "Preguntas sin responder"
+            },
+            {
+              "value": "3",
+              "label": "Advertencias de calidad"
+            },
+            {
+              "value": "5",
+              "label": "Oportunidades de mejora"
+            }
+          ],
+          "status": "Revisión solicitada por ti"
+        }
       },
       {
-        "id": "stagnant-products",
-        "category": "Detecta productos detenidos",
-        "prompt": "Muéstrame las publicaciones que no tuvieron ventas en los últimos 60 días.",
-        "resultType": "stagnant",
-        "resultTitle": "Requieren atención",
-        "resultDescription": "9 publicaciones sin ventas"
-      },
-      {
-        "id": "improve-listings",
-        "category": "Mejora publicaciones",
-        "prompt": "Encuentra publicaciones con visitas pero pocas ventas y dime qué debería mejorar.",
+        "id": "listing-improvements",
+        "category": "Encuentra qué mejorar",
+        "prompt": "Busca publicaciones con visitas pero pocas ventas y propón mejoras.",
         "resultType": "performance",
-        "resultTitle": "Conversión: 0.24%",
-        "resultDescription": "1,240 visitas · 3 ventas"
+        "resultTitle": "Plan de mejora preparado",
+        "resultDescription": "Primero analiza. Después decide.",
+        "preview": {
+          "label": "4 publicaciones para revisar",
+          "items": [
+            {
+              "value": "Precio",
+              "label": "Evaluar competitividad"
+            },
+            {
+              "value": "Fotos",
+              "label": "Revisar presentación"
+            },
+            {
+              "value": "Características",
+              "label": "Verificar datos faltantes"
+            }
+          ],
+          "status": "Recomendaciones para revisar"
+        }
       },
       {
-        "id": "quarterly-diagnosis",
-        "category": "Diagnostica tu trimestre",
-        "prompt": "Analiza este trimestre, compáralo con el anterior y muéstrame un diagnóstico con gráficas.",
-        "resultType": "dashboard",
-        "resultTitle": "Rendimiento en crecimiento",
-        "resultDescription": "S/ 184,500 · +14%"
+        "id": "product-ads",
+        "category": "Tu publicidad bajo la lupa",
+        "prompt": "¿Mis Product Ads están dando resultado? Analiza mis campañas.",
+        "resultType": "ads",
+        "resultTitle": "Publicidad analizada",
+        "resultDescription": "Detecta qué campañas necesitan atención.",
+        "preview": {
+          "label": "Product Ads",
+          "items": [
+            {
+              "value": "28%",
+              "label": "ACOS"
+            },
+            {
+              "value": "2",
+              "label": "Campañas para revisar"
+            }
+          ],
+          "status": "Recomendaciones listas · Datos disponibles"
+        }
+      },
+      {
+        "id": "account-comparison",
+        "category": "Dos tiendas. Una sola IA.",
+        "prompt": "Compara mis dos cuentas de Mercado Libre y dime cuál vendió más este mes.",
+        "resultType": "accounts",
+        "resultTitle": "Tus negocios, más claros",
+        "resultDescription": "Cada cuenta con sus propios datos.",
+        "preview": {
+          "label": "Cuentas autorizadas",
+          "items": [
+            {
+              "value": "S/ 24,600",
+              "label": "Tienda A"
+            },
+            {
+              "value": "S/ 18,200",
+              "label": "Tienda B"
+            }
+          ],
+          "status": "Tienda A vendió S/ 6,400 más"
+        }
+      },
+      {
+        "id": "order-status",
+        "category": "Resuelve tus pedidos",
+        "prompt": "Revisa mi última venta. ¿Ya pagaron y qué falta para enviarla?",
+        "resultType": "sale",
+        "resultTitle": "Ya sabes cuál es el siguiente paso",
+        "resultDescription": "Pedido y envío revisados.",
+        "preview": {
+          "label": "Samsung Galaxy A56",
+          "items": [
+            {
+              "value": "Pago",
+              "label": "Aprobado"
+            },
+            {
+              "value": "Envío",
+              "label": "Pendiente de preparación"
+            }
+          ],
+          "status": "Estado ilustrativo del pedido"
+        }
+      },
+      {
+        "id": "stock-coverage",
+        "category": "Repón antes de quedarte sin stock",
+        "prompt": "Con mis ventas y stock, dime qué productos podrían agotarse pronto.",
+        "resultType": "restock",
+        "resultTitle": "Revisa tu próxima reposición",
+        "resultDescription": "Estimación basada en ventas y stock.",
+        "preview": {
+          "label": "Audífonos Bluetooth",
+          "items": [
+            {
+              "value": "24",
+              "label": "Vendidos en 30 días"
+            },
+            {
+              "value": "5",
+              "label": "Stock actual"
+            },
+            {
+              "value": "≈6",
+              "label": "Días de cobertura"
+            }
+          ],
+          "status": "Si continúa el ritmo de ventas reciente"
+        }
       }
     ],
     "photoExamples": [
       {
-        "eyebrow": "Vendedor en acción",
-        "image": "/images/lifestyle/seller-workspace.png",
-        "alt": "Vendedora trabajando en su tienda online desde una laptop",
-        "note": "Decisiones más claras para tu operación."
-      },
-      {
-        "eyebrow": "Equipo conectado",
-        "image": "/images/lifestyle/agency-team.png",
-        "alt": "Equipo de ecommerce revisando ventas y pedidos",
-        "note": "Una vista clara para cada cliente."
-      },
-      {
         "eyebrow": "Publica con menos pasos",
+        "note": "De unas fotos a una publicación preparada para vender.",
         "image": "/images/lifestyle/publish-from-photo.png",
-        "alt": "Vendedora fotografiando un smartphone para publicarlo en su tienda online",
-        "note": "De una foto a una publicación lista para revisar."
+        "alt": "Vendedora fotografiando un smartphone para publicarlo en su tienda online"
       },
       {
-        "eyebrow": "Tu catálogo bajo control",
-        "image": "/images/lifestyle/catalog-control.png",
-        "alt": "Operador de ecommerce revisando inventario y catálogo desde una laptop",
-        "note": "Precios, stock y promociones al día."
+        "eyebrow": "Tu negocio, más claro",
+        "note": "Haz preguntas. Obtén respuestas útiles. Toma decisiones.",
+        "image": "/images/lifestyle/seller-workspace.png",
+        "alt": "Vendedora trabajando en su tienda online desde una laptop"
       },
       {
-        "eyebrow": "Convierte datos en acción",
+        "eyebrow": "Piensa en grande",
+        "note": "Convierte información en decisiones para crecer.",
         "image": "/images/lifestyle/sales-analysis.png",
-        "alt": "Equipo de ecommerce analizando el rendimiento de sus ventas",
-        "note": "Detecta oportunidades para crecer con claridad."
+        "alt": "Equipo de ecommerce analizando el rendimiento de sus ventas"
+      },
+      {
+        "eyebrow": "Una IA para tus negocios",
+        "note": "Menos trabajo repetitivo. Más tiempo para crecer.",
+        "image": "/images/lifestyle/agency-team.png",
+        "alt": "Equipo de ecommerce revisando ventas y pedidos"
       }
     ],
     "features": [
@@ -362,7 +517,7 @@
     "noCard": "Sin tarjeta",
     "howItWorks": "Ver cómo funciona",
     "featuresTitle": "Lo que puedes hacer con merchat",
-    "showcaseTitle": "Pídele a merchat lo que necesitas",
+    "showcaseTitle": "Una pregunta. Mucho más que una respuesta.",
     "stepsTitle": "Cómo funciona",
     "stepsIntro": "Crea tu cuenta, conecta Mercado Libre y usa merchat como tu asistente desde la herramienta de IA que prefieras.",
     "chatgptGuideLabel": "Guía para conectar merchat a ChatGPT",
@@ -456,6 +611,8 @@
     "footerRights": "Todos los derechos reservados.",
     "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre.",
     "pricingOffer": "Ahorra 50% en Vendedor y Vendedor Pro, y 83% en Vendedor Max Anual.",
-    "discountLabel": "50% OFF"
+    "discountLabel": "50% OFF",
+    "showcaseIntro": "Con MerChat, tu IA puede ayudarte a investigar, publicar, analizar y gestionar tu negocio en Mercado Libre. Desde una simple consulta hasta tareas complejas, solo tienes que pedirlo.",
+    "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles."
   }
 }
