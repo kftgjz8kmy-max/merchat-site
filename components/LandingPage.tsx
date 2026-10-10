@@ -1,9 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- Vinext's local dev renderer is incompatible with next/image; fixed-dimension local HiDPI assets are intentional. */
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { getLanding, getUi, landing as spanishLanding, type LandingUi, type UseCaseCard } from "@/config/landing";
+import { getLanding, getUi, landing as spanishLanding, type UseCaseCard } from "@/config/landing";
 import { siteConfig } from "@/config/site";
 import { BrandLogo } from "@/components/BrandLogo";
 import { localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
@@ -111,32 +111,97 @@ function StepIcon({ step }: { step: number }) {
   return <img className="step-icon-image" src={stepIconSources[step] ?? stepIconSources[0]} alt="" width="48" height="48" />;
 }
 
-function UseCaseResult({ card, copy }: { card: UseCaseCard; copy: LandingUi }) {
-  switch (card.resultType) {
-    case "listing": return <div className="listing-preview"><i /><div><b>Samsung Galaxy A56 256 GB</b><small>{copy.resultNew} · {copy.resultStock}: 3 {copy.resultUnits}</small></div></div>;
-    case "photo-identification": return <div className="identified-product"><i aria-hidden="true">⌁</i><div><b>Xiaomi Redmi Note 14</b><small>✓ {copy.resultModelIdentified}</small></div></div>;
-    case "technical": return <div className="technical-list"><span>{copy.resultBrand} <b>Samsung</b></span><span>{copy.resultMemory} <b>256 GB</b></span><span>{copy.resultScreen} <b>6.7″</b></span></div>;
-    case "price-range": return <div className="price-insight"><small>{copy.resultCompetitiveRange}</small><div><i /><b /></div><span>S/ 1,249 — S/ 1,349</span></div>;
-    case "discount": return <div className="metric-pairs"><span>{copy.resultCurrentPrice} <b>S/ 599</b></span><span>{copy.resultProfitableMinimum} <b>S/ 529</b></span></div>;
-    case "promotion": return <div className="promotion-summary"><b>{copy.resultWeeklyOffer}</b><span><strong>10%</strong><small>8 {copy.resultProducts} · 7 {copy.resultDays}</small></span></div>;
-    case "eligibility": return <div className="status-list"><span>✓ 5 {copy.resultAdded}</span><span>! 1 {copy.resultNeedsPriceAdjustment}</span></div>;
-    case "excel": return <div className="excel-preview"><i aria-hidden="true">↙</i><div><b>{copy.resultProfitFile}</b><small>{copy.resultPrice} · {copy.resultFee} · {copy.resultShipping}</small></div><span>{copy.resultExcelGenerated}</span></div>;
-    case "bulk-update": return <div className="metric-grid"><span><b>62</b> {copy.resultPrices}</span><span><b>18</b> {copy.resultStocks}</span><span><b>4</b> {copy.resultReview}</span></div>;
-    case "sale": return <div className="sale-summary"><b>Nintendo Switch OLED</b><span><i aria-hidden="true">✓</i> {copy.resultPaymentApproved}</span><small>{copy.resultReadyToShip}</small></div>;
-    case "ranking": return <div className="ranking"><span><b>{copy.resultBestSellers}</b> {copy.resultHeadphones} · 48</span><span><b>{copy.resultLowestSellers}</b> {copy.resultWebcam} · 1</span></div>;
-    case "restock": return <div className="restock-list"><span>{copy.resultHeadphones} <b>+20</b></span><span>{copy.resultSmartwatch} <b>+12</b></span><span>{copy.resultAirFryer} <b>+8</b></span></div>;
-    case "stagnant": return <div className="alert-summary"><b>S/ 12,480</b><span>{copy.resultFrozenStock}</span><small>3 {copy.resultAboveMarket}</small></div>;
-    case "performance": return <div className="performance-list"><span>{copy.resultAdjustPrice}</span><span>{copy.resultCompleteAttributes}</span><span>{copy.resultReviewPhotos}</span></div>;
-    case "dashboard": return <div className="mini-dashboard"><div><i /><i /><i /></div><span><b>326</b> {copy.resultQuarterSales}</span></div>;
-  }
+const productPhotos = ["open", "keyboard", "side", "closed"] as const;
+
+function ProductPhotos({ count = 4 }: { count?: number }) {
+  return <div className="cap-gallery" aria-hidden="true">
+    {productPhotos.slice(0, count).map((photo, index) => <div key={photo}>
+      <img src={`/images/products/macbook-${photo}.jpg`} alt="" width="160" height="100" loading="lazy" decoding="async" />
+      <span>{index + 1}</span>
+    </div>)}
+  </div>;
 }
 
-function UseCaseDemoCard({ card, copy }: { card: UseCaseCard; copy: LandingUi }) { return <article className={`example-card demo-card result-${card.resultType}`}><span>{card.category}</span><div className="example-bubble">{card.prompt}</div><UseCaseResult card={card} copy={copy} /><strong>{card.resultTitle}</strong>{card.resultDescription && <small>{card.resultDescription}</small>}</article>; }
+function UseCaseResult({ card, ui }: { card: UseCaseCard; ui: ReturnType<typeof getUi> }) {
+  const { label, status, example } = card.preview;
+  const isNumericCell = (value: string) => /^(?:[+−-]\s*)?(?:(?:S\/|R\$)\s*)?\d[\d.,]*(?:\s*(?:%|GB|unidades?|units?|件))?(?:\s*(?:→|\/)\s*(?:(?:S\/|R\$)\s*)?\d[\d.,]*(?:\s*(?:%|GB|unidades?|units?|件))?)*$/u.test(value.trim());
+  return <section className="cap-output" aria-label={label}>
+    <div className="cap-output-heading"><HeroIcon name="confirm" size={24} /><h3>{label}</h3></div>
+    {example.media === "product" && <img className="cap-output-product" src="/images/products/macbook-open.jpg" alt="MacBook Pro 14″" width="560" height="320" loading="lazy" decoding="async" />}
+    {example.media === "gallery" && <ProductPhotos count={card.id === "photo-order" ? 4 : 3} />}
+    {card.id === "photo-listing" && <ProductPhotos count={3} />}
+    <table className="cap-table">
+      <caption>{ui.showcaseIllustrative}</caption>
+      <thead><tr>{example.columns.map((column, columnIndex) => <th key={column} scope="col" data-numeric={columnIndex > 0 && example.rows.every((row) => isNumericCell(row[columnIndex])) || undefined}>{column}</th>)}</tr></thead>
+      <tbody>{example.rows.map((row, index) => <tr key={index}>{row.map((cell, columnIndex) => columnIndex === 0 ? <th key={columnIndex} scope="row">{cell}</th> : <td key={columnIndex} data-numeric={isNumericCell(cell) || undefined}>{cell}</td>)}</tr>)}</tbody>
+    </table>
+    <p className="cap-takeaway"><HeroIcon name="arrow" size={18} />{example.conclusion}</p>
+    <p className="cap-output-status"><HeroIcon name="shield" size={16} />{status}</p>
+  </section>;
+}
+
+function UseCaseDemoCard({ card, ui, onOpen }: { card: UseCaseCard; ui: ReturnType<typeof getUi>; onOpen: (id: string) => void }) {
+  return <article className={`example-card demo-card result-${card.resultType}`} data-capability={card.id}>
+    <h4 className="cap-card-title">{card.category}</h4><div className="example-bubble">{card.prompt}</div>
+    <strong>{card.resultTitle}</strong>
+    <button className="cap-open" type="button" aria-haspopup="dialog" aria-label={`${ui.showcaseOpen}: ${card.category}`} onClick={() => onOpen(card.id)}>
+      <span>{ui.showcaseOpen}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6" /></svg>
+    </button>
+  </article>;
+}
+
+function CapabilityDialog({ card, index, total, ui, onClose, onMove }: { card: UseCaseCard | null; index: number; total: number; ui: ReturnType<typeof getUi>; onClose: () => void; onMove: (direction: -1 | 1) => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const isOpen = card !== null;
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || !isOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>(".cap-close")?.focus();
+    const closeOnBackdrop = (event: MouseEvent) => {
+      const bounds = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) onClose();
+    };
+    dialog.addEventListener("click", closeOnBackdrop);
+    return () => {
+      dialog.removeEventListener("click", closeOnBackdrop);
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus({ preventScroll: true });
+    };
+  }, [isOpen, onClose]);
+  useEffect(() => {
+    dialogRef.current?.scrollTo({ top: 0 });
+    dialogRef.current?.querySelector<HTMLElement>(".cap-dialog-content")?.scrollTo({ top: 0 });
+  }, [card?.id]);
+  return <dialog ref={dialogRef} className="cap-dialog" aria-labelledby="cap-dialog-title" onCancel={onClose}>
+    {card && <div className="cap-dialog-inner">
+      <header className="cap-dialog-toolbar"><BrandLogo /><button className="cap-close" type="button" aria-label={ui.showcaseClose} onClick={onClose}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></header>
+      <div className="cap-dialog-content" key={card.id}>
+        <h2 className="cap-dialog-title" id="cap-dialog-title">{card.category}</h2><div className="cap-conversation"><div className="cap-question"><span className="cap-speaker">{ui.showcaseQuestion}</span><blockquote>{card.prompt}</blockquote></div><div className="cap-response"><span className="cap-speaker"><HeroIcon name="sparkle" size={16} />{siteConfig.name}</span><p className="cap-answer">{card.resultTitle}</p></div>{card.resultDescription && <details className="cap-method"><summary>{ui.showcaseHow}</summary><p>{card.resultDescription}</p></details>}</div>
+        <div className="cap-result"><UseCaseResult card={card} ui={ui} /></div>
+      </div>
+      <footer className="cap-dialog-footer"><p>{ui.showcaseDataNote}</p><div className="cap-dialog-nav"><button type="button" aria-label={ui.carouselPrevious} onClick={() => onMove(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6" /></svg></button><span aria-live="polite" aria-atomic="true">{index + 1} / {total}</span><button type="button" aria-label={ui.carouselNext} onClick={() => onMove(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6" /></svg></button></div></footer>
+    </div>}
+  </dialog>;
+}
+
 function PhotoDemoCard({ demo }: { demo: (typeof spanishLanding.photoExamples)[number] }) { return <article className="example-card example-photo"><img src={demo.image} alt={demo.alt} width={1122} height={1402} loading="lazy" decoding="async" /><div className="photo-overlay"><span>{demo.eyebrow}</span><strong>{demo.note}</strong></div></article>; }
-function ShowcaseCards({ content, copy, duplicate = false }: { content: ReturnType<typeof getLanding>; copy: LandingUi; duplicate?: boolean }) {
-  const photoAfterCase = [1, 3, 5, 7, 9];
-  const leadPhoto = content.photoExamples[2];
-  return <div className="carousel-set" aria-hidden={duplicate || undefined}>{[<PhotoDemoCard demo={leadPhoto} key={leadPhoto.eyebrow} />, ...content.useCases.flatMap((card, index) => [<UseCaseDemoCard card={card} copy={copy} key={card.id} />, ...(photoAfterCase.includes(index) && index !== 5 ? [<PhotoDemoCard demo={content.photoExamples[photoAfterCase.indexOf(index)]} key={content.photoExamples[photoAfterCase.indexOf(index)].eyebrow} />] : [])])]}</div>;
+function ShowcaseCards({ content, ui, duplicate = false, onOpen }: { content: ReturnType<typeof getLanding>; ui: ReturnType<typeof getUi>; duplicate?: boolean; onOpen: (id: string) => void }) {
+  // Lead with four workflows; distribute the six photo breaks across the full collection.
+  const photoAfterCase = [3, 10, 17, 24, 31, 38];
+  return <div className="carousel-set" aria-hidden={duplicate || undefined} inert={duplicate || undefined}>{content.useCases.flatMap((card, index) => {
+    const photoIndex = photoAfterCase.indexOf(index);
+    return [<UseCaseDemoCard card={card} ui={ui} key={card.id} onOpen={onOpen} />, ...(photoIndex >= 0 ? [<PhotoDemoCard demo={content.photoExamples[photoIndex]} key={`photo-${photoIndex}`} />] : [])];
+  })}</div>;
+}
+
+function getShowcaseLoopWidth(carousel: HTMLDivElement) {
+  const sets = carousel.querySelectorAll<HTMLElement>(".carousel-set");
+  return sets.length > 1 ? sets[1].offsetLeft - sets[0].offsetLeft : carousel.scrollWidth / 2;
 }
 
 export default function LandingPage() {
@@ -149,12 +214,41 @@ export default function LandingPage() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const showcasePausedRef = useRef(false);
+  const showcaseHoveredRef = useRef(false);
+  const showcaseFocusedRef = useRef(false);
+  const showcaseVisibleRef = useRef(false);
+  const showcaseAutoStartRef = useRef(0);
+  const showcaseResumeOnCloseRef = useRef(false);
   const showcaseAutoScrollRef = useRef<number | null>(null);
   const showcaseResumeTimerRef = useRef<number | null>(null);
   const showcaseDragRef = useRef({ active: false, pointerId: 0, startX: 0, startScroll: 0 });
   const showcaseTouchRef = useRef({ active: false, startX: 0, startY: 0, lastX: 0, startScroll: 0 });
   const [isDraggingShowcase, setIsDraggingShowcase] = useState(false);
   const showcasePages = 4;
+  const [activeShowcaseIndex, setActiveShowcaseIndex] = useState<number | null>(null);
+  const closeShowcase = useCallback(() => {
+    showcaseResumeOnCloseRef.current = true;
+    setActiveShowcaseIndex(null);
+  }, [setActiveShowcaseIndex]);
+  useEffect(() => {
+    if (activeShowcaseIndex !== null || !showcaseResumeOnCloseRef.current) return;
+    // Resume after the dialog restores focus to its opener.
+    const frame = window.requestAnimationFrame(() => {
+      showcaseResumeOnCloseRef.current = false;
+      if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
+      showcaseResumeTimerRef.current = null;
+      showcaseAutoStartRef.current = 0;
+      showcaseAutoScrollRef.current = showcaseRef.current?.scrollLeft ?? null;
+      showcaseFocusedRef.current = false;
+      showcaseHoveredRef.current = false;
+      showcasePausedRef.current = false;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeShowcaseIndex]);
+  const openShowcase = (id: string) => {
+    const index = localizedLanding.useCases.findIndex((card) => card.id === id);
+    if (index >= 0) setActiveShowcaseIndex(index);
+  };
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
@@ -186,12 +280,12 @@ export default function LandingPage() {
     const interval = window.setInterval(() => {
       const time = Date.now();
       const carousel = showcaseRef.current;
-      if (carousel && showcasePausedRef.current) {
+      if (carousel && (showcasePausedRef.current || !showcaseVisibleRef.current || time < showcaseAutoStartRef.current || activeShowcaseIndex !== null)) {
         showcaseAutoScrollRef.current = carousel.scrollLeft;
       } else if (carousel) {
-        const loopWidth = carousel.scrollWidth / 2;
+        const loopWidth = getShowcaseLoopWidth(carousel);
         const currentPosition = showcaseAutoScrollRef.current ?? carousel.scrollLeft;
-        const nextPosition = currentPosition + (time - previousTime) * 0.018;
+        const nextPosition = currentPosition + (time - previousTime) * 0.012;
         showcaseAutoScrollRef.current = nextPosition >= loopWidth ? nextPosition - loopWidth : nextPosition;
         // Keep fractional progress in memory, but assign whole pixels for
         // WebKit versions that round element.scrollLeft values.
@@ -200,13 +294,24 @@ export default function LandingPage() {
       previousTime = time;
     }, 32);
     return () => window.clearInterval(interval);
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, activeShowcaseIndex]);
   useEffect(() => {
     const carousel = showcaseRef.current;
     if (!carousel) return;
-    const pause = () => { showcasePausedRef.current = true; };
-    const resume = () => { showcasePausedRef.current = false; };
-    const handleVisibility = () => { showcasePausedRef.current = document.hidden; };
+    const observer = new IntersectionObserver(([entry]) => {
+      const visible = entry.isIntersecting && entry.intersectionRatio >= .35;
+      if (visible && !showcaseVisibleRef.current) showcaseAutoStartRef.current = Date.now() + 3000;
+      showcaseVisibleRef.current = visible;
+    }, { threshold: .35 });
+    observer.observe(carousel);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const carousel = showcaseRef.current;
+    if (!carousel) return;
+    const pause = () => { showcaseHoveredRef.current = true; showcasePausedRef.current = true; };
+    const resume = () => { showcaseHoveredRef.current = false; showcasePausedRef.current = showcaseFocusedRef.current || showcaseDragRef.current.active || showcaseTouchRef.current.active; };
+    const handleVisibility = () => { showcasePausedRef.current = document.hidden || showcaseHoveredRef.current || showcaseFocusedRef.current; };
     carousel.addEventListener("pointerenter", pause);
     carousel.addEventListener("pointerleave", resume);
     document.addEventListener("visibilitychange", handleVisibility);
@@ -222,19 +327,34 @@ export default function LandingPage() {
   const moveShowcase = (page: number) => {
     const carousel = showcaseRef.current;
     if (!carousel) return;
-    const loopWidth = carousel.scrollWidth / 2;
+    const loopWidth = getShowcaseLoopWidth(carousel);
     showcasePausedRef.current = true;
     carousel.scrollLeft = (loopWidth * page) / showcasePages;
     setActiveShowcasePage(page);
     if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
-    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = false; }, 700);
+    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = showcaseHoveredRef.current || showcaseFocusedRef.current; }, 900);
   };
   const scheduleShowcaseResume = (delay = 900) => {
     if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
-    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = false; }, delay);
+    showcaseResumeTimerRef.current = window.setTimeout(() => { showcasePausedRef.current = document.hidden || showcaseHoveredRef.current || showcaseFocusedRef.current || showcaseTouchRef.current.active || showcaseDragRef.current.active; }, delay);
+  };
+  const moveShowcaseByView = (direction: -1 | 1) => {
+    const carousel = showcaseRef.current;
+    const set = carousel?.querySelector<HTMLElement>(".carousel-set");
+    const card = set?.querySelector<HTMLElement>(".example-card");
+    if (!carousel || !set || !card) return;
+    const setStyle = window.getComputedStyle(set);
+    const columnWidth = card.offsetWidth + Number.parseFloat(setStyle.columnGap);
+    const staggerWidth = setStyle.gridTemplateRows.split(" ").length > 1 ? columnWidth / 2 : 0;
+    const visibleColumns = Math.max(1, Math.floor((carousel.clientWidth - staggerWidth) / columnWidth));
+    const loopWidth = getShowcaseLoopWidth(carousel);
+    showcasePausedRef.current = true;
+    carousel.scrollLeft = ((carousel.scrollLeft + direction * visibleColumns * columnWidth) % loopWidth + loopWidth) % loopWidth;
+    scheduleShowcaseResume();
   };
   const startShowcaseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if ((event.target as Element).closest("button")) return;
     const carousel = event.currentTarget;
     showcasePausedRef.current = true;
     showcaseDragRef.current = { active: true, pointerId: event.pointerId, startX: event.clientX, startScroll: carousel.scrollLeft };
@@ -253,7 +373,7 @@ export default function LandingPage() {
     showcaseDragRef.current.active = false;
     setIsDraggingShowcase(false);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    showcasePausedRef.current = false;
+    scheduleShowcaseResume();
   };
   const startShowcaseTouch = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
@@ -261,7 +381,7 @@ export default function LandingPage() {
     const carousel = event.currentTarget;
     showcasePausedRef.current = true;
     showcaseTouchRef.current = { active: true, startX: touch.clientX, startY: touch.clientY, lastX: touch.clientX, startScroll: carousel.scrollLeft };
-    scheduleShowcaseResume(1800);
+    if (showcaseResumeTimerRef.current) window.clearTimeout(showcaseResumeTimerRef.current);
   };
   const moveShowcaseTouch = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
@@ -271,7 +391,8 @@ export default function LandingPage() {
     const distanceY = touch.clientY - drag.startY;
     if (Math.abs(distanceY) > Math.abs(distanceX)) {
       drag.active = false;
-      showcasePausedRef.current = false;
+      setIsDraggingShowcase(false);
+      scheduleShowcaseResume();
       return;
     }
     event.preventDefault();
@@ -344,7 +465,7 @@ export default function LandingPage() {
 
     <section id="funciones" className="functions-group">
       <section className="features shell"><SectionTitle>{ui.featuresTitle}</SectionTitle><div>{localizedLanding.features.map(([, title, items], featureIndex) => <article key={title}><span className="feature-icon"><img src={brandFeatureIcons[featureIndex]} alt="" width="96" height="96" /></span><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
-      <section id="resultados" className="showcase shell"><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = event.currentTarget.scrollWidth / 2; setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} copy={ui} /><ShowcaseCards content={localizedLanding} copy={ui} duplicate /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase((activeShowcasePage + showcasePages - 1) % showcasePages)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase((activeShowcasePage + 1) % showcasePages)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div></section>
+      <section id="resultados" className="showcase shell" onFocusCapture={() => { showcaseFocusedRef.current = true; showcasePausedRef.current = true; }} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { showcaseFocusedRef.current = false; scheduleShowcaseResume(); } }}><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><p className="showcase-intro"><strong>{ui.showcaseToolCount}</strong> {ui.showcaseIntro}</p><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = getShowcaseLoopWidth(event.currentTarget); setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} ui={ui} onOpen={openShowcase} /><ShowcaseCards content={localizedLanding} ui={ui} duplicate onOpen={openShowcase} /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div><p className="showcase-disclaimer">{ui.showcaseDisclaimer}</p><CapabilityDialog card={activeShowcaseIndex === null ? null : localizedLanding.useCases[activeShowcaseIndex]} index={activeShowcaseIndex ?? 0} total={localizedLanding.useCases.length} ui={ui} onClose={closeShowcase} onMove={(direction) => setActiveShowcaseIndex((index) => index === null ? null : (index + direction + localizedLanding.useCases.length) % localizedLanding.useCases.length)} /></section>
     </section>
 
     <div className="post-pricing-background">

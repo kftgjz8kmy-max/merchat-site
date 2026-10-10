@@ -13,152 +13,2085 @@
     },
     "useCases": [
       {
-        "id": "create-listing",
-        "category": "Create a listing",
-        "prompt": "I want to sell this phone. It is new, has 256 GB, and I have three units.",
+        "id": "photo-listing",
+        "category": "List from your photos",
+        "prompt": "Help me list this MacBook using these photos.",
         "resultType": "listing",
-        "resultTitle": "Listing ready to review"
+        "resultTitle": "I prepared the listing for you to review.",
+        "resultDescription": "Photos, specifications and terms included.",
+        "preview": {
+          "label": "MacBook Pro 14″",
+          "items": [
+            {
+              "label": "Specifications ready"
+            },
+            {
+              "label": "Photos ready"
+            }
+          ],
+          "status": "Listing awaiting approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Model",
+                "MacBook Pro 14″ M3"
+              ],
+              [
+                "Price",
+                "S/ 6,499"
+              ],
+              [
+                "Stock",
+                "3 units"
+              ]
+            ],
+            "conclusion": "Draft with 3 photos, price and stock. Ready for your review.",
+            "media": "product"
+          }
+        }
       },
       {
-        "id": "publish-from-photo",
-        "category": "Publish from a photo",
-        "prompt": "Use these photos, identify the product, and ask me only for what is missing.",
-        "resultType": "photo-identification",
-        "resultTitle": "Only 2 details missing"
+        "id": "excel-publication",
+        "category": "Publish from Excel",
+        "prompt": "Prepare listings for the products in this Excel file.",
+        "resultType": "workflow",
+        "resultTitle": "I prepared the drafts for you to review.",
+        "resultDescription": "Your AI reads the file and prepares each listing with MerChat, showing missing information before publishing.",
+        "preview": {
+          "label": "Listings to review",
+          "items": [
+            {
+              "value": "1",
+              "label": "Products from Excel"
+            },
+            {
+              "value": "2",
+              "label": "Price and stock"
+            },
+            {
+              "value": "3",
+              "label": "Missing information"
+            }
+          ],
+          "status": "Publishing requires your approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Status"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "Ready to review"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "Ready to review"
+              ],
+              [
+                "iPhone 15",
+                "S/ 2,799",
+                "Confirm the color"
+              ]
+            ],
+            "conclusion": "2 drafts ready; 1 needs its color confirmed."
+          }
+        }
       },
       {
-        "id": "technical-details",
-        "category": "Complete technical details",
-        "prompt": "Complete the missing attributes and verify that the information is correct.",
-        "resultType": "technical",
-        "resultTitle": "12 attributes verified",
-        "resultDescription": "3 attributes completed"
+        "id": "category-requirements",
+        "category": "Complete product specifications",
+        "prompt": "Fill in this laptop’s specifications using its model and technical sheet.",
+        "resultType": "workflow",
+        "resultTitle": "I filled in available details and flagged what still needs confirmation.",
+        "resultDescription": "Your AI uses the model and information you provide and checks Mercado Libre requirements. Unconfirmed details are left for your review.",
+        "preview": {
+          "label": "Specifications to review",
+          "items": [
+            {
+              "value": "1",
+              "label": "Brand and model"
+            },
+            {
+              "value": "2",
+              "label": "Product sheet details"
+            },
+            {
+              "value": "3",
+              "label": "Details to confirm"
+            }
+          ],
+          "status": "Review the details before approving",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Processor",
+                "Apple M3",
+                "From the spec sheet"
+              ],
+              [
+                "Memory",
+                "16 GB",
+                "From the spec sheet"
+              ],
+              [
+                "Keyboard",
+                "Language not confirmed",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Processor and memory filled in; confirm the keyboard language."
+          }
+        }
       },
       {
-        "id": "compare-prices",
-        "category": "Compare your prices",
-        "prompt": "Compare my price with similar listings and tell me whether I should adjust it.",
-        "resultType": "price-range",
-        "resultTitle": "4% above the range",
-        "resultDescription": "Current price: S/ 1,399"
-      },
-      {
-        "id": "calculate-discount",
-        "category": "Calculate your discount",
-        "prompt": "Using my costs and fees, tell me how much I can discount without losing money.",
-        "resultType": "discount",
-        "resultTitle": "Your margin stays positive",
-        "resultDescription": "Maximum discount: 11%"
-      },
-      {
-        "id": "create-promotion",
-        "category": "Create a promotion",
-        "prompt": "Create a 10% promotion for these products for seven days.",
-        "resultType": "promotion",
-        "resultTitle": "Promotion ready to confirm",
-        "resultDescription": "Deal of the week"
-      },
-      {
-        "id": "add-to-promotion",
-        "category": "Add to a promotion",
-        "prompt": "Add these products to the Deals of the Week promotion.",
-        "resultType": "eligibility",
-        "resultTitle": "Products prepared",
-        "resultDescription": "5 of 6 added"
-      },
-      {
-        "id": "profit-excel",
-        "category": "Calculate your profit",
-        "prompt": "I will give you my costs. Create an Excel file with net profit after fees and shipping.",
+        "id": "inventory-file",
+        "category": "Update from Excel",
+        "prompt": "Use this Excel file to prepare my new prices and stock.",
         "resultType": "excel",
-        "resultTitle": "Net profit calculated",
-        "resultDescription": "126 listings analyzed"
+        "resultTitle": "I prepared the changes for your approval.",
+        "resultDescription": "4 rows need a closer look.",
+        "preview": {
+          "label": "Inventory.xlsx",
+          "items": [
+            {
+              "value": "62",
+              "label": "Rows checked"
+            },
+            {
+              "value": "58",
+              "label": "Changes ready"
+            },
+            {
+              "value": "4",
+              "label": "Need review"
+            }
+          ],
+          "status": "Awaiting approval",
+          "example": {
+            "columns": [
+              "SKU",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "Unchanged",
+                "SKU not found"
+              ]
+            ],
+            "conclusion": "58 of 62 rows ready. The other 4 need review."
+          }
+        }
       },
       {
-        "id": "bulk-catalog",
-        "category": "Update your catalog",
-        "prompt": "Use this Excel file to update the prices and stock of my listings.",
-        "resultType": "bulk-update",
-        "resultTitle": "Changes ready to approve",
-        "resultDescription": "84 products reviewed"
+        "id": "revision-verification",
+        "category": "Update several SKUs",
+        "prompt": "Prepare new prices and stock for these 30 products.",
+        "resultType": "workflow",
+        "resultTitle": "Each product’s changes are ready for your review.",
+        "resultDescription": "Review each SKU before approving. MerChat then checks which changes were saved and shows anything pending.",
+        "preview": {
+          "label": "Changes by product",
+          "items": [
+            {
+              "value": "1",
+              "label": "Selected SKUs"
+            },
+            {
+              "value": "2",
+              "label": "New price and stock"
+            },
+            {
+              "value": "3",
+              "label": "Confirmed changes"
+            }
+          ],
+          "status": "Verification after approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "S/ 2,799 → 2,699",
+                "6 → 10"
+              ]
+            ],
+            "conclusion": "Preview of 3 of your 30 products. Review before applying."
+          }
+        }
       },
       {
-        "id": "last-sale",
-        "category": "Check your latest sale",
-        "prompt": "Show me my latest sale with the product, buyer, payment, shipping, and status.",
-        "resultType": "sale",
-        "resultTitle": "S/ 1,249",
-        "resultDescription": "12 minutes ago"
+        "id": "batch-campaign",
+        "category": "Apply discounts to several products",
+        "prompt": "Add these 21 products to the campaign with a 10% discount.",
+        "resultType": "promotion",
+        "resultTitle": "I applied the discount to all 21 products after your approval.",
+        "resultDescription": "You approve the prices before they are applied.",
+        "preview": {
+          "label": "10% discount",
+          "items": [
+            {
+              "value": "21",
+              "label": "Products"
+            },
+            {
+              "value": "21/21",
+              "label": "Checked"
+            }
+          ],
+          "status": "Discounts applied after approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Before",
+              "With 10% off"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "S/ 1,259.10"
+              ],
+              [
+                "iPhone 15",
+                "S/ 2,799",
+                "S/ 2,519.10"
+              ],
+              [
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "S/ 5,849.10"
+              ]
+            ],
+            "conclusion": "21 of 21 discounts applied after your approval."
+          }
+        }
       },
       {
-        "id": "compare-products",
-        "category": "Compare your products",
-        "prompt": "Show me the three best-selling and three lowest-selling products this quarter.",
-        "resultType": "ranking",
-        "resultTitle": "Best and lowest sellers"
+        "id": "photo-order",
+        "category": "Reorder your photos",
+        "prompt": "I want to change the order of this listing’s photos.",
+        "resultType": "gallery",
+        "resultTitle": "The new order is ready for your approval.",
+        "resultDescription": "You can drag the photos in the chat.",
+        "preview": {
+          "label": "Photo order",
+          "items": [],
+          "status": "Awaiting approval",
+          "example": {
+            "columns": [
+              "Position",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "1",
+                "Open product",
+                "Side photo"
+              ],
+              [
+                "2",
+                "Keyboard photo",
+                "Open product"
+              ],
+              [
+                "3",
+                "Side photo",
+                "Keyboard photo"
+              ]
+            ],
+            "conclusion": "The side photo becomes the main image. Review the new order.",
+            "media": "gallery"
+          }
+        }
       },
       {
-        "id": "restock",
-        "category": "Plan your restocking",
-        "prompt": "Analyze my sales and tell me which products to restock and how many units to buy.",
-        "resultType": "restock",
-        "resultTitle": "Based on turnover and stock"
+        "id": "find-product-photos",
+        "category": "Find photos for your product",
+        "prompt": "Help me find photos of this model for my listing.",
+        "resultTitle": "Here are the photos found for you to choose.",
+        "resultDescription": "MerChat provides a guide to help your AI find photos of the model. Check that they match the product; MerChat can use the photos you choose in your listing draft.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Photos to choose",
+          "items": [
+            {
+              "value": "1",
+              "label": "Product model"
+            },
+            {
+              "value": "2",
+              "label": "Photos found"
+            },
+            {
+              "value": "3",
+              "label": "Selected photos"
+            }
+          ],
+          "status": "Subject to your AI’s tools · Publishing requires approval.",
+          "example": {
+            "columns": [
+              "Photo",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "1",
+                "MacBook Pro 14″ · front view",
+                "Model matches"
+              ],
+              [
+                "2",
+                "MacBook Pro 14″ · keyboard",
+                "Model matches"
+              ],
+              [
+                "3",
+                "MacBook Pro 14″ · side",
+                "Choose which to use"
+              ]
+            ],
+            "conclusion": "MerChat’s guide helps your AI search. Check the model and usage rights.",
+            "media": "gallery"
+          }
+        }
       },
       {
-        "id": "stagnant-products",
-        "category": "Find stagnant products",
-        "prompt": "Show me the listings that had no sales in the last 60 days.",
-        "resultType": "stagnant",
-        "resultTitle": "Needs attention",
-        "resultDescription": "9 listings without sales"
+        "id": "ai-product-photos",
+        "category": "Create AI photos and use them",
+        "prompt": "Create a white-background photo of this product and use it in my listing.",
+        "resultTitle": "The created photo is in the draft for your review.",
+        "resultDescription": "Your AI creates the image if it supports that feature. Check that it accurately represents the product; MerChat can upload it and prepare the photo change for your approval.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Created photo for your listing",
+          "items": [
+            {
+              "value": "1",
+              "label": "Reference product"
+            },
+            {
+              "value": "2",
+              "label": "AI-created photo"
+            },
+            {
+              "value": "3",
+              "label": "Draft to review"
+            }
+          ],
+          "status": "Requires image generation in your AI · Changes require approval.",
+          "example": {
+            "columns": [
+              "Field",
+              "Result"
+            ],
+            "rows": [
+              [
+                "Product",
+                "MacBook Pro 14″"
+              ],
+              [
+                "Requested background",
+                "White"
+              ],
+              [
+                "Destination",
+                "Draft’s main photo"
+              ]
+            ],
+            "conclusion": "Example of a product photo in the draft. Your AI generates the image; you review it.",
+            "media": "product"
+          }
+        }
       },
       {
-        "id": "improve-listings",
+        "id": "listing-preflight",
+        "category": "Prepare a complete listing",
+        "prompt": "Prepare this laptop’s listing and tell me what is missing.",
+        "resultType": "workflow",
+        "resultTitle": "The draft is ready. Here is what still needs completing.",
+        "resultDescription": "The listing choice and details are confirmed before publishing.",
+        "preview": {
+          "label": "Pre-publication review",
+          "items": [
+            {
+              "value": "1",
+              "label": "Check requirements"
+            },
+            {
+              "value": "2",
+              "label": "Review fees"
+            },
+            {
+              "value": "3",
+              "label": "Prepare draft"
+            }
+          ],
+          "status": "Pending approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Photos",
+                "3 photos uploaded",
+                "Ready to review"
+              ],
+              [
+                "Price",
+                "S/ 6,499",
+                "Ready to review"
+              ],
+              [
+                "Warranty",
+                "Duration missing",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Confirm the warranty before approving the listing."
+          }
+        }
+      },
+      {
+        "id": "revision-review",
+        "category": "Review changes together",
+        "prompt": "Change the price, stock and shipping. Show me before and after.",
+        "resultType": "workflow",
+        "resultTitle": "I prepared the changes in one review.",
+        "resultDescription": "Compare the current state with the proposal before approving.",
+        "preview": {
+          "label": "Before and after",
+          "items": [
+            {
+              "value": "1",
+              "label": "Price"
+            },
+            {
+              "value": "2",
+              "label": "Stock"
+            },
+            {
+              "value": "3",
+              "label": "Shipping"
+            }
+          ],
+          "status": "Nothing is applied without your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Price",
+                "S/ 1,399",
+                "S/ 1,349"
+              ],
+              [
+                "Stock",
+                "8",
+                "12"
+              ],
+              [
+                "Free shipping",
+                "No",
+                "Yes"
+              ]
+            ],
+            "conclusion": "Price, stock and shipping together in one review."
+          }
+        }
+      },
+      {
+        "id": "margin-diagnosis",
+        "category": "Review your profits",
+        "prompt": "Based on my sales, costs and ads, which products earn me little profit?",
+        "resultType": "diagnosis",
+        "resultTitle": "I found 3 products whose profit is worth reviewing.",
+        "resultDescription": "Here is what to check for each one.",
+        "preview": {
+          "label": "3 products to review",
+          "items": [
+            {
+              "value": "Product A",
+              "label": "Profit may be low"
+            },
+            {
+              "value": "Product B",
+              "label": "Costly ads"
+            },
+            {
+              "value": "Product C",
+              "label": "Profit unconfirmed"
+            }
+          ],
+          "status": "Costs supplied by the seller",
+          "example": {
+            "columns": [
+              "Product",
+              "Profit",
+              "What to check"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "S/ 42",
+                "Product cost"
+              ],
+              [
+                "Bluetooth headphones",
+                "S/ 8",
+                "Ad spend"
+              ],
+              [
+                "MacBook Pro 14″",
+                "To calculate",
+                "Your cost is missing"
+              ]
+            ],
+            "conclusion": "Profit per unit: two low margins and one missing cost."
+          }
+        }
+      },
+      {
+        "id": "selling-fees",
+        "category": "Calculate net profit",
+        "prompt": "How much would I earn from selling this device after deducting my cost and selling fees?",
+        "resultType": "report",
+        "resultTitle": "I calculated what you would keep after cost and selling fees.",
+        "resultDescription": "I combine your cost with fees reported by Mercado Libre.",
+        "preview": {
+          "label": "Sale breakdown",
+          "items": [
+            {
+              "value": "1",
+              "label": "Sale price"
+            },
+            {
+              "value": "2",
+              "label": "Your cost"
+            },
+            {
+              "value": "3",
+              "label": "Mercado Libre fees"
+            }
+          ],
+          "status": "Your supplied costs · Estimated profit",
+          "example": {
+            "columns": [
+              "Detail",
+              "Amount"
+            ],
+            "rows": [
+              [
+                "Sale price",
+                "S/ 1,500"
+              ],
+              [
+                "Your cost",
+                "− S/ 1,000"
+              ],
+              [
+                "Example fee",
+                "− S/ 180"
+              ]
+            ],
+            "conclusion": "Estimated profit: S/ 320. Other expenses excluded."
+          }
+        }
+      },
+      {
+        "id": "price-floor",
+        "category": "Calculate your minimum price",
+        "prompt": "What price would cover my cost and selling fees?",
+        "resultType": "report",
+        "resultTitle": "I estimated the minimum price to cover those costs.",
+        "resultDescription": "The calculation includes the costs you share. Add other expenses for a more complete estimate.",
+        "preview": {
+          "label": "Estimated minimum price",
+          "items": [
+            {
+              "value": "1",
+              "label": "Product cost"
+            },
+            {
+              "value": "2",
+              "label": "Available fees"
+            },
+            {
+              "value": "3",
+              "label": "Estimated price"
+            }
+          ],
+          "status": "Estimate using your costs and available data",
+          "example": {
+            "columns": [
+              "Detail",
+              "Amount"
+            ],
+            "rows": [
+              [
+                "Product cost",
+                "S/ 1,000"
+              ],
+              [
+                "Illustrative fee",
+                "12%"
+              ],
+              [
+                "Price to cover both",
+                "S/ 1,136.37"
+              ]
+            ],
+            "conclusion": "Below S/ 1,136.37, this example would not cover cost and fee. Other expenses excluded."
+          }
+        }
+      },
+      {
+        "id": "profit-report",
+        "category": "Get a profit report",
+        "prompt": "Using my costs, compare how much net profit each product earns me.",
+        "resultType": "report",
+        "resultTitle": "I compared each product’s estimated profit.",
+        "resultDescription": "I combine your supplied costs with available fees. Include other expenses to refine the estimate.",
+        "preview": {
+          "label": "Estimated profit by SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Your supplied costs"
+            },
+            {
+              "value": "2",
+              "label": "Fees and expenses"
+            },
+            {
+              "value": "3",
+              "label": "Estimated profit"
+            }
+          ],
+          "status": "Estimate based on costs and available data",
+          "example": {
+            "columns": [
+              "Product",
+              "Sales",
+              "Profit"
+            ],
+            "rows": [
+              [
+                "A56-256",
+                "S/ 13,990",
+                "S/ 1,420"
+              ],
+              [
+                "IP15-128",
+                "S/ 16,794",
+                "S/ 2,100"
+              ],
+              [
+                "MBP-14",
+                "S/ 19,497",
+                "S/ 3,060"
+              ]
+            ],
+            "conclusion": "MacBook Pro contributes the highest estimated profit this period."
+          }
+        }
+      },
+      {
+        "id": "market-research",
+        "category": "Compare your prices",
+        "prompt": "Find similar iPhones and compare their prices with mine.",
+        "resultType": "price-range",
+        "resultTitle": "Your price is S/ 50 above the highest-priced product compared.",
+        "resultDescription": "Compare similar products before changing it.",
+        "preview": {
+          "label": "Public references",
+          "items": [
+            {
+              "value": "S/ 1,249–1,349",
+              "label": "Public prices"
+            },
+            {
+              "value": "S/ 1,399",
+              "label": "Your price"
+            },
+            {
+              "value": "+S/ 50",
+              "label": "Above the maximum"
+            }
+          ],
+          "status": "Illustrative comparison · Depends on your AI tools",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "iPhone 13 · 128 GB",
+                "S/ 1,249",
+                "Reference 1"
+              ],
+              [
+                "iPhone 13 · 128 GB",
+                "S/ 1,349",
+                "Reference 2"
+              ],
+              [
+                "Your iPhone 13 · 128 GB",
+                "S/ 1,399",
+                "Your listing"
+              ]
+            ],
+            "conclusion": "Your price is S/ 50 above the highest reference."
+          }
+        }
+      },
+      {
+        "id": "product-family",
+        "category": "Find related listings",
+        "prompt": "Which other listings are linked to this product?",
+        "resultType": "report",
+        "resultTitle": "Here are the listings Mercado Libre links to this product.",
+        "resultDescription": "I show related listings according to Mercado Libre; I do not group them just because they look similar.",
+        "preview": {
+          "label": "Related listings",
+          "items": [
+            {
+              "value": "1",
+              "label": "Main product"
+            },
+            {
+              "value": "2",
+              "label": "Related versions"
+            },
+            {
+              "value": "3",
+              "label": "Listings in the group"
+            }
+          ],
+          "status": "Relationships reported by Mercado Libre",
+          "example": {
+            "columns": [
+              "Product",
+              "Price",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″ M3 · 512 GB",
+                "S/ 6,499",
+                "3 available"
+              ],
+              [
+                "MacBook Pro 14″ M3 · 1 TB",
+                "S/ 7,499",
+                "2 available"
+              ]
+            ],
+            "conclusion": "Example of two linked listings: same model, different storage.",
+            "media": "product"
+          }
+        }
+      },
+      {
+        "id": "user-product-options",
+        "category": "Add another selling option",
+        "prompt": "I want to offer this same product with a different price and stock.",
+        "resultType": "workflow",
+        "resultTitle": "The new selling option is ready for your review.",
+        "resultDescription": "You can prepare another selling option for the same product where Mercado Libre supports it. Review the price and stock before approving.",
+        "preview": {
+          "label": "New selling option",
+          "items": [
+            {
+              "value": "1",
+              "label": "Existing product"
+            },
+            {
+              "value": "2",
+              "label": "New price"
+            },
+            {
+              "value": "3",
+              "label": "Available stock"
+            }
+          ],
+          "status": "Approval required · Subject to availability",
+          "example": {
+            "columns": [
+              "Field",
+              "Before",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Product",
+                "Samsung Galaxy A56",
+                "Samsung Galaxy A56"
+              ],
+              [
+                "Price",
+                "S/ 1,399",
+                "S/ 1,349"
+              ],
+              [
+                "Stock",
+                "8",
+                "12"
+              ]
+            ],
+            "conclusion": "The original option stays; review the new option before approving."
+          }
+        }
+      },
+      {
+        "id": "daily-priorities",
+        "category": "Plan your day",
+        "prompt": "Check my account. What should I deal with first today?",
+        "resultType": "priorities",
+        "resultTitle": "Here are your priorities for today.",
+        "resultDescription": "Start with the unanswered questions.",
+        "preview": {
+          "label": "Today’s priorities",
+          "items": [
+            {
+              "value": "2",
+              "label": "Unanswered questions"
+            },
+            {
+              "value": "3",
+              "label": "Quality alerts"
+            },
+            {
+              "value": "5",
+              "label": "Possible improvements"
+            }
+          ],
+          "status": "Review requested by you",
+          "example": {
+            "columns": [
+              "Priority",
+              "Detail",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "1",
+                "2 unanswered questions",
+                "Reply today"
+              ],
+              [
+                "2",
+                "3 incomplete listings",
+                "Fill in specifications"
+              ],
+              [
+                "3",
+                "5 products to improve",
+                "Review price and photos"
+              ]
+            ],
+            "conclusion": "Start with customer questions, then complete your listings."
+          }
+        }
+      },
+      {
+        "id": "sales-report",
+        "category": "Get a sales report",
+        "prompt": "Make a report of this month’s sales by product.",
+        "resultType": "report",
+        "resultTitle": "Here are the units sold and revenue for each product.",
+        "resultDescription": "Request a period summary and compare products using available account data.",
+        "preview": {
+          "label": "Sales by product and SKU",
+          "items": [
+            {
+              "value": "1",
+              "label": "Products and SKUs"
+            },
+            {
+              "value": "2",
+              "label": "Units sold"
+            },
+            {
+              "value": "3",
+              "label": "Period revenue"
+            }
+          ],
+          "status": "Your account data · Selected period",
+          "example": {
+            "columns": [
+              "Product",
+              "Units",
+              "Sales"
+            ],
+            "rows": [
+              [
+                "A56-256",
+                "18",
+                "S/ 25,182"
+              ],
+              [
+                "IP15-128",
+                "12",
+                "S/ 33,588"
+              ],
+              [
+                "MBP-14",
+                "4",
+                "S/ 25,996"
+              ]
+            ],
+            "conclusion": "34 units sold · S/ 84,766 in sales this month."
+          }
+        }
+      },
+      {
+        "id": "payment-reconciliation",
+        "category": "Compare sales and payments",
+        "prompt": "Compare my sales with Mercado Pago payments. Are there differences?",
+        "resultType": "report",
+        "resultTitle": "Here are the sales, payments and differences to review.",
+        "resultDescription": "I compare available records and flag differences needing review.",
+        "preview": {
+          "label": "Sales vs. payments",
+          "items": [
+            {
+              "value": "1",
+              "label": "Period sales"
+            },
+            {
+              "value": "2",
+              "label": "Recorded payments"
+            },
+            {
+              "value": "3",
+              "label": "Differences to review"
+            }
+          ],
+          "status": "Read-only · Depends on available records",
+          "example": {
+            "columns": [
+              "Order",
+              "Sales",
+              "Recorded payment"
+            ],
+            "rows": [
+              [
+                "#1042",
+                "S/ 1,399",
+                "S/ 1,399"
+              ],
+              [
+                "#1043",
+                "S/ 2,799",
+                "S/ 2,799"
+              ],
+              [
+                "#1044",
+                "S/ 1,399",
+                "Not found"
+              ]
+            ],
+            "conclusion": "Order #1044 needs review: no linked payment found."
+          }
+        }
+      },
+      {
+        "id": "settlement-report",
+        "category": "Get a Mercado Pago report",
+        "prompt": "Request this month’s settlement report from Mercado Pago.",
+        "resultType": "workflow",
+        "resultTitle": "I requested the report with your approval and checked whether it is available.",
+        "resultDescription": "The report shows settlements recorded by Mercado Pago during your chosen period. Requesting it does not move your money.",
+        "preview": {
+          "label": "Settlement report",
+          "items": [
+            {
+              "value": "1",
+              "label": "Requested period"
+            },
+            {
+              "value": "2",
+              "label": "Task status"
+            },
+            {
+              "value": "3",
+              "label": "Available report"
+            }
+          ],
+          "status": "Approval required · No transfers",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Period",
+                "September 1–30"
+              ],
+              [
+                "Status",
+                "Available after request"
+              ],
+              [
+                "File",
+                "liquidaciones-septiembre.csv"
+              ]
+            ],
+            "conclusion": "Report available to review payments and deductions for the period."
+          }
+        }
+      },
+      {
+        "id": "listing-improvements",
         "category": "Improve your listings",
-        "prompt": "Find listings with views but few sales and tell me what I should improve.",
+        "prompt": "Which listings get views but few sales? Tell me what to improve.",
         "resultType": "performance",
-        "resultTitle": "Conversion: 0.24%",
-        "resultDescription": "1,240 views · 3 sales"
+        "resultTitle": "Check the price, photos and details.",
+        "resultDescription": "I found 4 listings to review.",
+        "preview": {
+          "label": "4 listings to review",
+          "items": [
+            {
+              "value": "Price",
+              "label": "Compare prices"
+            },
+            {
+              "value": "Photos",
+              "label": "Improve photos"
+            },
+            {
+              "value": "Specifications",
+              "label": "Fill in details"
+            }
+          ],
+          "status": "Recommendations for review",
+          "example": {
+            "columns": [
+              "Product",
+              "Visits / sales",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "420 / 3",
+                "Review price"
+              ],
+              [
+                "MacBook Pro 14″",
+                "310 / 1",
+                "Add a side photo"
+              ],
+              [
+                "iPhone 15",
+                "280 / 2",
+                "Fill in storage size"
+              ]
+            ],
+            "conclusion": "3 of the 4 flagged listings, with a specific improvement for each."
+          }
+        }
       },
       {
-        "id": "quarterly-diagnosis",
-        "category": "Review your quarter",
-        "prompt": "Analyze this quarter, compare it with the previous one, and show me a diagnosis with charts.",
-        "resultType": "dashboard",
-        "resultTitle": "Performance is growing",
-        "resultDescription": "S/ 184,500 · +14%"
+        "id": "quality-report",
+        "category": "Find listings to improve",
+        "prompt": "Review my listings and tell me which to improve first.",
+        "resultType": "report",
+        "resultTitle": "I ranked the listings by improvement priority.",
+        "resultDescription": "I gather available quality, visits and sales data to help you prioritize. Suggestions are based on that evidence.",
+        "preview": {
+          "label": "Listings to improve",
+          "items": [
+            {
+              "value": "1",
+              "label": "Quality and missing details"
+            },
+            {
+              "value": "2",
+              "label": "Visits and sales"
+            },
+            {
+              "value": "3",
+              "label": "Suggested improvements"
+            }
+          ],
+          "status": "Available data · Changes require approval",
+          "example": {
+            "columns": [
+              "Product",
+              "Issue",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "MacBook Pro 14″",
+                "Warranty unspecified",
+                "Confirm duration"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "Storage size missing",
+                "Add 256 GB"
+              ],
+              [
+                "iPhone 15",
+                "Only one photo",
+                "Add other views"
+              ]
+            ],
+            "conclusion": "Fill in missing information first, then improve the photos."
+          }
+        }
+      },
+      {
+        "id": "reuse-listing-photos",
+        "category": "Reuse your photos",
+        "prompt": "Prepare another listing with the same photos as this one.",
+        "resultType": "workflow",
+        "resultTitle": "I included the same photos in the new draft.",
+        "resultDescription": "The new draft uses the same photos as the original listing.",
+        "preview": {
+          "label": "Original listing photos",
+          "items": [
+            {
+              "value": "1",
+              "label": "Original photos"
+            },
+            {
+              "value": "2",
+              "label": "Same photos"
+            },
+            {
+              "value": "3",
+              "label": "New draft"
+            }
+          ],
+          "status": "Pending approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Source",
+                "MacBook Pro 14″ · 512 GB"
+              ],
+              [
+                "New draft",
+                "MacBook Pro 14″ · 1 TB"
+              ],
+              [
+                "Reused photos",
+                "3 photos of the same model"
+              ]
+            ],
+            "conclusion": "All 3 photos are in the new draft for your review.",
+            "media": "gallery"
+          }
+        }
+      },
+      {
+        "id": "product-ads",
+        "category": "Review your ads",
+        "prompt": "Are my ads working? Review my campaigns.",
+        "resultType": "ads",
+        "resultTitle": "I found 2 campaigns whose performance is worth reviewing.",
+        "resultDescription": "I reviewed available data for your ads on Mercado Libre.",
+        "preview": {
+          "label": "Advertising on Mercado Libre",
+          "items": [
+            {
+              "value": "28%",
+              "label": "Ad spending relative to sales"
+            },
+            {
+              "value": "2",
+              "label": "Campaigns to review"
+            }
+          ],
+          "status": "Reporting depends on availability · Does not modify campaigns",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Spend / sales",
+              "Spend as % of sales"
+            ],
+            "rows": [
+              [
+                "MacBook Pro",
+                "S/ 300 / 1,000",
+                "30%"
+              ],
+              [
+                "Headphones",
+                "S/ 120 / 500",
+                "24%"
+              ]
+            ],
+            "conclusion": "Total spend: S/ 420 on S/ 1,500 in attributed sales (28%)."
+          }
+        }
+      },
+      {
+        "id": "ads-report",
+        "category": "Get an advertising report",
+        "prompt": "Summarize my spending and the sales my ads generated this month.",
+        "resultType": "report",
+        "resultTitle": "Here are your spending and sales attributed to your ads.",
+        "resultDescription": "These are the sales Mercado Libre links to your advertising, based on available data.",
+        "preview": {
+          "label": "Advertising performance",
+          "items": [
+            {
+              "value": "1",
+              "label": "Ad spending"
+            },
+            {
+              "value": "2",
+              "label": "Sales attributed to ads"
+            },
+            {
+              "value": "3",
+              "label": "Available performance"
+            }
+          ],
+          "status": "Subject to availability · No campaign changes",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Spend",
+              "Attributed sales"
+            ],
+            "rows": [
+              [
+                "MacBook Pro",
+                "S/ 300",
+                "S/ 1,000"
+              ],
+              [
+                "Headphones",
+                "S/ 120",
+                "S/ 500"
+              ]
+            ],
+            "conclusion": "These campaigns generated S/ 3.57 in attributed sales per S/ 1 in ad spend."
+          }
+        }
+      },
+      {
+        "id": "account-comparison",
+        "category": "Compare your stores",
+        "prompt": "Which of my two stores sold more this month?",
+        "resultType": "accounts",
+        "resultTitle": "Store A sold S/ 6,400 more.",
+        "resultDescription": "I compared sales from your two authorized accounts.",
+        "preview": {
+          "label": "Authorized accounts",
+          "items": [
+            {
+              "value": "S/ 24,600",
+              "label": "Store A"
+            },
+            {
+              "value": "S/ 18,200",
+              "label": "Store B"
+            }
+          ],
+          "status": "Store A sold S/ 6,400 more",
+          "example": {
+            "columns": [
+              "Store",
+              "Sales",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Store A",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "Store B",
+                "S/ 18,200",
+                "31"
+              ]
+            ],
+            "conclusion": "Store A sold S/ 6,400 more than Store B."
+          }
+        }
+      },
+      {
+        "id": "multi-country",
+        "category": "Manage stores across countries",
+        "prompt": "Review sales for my stores in Peru and Brazil separately.",
+        "resultTitle": "Here are each store’s sales in its own currency.",
+        "resultDescription": "Work with your connected accounts in different countries and choose which to review. Each store keeps its own data; available features depend on the country and account.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Your stores by country",
+          "items": [
+            {
+              "value": "1",
+              "label": "Store in Peru"
+            },
+            {
+              "value": "2",
+              "label": "Store in Brazil"
+            },
+            {
+              "value": "3",
+              "label": "Sales in local currency"
+            }
+          ],
+          "status": "Accounts you connected · Subject to availability by country.",
+          "example": {
+            "columns": [
+              "Store",
+              "Sales",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Peru · Lima",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "Brazil · São Paulo",
+                "R$ 31,200",
+                "56"
+              ]
+            ],
+            "conclusion": "Each store is reviewed separately. Amounts stay in their own currency."
+          }
+        }
+      },
+      {
+        "id": "publication-route",
+        "category": "Find your product in the catalog",
+        "prompt": "Is this device already in Mercado Libre’s catalog?",
+        "resultType": "workflow",
+        "resultTitle": "I checked the catalog. Here are your options for listing it.",
+        "resultDescription": "MerChat looks up the product and explains your options. If unclear, it asks you to confirm how you want to list it.",
+        "preview": {
+          "label": "Listing options",
+          "items": [
+            {
+              "value": "1",
+              "label": "Catalog product"
+            },
+            {
+              "value": "2",
+              "label": "Your own listing"
+            },
+            {
+              "value": "3",
+              "label": "Your choice"
+            }
+          ],
+          "status": "Option to confirm with you",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Product",
+                "Samsung Galaxy A56 · 256 GB"
+              ],
+              [
+                "Match",
+                "Model and storage match"
+              ],
+              [
+                "Available option",
+                "Review catalog listing"
+              ]
+            ],
+            "conclusion": "Found a catalog match. Confirm it is your product before continuing."
+          }
+        }
+      },
+      {
+        "id": "publication-resume",
+        "category": "Resume a draft",
+        "prompt": "Resume the listing we left unfinished and tell me what is missing.",
+        "resultType": "workflow",
+        "resultTitle": "I recovered the draft and remaining steps.",
+        "resultDescription": "Continue the session or cancel it before publishing.",
+        "preview": {
+          "label": "Saved draft",
+          "items": [
+            {
+              "value": "1",
+              "label": "Saved details"
+            },
+            {
+              "value": "2",
+              "label": "Missing details"
+            },
+            {
+              "value": "3",
+              "label": "Final review"
+            }
+          ],
+          "status": "Nothing is published without your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Product",
+                "MacBook Pro 14″",
+                "Saved"
+              ],
+              [
+                "Price",
+                "S/ 6,499",
+                "Saved"
+              ],
+              [
+                "Color",
+                "Not confirmed",
+                "Needs review"
+              ]
+            ],
+            "conclusion": "Recovered your photos and price. Confirm the color and review."
+          }
+        }
+      },
+      {
+        "id": "order-status",
+        "category": "Check your orders",
+        "prompt": "Has my latest sale been paid? What is left before shipping?",
+        "resultType": "sale",
+        "resultTitle": "Payment is approved. Prepare the shipment next.",
+        "resultDescription": "I checked the order and shipping status.",
+        "preview": {
+          "label": "Samsung Galaxy A56",
+          "items": [
+            {
+              "value": "Payment",
+              "label": "Approved"
+            },
+            {
+              "value": "Shipping",
+              "label": "Pending preparation"
+            }
+          ],
+          "status": "Illustrative order status",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Order",
+                "#1042 · Samsung Galaxy A56"
+              ],
+              [
+                "Payment",
+                "S/ 1,399 · approved"
+              ],
+              [
+                "Shipping",
+                "Awaiting preparation"
+              ]
+            ],
+            "conclusion": "Next step: prepare the package for dispatch."
+          }
+        }
+      },
+      {
+        "id": "orders-report",
+        "category": "Get an order report",
+        "prompt": "Summarize this week’s orders, payments and pending shipments.",
+        "resultType": "report",
+        "resultTitle": "I organized orders by what needs attention.",
+        "resultDescription": "I gather available payment and shipping status to help you prepare dispatch.",
+        "preview": {
+          "label": "Orders needing attention",
+          "items": [
+            {
+              "value": "1",
+              "label": "Payment status"
+            },
+            {
+              "value": "2",
+              "label": "Shipping status"
+            },
+            {
+              "value": "3",
+              "label": "Dispatch information"
+            }
+          ],
+          "status": "Read only · Does not change order status",
+          "example": {
+            "columns": [
+              "Order",
+              "Product",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "#1042",
+                "Samsung Galaxy A56",
+                "Prepare shipment"
+              ],
+              [
+                "#1043",
+                "iPhone 15",
+                "Wait for payment approval"
+              ],
+              [
+                "#1044",
+                "MacBook Pro 14″",
+                "Hand over to carrier"
+              ]
+            ],
+            "conclusion": "3 orders, each with its next step identified."
+          }
+        }
+      },
+      {
+        "id": "promotion-eligibility",
+        "category": "Find products for a campaign",
+        "prompt": "Which of my products can join this campaign?",
+        "resultType": "report",
+        "resultTitle": "Here is what can participate and what needs review.",
+        "resultDescription": "Each campaign has its own participation requirements.",
+        "preview": {
+          "label": "Products for the campaign",
+          "items": [
+            {
+              "value": "1",
+              "label": "Products that can participate"
+            },
+            {
+              "value": "2",
+              "label": "Campaign terms"
+            },
+            {
+              "value": "3",
+              "label": "Products to review"
+            }
+          ],
+          "status": "Subject to Mercado Libre requirements",
+          "example": {
+            "columns": [
+              "Product",
+              "Status",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "Eligible",
+                "10%"
+              ],
+              [
+                "iPhone 15",
+                "Eligible",
+                "10%"
+              ],
+              [
+                "MacBook Pro 14″",
+                "Needs review",
+                "Check minimum price"
+              ]
+            ],
+            "conclusion": "2 products meet the requirements; check the MacBook price."
+          }
+        }
+      },
+      {
+        "id": "promotions-report",
+        "category": "Get a promotion report",
+        "prompt": "Summarize campaigns and discounts for my products.",
+        "resultType": "report",
+        "resultTitle": "I organized offers and participating products.",
+        "resultDescription": "Review campaigns, discounts and eligible products where available for your account.",
+        "preview": {
+          "label": "Campaigns and discounts",
+          "items": [
+            {
+              "value": "1",
+              "label": "Available campaigns"
+            },
+            {
+              "value": "2",
+              "label": "Current discounts"
+            },
+            {
+              "value": "3",
+              "label": "Participating products"
+            }
+          ],
+          "status": "Subject to availability · No changes applied",
+          "example": {
+            "columns": [
+              "Campaign",
+              "Discount",
+              "Products"
+            ],
+            "rows": [
+              [
+                "October offer",
+                "10%",
+                "21"
+              ],
+              [
+                "Weekend offer",
+                "15%",
+                "8"
+              ]
+            ],
+            "conclusion": "29 product participations across 2 campaigns. Review each product."
+          }
+        }
+      },
+      {
+        "id": "promotion-propagation",
+        "category": "Verify your discounts",
+        "prompt": "Confirm whether this campaign’s discounts have been applied.",
+        "resultType": "report",
+        "resultTitle": "I checked which discounts appear applied.",
+        "resultDescription": "Confirmed results are separate from pending operations.",
+        "preview": {
+          "label": "Promotion status",
+          "items": [
+            {
+              "value": "1",
+              "label": "Confirmed"
+            },
+            {
+              "value": "2",
+              "label": "Pending"
+            },
+            {
+              "value": "3",
+              "label": "To verify"
+            }
+          ],
+          "status": "Check of the current state",
+          "example": {
+            "columns": [
+              "Product",
+              "Discount",
+              "Status"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "10%",
+                "Applied"
+              ],
+              [
+                "iPhone 15",
+                "10%",
+                "Applied"
+              ],
+              [
+                "MacBook Pro 14″",
+                "10%",
+                "To verify"
+              ]
+            ],
+            "conclusion": "20 of 21 discounts confirmed. The MacBook still needs verification."
+          }
+        }
+      },
+      {
+        "id": "stock-coverage",
+        "category": "Plan ahead for restocking",
+        "prompt": "Which products could run out soon? Review my sales and stock.",
+        "resultType": "restock",
+        "resultTitle": "These headphones’ stock could last about 6 days.",
+        "resultDescription": "This estimate uses your recent sales.",
+        "preview": {
+          "label": "Bluetooth headphones",
+          "items": [
+            {
+              "value": "24",
+              "label": "Sold in 30 days"
+            },
+            {
+              "value": "5",
+              "label": "Units available"
+            },
+            {
+              "value": "≈6",
+              "label": "Estimated days"
+            }
+          ],
+          "status": "If the recent sales rate continues",
+          "example": {
+            "columns": [
+              "Field",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Sales in 30 days",
+                "24 headphones"
+              ],
+              [
+                "Stock",
+                "5 units"
+              ],
+              [
+                "Estimated coverage",
+                "About 6 days"
+              ]
+            ],
+            "conclusion": "Prioritize headphone restocking if this pace continues."
+          }
+        }
+      },
+      {
+        "id": "inventory-report",
+        "category": "Get a stock report",
+        "prompt": "Summarize my products’ stock and tell me what to restock first.",
+        "resultType": "report",
+        "resultTitle": "Here is your stock and what is worth restocking first.",
+        "resultDescription": "I compare available stock with your sales. Estimated coverage assumes the sales pace continues.",
+        "preview": {
+          "label": "Stock and restocking",
+          "items": [
+            {
+              "value": "1",
+              "label": "Stock by SKU"
+            },
+            {
+              "value": "2",
+              "label": "Recent sales"
+            },
+            {
+              "value": "3",
+              "label": "Restocking priority"
+            }
+          ],
+          "status": "Estimated coverage if sales pace continues",
+          "example": {
+            "columns": [
+              "Product",
+              "Stock",
+              "Estimated coverage"
+            ],
+            "rows": [
+              [
+                "Bluetooth headphones",
+                "5",
+                "≈ 6 days"
+              ],
+              [
+                "Samsung Galaxy A56",
+                "12",
+                "≈ 20 days"
+              ],
+              [
+                "iPhone 15",
+                "10",
+                "≈ 25 days"
+              ]
+            ],
+            "conclusion": "Restock headphones first: they have the shortest estimated coverage."
+          }
+        }
+      },
+      {
+        "id": "volume-promotion",
+        "category": "Create quantity discounts",
+        "prompt": "Prepare a discount for customers buying 3 units of these products.",
+        "resultType": "workflow",
+        "resultTitle": "I prepared the offer for you to review its terms.",
+        "resultDescription": "Offers depend on the promotion types Mercado Libre supports.",
+        "preview": {
+          "label": "Quantity offer",
+          "items": [
+            {
+              "value": "1",
+              "label": "Products"
+            },
+            {
+              "value": "2",
+              "label": "Required quantity"
+            },
+            {
+              "value": "3",
+              "label": "Proposed terms"
+            }
+          ],
+          "status": "Subject to offer availability · Requires your approval",
+          "example": {
+            "columns": [
+              "Field",
+              "Proposed"
+            ],
+            "rows": [
+              [
+                "Product",
+                "USB-C charger"
+              ],
+              [
+                "Minimum purchase",
+                "3 units"
+              ],
+              [
+                "Price",
+                "S/ 59 → S/ 53.10 per unit"
+              ]
+            ],
+            "conclusion": "Proposal: 10% off when buying 3 units. Review before approving."
+          }
+        }
+      },
+      {
+        "id": "bank-movements",
+        "category": "Review your money in Mercado Pago",
+        "prompt": "Group what I received, was deducted and withdrew this month.",
+        "resultType": "report",
+        "resultTitle": "I organized the transactions for you to review each amount.",
+        "resultDescription": "You can review received, deducted and withdrawn money already recorded.",
+        "preview": {
+          "label": "Mercado Pago movements",
+          "items": [
+            {
+              "value": "1",
+              "label": "Money received"
+            },
+            {
+              "value": "2",
+              "label": "Money deducted"
+            },
+            {
+              "value": "3",
+              "label": "Recorded withdrawals"
+            }
+          ],
+          "status": "Read-only · Does not move money",
+          "example": {
+            "columns": [
+              "Transaction",
+              "Amount",
+              "Detail"
+            ],
+            "rows": [
+              [
+                "Received",
+                "+ S/ 24,600",
+                "Sales"
+              ],
+              [
+                "Deducted",
+                "− S/ 2,952",
+                "Recorded fees"
+              ],
+              [
+                "Withdrawn",
+                "− S/ 15,000",
+                "Period withdrawals"
+              ]
+            ],
+            "conclusion": "Inflows and outflows grouped for review; no transfers are made."
+          }
+        }
+      },
+      {
+        "id": "sales-drop",
+        "category": "Investigate declining sales",
+        "prompt": "Why did my sales fall? Compare this month with last month.",
+        "resultType": "report",
+        "resultTitle": "I found signs that may explain the drop.",
+        "resultDescription": "I compare sales, visits and how many visits lead to purchases, where data is available.",
+        "preview": {
+          "label": "Period comparison",
+          "items": [
+            {
+              "value": "1",
+              "label": "Sales"
+            },
+            {
+              "value": "2",
+              "label": "Visits and conversion"
+            },
+            {
+              "value": "3",
+              "label": "Possible causes"
+            }
+          ],
+          "status": "Verified facts and hypotheses kept separate",
+          "example": {
+            "columns": [
+              "Field",
+              "Previous month",
+              "This month"
+            ],
+            "rows": [
+              [
+                "Sales",
+                "S/ 32,000",
+                "S/ 24,600"
+              ],
+              [
+                "Visits",
+                "4,000",
+                "3,100"
+              ],
+              [
+                "Conversion",
+                "2.0%",
+                "2.0%"
+              ]
+            ],
+            "conclusion": "Sales fell 23%, as did visits. Hypothesis: lower traffic; investigate further."
+          }
+        }
+      },
+      {
+        "id": "growth-roadmap",
+        "category": "Make a plan to sell better",
+        "prompt": "Review my MacBooks and tell me what to improve first.",
+        "resultType": "report",
+        "resultTitle": "I prepared a plan with priorities and changes for your review.",
+        "resultDescription": "I combine performance, quality and your costs; you review proposals.",
+        "preview": {
+          "label": "Business improvement plan",
+          "items": [
+            {
+              "value": "1",
+              "label": "What to improve first"
+            },
+            {
+              "value": "2",
+              "label": "Why it matters"
+            },
+            {
+              "value": "3",
+              "label": "Changes to review"
+            }
+          ],
+          "status": "Your supplied costs · Changes require approval",
+          "example": {
+            "columns": [
+              "Priority",
+              "Product",
+              "Suggested action"
+            ],
+            "rows": [
+              [
+                "1",
+                "MacBook Pro 14″",
+                "Confirm the warranty"
+              ],
+              [
+                "2",
+                "MacBook Pro 14″",
+                "Add a side photo"
+              ],
+              [
+                "3",
+                "MacBook Pro 14″",
+                "Review price against your costs"
+              ]
+            ],
+            "conclusion": "Fill in what is missing first, then review photos and price."
+          }
+        }
       }
     ],
     "photoExamples": [
       {
-        "eyebrow": "Seller in action",
-        "image": "/images/lifestyle/seller-workspace.png",
-        "alt": "Seller working on her online store from a laptop",
-        "note": "Clearer decisions for your operation."
-      },
-      {
-        "eyebrow": "Connected team",
-        "image": "/images/lifestyle/agency-team.png",
-        "alt": "Ecommerce team reviewing sales and orders",
-        "note": "A clear view for every client."
-      },
-      {
-        "eyebrow": "Publish in fewer steps",
+        "eyebrow": "List with fewer steps",
+        "note": "Turn your photos into a listing ready to review.",
         "image": "/images/lifestyle/publish-from-photo.png",
-        "alt": "Seller photographing a smartphone to publish it in her online store",
-        "note": "From a photo to a listing ready to review."
+        "alt": "Seller photographing a smartphone to publish it in her online store"
       },
       {
-        "eyebrow": "Your catalog under control",
-        "image": "/images/lifestyle/catalog-control.png",
-        "alt": "Ecommerce operator reviewing inventory and catalog from a laptop",
-        "note": "Prices, stock, and promotions kept up to date."
+        "eyebrow": "A clearer view of your business",
+        "note": "Ask what you need to know about your business.",
+        "image": "/images/lifestyle/seller-workspace.png",
+        "alt": "Seller working on her online store from a laptop"
       },
       {
-        "eyebrow": "Turn data into action",
+        "eyebrow": "Your operations under control",
+        "note": "Manage multiple SKUs and prepare your operations.",
+        "image": "/images/lifestyle/powerseller-inventory.png",
+        "alt": "Seller scanning a product among inventory and packages ready for dispatch"
+      },
+      {
+        "eyebrow": "Think bigger",
+        "note": "Understand your sales and decide what to do next.",
         "image": "/images/lifestyle/sales-analysis.png",
-        "alt": "Ecommerce team analyzing sales performance",
-        "note": "Spot opportunities to grow with clarity."
+        "alt": "Ecommerce team analyzing sales performance"
+      },
+      {
+        "eyebrow": "Decide with your data",
+        "note": "Decide what to sell, improve and restock.",
+        "image": "/images/lifestyle/powerseller-analysis.png",
+        "alt": "Seller reviewing sales and stock reports beside products and a calculator"
+      },
+      {
+        "eyebrow": "One AI for your businesses",
+        "note": "Fewer repetitive tasks. More time for your business.",
+        "image": "/images/lifestyle/agency-team.png",
+        "alt": "Ecommerce team reviewing sales and orders"
       }
     ],
     "features": [
@@ -362,7 +2295,7 @@
     "noCard": "No card required",
     "howItWorks": "See how it works",
     "featuresTitle": "What you can do with merchat",
-    "showcaseTitle": "Ask merchat for what you need",
+    "showcaseTitle": "One question. Much more than an answer.",
     "stepsTitle": "How it works",
     "stepsIntro": "Create your account, connect Mercado Libre, and use merchat as your assistant from the AI tool you prefer.",
     "chatgptGuideLabel": "Guide to connect merchat to ChatGPT",
@@ -456,6 +2389,16 @@
     "footerRights": "All rights reserved.",
     "footerDisclosure": "merchat is an independent service and is not affiliated with Mercado Libre.",
     "pricingOffer": "Save 50% on Vendedor and Vendedor Pro, and 83% on Vendedor Max Anual.",
-    "discountLabel": "50% OFF"
+    "discountLabel": "50% OFF",
+    "showcaseIntro": "Prepare listings from photos or Excel, update multiple products at once, and find ways to improve your sales, profits, and stock. Less repetitive work and more time to grow your business—just ask your AI.",
+    "showcaseDisclaimer": "Illustrative examples. Features and results depend on available data and permissions.",
+    "showcaseToolCount": "91 actions to sell and manage smarter.",
+    "showcaseClose": "Close example",
+    "showcaseOpen": "View example",
+    "showcaseHint": "Open any example to see the full result.",
+    "showcaseIllustrative": "Illustrative result",
+    "showcaseQuestion": "Your question",
+    "showcaseHow": "How it works",
+    "showcaseDataNote": "Example products and amounts; not data from a real account."
   }
 }
