@@ -131,8 +131,8 @@ function UseCaseResult({ card, ui }: { card: UseCaseCard; ui: ReturnType<typeof 
     {card.id === "photo-listing" && <ProductPhotos count={3} />}
     <table className="cap-table">
       <caption>{ui.showcaseIllustrative}</caption>
-      <thead><tr>{example.columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
-      <tbody>{example.rows.map((row, index) => <tr key={index}>{row.map((cell, columnIndex) => columnIndex === 0 ? <th key={columnIndex} scope="row">{cell}</th> : <td key={columnIndex}>{cell}</td>)}</tr>)}</tbody>
+      <thead><tr>{example.columns.map((column, columnIndex) => <th key={column} scope="col" data-numeric={columnIndex > 0 && example.rows.every((row) => /^[+−]?\s*(?:S\/|R\$|\d)/.test(row[columnIndex])) || undefined}>{column}</th>)}</tr></thead>
+      <tbody>{example.rows.map((row, index) => <tr key={index}>{row.map((cell, columnIndex) => columnIndex === 0 ? <th key={columnIndex} scope="row">{cell}</th> : <td key={columnIndex} data-numeric={/^[+−]?\s*(?:S\/|R\$|\d)/.test(cell) || undefined}>{cell}</td>)}</tr>)}</tbody>
     </table>
     <p className="cap-takeaway"><HeroIcon name="arrow" size={18} />{example.conclusion}</p>
     <p className="cap-output-status"><HeroIcon name="shield" size={16} />{status}</p>
@@ -141,7 +141,7 @@ function UseCaseResult({ card, ui }: { card: UseCaseCard; ui: ReturnType<typeof 
 
 function UseCaseDemoCard({ card, ui, onOpen }: { card: UseCaseCard; ui: ReturnType<typeof getUi>; onOpen: (id: string) => void }) {
   return <article className={`example-card demo-card result-${card.resultType}`} data-capability={card.id}>
-    <span>{card.category}</span><div className="example-bubble">{card.prompt}</div>
+    <h4 className="cap-card-title">{card.category}</h4><div className="example-bubble">{card.prompt}</div>
     <strong>{card.resultTitle}</strong>
     <button className="cap-open" type="button" aria-haspopup="dialog" aria-label={`${ui.showcaseOpen}: ${card.category}`} onClick={() => onOpen(card.id)}>
       <span>{ui.showcaseOpen}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 6 6-6 6" /></svg>
@@ -180,7 +180,7 @@ function CapabilityDialog({ card, index, total, ui, onClose, onMove }: { card: U
     {card && <div className="cap-dialog-inner">
       <header className="cap-dialog-toolbar"><BrandLogo /><button className="cap-close" type="button" aria-label={ui.showcaseClose} onClick={onClose}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></header>
       <div className="cap-dialog-content" key={card.id}>
-        <div className="cap-conversation"><h2 id="cap-dialog-title">{card.category}</h2><div className="cap-question"><span className="cap-speaker">{ui.showcaseQuestion}</span><blockquote>{card.prompt}</blockquote></div><div className="cap-response"><span className="cap-speaker"><HeroIcon name="sparkle" size={16} />{siteConfig.name}</span><p className="cap-answer">{card.resultTitle}</p></div>{card.resultDescription && <details className="cap-method"><summary>{ui.showcaseHow}</summary><p>{card.resultDescription}</p></details>}</div>
+        <h2 className="cap-dialog-title" id="cap-dialog-title">{card.category}</h2><div className="cap-conversation"><div className="cap-question"><span className="cap-speaker">{ui.showcaseQuestion}</span><blockquote>{card.prompt}</blockquote></div><div className="cap-response"><span className="cap-speaker"><HeroIcon name="sparkle" size={16} />{siteConfig.name}</span><p className="cap-answer">{card.resultTitle}</p></div>{card.resultDescription && <details className="cap-method"><summary>{ui.showcaseHow}</summary><p>{card.resultDescription}</p></details>}</div>
         <div className="cap-result"><UseCaseResult card={card} ui={ui} /></div>
       </div>
       <footer className="cap-dialog-footer"><p>{ui.showcaseDataNote}</p><div className="cap-dialog-nav"><button type="button" aria-label={ui.carouselPrevious} onClick={() => onMove(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6" /></svg></button><span aria-live="polite" aria-atomic="true">{index + 1} / {total}</span><button type="button" aria-label={ui.carouselNext} onClick={() => onMove(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6" /></svg></button></div></footer>

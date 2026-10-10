@@ -12,6 +12,12 @@ Two generated photos add experienced-seller contexts: scanning inventory among p
 
 User-approved questions and responses remain unchanged. The newly added sample products and amounts are explicitly illustrative, not live seller data. The MerChat photo-search guide helps the connected AI find photos; the client AI creates images and MerChat associates them with listing drafts. Approval requirements and country/account limitations remain explicit. Pricing and its typography remain unchanged.
 
+## Visual refinement
+
+The final polish aligns cards and photographs within each desktop row, keeps all 42 desktop text cards between 252 and 271 px high, and reduces competing blue surfaces. Titles use the existing navy, question bubbles are quieter, and each footer has a clear opening action with a circular arrow. The dialog title spans both columns; the result surface uses lighter borders, aligned numeric values and a warm takeaway highlight. Existing fonts, approved copy and pricing remain unchanged.
+
+Desktop overview and Excel detail visually confirmed at 1440 × 1000; the mobile Excel detail confirmed at 390 × 844 with visible fixed navigation and no horizontal overflow. The production build, lint and TypeScript pass after refinement.
+
 ## Current validation
 
 - Production build, TypeScript and ESLint passed; the existing BrandLogo image warning remains.
@@ -23,6 +29,10 @@ User-approved questions and responses remain unchanged. The newly added sample p
 - Earlier full-suite checks recorded two baseline logo/icon assertion failures at `610e0f4`; these unrelated assertions are unchanged.
 
 ## Screenshots
+
+- [Polished compact overview](polished-overview.png)
+- [Polished desktop detail](polished-detail.png)
+- [Polished mobile detail](polished-mobile.png)
 
 - [Concrete desktop result](concrete-desktop.png)
 - [Explicit opening controls](explicit-cards.png)
