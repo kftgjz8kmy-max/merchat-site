@@ -2099,38 +2099,44 @@
         "/images/feature-icons/publishing-v3-transparent.png",
         "Publica en minutos",
         [
-          "Crea una publicación conversando",
-          "Publica desde una foto",
-          "Completa y verifica datos técnicos"
+          "Publica desde una foto, Excel o conversación",
+          "Busca fotos o crea imágenes para tu publicación",
+          "Genera títulos y descripciones atractivas",
+          "Completa y verifica las características",
+          "Revisa todo antes de publicar"
         ]
       ],
       [
         "/images/feature-icons/market-research.png",
-        "Mejora tus precios",
+        "Mejora tus ingresos",
         [
-          "Compara tus precios",
-          "Calcula descuentos",
-          "Crea promociones",
-          "Agrega productos a promociones"
+          "Compara precios con productos similares",
+          "Calcula ganancias, costos y comisiones",
+          "Evalúa descuentos sin perder margen",
+          "Consulta y activa promociones",
+          "Actualiza precios desde Excel"
         ]
       ],
       [
         "/images/feature-icons/order-management.png",
         "Controla tu operación",
         [
-          "Calcula ganancias en Excel",
-          "Actualiza precios y stock",
-          "Consulta tus últimas ventas",
-          "Identifica los más y menos vendidos"
+          "Descubre qué necesita tu negocio hoy",
+          "Consulta y gestiona publicaciones, ventas, stock, pedidos, envíos y más",
+          "Revisa preguntas pendientes",
+          "Organiza tu catálogo y tus SKU",
+          "Usa hojas de Excel para importar y exportar información a tu tienda."
         ]
       ],
       [
         "/images/feature-icons/sales-insights.png",
         "Analiza tus ventas",
         [
-          "Encuentra productos que no se venden",
-          "Optimiza publicaciones",
-          "Genera un diagnóstico trimestral"
+          "Identifica oportunidades para vender más",
+          "Detecta publicaciones que necesitan mejoras",
+          "Compara ventas entre períodos",
+          "Consulta tus campañas y resultados publicitarios",
+          "Genera reportes de ventas, ganancias y stock"
         ]
       ]
     ],
@@ -2147,7 +2153,7 @@
       ],
       [
         "3",
-        "Instala tu asistente merchat",
+        "Instala merchat en tu IA",
         "Conéctalo con ChatGPT, Claude u otra herramienta compatible."
       ],
       [
@@ -2158,7 +2164,7 @@
     ],
     "plans": [
       {
-        "name": "Vendedor",
+        "name": "Merchat Basico",
         "audience": "Para quienes quieren entender mejor su operación.",
         "originalPrice": "19.99",
         "price": "9.99",
@@ -2166,45 +2172,43 @@
         "cta": "Gratis por 14 días",
         "items": [
           "Conecta hasta 2 cuentas de Mercado Libre",
+          "Descubre qué necesita atención y qué publicaciones mejorar",
           "Consulta ventas, pedidos y entregas",
-          "Revisa publicaciones, precios y stock",
-          "Analiza rendimiento y oportunidades",
-          "Consulta promociones y campañas",
-          "Consultas mensuales incluidas",
-          "Analizar tu cuenta sin realizar cambios"
+          "Revisa precios, stock y productos más vendidos",
+          "Compara precios, costos, comisiones y ganancias",
+          "Analiza tus promociones, campañas, visitas y resultados publicitarios.",
+          "Genera reportes personalizados con tus preguntas"
         ],
         "billingPeriod": "/mes"
       },
       {
-        "name": "Vendedor Pro",
+        "name": "Merchat Pro",
         "audience": "Tu asistente para operar Mercado Libre.",
         "originalPrice": "39.99",
         "price": "19.99",
         "featured": false,
         "cta": "Gratis por 14 días",
         "items": [
-          "Todo lo incluido en Vendedor",
-          "Conecta hasta 2 cuentas de Mercado Libre",
-          "Crea y actualiza publicaciones",
-          "Cambia precios y stock",
-          "Pausa y reactiva publicaciones",
-          "Gestiona promociones y descuentos",
-          "Analiza ventas y rendimiento",
-          "Revisa oportunidades en Product Ads",
-          "Confirma antes de ejecutar cambios"
+          "Todo lo incluido en MerChat Básico",
+          "Publica conversando, desde fotos o Excel",
+          "Busca o genera imágenes para tus productos",
+          "Crea títulos, descripciones y completa características",
+          "Actualiza precios, stock y promociones en lote",
+          "Gestiona publicaciones, ventas, envíos y preguntas",
+          "Gestiona hasta 2 cuentas y opera desde una publicación hasta cientos de productos."
         ],
         "billingPeriod": "/mes"
       },
       {
-        "name": "Vendedor Max Anual",
-        "audience": "Todo lo incluido en Vendedor Pro, con hasta 4 cuentas y facturación anual.",
+        "name": "Merchat Ultra",
+        "audience": "Todo lo incluido en Merchat Pro, con hasta 4 cuentas y facturación anual.",
         "originalPrice": "959.76",
         "price": "159.99",
         "billingPeriod": "/año",
         "featured": true,
-        "cta": "Comenzar con Vendedor Max Anual",
+        "cta": "Comenzar con Merchat Ultra",
         "items": [
-          "Todo lo incluido en Vendedor Pro",
+          "Todo lo incluido en Merchat Pro",
           "Conecta hasta 4 cuentas de Mercado Libre",
           "Consulta y opera cada cuenta por separado"
         ]
@@ -2227,7 +2231,7 @@
       ],
       [
         "¿Qué incluye la prueba gratis de 14 días?",
-        "Durante 14 días puedes probar las funciones de Pro con una cuenta de Mercado Libre, incluyendo consultas, análisis y herramientas para gestionar tu operación.\n\nNo necesitas tarjeta para comenzar."
+        "Durante 14 días puedes probar las funciones de Merchat Pro con una cuenta de Mercado Libre, incluyendo consultas, análisis y herramientas para gestionar tu operación.\n\nNo necesitas tarjeta para comenzar."
       ],
       [
         "¿Cuándo comienza mi prueba gratis?",
@@ -2238,8 +2242,8 @@
         "Puedes elegir el plan que mejor se adapte a tu operación para continuar usando merchat."
       ],
       [
-        "¿Cuál es la diferencia entre Read, Pro y Pro Anual?",
-        "**Read (US$9/mes)** permite consultar y analizar hasta 2 cuentas sin hacer cambios.\n\n**Pro (US$20/mes)** incluye lectura y escritura para hasta 2 cuentas: puedes crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones.\n\n**Pro Anual (US$159/año)** incluye todo lo de Pro para hasta 4 cuentas y ahorra US$799.77 frente a pagar US$79.98 al mes por 2 cuentas Vendedor Pro durante 12 meses (US$959.76)."
+        "¿Cuánto cuesta cada plan de merchat?",
+        "**Merchat Basico (US$9.99/mes)** permite consultar y analizar hasta 2 cuentas sin hacer cambios.\n\n**Merchat Pro (US$19.99/mes)** incluye lectura y escritura para hasta 2 cuentas: puedes crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones.\n\n**Merchat Ultra (US$159.99/año)** incluye las funciones de Merchat Pro para hasta 4 cuentas, con facturación anual."
       ],
       [
         "¿merchat puede hacer cambios en mi cuenta de Mercado Libre?",
@@ -2270,8 +2274,8 @@
         "No. El proceso está diseñado para guiarte paso a paso. Creas tu cuenta, conectas Mercado Libre, instalas merchat en tu asistente de IA y puedes comenzar a usarlo conversando."
       ],
       [
-        "¿Cuál es la diferencia entre Vendedor, Vendedor Pro y Vendedor Max Anual?",
-        "**Vendedor** está pensado para consultar y analizar tu cuenta sin realizar cambios.\n\n**Vendedor Pro** además te permite operar tu cuenta: crear y actualizar publicaciones, cambiar precios y stock, gestionar promociones y realizar otras acciones con tu autorización.\n\n**Vendedor Max Anual** incluye las funciones de Vendedor Pro para hasta 4 cuentas de Mercado Libre, con facturación anual."
+        "¿Qué incluye Merchat Basico, Merchat Pro y Merchat Ultra?",
+        "**Merchat Basico** está pensado para consultar y analizar hasta 2 cuentas sin realizar cambios.\n\n**Merchat Pro** también te permite operar hasta 2 cuentas: crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones con tu autorización.\n\n**Merchat Ultra** incluye las funciones de Merchat Pro para hasta 4 cuentas de Mercado Libre, con facturación anual."
       ],
       [
         "¿merchat puede crear publicaciones nuevas?",
@@ -2279,21 +2283,105 @@
       ],
       [
         "¿Puedo usar merchat solamente para consultar información sin permitir cambios?",
-        "Sí. El plan Vendedor está diseñado precisamente para eso: consultar ventas, publicaciones, stock, rendimiento, promociones y otra información de tu operación sin realizar cambios en tu cuenta."
+        "Sí. Merchat Basico está diseñado precisamente para eso: consultar ventas, publicaciones, stock, rendimiento, promociones y otra información de tu operación sin realizar cambios en tu cuenta."
       ],
       [
         "¿Qué puedo preguntarle a merchat?",
         "Puedes pedirle cosas como:\n\n“¿Cuáles fueron mis productos más vendidos este mes?”\n\n“Muéstrame las publicaciones que necesitan mejorar.”\n\n“¿Cuánto gané después de comisiones?”\n\n“Actualiza el stock de estos productos.”\n\n“Crea una promoción para estas publicaciones.”\n\n“Quiero publicar este producto.”\n\nLa idea es que puedas gestionar Mercado Libre conversando, en lugar de buscar cada función manualmente."
+      ],
+      [
+        "¿Puedo usar merchat en mi país?",
+        "Sí. merchat es compatible con todos los países donde opera Mercado Libre. Puedes conectar tus cuentas y gestionar cada una por separado. Las funciones disponibles pueden variar según el país y tu cuenta."
       ]
+    ],
+    "countries": [
+      {
+        "code": "BR",
+        "name": "Brasil"
+      },
+      {
+        "code": "MX",
+        "name": "México"
+      },
+      {
+        "code": "AR",
+        "name": "Argentina"
+      },
+      {
+        "code": "CL",
+        "name": "Chile"
+      },
+      {
+        "code": "CO",
+        "name": "Colombia"
+      },
+      {
+        "code": "PE",
+        "name": "Perú"
+      },
+      {
+        "code": "UY",
+        "name": "Uruguay"
+      },
+      {
+        "code": "VE",
+        "name": "Venezuela"
+      },
+      {
+        "code": "EC",
+        "name": "Ecuador"
+      },
+      {
+        "code": "BO",
+        "name": "Bolivia"
+      },
+      {
+        "code": "PY",
+        "name": "Paraguay"
+      },
+      {
+        "code": "CR",
+        "name": "Costa Rica"
+      },
+      {
+        "code": "DO",
+        "name": "República Dominicana"
+      },
+      {
+        "code": "PA",
+        "name": "Panamá"
+      },
+      {
+        "code": "GT",
+        "name": "Guatemala"
+      },
+      {
+        "code": "HN",
+        "name": "Honduras"
+      },
+      {
+        "code": "SV",
+        "name": "El Salvador"
+      },
+      {
+        "code": "NI",
+        "name": "Nicaragua"
+      },
+      {
+        "code": "CU",
+        "name": "Cuba"
+      }
     ]
   },
   "ui": {
+    "heroTools": "Úsalo desde ChatGPT, Claude u otra herramienta de IA compatible.",
     "heroTitle": "Gestiona Mercado Libre hablando con una IA que",
     "heroEmphasis": "entiende tu negocio.",
     "startFree": "Comienza Gratis",
     "trial": "14 días gratis",
     "noCard": "Sin tarjeta",
     "howItWorks": "Ver cómo funciona",
+    "exploreFeatures": "Lo que puedes hacer con merchat",
     "featuresTitle": "Lo que puedes hacer con merchat",
     "showcaseTitle": "Una pregunta. Mucho más que una respuesta.",
     "stepsTitle": "Cómo funciona",
@@ -2390,15 +2478,16 @@
     "footerDisclosure": "merchat es un servicio independiente y no está afiliado a Mercado Libre.",
     "pricingOffer": "Ahorra 50% en Vendedor y Vendedor Pro, y 83% en Vendedor Max Anual.",
     "discountLabel": "50% OFF",
-    "showcaseIntro": "Prepara publicaciones desde fotos o Excel, actualiza varios productos a la vez y descubre qué mejorar en tus ventas, ganancias y stock. Menos tareas repetitivas y más tiempo para hacer crecer tu negocio, con solo pedírselo a tu IA.",
+    "showcaseIntro": "Prepara publicaciones, actualiza varios productos a la vez y descubre qué mejorar en tus ventas, ganancias y stock. Menos tareas repetitivas y más tiempo para hacer crecer tu negocio, con solo pedírselo a tu IA.",
     "showcaseDisclaimer": "Ejemplos ilustrativos. Las funciones y resultados dependen de los datos y permisos disponibles.",
-    "showcaseToolCount": "91 acciones para vender y gestionar mejor.",
+    "showcaseToolCount": "Más de 90 acciones para vender y gestionar tu negocio.",
     "showcaseClose": "Cerrar ejemplo",
     "showcaseOpen": "Ver ejemplo",
     "showcaseHint": "Abre cualquier ejemplo para ver el resultado completo.",
     "showcaseIllustrative": "Resultado ilustrativo",
     "showcaseQuestion": "Tu pregunta",
     "showcaseHow": "Cómo lo hace",
-    "showcaseDataNote": "Productos e importes de ejemplo; no son datos de una cuenta real."
+    "showcaseDataNote": "Productos e importes de ejemplo; no son datos de una cuenta real.",
+    "countryCompatibility": "Compatible con tu cuenta de Mercado Libre en:"
   }
 }

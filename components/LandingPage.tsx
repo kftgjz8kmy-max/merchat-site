@@ -355,6 +355,7 @@ export default function LandingPage() {
   const startShowcaseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
     if ((event.target as Element).closest("button")) return;
+    event.preventDefault();
     const carousel = event.currentTarget;
     showcasePausedRef.current = true;
     showcaseDragRef.current = { active: true, pointerId: event.pointerId, startX: event.clientX, startScroll: carousel.scrollLeft };
@@ -447,24 +448,42 @@ export default function LandingPage() {
         <div className="hero-dots hero-dots-bottom" />
       </div>
       <div className="hero-copy">
-        <p className="eyebrow"><HeroIcon name="sparkle" size={16} />{localizedLanding.hero.eyebrow}</p>
         <h1>{ui.heroTitle.split(/(Mercado Libre|Mercado Livre)/).map((part, index) => /^(Mercado Libre|Mercado Livre)$/.test(part) ? <span className="hero-marketplace-name" key={index}>{part}</span> : <Fragment key={index}>{part}</Fragment>)} <em>{ui.heroEmphasis}</em></h1>
         <p className="hero-description">{localizedLanding.hero.description}</p>
+        <p className="hero-tools">{ui.heroTools}</p>
         <div className="button-row"><div className="primary-cta"><Button icon href={siteConfig.trialUrl}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
-        <div className="quick-points"><span><img src="/images/quick-points/publish.png" alt="" width="28" height="28" /><span>{ui.quickPublish}</span></span><span><img src="/images/quick-points/clock.png" alt="" width="28" height="28" /><span>{ui.quickHoursLine1}<br className="quick-point-break" /> {ui.quickHoursLine2}</span></span><span><img src="/images/quick-points/language.png" alt="" width="28" height="28" /><span>{ui.quickNaturalLine1}<br className="quick-point-break" /> {ui.quickNaturalLine2}</span></span></div>
       </div>
-      <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
-        <iframe
-          className="hero-animation-frame"
-          sandbox="allow-scripts"
-          src={`/animations/pregunta-viva/pregunta-viva.html?embed=hero&locale=${locale}`}
-          title={ui.animationLabel}
-        />
+      <div className="hero-demo">
+        <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
+          <iframe
+            className="hero-animation-frame"
+            sandbox="allow-scripts"
+            src={`/animations/pregunta-viva/pregunta-viva.html?embed=hero&locale=${locale}`}
+            title={ui.animationLabel}
+          />
+        </div>
+      </div>
+      <div className="country-compatibility">
+        <p>{ui.countryCompatibility}</p>
+        <div className="country-marquee" role="region" aria-label={ui.countryCompatibility}>
+          <div className="country-track">
+            {[false, true].map((duplicate) => <ul key={String(duplicate)} aria-hidden={duplicate || undefined}>
+              {localizedLanding.countries.map((country) => <li key={country.code}>
+                <span className="country-flag" aria-hidden="true">{Array.from(country.code).map((letter) => String.fromCodePoint(127397 + letter.charCodeAt(0))).join("")}</span>
+                <span>{locale === "es" ? country.name : new Intl.DisplayNames([locale], { type: "region" }).of(country.code)}</span>
+              </li>)}
+            </ul>)}
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="funciones" className="functions-group">
-      <section className="features shell"><SectionTitle>{ui.featuresTitle}</SectionTitle><div>{localizedLanding.features.map(([, title, items], featureIndex) => <article key={title}><span className="feature-icon"><img src={brandFeatureIcons[featureIndex]} alt="" width="96" height="96" /></span><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
+      <a className="hero-scroll-cue" href="#capacidades">
+        <span>{ui.exploreFeatures}</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </a>
+      <section id="capacidades" className="features shell"><SectionTitle>{ui.featuresTitle}</SectionTitle><div>{localizedLanding.features.map(([, title, items], featureIndex) => <article key={title}><span className="feature-icon"><img src={brandFeatureIcons[featureIndex]} alt="" width="96" height="96" /></span><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
       <section id="resultados" className="showcase shell" onFocusCapture={() => { showcaseFocusedRef.current = true; showcasePausedRef.current = true; }} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { showcaseFocusedRef.current = false; scheduleShowcaseResume(); } }}><SectionTitle level="h3">{ui.showcaseTitle}</SectionTitle><p className="showcase-intro"><strong>{ui.showcaseToolCount}</strong> {ui.showcaseIntro}</p><div ref={showcaseRef} className={`showcase-carousel ${isDraggingShowcase ? "is-dragging" : ""}`} role="region" aria-roledescription={ui.carouselRole} aria-label={ui.showcaseAria} onPointerDown={startShowcaseDrag} onPointerMove={dragShowcase} onPointerUp={stopShowcaseDrag} onPointerCancel={stopShowcaseDrag} onTouchStart={startShowcaseTouch} onTouchMove={moveShowcaseTouch} onTouchEnd={stopShowcaseTouch} onTouchCancel={stopShowcaseTouch} onScroll={(event) => { const loopWidth = getShowcaseLoopWidth(event.currentTarget); setActiveShowcasePage(Math.min(showcasePages - 1, Math.floor((event.currentTarget.scrollLeft % loopWidth) / (loopWidth / showcasePages)))); }}><div className="carousel"><ShowcaseCards content={localizedLanding} ui={ui} onOpen={openShowcase} /><ShowcaseCards content={localizedLanding} ui={ui} duplicate onOpen={openShowcase} /></div></div><div className="showcase-controls"><button className="carousel-arrow" type="button" aria-label={ui.carouselPrevious} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(-1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 4.5-5.5 5.5 5.5 5.5" /></svg></button><div className="dots" aria-label={ui.showcaseNavigation}>{Array.from({ length: showcasePages }, (_, index) => <button key={index} className={activeShowcasePage === index ? "active" : ""} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcase(index)} aria-label={`${ui.showcasePage} ${index + 1}`} aria-current={activeShowcasePage === index ? "page" : undefined} />)}</div><button className="carousel-arrow" type="button" aria-label={ui.carouselNext} onFocus={() => { showcasePausedRef.current = true; }} onBlur={() => scheduleShowcaseResume()} onClick={() => moveShowcaseByView(1)}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4.5 5.5 5.5-5.5 5.5" /></svg></button></div><p className="showcase-disclaimer">{ui.showcaseDisclaimer}</p><CapabilityDialog card={activeShowcaseIndex === null ? null : localizedLanding.useCases[activeShowcaseIndex]} index={activeShowcaseIndex ?? 0} total={localizedLanding.useCases.length} ui={ui} onClose={closeShowcase} onMove={(direction) => setActiveShowcaseIndex((index) => index === null ? null : (index + direction + localizedLanding.useCases.length) % localizedLanding.useCases.length)} /></section>
     </section>
 
@@ -473,7 +492,7 @@ export default function LandingPage() {
 
       <section id="seguridad" className="trust shell"><SectionTitle>{ui.trustTitle}</SectionTitle><div>{localizedLanding.trust.map((item, i) => <article key={item}><span className="trust-icon"><img src={trustIconSources[i] ?? trustIconSources[0]} alt="" width="48" height="48" /></span>{item}</article>)}</div></section>
 
-      <section id="planes" className="pricing shell"><SectionTitle>{ui.pricingTitle}</SectionTitle><p className="pricing-intro">{ui.pricingIntro}<br /><span>{ui.pricingOffer}</span></p><div className="pricing-grid">{localizedLanding.plans.map((plan, planIndex) => { const isTrialPlan = planIndex < 2; const savingsLabel = plan.featured ? ui.recommended : ui.planSavingsMonthly; return <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}><span className="plan-savings">{savingsLabel}</span><div className="plan-header"><h3 className="plan-name">{plan.name}</h3><p className="audience">{plan.audience}</p></div><ul>{plan.items.map((item, itemIndex) => <li className={planIndex > 0 && itemIndex === 0 ? "feature-inherited" : undefined} key={item}><svg className="feature-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4.2 10.2 3.5 3.5 8-8" /></svg><span>{item}</span></li>)}</ul><div className="price-block">{plan.featured && <span className="plan-savings-secondary">{ui.planSavingsAnnual}</span>}<p className="price"><span className="price-original"><del><span className="price-currency">$</span>{plan.originalPrice}</del></span><span className="price-current-group"><span className="price-current"><span className="price-currency">$</span>{plan.price}</span><small className="price-period">{plan.billingPeriod}</small></span></p></div><Button outline={!plan.featured} href={isTrialPlan ? siteConfig.trialUrl : siteConfig.whatsappUrl}>{plan.cta}</Button>{isTrialPlan && <span className="plan-note">{ui.planNoCard}</span>}</article>; })}</div></section>
+      <section id="planes" className="pricing shell"><SectionTitle>{ui.pricingTitle}</SectionTitle><p className="pricing-intro">{ui.pricingIntro}</p><div className="pricing-grid">{localizedLanding.plans.map((plan, planIndex) => { const isTrialPlan = planIndex < 2; const savingsLabel = plan.featured ? ui.recommended : ui.planSavingsMonthly; return <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}><span className="plan-savings">{savingsLabel}</span><div className="plan-header"><h3 className="plan-name">{plan.name}</h3><p className="audience">{plan.audience}</p></div><ul>{plan.items.map((item, itemIndex) => <li className={planIndex > 0 && itemIndex === 0 ? "feature-inherited" : undefined} key={item}><svg className="feature-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4.2 10.2 3.5 3.5 8-8" /></svg><span>{item}</span></li>)}</ul><div className="price-block">{plan.featured && <span className="plan-savings-secondary">{ui.planSavingsAnnual}</span>}<p className="price"><span className="price-original"><del><span className="price-currency">$</span>{plan.originalPrice}</del></span><span className="price-current-group"><span className="price-current"><span className="price-currency">$</span>{plan.price}</span><small className="price-period">{plan.billingPeriod}</small></span></p></div><Button outline={!plan.featured} href={isTrialPlan ? siteConfig.trialUrl : siteConfig.whatsappUrl}>{plan.cta}</Button>{isTrialPlan && <span className="plan-note">{ui.planNoCard}</span>}</article>; })}</div></section>
 
       <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
 

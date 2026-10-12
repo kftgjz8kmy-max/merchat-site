@@ -25,6 +25,7 @@ export type UseCaseCard = {
 export type LandingUi = { [key: string]: string };
 
 type LandingContent = {
+  countries: { code: string; name: string }[];
   hero: { eyebrow: string; description: string };
   useCases: UseCaseCard[];
   photoExamples: { eyebrow: string; image: string; alt: string; note: string }[];

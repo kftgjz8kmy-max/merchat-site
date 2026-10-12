@@ -2284,16 +2284,100 @@
       [
         "What can I ask merchat?",
         "You can ask things like:\n\n“What were my best-selling products this month?”\n\n“Show me the listings that need improvement.”\n\n“How much did I earn after fees?”\n\n“Update the stock for these products.”\n\n“Create a promotion for these listings.”\n\n“I want to publish this product.”\n\nThe idea is to manage Mercado Libre through conversation instead of searching for every function manually."
+      ],
+      [
+        "Can I use merchat in my country?",
+        "Yes. merchat is compatible with every country where Mercado Libre operates. You can connect your accounts and manage each one separately. Available features may vary by country and account."
       ]
+    ],
+    "countries": [
+      {
+        "code": "AR",
+        "name": "Argentina"
+      },
+      {
+        "code": "BR",
+        "name": "Brasil"
+      },
+      {
+        "code": "MX",
+        "name": "México"
+      },
+      {
+        "code": "CL",
+        "name": "Chile"
+      },
+      {
+        "code": "CO",
+        "name": "Colombia"
+      },
+      {
+        "code": "PE",
+        "name": "Perú"
+      },
+      {
+        "code": "UY",
+        "name": "Uruguay"
+      },
+      {
+        "code": "VE",
+        "name": "Venezuela"
+      },
+      {
+        "code": "EC",
+        "name": "Ecuador"
+      },
+      {
+        "code": "BO",
+        "name": "Bolivia"
+      },
+      {
+        "code": "PY",
+        "name": "Paraguay"
+      },
+      {
+        "code": "CR",
+        "name": "Costa Rica"
+      },
+      {
+        "code": "DO",
+        "name": "República Dominicana"
+      },
+      {
+        "code": "PA",
+        "name": "Panamá"
+      },
+      {
+        "code": "GT",
+        "name": "Guatemala"
+      },
+      {
+        "code": "HN",
+        "name": "Honduras"
+      },
+      {
+        "code": "SV",
+        "name": "El Salvador"
+      },
+      {
+        "code": "NI",
+        "name": "Nicaragua"
+      },
+      {
+        "code": "CU",
+        "name": "Cuba"
+      }
     ]
   },
   "ui": {
+    "heroTools": "Use it from ChatGPT, Claude, or another compatible AI tool.",
     "heroTitle": "Manage Mercado Libre by talking with an AI that",
     "heroEmphasis": "understands your business.",
     "startFree": "Start Free",
     "trial": "14 days free",
     "noCard": "No card required",
     "howItWorks": "See how it works",
+    "exploreFeatures": "Explore what you can do",
     "featuresTitle": "What you can do with merchat",
     "showcaseTitle": "One question. Much more than an answer.",
     "stepsTitle": "How it works",
@@ -2399,6 +2483,7 @@
     "showcaseIllustrative": "Illustrative result",
     "showcaseQuestion": "Your question",
     "showcaseHow": "How it works",
-    "showcaseDataNote": "Example products and amounts; not data from a real account."
+    "showcaseDataNote": "Example products and amounts; not data from a real account.",
+    "countryCompatibility": "Compatible with your Mercado Libre account in"
   }
 }
