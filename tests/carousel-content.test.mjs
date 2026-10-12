@@ -1,0 +1,68 @@
+import assert from "node:assert/strict";
+import { readFile, access } from "node:fs/promises";
+import test from "node:test";
+
+const root = new URL("../", import.meta.url);
+const locales = ["es", "en", "pt-BR", "zh-CN"];
+const readMessages = async (locale) => JSON.parse(await readFile(new URL(`messages/${locale}.json`, root), "utf8"));
+
+test("every locale has the same 42 workflows and six distinct lifestyle photos", async () => {
+  const messages = await Promise.all(locales.map(readMessages));
+  const ids = messages[0].landing.useCases.map((card) => card.id);
+  assert.equal(ids.length, 42);
+  assert.equal(new Set(ids).size, 42);
+  for (const { landing, ui } of messages) {
+    assert.deepEqual(landing.useCases.map((card) => card.id), ids);
+    assert.equal(new Set(landing.useCases.map((card) => card.resultType)).size, 14);
+    assert.equal(landing.photoExamples.length, 6);
+    assert.equal(new Set(landing.photoExamples.map((photo) => photo.image)).size, 6);
+    for (const card of landing.useCases) {
+      for (const value of [card.category, card.prompt, card.resultTitle, card.resultDescription, card.preview.label, card.preview.status]) assert.ok(value?.trim());
+      assert.ok(Array.isArray(card.preview.items));
+      const example = card.preview.example;
+      assert.ok(example?.conclusion?.trim(), `${card.id} needs a concrete takeaway`);
+      assert.ok(example.columns.length >= 2);
+      assert.ok(example.rows.length >= 2, `${card.id} needs sample results`);
+      for (const row of example.rows) {
+        assert.equal(row.length, example.columns.length);
+        assert.ok(row.every((cell) => typeof cell === "string" && cell.trim()));
+      }
+      assert.ok(example.rows.flat().some((cell) => /\d/.test(cell)), `${card.id} needs concrete data`);
+    }
+    assert.ok(ui.showcaseIntro && ui.showcaseDisclaimer && ui.showcaseOpen && ui.showcaseDataNote);
+    assert.match(ui.showcaseToolCount, /91/);
+    for (const photo of landing.photoExamples) await access(new URL(`public${photo.image}`, root));
+  }
+});
+
+test("advanced workflows preserve approval, financial read-only boundaries and photo prerequisites", async () => {
+  const { landing } = await readMessages("es");
+  const byId = Object.fromEntries(landing.useCases.map((card) => [card.id, card]));
+  assert.match(byId["revision-review"].preview.status, /sin tu aprobación/);
+  assert.match(byId["revision-verification"].preview.status, /después de aprobar/);
+  assert.match(byId["publication-route"].preview.status, /confirmar contigo/);
+  assert.match(byId["product-family"].resultDescription, /según Mercado Libre/);
+  assert.match(byId["selling-fees"].preview.status, /Costos aportados.*estimada/);
+  assert.match(byId["price-floor"].resultDescription, /otros gastos/);
+  assert.match(byId["bank-movements"].preview.status, /Solo consulta.*No mueve dinero/);
+  assert.match(byId["settlement-report"].preview.status, /Requiere aprobación.*No hace transferencias/);
+  assert.match(byId["sales-drop"].preview.status, /Datos verificados e hipótesis por separado/);
+  assert.match(byId["multi-country"].preview.status, /Cuentas conectadas.*disponibilidad por país/);
+  assert.match(byId["find-product-photos"].preview.status, /herramientas de tu IA.*aprobación/);
+  assert.match(byId["ai-product-photos"].preview.status, /generación de imágenes en tu IA.*aprobación/);
+});
+
+test("illustrative previews preserve approval gates, uncertainty and account separation", async () => {
+  const { landing } = await readMessages("es");
+  const byId = Object.fromEntries(landing.useCases.map((card) => [card.id, card]));
+  assert.match(byId["photo-listing"].preview.status, /pendiente de aprobación/);
+  assert.match(byId["inventory-file"].preview.status, /Pendiente de aprobación/);
+  assert.match(byId["photo-order"].preview.status, /Pendiente de aprobación/);
+  assert.match(byId["batch-campaign"].preview.status, /después de aprobar/);
+  assert.equal(byId["batch-campaign"].preview.items[1].value, "21/21");
+  assert.match(byId["market-research"].preview.status, /ilustrativa/);
+  assert.match(byId["margin-diagnosis"].preview.status, /Costos aportados/);
+  assert.match(byId["stock-coverage"].preview.status, /Si continúa/);
+  assert.deepEqual(byId["account-comparison"].preview.items.map((item) => item.label), ["Tienda A", "Tienda B"]);
+  assert.match(byId["order-status"].preview.items[1].label, /Pendiente/);
+});

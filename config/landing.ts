@@ -1,6 +1,6 @@
 import { getLocaleMessages } from "@/i18n/messages";
 
-export type UseCaseResultType = "listing" | "photo-identification" | "technical" | "price-range" | "discount" | "promotion" | "eligibility" | "excel" | "bulk-update" | "sale" | "ranking" | "restock" | "stagnant" | "performance" | "dashboard";
+export type UseCaseResultType = "listing" | "promotion" | "excel" | "gallery" | "diagnosis" | "price-range" | "priorities" | "performance" | "ads" | "accounts" | "sale" | "restock" | "workflow" | "report";
 
 export type UseCaseCard = {
   id: string;
@@ -9,11 +9,23 @@ export type UseCaseCard = {
   resultType: UseCaseResultType;
   resultTitle: string;
   resultDescription?: string;
+  preview: {
+    label: string;
+    items: { label: string; value?: string }[];
+    status: string;
+    example: {
+      columns: string[];
+      rows: string[][];
+      conclusion: string;
+      media?: "product" | "gallery";
+    };
+  };
 };
 
 export type LandingUi = { [key: string]: string };
 
 type LandingContent = {
+  countries: { code: string; name: string }[];
   hero: { eyebrow: string; description: string };
   useCases: UseCaseCard[];
   photoExamples: { eyebrow: string; image: string; alt: string; note: string }[];
@@ -24,8 +36,7 @@ type LandingContent = {
     audience: string;
     originalPrice: string;
     price: string;
-    prefix: string;
-    setup: string;
+    billingPeriod: string;
     featured: boolean;
     cta: string;
     items: string[];

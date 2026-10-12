@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+<defs>
+  <linearGradient id="blue" x1="0" y1="0" x2="0.65" y2="1"><stop stop-color="#4198FF"/><stop offset=".3" stop-color="#1768FF"/><stop offset="1" stop-color="#103AE5"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2=".65" y2="1"><stop stop-color="#FFF071"/><stop offset=".35" stop-color="#FFDA24"/><stop offset="1" stop-color="#FFA511"/></linearGradient>
+  <linearGradient id="white" x2=".5" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DFE9FF"/></linearGradient>
+  <filter id="depth" x="-30%" y="-25%" width="170%" height="170%"><feDropShadow dx="1" dy="2" stdDeviation=".65" flood-color="#102D87" flood-opacity=".3"/><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#173A86" flood-opacity=".14"/></filter>
+</defs>
+<g filter="url(#depth)" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="15" width="26" height="48" rx="9" fill="url(#blue)"/><rect x="44" y="15" width="26" height="48" rx="9" fill="url(#blue)"/><path d="M18 19h10m24 0h10" stroke="#B1D7FF" stroke-width="2"/><path d="M18 29h10m-10 10h10m-10 10h10m24-20h10m-10 10h10m-10 10h10" stroke="#FFFFFF" stroke-width="3"/><rect x="37" y="9" width="6" height="60" rx="3" fill="url(#gold)"/></g>
+</svg>
