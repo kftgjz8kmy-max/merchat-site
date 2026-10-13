@@ -2158,55 +2158,53 @@
     ],
     "plans": [
       {
-        "name": "Vendedor",
-        "audience": "For people who want to better understand their operation.",
+        "name": "Merchat Basic",
+        "audience": "For sellers who want a clearer view of their business.",
         "originalPrice": "19.99",
         "price": "9.99",
         "featured": false,
-        "cta": "Free for 14 days",
+        "cta": "Try it free for 14 days",
         "items": [
           "Connect up to 2 Mercado Libre accounts",
-          "Check sales, orders, and deliveries",
-          "Review listings, prices, and stock",
-          "Analyze performance and opportunities",
-          "Check promotions and campaigns",
-          "Monthly queries included",
-          "Analyze your account without making changes"
+          "See what needs attention and which listings to improve",
+          "Review sales, orders, and deliveries",
+          "Check prices, stock, and best-selling products",
+          "Compare prices, costs, fees, and profit",
+          "Review promotions, campaigns, visits, and ad performance",
+          "Create custom reports by asking questions"
         ],
         "billingPeriod": "/month"
       },
       {
-        "name": "Vendedor Pro",
-        "audience": "Your assistant for operating on Mercado Libre.",
+        "name": "Merchat Pro",
+        "audience": "Your assistant for running your Mercado Libre business.",
         "originalPrice": "39.99",
         "price": "19.99",
         "featured": false,
-        "cta": "Free for 14 days",
+        "cta": "Try it free for 14 days",
         "items": [
-          "Everything included in Vendedor",
-          "Connect up to 2 Mercado Libre accounts",
-          "Create and update listings",
-          "Change prices and stock",
-          "Pause and reactivate listings",
-          "Manage promotions and discounts",
-          "Analyze sales and performance",
-          "Review Product Ads opportunities",
-          "Confirm before making changes"
+          "Everything in Merchat Basic",
+          "Create listings by chatting, from photos, or from Excel",
+          "Find or generate images for your products",
+          "Create titles and descriptions, and complete product attributes",
+          "Update prices, stock, and promotions in bulk",
+          "Manage listings, sales, shipping, and questions",
+          "Manage up to 2 accounts, from a single listing to hundreds of products"
         ],
         "billingPeriod": "/month"
       },
       {
-        "name": "Vendedor Max Anual",
-        "audience": "Everything in Vendedor Pro, with up to 4 accounts and annual billing.",
+        "name": "Merchat Ultra",
+        "audience": "Everything in Merchat Pro, with up to 4 accounts and annual billing.",
         "originalPrice": "959.76",
         "price": "159.99",
         "billingPeriod": "/year",
         "featured": true,
-        "cta": "Get started with Vendedor Max Anual",
+        "cta": "Get started with Merchat Ultra",
         "items": [
-          "Everything included in Vendedor Pro",
-          "Connect up to 5 Mercado Libre accounts",
-          "Review and operate each account separately"
+          "Everything in Merchat Pro",
+          "Connect up to 4 Mercado Libre accounts",
+          "Review and manage each account separately"
         ]
       }
     ],

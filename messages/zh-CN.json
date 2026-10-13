@@ -2158,53 +2158,51 @@
     ],
     "plans": [
       {
-        "name": "Vendedor",
-        "audience": "适合希望更好了解业务运营的人。",
+        "name": "Merchat 基础版",
+        "audience": "适合希望更清楚了解业务运营的卖家。",
         "originalPrice": "19.99",
         "price": "9.99",
         "featured": false,
-        "cta": "免费 14 天",
+        "cta": "免费试用 14 天",
         "items": [
           "最多连接 2 个 Mercado Libre 账户",
+          "了解哪些事项需要处理，以及哪些商品刊登需要改进",
           "查看销售、订单和配送",
-          "查看商品刊登、价格和库存",
-          "分析业绩和机会",
-          "查看促销和活动",
-          "包含每月查询次数",
-          "在不更改账户的情况下分析业务"
+          "查看价格、库存和畅销商品",
+          "比较价格、成本、手续费和利润",
+          "分析促销、活动、访问量和广告表现",
+          "通过提问生成自定义报告"
         ],
         "billingPeriod": "/月"
       },
       {
-        "name": "Vendedor Pro",
-        "audience": "你的 Mercado Libre 运营助手。",
+        "name": "Merchat Pro",
+        "audience": "帮你运营 Mercado Libre 业务的助手。",
         "originalPrice": "39.99",
         "price": "19.99",
         "featured": false,
-        "cta": "免费 14 天",
+        "cta": "免费试用 14 天",
         "items": [
-          "包含 Vendedor 的全部功能",
-          "最多连接 2 个 Mercado Libre 账户",
-          "创建和更新商品刊登",
-          "修改价格和库存",
-          "暂停并重新启用刊登",
-          "管理促销和折扣",
-          "分析销售和业绩",
-          "查看 Product Ads 机会",
-          "在更改前进行确认"
+          "包含 Merchat 基础版的全部功能",
+          "通过对话、照片或 Excel 创建商品刊登",
+          "查找或生成商品图片",
+          "生成标题和描述，并补全商品属性",
+          "批量更新价格、库存和促销",
+          "管理商品刊登、销售、配送和买家问题",
+          "最多管理 2 个账户，可处理单个刊登或数百件商品"
         ],
         "billingPeriod": "/月"
       },
       {
-        "name": "Vendedor Max Anual",
-        "audience": "包含 Vendedor Pro 的全部功能，最多支持 4 个账户并按年计费。",
+        "name": "Merchat Ultra",
+        "audience": "包含 Merchat Pro 的全部功能，最多支持 4 个账户并按年付费。",
         "originalPrice": "959.76",
         "price": "159.99",
         "billingPeriod": "/年",
         "featured": true,
-        "cta": "开始使用 Vendedor Max Anual",
+        "cta": "开始使用 Merchat Ultra",
         "items": [
-          "包含 Vendedor Pro 的全部功能",
+          "包含 Merchat Pro 的全部功能",
           "最多连接 4 个 Mercado Libre 账户",
           "分别查看和运营每个账户"
         ]
