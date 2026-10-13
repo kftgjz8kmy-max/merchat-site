@@ -6,7 +6,7 @@ import { useLocale } from "next-intl";
 import { getLanding, getUi, landing as spanishLanding, type UseCaseCard } from "@/config/landing";
 import { siteConfig } from "@/config/site";
 import { BrandLogo } from "@/components/BrandLogo";
-import { localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
+import { localeCookieMaxAge, localeCookieName, localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
 
 type HeroIconName = "sparkle" | "arrow" | "shield" | "lock" | "check" | "publish" | "clock" | "confirm" | "send" | "double-check" | "globe";
 
@@ -29,11 +29,19 @@ const languages = localeOptions;
 
 type LanguageCode = AppLocale;
 
+function saveLocalePreference(locale: LanguageCode) {
+  document.cookie = `${localeCookieName}=${encodeURIComponent(locale)}; Path=/; Max-Age=${localeCookieMaxAge}; SameSite=Lax${window.location.protocol === "https:" ? "; Secure" : ""}`;
+}
+
 function LanguageSwitcher({ selectorLabel, currentLanguageLabel }: { selectorLabel: string; currentLanguageLabel: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const selectedLanguage = useLocale() as LanguageCode;
   const switcherRef = useRef<HTMLDivElement>(null);
   const selected = languages.find((language) => language.code === selectedLanguage) ?? languages[0];
+
+  useEffect(() => {
+    saveLocalePreference(selectedLanguage);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
@@ -52,6 +60,7 @@ function LanguageSwitcher({ selectorLabel, currentLanguageLabel }: { selectorLab
 
   const selectLanguage = (language: (typeof languages)[number]) => {
     const hash = window.location.hash;
+    saveLocalePreference(language.code);
     setIsOpen(false);
     window.location.assign(`${localePaths[language.code]}${hash}`);
   };
@@ -67,6 +76,12 @@ function LanguageSwitcher({ selectorLabel, currentLanguageLabel }: { selectorLab
       </button>)}
     </div>}
   </div>;
+}
+
+function mlAutomationHref(href: string, locale: AppLocale) {
+  const target = new URL(href);
+  target.searchParams.set("locale", locale);
+  return target.toString();
 }
 
 function Button({ children, outline = false, href = siteConfig.whatsappUrl, icon = false }: { children: React.ReactNode; outline?: boolean; href?: string; icon?: boolean }) {
@@ -205,7 +220,7 @@ function getShowcaseLoopWidth(carousel: HTMLDivElement) {
 }
 
 export default function LandingPage() {
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const localizedLanding = getLanding(locale);
   const ui = getUi(locale);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -436,7 +451,7 @@ export default function LandingPage() {
       <a href="#inicio" className="brand" aria-label={siteConfig.name}><BrandLogo className="brand-logo-full" /></a>
       <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#como-funciona", ui.navHow], ["#funciones", ui.navFeatures], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-negocios", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-negocios" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
       <LanguageSwitcher selectorLabel={ui.languageSelector} currentLanguageLabel={ui.currentLanguage} />
-      <Button href={siteConfig.trialUrl}>{ui.startFree}</Button>
+      <Button href={mlAutomationHref(siteConfig.trialUrl, locale)}>{ui.startFree}</Button>
       <button className="mobile-menu" type="button" aria-label={ui.menu} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((open) => !open)}><span /><span /><span /></button>
     </header>
 
@@ -451,7 +466,7 @@ export default function LandingPage() {
         <h1>{ui.heroTitle.split(/(Mercado Libre|Mercado Livre)/).map((part, index) => /^(Mercado Libre|Mercado Livre)$/.test(part) ? <span className="hero-marketplace-name" key={index}>{part}</span> : <Fragment key={index}>{part}</Fragment>)} <em>{ui.heroEmphasis}</em></h1>
         <p className="hero-description">{localizedLanding.hero.description}</p>
         <p className="hero-tools">{ui.heroTools}</p>
-        <div className="button-row"><div className="primary-cta"><Button icon href={siteConfig.trialUrl}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
+        <div className="button-row"><div className="primary-cta"><Button icon href={mlAutomationHref(siteConfig.trialUrl, locale)}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
       </div>
       <div className="hero-demo">
         <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
@@ -488,11 +503,11 @@ export default function LandingPage() {
     </section>
 
     <div className="post-pricing-background">
-      <section id="como-funciona" className="steps shell"><SectionTitle>{ui.stepsTitle}</SectionTitle><p className="steps-intro">{ui.stepsIntro}</p><div>{localizedLanding.steps.map(([number, title, description], i) => <article key={number}><div className="step-symbol"><StepIcon step={i} /></div><div className="step-title"><h3>{title}</h3></div><p>{description}</p>{i === 2 && <a className="chatgpt-guide-link" href={siteConfig.chatgptGuideUrl} target="_blank" rel="noopener noreferrer">{ui.chatgptGuideLabel}<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" /></svg></a>}</article>)}</div></section>
+      <section id="como-funciona" className="steps shell"><SectionTitle>{ui.stepsTitle}</SectionTitle><p className="steps-intro">{ui.stepsIntro}</p><div>{localizedLanding.steps.map(([number, title, description], i) => <article key={number}><div className="step-symbol"><StepIcon step={i} /></div><div className="step-title"><h3>{title}</h3></div><p>{description}</p>{i === 2 && <a className="chatgpt-guide-link" href={mlAutomationHref(siteConfig.chatgptGuideUrl, locale)} target="_blank" rel="noopener noreferrer">{ui.chatgptGuideLabel}<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" /></svg></a>}</article>)}</div></section>
 
       <section id="seguridad" className="trust shell"><SectionTitle>{ui.trustTitle}</SectionTitle><div>{localizedLanding.trust.map((item, i) => <article key={item}><span className="trust-icon"><img src={trustIconSources[i] ?? trustIconSources[0]} alt="" width="48" height="48" /></span>{item}</article>)}</div></section>
 
-      <section id="planes" className="pricing shell"><SectionTitle>{ui.pricingTitle}</SectionTitle><p className="pricing-intro">{ui.pricingIntro}</p><div className="pricing-grid">{localizedLanding.plans.map((plan, planIndex) => { const isTrialPlan = planIndex < 2; const savingsLabel = plan.featured ? ui.recommended : ui.planSavingsMonthly; return <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}><span className="plan-savings">{savingsLabel}</span><div className="plan-header"><h3 className="plan-name">{plan.name}</h3><p className="audience">{plan.audience}</p></div><ul>{plan.items.map((item, itemIndex) => <li className={planIndex > 0 && itemIndex === 0 ? "feature-inherited" : undefined} key={item}><svg className="feature-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4.2 10.2 3.5 3.5 8-8" /></svg><span>{item}</span></li>)}</ul><div className="price-block">{plan.featured && <span className="plan-savings-secondary">{ui.planSavingsAnnual}</span>}<p className="price"><span className="price-original"><del><span className="price-currency">$</span>{plan.originalPrice}</del></span><span className="price-current-group"><span className="price-current"><span className="price-currency">$</span>{plan.price}</span><small className="price-period">{plan.billingPeriod}</small></span></p></div><Button outline={!plan.featured} href={isTrialPlan ? siteConfig.trialUrl : siteConfig.whatsappUrl}>{plan.cta}</Button>{isTrialPlan && <span className="plan-note">{ui.planNoCard}</span>}</article>; })}</div></section>
+      <section id="planes" className="pricing shell"><SectionTitle>{ui.pricingTitle}</SectionTitle><p className="pricing-intro">{ui.pricingIntro}</p><div className="pricing-grid">{localizedLanding.plans.map((plan, planIndex) => { const isTrialPlan = planIndex < 2; const savingsLabel = plan.featured ? ui.recommended : ui.planSavingsMonthly; return <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}><span className="plan-savings">{savingsLabel}</span><div className="plan-header"><h3 className="plan-name">{plan.name}</h3><p className="audience">{plan.audience}</p></div><ul>{plan.items.map((item, itemIndex) => <li className={planIndex > 0 && itemIndex === 0 ? "feature-inherited" : undefined} key={item}><svg className="feature-check" viewBox="0 0 20 20" aria-hidden="true"><path d="m4.2 10.2 3.5 3.5 8-8" /></svg><span>{item}</span></li>)}</ul><div className="price-block">{plan.featured && <span className="plan-savings-secondary">{ui.planSavingsAnnual}</span>}<p className="price"><span className="price-original"><del><span className="price-currency">$</span>{plan.originalPrice}</del></span><span className="price-current-group"><span className="price-current"><span className="price-currency">$</span>{plan.price}</span><small className="price-period">{plan.billingPeriod}</small></span></p></div><Button outline={!plan.featured} href={isTrialPlan ? mlAutomationHref(siteConfig.trialUrl, locale) : siteConfig.whatsappUrl}>{plan.cta}</Button>{isTrialPlan && <span className="plan-note">{ui.planNoCard}</span>}</article>; })}</div></section>
 
       <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
 
