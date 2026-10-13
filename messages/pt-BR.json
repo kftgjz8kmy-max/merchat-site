@@ -2158,53 +2158,51 @@
     ],
     "plans": [
       {
-        "name": "Vendedor",
-        "audience": "Para quem quer entender melhor sua operação.",
+        "name": "Merchat Básico",
+        "audience": "Para quem quer entender melhor a própria operação.",
         "originalPrice": "19.99",
         "price": "9.99",
         "featured": false,
-        "cta": "Grátis por 14 dias",
+        "cta": "Teste grátis por 14 dias",
         "items": [
           "Conecte até 2 contas do Mercado Livre",
+          "Descubra o que precisa de atenção e quais anúncios melhorar",
           "Consulte vendas, pedidos e entregas",
-          "Revise anúncios, preços e estoque",
-          "Analise desempenho e oportunidades",
-          "Consulte promoções e campanhas",
-          "Consultas mensais incluídas",
-          "Analise sua conta sem fazer alterações"
+          "Confira preços, estoque e produtos mais vendidos",
+          "Compare preços, custos, tarifas e lucros",
+          "Analise promoções, campanhas, visitas e resultados de anúncios",
+          "Gere relatórios personalizados fazendo perguntas"
         ],
         "billingPeriod": "/mês"
       },
       {
-        "name": "Vendedor Pro",
+        "name": "Merchat Pro",
         "audience": "Seu assistente para operar no Mercado Livre.",
         "originalPrice": "39.99",
         "price": "19.99",
         "featured": false,
-        "cta": "Grátis por 14 dias",
+        "cta": "Teste grátis por 14 dias",
         "items": [
-          "Tudo incluído no Vendedor",
-          "Conecte até 2 contas do Mercado Livre",
-          "Crie e atualize anúncios",
-          "Altere preços e estoque",
-          "Pause e reative anúncios",
-          "Gerencie promoções e descontos",
-          "Analise vendas e desempenho",
-          "Revise oportunidades no Product Ads",
-          "Confirme antes de fazer alterações"
+          "Tudo incluído no Merchat Básico",
+          "Crie anúncios por conversa, a partir de fotos ou de planilhas Excel",
+          "Busque ou gere imagens para seus produtos",
+          "Crie títulos e descrições e complete as características",
+          "Atualize preços, estoque e promoções em lote",
+          "Gerencie anúncios, vendas, envios e perguntas",
+          "Gerencie até 2 contas, de um anúncio a centenas de produtos"
         ],
         "billingPeriod": "/mês"
       },
       {
-        "name": "Vendedor Max Anual",
-        "audience": "Tudo do Vendedor Pro, com até 4 contas e cobrança anual.",
+        "name": "Merchat Ultra",
+        "audience": "Tudo do Merchat Pro, com até 4 contas e cobrança anual.",
         "originalPrice": "959.76",
         "price": "159.99",
         "billingPeriod": "/ano",
         "featured": true,
-        "cta": "Começar com Vendedor Max Anual",
+        "cta": "Começar com o Merchat Ultra",
         "items": [
-          "Tudo incluído no Vendedor Pro",
+          "Tudo incluído no Merchat Pro",
           "Conecte até 4 contas do Mercado Livre",
           "Consulte e opere cada conta separadamente"
         ]

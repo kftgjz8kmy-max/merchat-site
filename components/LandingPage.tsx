@@ -238,6 +238,7 @@ export default function LandingPage() {
   const showcaseResumeTimerRef = useRef<number | null>(null);
   const showcaseDragRef = useRef({ active: false, pointerId: 0, startX: 0, startScroll: 0 });
   const showcaseTouchRef = useRef({ active: false, startX: 0, startY: 0, lastX: 0, startScroll: 0 });
+  const countryDragRef = useRef<{ active: boolean; pointerId: number; startX: number; startTime: number; duration: number; loopWidth: number; startScroll: number; animation: Animation | null }>({ active: false, pointerId: 0, startX: 0, startTime: 0, duration: 0, loopWidth: 0, startScroll: 0, animation: null });
   const [isDraggingShowcase, setIsDraggingShowcase] = useState(false);
   const showcasePages = 4;
   const [activeShowcaseIndex, setActiveShowcaseIndex] = useState<number | null>(null);
@@ -432,6 +433,64 @@ export default function LandingPage() {
     setIsDraggingShowcase(false);
     scheduleShowcaseResume(900);
   };
+  const startCountryDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    const track = event.currentTarget.querySelector<HTMLElement>(".country-track");
+    if (!track) return;
+    const animation = track.getAnimations()[0] ?? null;
+    const timingDuration = animation?.effect?.getTiming().duration;
+    const duration = typeof timingDuration === "number" ? timingDuration : 0;
+    const drag = countryDragRef.current;
+    drag.active = true;
+    drag.pointerId = event.pointerId;
+    drag.startX = event.clientX;
+    drag.duration = duration;
+    drag.loopWidth = track.scrollWidth / 2;
+    drag.startTime = duration > 0 && typeof animation?.currentTime === "number"
+      ? ((animation.currentTime % duration) + duration) % duration
+      : 0;
+    drag.startScroll = event.currentTarget.scrollLeft;
+    drag.animation = animation;
+    event.currentTarget.classList.add("is-dragging");
+    event.currentTarget.setPointerCapture(event.pointerId);
+    if (event.pointerType === "mouse") event.preventDefault();
+  };
+  const dragCountries = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = countryDragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+    const distance = event.clientX - drag.startX;
+    if (drag.animation && drag.duration > 0 && drag.loopWidth > 0) {
+      const time = drag.startTime - (distance / drag.loopWidth) * drag.duration;
+      drag.animation.currentTime = ((time % drag.duration) + drag.duration) % drag.duration;
+    } else {
+      event.currentTarget.scrollLeft = drag.startScroll - distance;
+    }
+  };
+  const stopCountryDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = countryDragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+    drag.active = false;
+    drag.animation = null;
+    event.currentTarget.classList.remove("is-dragging");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+  const scrollCountriesWithWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const distance = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+    if (!distance) return;
+    const track = event.currentTarget.querySelector<HTMLElement>(".country-track");
+    if (!track) return;
+    const animation = track.getAnimations()[0];
+    const timingDuration = animation?.effect?.getTiming().duration;
+    const duration = typeof timingDuration === "number" ? timingDuration : 0;
+    const loopWidth = track.scrollWidth / 2;
+    if (animation && duration > 0 && loopWidth > 0 && typeof animation.currentTime === "number") {
+      const time = animation.currentTime + (distance / loopWidth) * duration;
+      animation.currentTime = ((time % duration) + duration) % duration;
+    } else {
+      event.currentTarget.scrollLeft += distance;
+    }
+    event.preventDefault();
+  };
   const navigateToSection = (event: React.MouseEvent<HTMLAnchorElement>) => {
     const href = event.currentTarget.getAttribute("href");
     const id = href?.startsWith("#") ? href.slice(1) : "";
@@ -480,7 +539,7 @@ export default function LandingPage() {
       </div>
       <div className="country-compatibility">
         <p>{ui.countryCompatibility}</p>
-        <div className="country-marquee" role="region" aria-label={ui.countryCompatibility}>
+        <div className="country-marquee" role="region" aria-label={ui.countryCompatibility} onPointerDown={startCountryDrag} onPointerMove={dragCountries} onPointerUp={stopCountryDrag} onPointerCancel={stopCountryDrag} onWheel={scrollCountriesWithWheel}>
           <div className="country-track">
             {[false, true].map((duplicate) => <ul key={String(duplicate)} aria-hidden={duplicate || undefined}>
               {localizedLanding.countries.map((country) => <li key={country.code}>
