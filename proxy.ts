@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
-import { localeCookieMaxAge, localeCookieName, localePaths, normalizeLocale } from "./i18n/locales";
+import { detectLocaleFromAcceptLanguage, localeCookieMaxAge, localeCookieName, localePaths, normalizeLocale } from "./i18n/locales";
 
 const intlProxy = createMiddleware(routing);
 
@@ -21,6 +21,19 @@ export default function proxy(request: NextRequest) {
     });
     response.headers.set("Cache-Control", "private, no-store");
     return response;
+  }
+
+  if (request.nextUrl.pathname === "/") {
+    const locale = normalizeLocale(request.cookies.get(localeCookieName)?.value)
+      ?? detectLocaleFromAcceptLanguage(request.headers.get("accept-language"));
+    if (locale !== "es") {
+      const url = request.nextUrl.clone();
+      url.pathname = localePaths[locale];
+      const response = NextResponse.redirect(url);
+      response.headers.set("Cache-Control", "private, no-store");
+      response.headers.set("Vary", "Cookie, Accept-Language");
+      return response;
+    }
   }
 
   return intlProxy(request);
