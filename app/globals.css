@@ -2770,8 +2770,8 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   animation:button-light-sweep 2.8s ease-in-out infinite;
 }
 .button-animated.button-outline::after {
-  opacity:.68;
-  background:linear-gradient(105deg,transparent 0%,rgb(31 41 55 / 10%) 32%,rgb(31 41 55 / 28%) 50%,rgb(31 41 55 / 10%) 68%,transparent 100%);
+  opacity:.55;
+  background:linear-gradient(105deg,transparent 0%,rgb(31 41 55 / 6%) 32%,rgb(31 41 55 / 18%) 50%,rgb(31 41 55 / 6%) 68%,transparent 100%);
 }
 .button-animated-content {
   position:relative;
