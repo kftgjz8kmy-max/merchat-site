@@ -2738,6 +2738,64 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   .hero-scroll-cue { margin-block:20px 8px; }
   main #funciones.functions-group #capacidades { padding-block:40px 44px; }
 }
+
+/* A restrained Uiverse-inspired light sweep on the primary signup actions. */
+.button-animated {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transition:background .2s ease, transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.button-hover-effect:hover,
+.button-hover-effect:focus-visible {
+  transform:translateY(-1px) scale(1.035);
+  border-color:rgb(255 255 255 / 78%);
+  box-shadow:0 9px 20px rgb(23 79 240 / 26%);
+}
+.button-animated-content svg { transition:transform .22s ease; }
+.button-hover-effect:hover .button-animated-content svg,
+.button-hover-effect:focus-visible .button-animated-content svg { transform:translateX(3px); }
+.button-animated::after {
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:-55%;
+  bottom:-55%;
+  left:-48%;
+  width:34%;
+  pointer-events:none;
+  opacity:.42;
+  background:linear-gradient(105deg,transparent 0%,rgb(255 255 255 / 38%) 32%,rgb(255 255 255 / 88%) 50%,rgb(255 255 255 / 38%) 68%,transparent 100%);
+  transform:translateX(-160%) skewX(-18deg);
+  animation:button-light-sweep 2.8s ease-in-out infinite;
+}
+.button-animated.button-outline::after {
+  opacity:.68;
+  background:linear-gradient(105deg,transparent 0%,rgb(31 41 55 / 10%) 32%,rgb(31 41 55 / 28%) 50%,rgb(31 41 55 / 10%) 68%,transparent 100%);
+}
+.button-animated-content {
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  white-space:nowrap;
+}
+@keyframes button-light-sweep {
+  0%, 18% { transform:translateX(-160%) skewX(-18deg); }
+  61%, 100% { transform:translateX(510%) skewX(-18deg); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .button-hover-effect,
+  .button-animated-content svg { transition:none; }
+  .button-hover-effect:hover,
+  .button-hover-effect:focus-visible,
+  .button-hover-effect:hover .button-animated-content svg,
+  .button-hover-effect:focus-visible .button-animated-content svg { transform:none; }
+  .button-animated::after { animation:none; display:none; }
+}
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
   .hero-scroll-cue,.hero-scroll-cue svg { transition:none; }
