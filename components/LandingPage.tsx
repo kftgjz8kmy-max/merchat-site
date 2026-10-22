@@ -510,7 +510,7 @@ export default function LandingPage() {
       <a href="#inicio" className="brand" aria-label={siteConfig.name}><BrandLogo className="brand-logo-full" /></a>
       <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#como-funciona", ui.navHow], ["#funciones", ui.navFeatures], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-negocios", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-negocios" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
       <LanguageSwitcher selectorLabel={ui.languageSelector} currentLanguageLabel={ui.currentLanguage} />
-      <Button href="#planes">{ui.startFree}</Button>
+      <Button href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button>
       <button className="mobile-menu" type="button" aria-label={ui.menu} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((open) => !open)}><span /><span /><span /></button>
     </header>
 
@@ -525,7 +525,7 @@ export default function LandingPage() {
         <h1>{ui.heroTitle.split(/(Mercado Libre|Mercado Livre)/).map((part, index) => /^(Mercado Libre|Mercado Livre)$/.test(part) ? <span className="hero-marketplace-name" key={index}>{part}</span> : <Fragment key={index}>{part}</Fragment>)} <em>{ui.heroEmphasis}</em></h1>
         <p className="hero-description">{localizedLanding.hero.description}</p>
         <p className="hero-tools">{ui.heroTools}</p>
-        <div className="button-row"><div className="primary-cta"><Button icon href="#planes">{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
+        <div className="button-row"><div className="primary-cta"><Button icon href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
       </div>
       <div className="hero-demo">
         <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
