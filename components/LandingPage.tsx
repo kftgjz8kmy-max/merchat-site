@@ -510,7 +510,7 @@ export default function LandingPage() {
       <a href="#inicio" className="brand" aria-label={siteConfig.name}><BrandLogo className="brand-logo-full" /></a>
       <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#como-funciona", ui.navHow], ["#funciones", ui.navFeatures], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-negocios", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-negocios" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
       <LanguageSwitcher selectorLabel={ui.languageSelector} currentLanguageLabel={ui.currentLanguage} />
-      <Button animated hoverEffect href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button>
+      <Button hoverEffect href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button>
       <button className="mobile-menu" type="button" aria-label={ui.menu} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((open) => !open)}><span /><span /><span /></button>
     </header>
 
