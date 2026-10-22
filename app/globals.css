@@ -2225,6 +2225,23 @@ body, main { background: var(--bg); }
   border-color: var(--brand-blue); background: #FFFFFF; animation: none;
   box-shadow: 0 12px 30px rgb(23 79 240 / 9%);
 }
+/* Match the Ultra offer perimeter in the onboarding app. */
+@property --ultra-border-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+#planes .price-card.featured::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(from var(--ultra-border-angle), transparent 0deg 270deg, #ffcb24 305deg, #ff9216 330deg, transparent 360deg);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: ultra-border-orbit 6s linear infinite;
+}
+@keyframes ultra-border-orbit { to { --ultra-border-angle: 360deg; } }
+@media (prefers-reduced-motion: reduce) { #planes .price-card.featured::after { animation: none; } }
+@media (forced-colors: active) { #planes .price-card.featured::after { display: none; } }
 #planes .pricing-grid .price-card > .plan-savings,
 #planes .pricing-grid .price-card.featured .plan-savings-secondary {
   background: #FFD21A; color: #172554; box-shadow: none; text-shadow: none;
