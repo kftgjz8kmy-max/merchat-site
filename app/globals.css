@@ -3108,7 +3108,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   padding: 8px 22px;
   border: 1px solid #e8cc83;
   border-radius: 999px;
-  background: linear-gradient(110deg, #fff5d6, #fff9e8);
+  background: linear-gradient(110deg, #fff2c4, #fff6d8);
   box-shadow: 0 2px 6px rgb(135 95 0 / 6%);
   color: #604a12;
   font-size: 20px;
@@ -3119,7 +3119,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 #planes .annual-plan-column .price-card.featured .annual-value .price {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  width: max-content;
+  width: 100%;
   max-width: 100%;
   align-items: baseline;
   justify-content: center;
@@ -3130,6 +3130,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  justify-content: center;
 }
 #planes .annual-plan-column .price-card.featured .annual-value .price-original del {
   font-size: 16px;
@@ -3146,7 +3147,10 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 #planes .annual-plan-column .price-card.featured .annual-value .price-current-group {
   display: flex;
   align-items: baseline;
-  gap: 3px;
+  justify-content: center;
+  justify-self: center;
+  width: max-content;
+  gap: 4px;
 }
 #planes .annual-plan-column .price-card.featured .annual-value .price-period {
   position: static;
@@ -3162,6 +3166,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 #planes .annual-plan-column .price-card.featured .annual-value > .button:hover {
   background: #ffe05b;
 }
+#planes .annual-plan-column .annual-value > .button-animated::after { animation-duration: 3.4s; }
 #planes .annual-plan-column .price-card.featured .annual-monthly { font-weight: 600; }
 #planes .annual-plan-column .price-card.featured .annual-trial { margin: -8px auto 0; }
 #planes .price-card.featured .price-original {
