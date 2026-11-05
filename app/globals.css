@@ -247,7 +247,7 @@ main{position:relative}main:before{display:none}.header{position:sticky;top:0;z-
 .step-number{box-shadow:0 3px 10px color-mix(in srgb,var(--brand-blue) 20%,transparent),inset 0 1px 1px rgb(255 255 255 / 72%)}.step-symbol{box-shadow:inset 0 1px 1px rgb(255 255 255 / 88%),inset 0 -1px 1px color-mix(in srgb,var(--brand-blue) 16%,transparent),0 14px 30px color-mix(in srgb,var(--brand-blue) 14%,transparent),0 2px 7px color-mix(in srgb,var(--brand-blue) 10%,transparent)}.step-symbol svg{filter:drop-shadow(0 2px 2px color-mix(in srgb,var(--brand-blue) 16%,transparent))}
 .footer-brand{display:block;width:280px;height:90px;margin:0 auto 10px;object-fit:contain}
 .mobile-menu{display:none}
-@media(max-width:720px){.header{height:70px}.mobile-menu{display:grid;place-items:center;gap:5px;width:38px;height:38px;padding:7px;border:0;border-radius:8px;background:transparent;color:#17104F;cursor:pointer}.mobile-menu span{display:block;width:28px;height:3px;border-radius:99px;background:currentColor}.header nav{display:none;position:fixed;z-index:30;top:70px;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:10px 24px 14px;background:var(--surface);border-bottom:1px solid #E2E5EB;box-shadow:0 12px 22px rgb(17 24 39 / 6%)}.header nav.mobile-nav-open{display:flex}.header nav a{width:100%;padding:12px 0;border-bottom:1px solid #F0F1F3}.header nav a:last-child{border-bottom:0}.header .button{display:none}}
+@media(max-width:1200px){.header{height:70px}.mobile-menu{display:grid;place-items:center;gap:5px;width:38px;height:38px;padding:7px;border:0;border-radius:8px;background:transparent;color:#17104F;cursor:pointer}.mobile-menu span{display:block;width:28px;height:3px;border-radius:99px;background:currentColor}.header nav{display:none;position:fixed;z-index:30;top:70px;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:10px 24px 14px;background:var(--surface);border-bottom:1px solid #E2E5EB;box-shadow:0 12px 22px rgb(17 24 39 / 6%)}.header nav.mobile-nav-open{display:flex}.header nav a{width:100%;padding:12px 0;border-bottom:1px solid #F0F1F3}.header nav a:last-child{border-bottom:0}.header .button{display:none}}
 
 /* Archivo typography system for the public marketing site. */
 .header nav{font-family:var(--font-archivo),var(--font-sans);font-size:14px;font-weight:500;line-height:1.25;letter-spacing:-.01em;font-synthesis:none}.header .button{font-family:var(--font-archivo),var(--font-sans);font-size:13px;font-weight:600;line-height:1;letter-spacing:-.01em;font-synthesis:none}
@@ -617,7 +617,7 @@ main section[id] { scroll-margin-top:98px; }
 .language-menu button.is-selected{color:var(--brand-blue);font-weight:600}
 .language-menu button svg{flex:none}
 @keyframes language-menu-in{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-@media(max-width:720px){.language-switcher{margin-left:auto}.language-trigger{min-width:42px;height:38px;padding:0 8px}.language-menu{top:calc(100% + 8px);right:-42px;min-width:168px}}
+@media(max-width:1200px){.language-switcher{margin-left:auto}.language-trigger{min-width:42px;height:38px;padding:0 8px}.language-menu{top:calc(100% + 8px);right:-42px;min-width:168px}}
 @media(prefers-reduced-motion:reduce){.language-trigger,.language-menu,.language-menu button{transition-duration:.01ms;animation-duration:.01ms}}
 
 .showcase-controls{display:flex;align-items:center;justify-content:center;gap:12px;padding-top:14px}.showcase-controls .dots{padding-top:0}.carousel-arrow{display:grid;width:34px;height:34px;place-items:center;padding:0;border:1px solid #DDE6F2;border-radius:50%;background:#fff;color:#405678;box-shadow:0 5px 14px rgb(17 24 39 / 6%);cursor:pointer;transition:color .2s ease,border-color .2s ease,background .2s ease,transform .2s ease}.carousel-arrow:hover{border-color:#BFD2F0;background:#F7FAFF;color:var(--blue);transform:translateY(-1px)}.carousel-arrow:focus-visible{outline:3px solid rgb(37 99 235 / 26%);outline-offset:3px}.carousel-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -2225,8 +2225,8 @@ body, main { background: var(--bg); }
   border-color: var(--brand-blue); background: #FFFFFF; animation: none;
   box-shadow: 0 12px 30px rgb(23 79 240 / 9%);
 }
-/* Match the Ultra offer perimeter in the onboarding app. */
-@property --ultra-border-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+/* Match the featured annual offer perimeter in the onboarding app. */
+@property --annual-border-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
 #planes .price-card.featured::after {
   content: "";
   position: absolute;
@@ -2234,12 +2234,12 @@ body, main { background: var(--bg); }
   padding: 2px;
   border-radius: inherit;
   pointer-events: none;
-  background: conic-gradient(from var(--ultra-border-angle), transparent 0deg 270deg, #ffcb24 305deg, #ff9216 330deg, transparent 360deg);
+  background: conic-gradient(from var(--annual-border-angle), transparent 0deg 270deg, #ffcb24 305deg, #ff9216 330deg, transparent 360deg);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: ultra-border-orbit 6s linear infinite;
+  animation: annual-border-orbit 6s linear infinite;
 }
-@keyframes ultra-border-orbit { to { --ultra-border-angle: 360deg; } }
+@keyframes annual-border-orbit { to { --annual-border-angle: 360deg; } }
 @media (prefers-reduced-motion: reduce) { #planes .price-card.featured::after { animation: none; } }
 @media (forced-colors: active) { #planes .price-card.featured::after { display: none; } }
 #planes .pricing-grid .price-card > .plan-savings,
@@ -2818,3 +2818,383 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   .hero-scroll-cue,.hero-scroll-cue svg { transition:none; }
   .hero-scroll-cue:hover svg,.hero-scroll-cue:focus-visible svg { transform:none; }
 }
+
+/* Annual offer details and optional Pro trial. */
+#planes .price-card.featured .annual-original-period { font-size: .7em; font-weight: 600; }
+#planes .price-card.featured .annual-monthly {
+  margin: 12px 0 0;
+  color: #1d429c;
+  font-family: var(--font-archivo), var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+#planes .price-card.featured .annual-trial {
+  max-width: 255px;
+  margin: 15px auto 0;
+  color: #667085;
+  font-family: var(--font-archivo), var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+#planes .price-card.featured .annual-trial a {
+  display: block;
+  margin-top: 2px;
+  color: #1744b5;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+#planes .pricing-grid .price-card.featured > .plan-savings { white-space: normal; text-align: center; }
+
+/* Give the annual offer a warmer, more prominent value and action. */
+#planes .price-card.featured .annual-monthly { margin: 6px 0 0; color: #193c91; }
+#planes .price-card.featured > .button {
+  background: #ffd21a;
+  border-color: #ffd21a;
+  color: #172554;
+  box-shadow: 0 8px 20px rgb(195 145 0 / 20%);
+}
+#planes .price-card.featured > .button:hover,
+#planes .price-card.featured > .button:focus-visible {
+  background: #ffdc45;
+  border-color: #ffdc45;
+  color: #172554;
+}
+
+#planes .price-card.featured .annual-best-value {
+  display: inline-flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px; padding: 5px 11px; border-radius: 999px;
+  background: #fff3bd; color: #624400; font-family: var(--font-archivo), var(--font-sans);
+  font-size: 11px; font-weight: 800; letter-spacing: .04em; line-height: 1.2;
+}
+#planes .price-card.featured li.annual-account-feature { color: #173e9f; font-weight: 700; }
+
+/* Warm savings palette inspired by proposal 3. */
+#planes .price-card.featured {
+  border-color: #e8c85a;
+  background: linear-gradient(155deg, #fffdf5 0%, #fffaf0 55%, #fff7df 100%);
+  box-shadow: 0 22px 46px rgb(146 103 0 / 13%), 0 8px 20px rgb(146 103 0 / 7%);
+}
+#planes .price-card.featured > .plan-savings {
+  background: #ffdc4a;
+  color: #342600;
+  text-shadow: none;
+}
+#planes .price-card.featured .annual-best-value {
+  background: #e8efff;
+  color: #2546a8;
+}
+#planes .price-card.featured .plan-name { color: #172554; }
+#planes .price-card.featured .audience { color: #667085; }
+#planes .price-card.featured li,
+#planes .price-card.featured li span { color: #344054; }
+#planes .price-card.featured li.annual-account-feature,
+#planes .price-card.featured li.annual-account-feature span { color: #173e9f; }
+#planes .price-card.featured li.feature-inherited { background: #edf3ff; }
+#planes .price-card.featured .price-block { border-color: #eadca7; }
+#planes .price-card.featured .price-original { color: #98a2b3; }
+#planes .price-card.featured .price-current,
+#planes .price-card.featured .price-currency { color: #172554; }
+#planes .price-card.featured .price-period { color: #667085; }
+#planes .price-card.featured .annual-monthly { color: #2546a8; }
+#planes .price-card.featured .annual-value {
+  margin: 8px -5px 0;
+  padding: 13px 10px;
+  border: 1px solid #ecd878;
+  border-radius: 14px;
+  background: #fff5cc;
+}
+#planes .price-card.featured > .button {
+  background: #ffdc4a;
+  border-color: #ffdc4a;
+  color: #172554;
+  box-shadow: 0 10px 24px rgb(195 145 0 / 20%);
+}
+#planes .price-card.featured > .button:hover,
+#planes .price-card.featured > .button:focus-visible {
+  background: #ffe77c;
+  border-color: #ffe77c;
+  color: #172554;
+}
+#planes .price-card.featured .annual-trial { color: #667085; }
+#planes .price-card.featured .annual-trial a { color: #2148b7; }
+
+
+#planes .price-card.featured .price-block { margin: 0; padding: 0; border: 0; }
+#planes .price-card.featured .annual-value {
+  margin: 0 -5px; padding: 15px 12px 13px; border: 1px solid #ecd878;
+  border-radius: 14px; background: #fff2bd; text-align: center;
+}
+#planes .price-card.featured .annual-value .price { margin: 0; }
+#planes .price-card.featured .annual-value .price-original del { color: #7b8495; }
+#planes .price-card.featured .annual-value .annual-monthly { margin-top: 7px; }
+#planes .price-card.featured .price-block { border-top: 0 !important; }
+#planes .price-card.featured { padding: 76px 28px 24px; }
+#planes .price-card.featured .plan-header { margin: 8px 0 0; }
+#planes .price-card.featured .plan-header .annual-best-value { margin-bottom: 8px; }
+#planes .price-card.featured ul { margin-top: 20px; margin-bottom: 22px; }
+#planes .price-card.featured .annual-value {
+  width: 100%;
+  margin: 0;
+  padding: 16px 16px 14px;
+  border-radius: 16px;
+}
+#planes .price-card.featured .annual-value .price-current { font-size: 1.08em; }
+#planes .price-card.featured > .button { margin-top: 20px; }
+#planes .price-card.featured .annual-trial { margin-top: 14px; }
+#planes .price-card.featured .price-block {
+  align-self: stretch;
+  width: 100%;
+}
+#planes .price-card.featured .annual-value {
+  display: block;
+  box-sizing: border-box;
+}
+#planes .price-card.featured ul { margin-bottom: 16px; }
+#planes .price-card.featured > .button { margin-top: 14px; }
+#planes .price-card.featured .annual-trial { margin-top: 12px; }
+@media (min-width: 641px) {
+  #planes .price-card.featured { padding-right: 32px; padding-left: 32px; }
+  #planes .price-card.featured .annual-value { padding: 18px 18px 16px; }
+}
+@media (max-width: 640px) {
+  #planes .price-card.featured { padding: 30px 22px 22px; }
+  #planes .price-card.featured .annual-value { padding: 16px 14px 14px; }
+  #planes .price-card.featured > .button { margin-bottom: 0; }
+  #planes .price-card.featured .annual-trial { margin-top: 9px; }
+}
+@media (min-width: 641px) {
+  #planes .price-card.featured { padding-top: 68px; }
+  #planes .price-card.featured > .button { margin-bottom: 0; }
+  #planes .price-card.featured .annual-trial { margin-top: 10px; }
+}
+
+/* Keep one interior alignment and let the annual price lead the offer. */
+#planes .price-card.featured {
+  align-self: stretch;
+  justify-content: space-between;
+  padding: 76px 35px 24px;
+  background: #fffaf0;
+  border-color: #dfb638;
+  animation: none;
+  box-shadow: 0 24px 48px rgb(126 87 0 / 16%), 0 6px 16px rgb(126 87 0 / 8%);
+}
+#planes .price-card.featured .plan-header { min-height: 0; margin: 0; gap: 10px; }
+#planes .price-card.featured .plan-name { font-size: 22px; }
+#planes .price-card.featured .audience { font-size: 16px; }
+#planes .price-card.featured .plan-header .annual-best-value {
+  margin: 0;
+  padding: 4px 10px;
+  background: transparent;
+  color: #475467;
+  font-size: 10px;
+}
+#planes .price-card.featured ul { order: 2; flex: none; margin: 20px 0; gap: 10px; }
+#planes .price-card.featured .price-block { order: 1; margin-top: 20px; }
+#planes .price-card.featured li.feature-inherited {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-weight: 500;
+}
+#planes .price-card.featured li.feature-inherited + li { margin-top: 0; }
+#planes .price-card.featured .annual-value {
+  padding: 16px 10px;
+  background: #ffe58a;
+  border-color: #e9c451;
+}
+#planes .price-card.featured .annual-value .price { font-size: 36px; row-gap: 4px; }
+#planes .price-card.featured .annual-value .price-current { font-size: 1em; }
+#planes .price-card.featured .annual-value .price-original del {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+#planes .price-card.featured .annual-original-period { margin-left: 3px; font-size: 13px; }
+#planes .price-card.featured .price-current-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+#planes .price-card.featured .price-current-group .price-period {
+  position: static;
+  margin: 0;
+}
+#planes .price-card.featured .annual-value .annual-monthly { margin-top: 5px; }
+#planes .price-card.featured > .button { order: 3; margin: 0; }
+#planes .price-card.featured .annual-trial { order: 4; }
+@media (max-width: 640px) {
+  #planes .price-card.featured { padding: 36px 23px 22px; justify-content: flex-start; }
+  #planes .price-card.featured .annual-value .price { font-size: 32px; }
+}
+
+/* Annual decision: tangible benefits followed by one price-and-action group. */
+#planes .price-card.featured { justify-content: flex-start; }
+#planes .price-card.featured ul { order: 1; flex: 1; margin: 20px 0 18px; gap: 9px; }
+#planes .price-card.featured li.annual-account-feature {
+  margin-inline: -12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff5d6;
+}
+#planes .price-card.featured .price-block { order: 2; margin: 0; }
+#planes .price-card.featured .annual-value { padding: 16px 14px 14px; }
+#planes .price-card.featured .annual-monthly { font-size: 16px; color: #172554; }
+#planes .price-card.featured .annual-value > .button {
+  width: 100%;
+  margin: 14px 0 0;
+  min-height: 52px;
+  border-radius: 10px;
+  background: #ffd21a;
+  border-color: #e7b900;
+  color: #172554;
+  box-shadow: 0 6px 12px rgb(145 101 0 / 12%);
+}
+#planes .price-card.featured .annual-value > .button:hover,
+#planes .price-card.featured .annual-value > .button:focus-visible {
+  background: #ffdc4a;
+  border-color: #bc9200;
+}
+#planes .price-card.featured .annual-trial { order: 3; margin: 10px auto 0; }
+
+/* Explain the annual comparison without implying a previous annual price. */
+#planes .annual-plan-column {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+  min-width: 0;
+}
+#planes .annual-plan-column .price-card.featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(min-content, 1fr) auto auto;
+  row-gap: 24px;
+  flex: 1;
+  width: 100%;
+  background: #fffdf8;
+  border-color: var(--brand-blue);
+  box-shadow: 0 14px 32px rgb(112 86 20 / 10%);
+}
+#planes .annual-plan-column .price-card.featured ul {
+  align-content: center;
+  margin: 0;
+  gap: 14px;
+}
+#planes .annual-plan-column .price-card.featured li.annual-account-feature {
+  background: linear-gradient(110deg, #fff5d6, #fff9e8) !important;
+}
+#planes .annual-plan-column .price-card.featured .annual-value {
+  width: calc(100% + 24px);
+  box-sizing: border-box;
+  margin-inline: -12px;
+  background: linear-gradient(155deg, #fffbef, #fff3d0);
+  border-color: #ecd79b;
+  padding: 34px 14px 16px;
+  border-radius: 18px;
+}
+#planes .annual-plan-column .price-card.featured .price-block > .annual-savings {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto -18px;
+  padding: 8px 22px;
+  border: 1px solid #e8cc83;
+  border-radius: 999px;
+  background: linear-gradient(110deg, #fff1be, #ffe7a0);
+  box-shadow: 0 5px 12px rgb(135 95 0 / 10%);
+  color: #604a12;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.3;
+  text-align: center;
+}
+#planes .annual-plan-column .price-card.featured .annual-value .price {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: max-content;
+  max-width: 100%;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-inline: auto;
+}
+#planes .annual-plan-column .price-card.featured .annual-value .price-original {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+#planes .annual-plan-column .price-card.featured .annual-value .price-original del { font-size: 16px; font-weight: 500; }
+#planes .annual-plan-column .price-card.featured .annual-value .price-current-group {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+#planes .annual-plan-column .price-card.featured .annual-value .price-period {
+  position: static;
+  margin: 0;
+}
+#planes .annual-plan-column .price-card.featured .annual-value > .button {
+  min-height: 54px;
+  margin-top: 18px;
+  background: linear-gradient(110deg, #ffdc26, #ffd000);
+  border-color: #e5b600;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 45%), 0 5px 10px rgb(145 101 0 / 9%);
+}
+#planes .annual-plan-column .price-card.featured .annual-value > .button:hover {
+  background: #ffe05b;
+}
+#planes .annual-plan-column .price-card.featured .annual-monthly { font-weight: 600; }
+#planes .annual-plan-column .price-card.featured .annual-trial { margin: -8px auto 0; }
+#planes .price-card.featured .price-original {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+#planes .price-card.featured .annual-reference-label {
+  color: #625324;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+#planes .annual-comparison-note {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 12px 8px 0;
+  color: #667085;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: pretty;
+}
+#planes .pricing-grid .price-card.featured > .plan-savings {
+  font-weight: 800;
+  padding-inline: 12px;
+  line-height: 1.3;
+}
+@media (max-width: 950px) {
+  #planes .annual-plan-column { grid-column: 1 / -1; width: calc(50% - 12px); justify-self: center; }
+  #planes .annual-plan-column { display: block; }
+  #planes .annual-comparison-note { position: static; }
+  #planes .annual-plan-column .price-card.featured {
+    grid-template-rows: auto auto auto auto;
+    padding-top: 62px;
+  }
+}
+@media (max-width: 640px) {
+  #planes .annual-plan-column { grid-column: auto; width: 100%; }
+  #planes .price-card.featured .annual-monthly { font-size: 14px; }
+}
+
+#planes .annual-plan-column .price-card.featured li:not(.annual-account-feature) { font-weight: 400; }
