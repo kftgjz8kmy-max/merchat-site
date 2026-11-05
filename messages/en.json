@@ -2178,8 +2178,8 @@
       {
         "name": "Merchat Pro",
         "audience": "Your assistant for running your Mercado Libre business.",
-        "originalPrice": "39.99",
-        "price": "19.99",
+        "originalPrice": "59.99",
+        "price": "29.99",
         "featured": false,
         "cta": "Try it free for 14 days",
         "items": [
@@ -2189,22 +2189,23 @@
           "Create titles and descriptions, and complete product attributes",
           "Update prices, stock, and promotions in bulk",
           "Manage listings, sales, shipping, and questions",
-          "Manage up to 2 accounts, from a single listing to hundreds of products"
+          "Manage up to 3 accounts, from a single listing to hundreds of products"
         ],
         "billingPeriod": "/month"
       },
       {
-        "name": "Merchat Ultra",
-        "audience": "Everything in Merchat Pro, with up to 4 accounts and annual billing.",
-        "originalPrice": "959.76",
-        "price": "159.99",
+        "name": "MerChat Pro Annual",
+        "audience": "Your assistant for running Mercado Libre for 1 year, with no monthly payments and added benefits.",
+        "originalPrice": "719.88",
+        "price": "199",
         "billingPeriod": "/year",
         "featured": true,
-        "cta": "Get started with Merchat Ultra",
+        "cta": "Choose Pro Annual",
         "items": [
-          "Everything in Merchat Pro",
+          "All MerChat Pro features included",
           "Connect up to 4 Mercado Libre accounts",
-          "Review and manage each account separately"
+          "Personalized technical support",
+          "Early access to new features"
         ]
       }
     ],
@@ -2237,7 +2238,7 @@
       ],
       [
         "What is the difference between Read, Pro, and Pro Annual?",
-        "**Read (US$9/month)** lets you check and analyze up to 2 accounts without making changes.\n\n**Pro (US$20/month)** includes read and write access for up to 2 accounts: create and update listings, change prices and stock, and manage promotions.\n\n**Pro Annual (US$159/year)** includes everything in Pro for up to 4 accounts and saves US$799.77 compared with paying US$79.98/month for 2 Vendedor Pro accounts for 12 months (US$959.76)."
+        "**Read (US$9/month)** lets you check and analyze up to 2 accounts without making changes.\n\n**Pro (US$29.99/month)** includes read and write access for up to 3 accounts: create and update listings, change prices and stock, and manage promotions.\n\n**Pro Annual (US$199/year)** includes everything in Pro for up to 4 accounts."
       ],
       [
         "Can merchat make changes to my Mercado Libre account?",
@@ -2409,8 +2410,8 @@
     "quickNaturalLine2": "in natural language",
     "pricingIntro": "Start with 14 days free. Discover everything merchat can do for your operation and choose your plan when you are ready.",
     "recommended": "RECOMMENDED",
-    "planSavingsMonthly": "Save 50%",
-    "planSavingsAnnual": "Save 83%",
+    "planSavingsMonthly": "50% OFF",
+    "planSavingsAnnual": "Save 72%",
     "planNoCard": "No card required",
     "resultNew": "New",
     "resultStock": "Stock",
@@ -2482,6 +2483,14 @@
     "showcaseQuestion": "Your question",
     "showcaseHow": "How it works",
     "showcaseDataNote": "Example products and amounts; not data from a real account.",
-    "countryCompatibility": "Compatible with your Mercado Libre account in"
+    "countryCompatibility": "Compatible with your Mercado Libre account in",
+    "planSavingsPro": "50% OFF",
+    "annualHeadline": "70% OFF",
+    "annualSavingsLabel": "Save $500",
+    "annualMonthlyEquivalent": "Equivalent to $16.58 per month",
+    "annualTrialPrompt": "Want to try it first?",
+    "annualTrialLink": "Try MerChat Pro free for 14 days",
+    "annualBestValue": "BEST VALUE",
+    "annualComparisonNote": "Savings compared with 12 monthly Pro payments at the regular price of $59.99. Annual payment of $199."
   }
 }

@@ -2184,8 +2184,8 @@
       {
         "name": "Merchat Pro",
         "audience": "Tu asistente para operar Mercado Libre.",
-        "originalPrice": "39.99",
-        "price": "19.99",
+        "originalPrice": "59.99",
+        "price": "29.99",
         "featured": false,
         "cta": "Gratis por 14 días",
         "items": [
@@ -2195,22 +2195,23 @@
           "Crea títulos, descripciones y completa características",
           "Actualiza precios, stock y promociones en lote",
           "Gestiona publicaciones, ventas, envíos y preguntas",
-          "Gestiona hasta 2 cuentas y opera desde una publicación hasta cientos de productos."
+          "Gestiona hasta 3 cuentas y opera desde una publicación hasta cientos de productos."
         ],
         "billingPeriod": "/mes"
       },
       {
-        "name": "Merchat Ultra",
-        "audience": "Todo lo incluido en Merchat Pro, con hasta 4 cuentas y facturación anual.",
-        "originalPrice": "959.76",
-        "price": "159.99",
+        "name": "MerChat Pro Anual",
+        "audience": "Tu asistente para operar Mercado Libre por 1 año, sin pagos mensuales y con más beneficios.",
+        "originalPrice": "719.88",
+        "price": "199",
         "billingPeriod": "/año",
         "featured": true,
-        "cta": "Comenzar con Merchat Ultra",
+        "cta": "Elegir Pro Anual",
         "items": [
-          "Todo lo incluido en Merchat Pro",
+          "Todas las funciones de MerChat Pro incluidas",
           "Conecta hasta 4 cuentas de Mercado Libre",
-          "Consulta y opera cada cuenta por separado"
+          "Soporte técnico personalizado",
+          "Acceso anticipado a nuevas funcionalidades"
         ]
       }
     ],
@@ -2243,7 +2244,7 @@
       ],
       [
         "¿Cuánto cuesta cada plan de merchat?",
-        "**Merchat Basico (US$9.99/mes)** permite consultar y analizar hasta 2 cuentas sin hacer cambios.\n\n**Merchat Pro (US$19.99/mes)** incluye lectura y escritura para hasta 2 cuentas: puedes crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones.\n\n**Merchat Ultra (US$159.99/año)** incluye las funciones de Merchat Pro para hasta 4 cuentas, con facturación anual."
+        "**Merchat Basico (US$9.99/mes)** permite consultar y analizar hasta 2 cuentas sin hacer cambios.\n\n**Merchat Pro (US$29.99/mes)** incluye lectura y escritura para hasta 3 cuentas: puedes crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones.\n\n**Merchat Pro Anual (US$199/año)** incluye las funciones de Merchat Pro para hasta 4 cuentas, con facturación anual."
       ],
       [
         "¿merchat puede hacer cambios en mi cuenta de Mercado Libre?",
@@ -2274,8 +2275,8 @@
         "No. El proceso está diseñado para guiarte paso a paso. Creas tu cuenta, conectas Mercado Libre, instalas merchat en tu asistente de IA y puedes comenzar a usarlo conversando."
       ],
       [
-        "¿Qué incluye Merchat Basico, Merchat Pro y Merchat Ultra?",
-        "**Merchat Basico** está pensado para consultar y analizar hasta 2 cuentas sin realizar cambios.\n\n**Merchat Pro** también te permite operar hasta 2 cuentas: crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones con tu autorización.\n\n**Merchat Ultra** incluye las funciones de Merchat Pro para hasta 4 cuentas de Mercado Libre, con facturación anual."
+        "¿Qué incluyen Merchat Basico, Merchat Pro y Merchat Pro Anual?",
+        "**Merchat Basico** está pensado para consultar y analizar hasta 2 cuentas sin realizar cambios.\n\n**Merchat Pro** también te permite operar hasta 3 cuentas: crear y actualizar publicaciones, cambiar precios y stock, y gestionar promociones con tu autorización.\n\n**Merchat Pro Anual** incluye las funciones de Merchat Pro para hasta 4 cuentas de Mercado Libre, con facturación anual."
       ],
       [
         "¿merchat puede crear publicaciones nuevas?",
@@ -2415,8 +2416,8 @@
     "quickNaturalLine2": "lenguaje natural",
     "pricingIntro": "Empieza con 14 días gratis. Descubre todo lo que merchat puede hacer por tu operación y elige tu plan cuando estés listo.",
     "recommended": "MÁS POPULAR",
-    "planSavingsMonthly": "Ahorra 50%",
-    "planSavingsAnnual": "Ahorra 83%",
+    "planSavingsMonthly": "50% DE DESCUENTO",
+    "planSavingsAnnual": "Ahorra 72%",
     "planNoCard": "Sin tarjeta",
     "resultNew": "Nuevo",
     "resultStock": "Stock",
@@ -2488,6 +2489,14 @@
     "showcaseQuestion": "Tu pregunta",
     "showcaseHow": "Cómo lo hace",
     "showcaseDataNote": "Productos e importes de ejemplo; no son datos de una cuenta real.",
-    "countryCompatibility": "Compatible con tu cuenta de Mercado Libre en"
+    "countryCompatibility": "Compatible con tu cuenta de Mercado Libre en",
+    "planSavingsPro": "50% DE DESCUENTO",
+    "annualHeadline": "70% DE DESCUENTO",
+    "annualSavingsLabel": "Ahorra $500",
+    "annualMonthlyEquivalent": "Equivale a $16.58 al mes",
+    "annualTrialPrompt": "¿Quieres probarlo primero?",
+    "annualTrialLink": "Prueba MerChat Pro gratis por 14 días",
+    "annualBestValue": "MEJOR VALOR",
+    "annualComparisonNote": "Ahorro calculado frente a 12 mensualidades de Pro a su precio regular de $59.99. Pago anual de $199."
   }
 }

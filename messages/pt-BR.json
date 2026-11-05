@@ -2178,8 +2178,8 @@
       {
         "name": "Merchat Pro",
         "audience": "Seu assistente para operar no Mercado Livre.",
-        "originalPrice": "39.99",
-        "price": "19.99",
+        "originalPrice": "59.99",
+        "price": "29.99",
         "featured": false,
         "cta": "Teste grátis por 14 dias",
         "items": [
@@ -2189,22 +2189,23 @@
           "Crie títulos e descrições e complete as características",
           "Atualize preços, estoque e promoções em lote",
           "Gerencie anúncios, vendas, envios e perguntas",
-          "Gerencie até 2 contas, de um anúncio a centenas de produtos"
+          "Gerencie até 3 contas, de um anúncio a centenas de produtos"
         ],
         "billingPeriod": "/mês"
       },
       {
-        "name": "Merchat Ultra",
-        "audience": "Tudo do Merchat Pro, com até 4 contas e cobrança anual.",
-        "originalPrice": "959.76",
-        "price": "159.99",
+        "name": "MerChat Pro Anual",
+        "audience": "Seu assistente para operar no Mercado Livre por 1 ano, sem pagamentos mensais e com mais benefícios.",
+        "originalPrice": "719.88",
+        "price": "199",
         "billingPeriod": "/ano",
         "featured": true,
-        "cta": "Começar com o Merchat Ultra",
+        "cta": "Escolher Pro Anual",
         "items": [
-          "Tudo incluído no Merchat Pro",
+          "Todas as funções do MerChat Pro incluídas",
           "Conecte até 4 contas do Mercado Livre",
-          "Consulte e opere cada conta separadamente"
+          "Suporte técnico personalizado",
+          "Acesso antecipado a novos recursos"
         ]
       }
     ],
@@ -2237,7 +2238,7 @@
       ],
       [
         "Qual é a diferença entre Read, Pro e Pro Anual?",
-        "**Read (US$9/mês)** permite consultar e analisar até 2 contas sem fazer alterações.\n\n**Pro (US$20/mês)** inclui leitura e escrita para até 2 contas: criar e atualizar anúncios, alterar preços e estoque e gerenciar promoções.\n\n**Pro Anual (US$159/ano)** inclui tudo do Pro para até 4 contas e economiza US$799,77 em comparação com o pagamento de US$79,98/mês por 2 contas Vendedor Pro durante 12 meses (US$959,76)."
+        "**Read (US$9/mês)** permite consultar e analisar até 2 contas sem fazer alterações.\n\n**Pro (US$29.99/mês)** inclui leitura e escrita para até 3 contas: criar e atualizar anúncios, alterar preços e estoque e gerenciar promoções.\n\n**Pro Anual (US$199/ano)** inclui tudo do Pro para até 4 contas."
       ],
       [
         "O merchat pode fazer alterações na minha conta do Mercado Livre?",
@@ -2269,7 +2270,7 @@
       ],
       [
         "Posso conectar várias contas do Mercado Livre?",
-        "Read e Pro permitem conectar até 2 contas do Mercado Livre. Pro Anual permite conectar até 4 contas."
+        "Read permite conectar até 2 contas do Mercado Livre. Pro permite conectar até 3 contas, e Pro Anual até 4."
       ],
       [
         "O merchat pode criar novos anúncios?",
@@ -2409,8 +2410,8 @@
     "quickNaturalLine2": "em linguagem natural",
     "pricingIntro": "Comece com 14 dias grátis. Descubra tudo o que o merchat pode fazer pela sua operação e escolha seu plano quando estiver pronto.",
     "recommended": "RECOMENDADO",
-    "planSavingsMonthly": "Economize 50%",
-    "planSavingsAnnual": "Economize 83%",
+    "planSavingsMonthly": "50% DE DESCONTO",
+    "planSavingsAnnual": "Economize 72%",
     "planNoCard": "Sem cartão",
     "resultNew": "Novo",
     "resultStock": "Estoque",
@@ -2482,6 +2483,14 @@
     "showcaseQuestion": "Sua pergunta",
     "showcaseHow": "Como funciona",
     "showcaseDataNote": "Produtos e valores de exemplo; não são dados de uma conta real.",
-    "countryCompatibility": "Compatível com sua conta do Mercado Livre em"
+    "countryCompatibility": "Compatível com sua conta do Mercado Livre em",
+    "planSavingsPro": "50% DE DESCONTO",
+    "annualHeadline": "70% DE DESCONTO",
+    "annualSavingsLabel": "Economize $500",
+    "annualMonthlyEquivalent": "Equivale a $16.58 por mês",
+    "annualTrialPrompt": "Quer experimentar primeiro?",
+    "annualTrialLink": "Teste o MerChat Pro grátis por 14 dias",
+    "annualBestValue": "MELHOR VALOR",
+    "annualComparisonNote": "Economia calculada em relação a 12 mensalidades do Pro pelo preço regular de $59.99. Pagamento anual de $199."
   }
 }

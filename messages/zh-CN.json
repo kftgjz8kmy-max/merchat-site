@@ -2178,8 +2178,8 @@
       {
         "name": "Merchat Pro",
         "audience": "帮你运营 Mercado Libre 业务的助手。",
-        "originalPrice": "39.99",
-        "price": "19.99",
+        "originalPrice": "59.99",
+        "price": "29.99",
         "featured": false,
         "cta": "免费试用 14 天",
         "items": [
@@ -2189,22 +2189,23 @@
           "生成标题和描述，并补全商品属性",
           "批量更新价格、库存和促销",
           "管理商品刊登、销售、配送和买家问题",
-          "最多管理 2 个账户，可处理单个刊登或数百件商品"
+          "最多管理 3 个账户，从单个商品刊登到数百件商品"
         ],
         "billingPeriod": "/月"
       },
       {
-        "name": "Merchat Ultra",
-        "audience": "包含 Merchat Pro 的全部功能，最多支持 4 个账户并按年付费。",
-        "originalPrice": "959.76",
-        "price": "159.99",
+        "name": "MerChat Pro 年付版",
+        "audience": "连续 1 年使用 Mercado Libre 助手，无需按月付费，并享有更多权益。",
+        "originalPrice": "719.88",
+        "price": "199",
         "billingPeriod": "/年",
         "featured": true,
-        "cta": "开始使用 Merchat Ultra",
+        "cta": "选择 Pro 年付",
         "items": [
-          "包含 Merchat Pro 的全部功能",
+          "包含 MerChat Pro 的全部功能",
           "最多连接 4 个 Mercado Libre 账户",
-          "分别查看和运营每个账户"
+          "个性化技术支持",
+          "优先体验新功能"
         ]
       }
     ],
@@ -2237,7 +2238,7 @@
       ],
       [
         "Read、Pro 和 Pro 年付有什么区别？",
-        "**Read（US$9/月）**支持查看和分析最多 2 个账户，不会进行更改。\n\n**Pro（US$20/月）**为最多 2 个账户提供读写功能：创建和更新商品刊登、修改价格和库存、管理促销。\n\n**Pro 年付（US$159/年）**包含 Pro 的全部功能，最多支持 4 个账户。相比按常规定价 US$79.98/月订阅 2 个 Vendedor Pro 账户 12 个月（US$959.76），每年节省 US$799.77。"
+        "**Read（US$9/月）**支持查看和分析最多 2 个账户，不会进行更改。\n\n**Pro（US$29.99/月）**为最多 3 个账户提供读写功能：创建和更新商品刊登、修改价格和库存、管理促销。\n\n**Pro 年付（US$199/年）**包含 Pro 的全部功能，最多支持 4 个账户。"
       ],
       [
         "merchat 可以更改我的 Mercado Libre 账户吗？",
@@ -2409,8 +2410,8 @@
     "quickNaturalLine2": "管理你的账户",
     "pricingIntro": "免费开始 14 天，了解 merchat 能为你的业务做什么，准备好后再选择方案。",
     "recommended": "推荐",
-    "planSavingsMonthly": "节省 50%",
-    "planSavingsAnnual": "节省 83%",
+    "planSavingsMonthly": "优惠 50%",
+    "planSavingsAnnual": "节省 72%",
     "planNoCard": "无需银行卡",
     "resultNew": "全新",
     "resultStock": "库存",
@@ -2482,6 +2483,14 @@
     "showcaseQuestion": "你的问题",
     "showcaseHow": "工作方式",
     "showcaseDataNote": "商品和金额均为示例，并非真实账户数据。",
-    "countryCompatibility": "你的 Mercado Libre 账户适用于以下国家："
+    "countryCompatibility": "你的 Mercado Libre 账户适用于以下国家：",
+    "planSavingsPro": "优惠 50%",
+    "annualHeadline": "优惠 70%",
+    "annualSavingsLabel": "节省 $500",
+    "annualMonthlyEquivalent": "相当于每月 $16.58",
+    "annualTrialPrompt": "想先试用吗？",
+    "annualTrialLink": "免费试用 MerChat Pro 14 天",
+    "annualBestValue": "超值之选",
+    "annualComparisonNote": "节省金额按 Pro 常规月费 $59.99 的 12 个月费用计算。年付金额为 $199。"
   }
 }
