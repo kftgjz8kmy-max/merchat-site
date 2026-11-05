@@ -2201,12 +2201,12 @@
       },
       {
         "name": "MerChat Pro Anual",
-        "audience": "Tu asistente para operar Mercado Libre por 1 año, sin pagos mensuales y con más beneficios.",
+        "audience": "MerChat Pro por un año, sin pagos mensuales y con más beneficios.",
         "originalPrice": "719.88",
         "price": "199",
         "billingPeriod": "/año",
         "featured": true,
-        "cta": "Elegir Pro Anual",
+        "cta": "Activar Pro por 1 año",
         "items": [
           "Todas las funciones de MerChat Pro incluidas",
           "Conecta hasta 4 cuentas de Mercado Libre",
@@ -2493,7 +2493,7 @@
     "planSavingsPro": "50% DE DESCUENTO",
     "annualHeadline": "70% DE DESCUENTO",
     "annualSavingsLabel": "Ahorra $500",
-    "annualMonthlyEquivalent": "Equivale a $16.58 al mes",
+    "annualMonthlyEquivalent": "Menos de $17 al mes",
     "annualTrialPrompt": "¿Quieres probarlo primero?",
     "annualTrialLink": "Prueba MerChat Pro gratis por 14 días",
     "annualBestValue": "MEJOR VALOR",

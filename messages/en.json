@@ -2195,12 +2195,12 @@
       },
       {
         "name": "MerChat Pro Annual",
-        "audience": "Your assistant for running Mercado Libre for 1 year, with no monthly payments and added benefits.",
+        "audience": "MerChat Pro for one year, with no monthly payments and added benefits.",
         "originalPrice": "719.88",
         "price": "199",
         "billingPeriod": "/year",
         "featured": true,
-        "cta": "Choose Pro Annual",
+        "cta": "Activate Pro for 1 year",
         "items": [
           "All MerChat Pro features included",
           "Connect up to 4 Mercado Libre accounts",
@@ -2487,7 +2487,7 @@
     "planSavingsPro": "50% OFF",
     "annualHeadline": "70% OFF",
     "annualSavingsLabel": "Save $500",
-    "annualMonthlyEquivalent": "Equivalent to $16.58 per month",
+    "annualMonthlyEquivalent": "Less than $17 per month",
     "annualTrialPrompt": "Want to try it first?",
     "annualTrialLink": "Try MerChat Pro free for 14 days",
     "annualBestValue": "BEST VALUE",

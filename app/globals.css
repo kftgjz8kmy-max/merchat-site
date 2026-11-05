@@ -3094,8 +3094,8 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   width: calc(100% + 24px);
   box-sizing: border-box;
   margin-inline: -12px;
-  background: linear-gradient(155deg, #fffbef, #fff3d0);
-  border-color: #ecd79b;
+  background: linear-gradient(155deg, #fff9e8, #fff2ce);
+  border-color: #eee1bd;
   padding: 34px 14px 16px;
   border-radius: 18px;
 }
@@ -3108,8 +3108,8 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   padding: 8px 22px;
   border: 1px solid #e8cc83;
   border-radius: 999px;
-  background: linear-gradient(110deg, #fff1be, #ffe7a0);
-  box-shadow: 0 5px 12px rgb(135 95 0 / 10%);
+  background: linear-gradient(110deg, #fff5d6, #fff9e8);
+  box-shadow: 0 2px 6px rgb(135 95 0 / 6%);
   color: #604a12;
   font-size: 20px;
   font-weight: 750;
@@ -3123,7 +3123,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   max-width: 100%;
   align-items: baseline;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
   margin-inline: auto;
 }
 #planes .annual-plan-column .price-card.featured .annual-value .price-original {
@@ -3131,7 +3131,18 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   flex-direction: row;
   align-items: baseline;
 }
-#planes .annual-plan-column .price-card.featured .annual-value .price-original del { font-size: 16px; font-weight: 500; }
+#planes .annual-plan-column .price-card.featured .annual-value .price-original del {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: currentColor;
+}
+#planes .annual-plan-column .price-card.featured .price-original del::after { content: none; }
+#planes .annual-plan-column .price-card.featured .price-original .price-currency {
+  color: inherit;
+  font-weight: inherit;
+}
 #planes .annual-plan-column .price-card.featured .annual-value .price-current-group {
   display: flex;
   align-items: baseline;
@@ -3195,6 +3206,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 @media (max-width: 640px) {
   #planes .annual-plan-column { grid-column: auto; width: 100%; }
   #planes .price-card.featured .annual-monthly { font-size: 14px; }
+  #planes .annual-comparison-note { font-size: 12px; line-height: 1.6; }
 }
 
 #planes .annual-plan-column .price-card.featured li:not(.annual-account-feature) { font-weight: 400; }

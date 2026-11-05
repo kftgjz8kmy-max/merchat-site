@@ -2195,12 +2195,12 @@
       },
       {
         "name": "MerChat Pro 年付版",
-        "audience": "连续 1 年使用 Mercado Libre 助手，无需按月付费，并享有更多权益。",
+        "audience": "一年 MerChat Pro，无需按月付款，享受更多权益。",
         "originalPrice": "719.88",
         "price": "199",
         "billingPeriod": "/年",
         "featured": true,
-        "cta": "选择 Pro 年付",
+        "cta": "开通一年 Pro",
         "items": [
           "包含 MerChat Pro 的全部功能",
           "最多连接 4 个 Mercado Libre 账户",
@@ -2487,7 +2487,7 @@
     "planSavingsPro": "优惠 50%",
     "annualHeadline": "优惠 70%",
     "annualSavingsLabel": "节省 $500",
-    "annualMonthlyEquivalent": "相当于每月 $16.58",
+    "annualMonthlyEquivalent": "每月不到 $17",
     "annualTrialPrompt": "想先试用吗？",
     "annualTrialLink": "免费试用 MerChat Pro 14 天",
     "annualBestValue": "超值之选",
