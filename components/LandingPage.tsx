@@ -525,7 +525,7 @@ export default function LandingPage() {
         <h1>{ui.heroTitle.split(/(Mercado Libre|Mercado Livre)/).map((part, index) => /^(Mercado Libre|Mercado Livre)$/.test(part) ? <span className="hero-marketplace-name" key={index}>{part}</span> : <Fragment key={index}>{part}</Fragment>)} <em>{ui.heroEmphasis}</em></h1>
         <p className="hero-description">{localizedLanding.hero.description}</p>
         <p className="hero-tools">{ui.heroTools}</p>
-        <div className="button-row"><div className="primary-cta"><Button animated hoverEffect icon href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#como-funciona">{ui.howItWorks}</Button></div>
+        <div className="button-row"><div className="primary-cta"><Button animated hoverEffect icon href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button><p className="trial-note">{ui.trial} <span aria-hidden="true">-</span> {ui.noCard}</p></div><Button outline href="#resultados">{ui.howItWorks}</Button></div>
       </div>
       <div className="hero-demo">
         <div className="hero-visual hero-animation" aria-label={ui.animationLabel}>
