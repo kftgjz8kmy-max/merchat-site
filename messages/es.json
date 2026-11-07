@@ -55,53 +55,53 @@
         }
       },
       {
-        "id": "excel-publication",
-        "category": "Publica desde Excel",
-        "prompt": "Prepara publicaciones con los productos de este Excel.",
+        "id": "revision-verification",
+        "category": "Actualiza varios SKU",
+        "prompt": "Prepara nuevos precios y stock para estos 30 productos.",
         "resultType": "workflow",
-        "resultTitle": "Preparé los borradores para que los revises.",
-        "resultDescription": "La IA lee el archivo y prepara cada publicación con MerChat. Te muestra los datos que faltan antes de publicar.",
+        "resultTitle": "Los cambios de cada producto están listos para que los revises.",
+        "resultDescription": "Revisa cada SKU antes de aprobar. Después, MerChat comprueba qué cambios quedaron guardados y te muestra los pendientes.",
         "preview": {
-          "label": "Publicaciones por revisar",
+          "label": "Cambios por producto",
           "items": [
             {
               "value": "1",
-              "label": "Productos del Excel"
+              "label": "SKU seleccionados"
             },
             {
               "value": "2",
-              "label": "Precio y stock"
+              "label": "Nuevo precio y stock"
             },
             {
               "value": "3",
-              "label": "Datos que faltan"
+              "label": "Cambios confirmados"
             }
           ],
-          "status": "Publicación con tu aprobación.",
+          "status": "Verificación después de aprobar.",
           "example": {
             "columns": [
               "Producto",
               "Precio",
-              "Estado"
+              "Stock"
             ],
             "rows": [
               [
-                "MacBook Pro 14″",
-                "S/ 6,499",
-                "Listo para revisar"
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
               ],
               [
-                "Samsung Galaxy A56",
-                "S/ 1,399",
-                "Listo para revisar"
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
               ],
               [
-                "iPhone 15",
-                "S/ 2,799",
-                "Falta confirmar el color"
+                "IP15-128",
+                "S/ 2,799 → 2,699",
+                "6 → 10"
               ]
             ],
-            "conclusion": "2 borradores listos; 1 necesita confirmar el color."
+            "conclusion": "Vista previa de 3 de tus 30 productos. Revisa antes de aplicar."
           }
         }
       },
@@ -157,194 +157,6 @@
         }
       },
       {
-        "id": "inventory-file",
-        "category": "Actualiza desde Excel",
-        "prompt": "Usa este Excel para preparar mis nuevos precios y stock.",
-        "resultType": "excel",
-        "resultTitle": "Preparé los cambios para que los apruebes.",
-        "resultDescription": "Hay 4 filas que necesitan revisión.",
-        "preview": {
-          "label": "Inventario.xlsx",
-          "items": [
-            {
-              "value": "62",
-              "label": "Filas revisadas"
-            },
-            {
-              "value": "58",
-              "label": "Cambios listos"
-            },
-            {
-              "value": "4",
-              "label": "Por revisar"
-            }
-          ],
-          "status": "Pendiente de aprobación.",
-          "example": {
-            "columns": [
-              "SKU",
-              "Precio",
-              "Stock"
-            ],
-            "rows": [
-              [
-                "MBP-14",
-                "S/ 6,499 → 6,299",
-                "3 → 5"
-              ],
-              [
-                "A56-256",
-                "S/ 1,399 → 1,349",
-                "8 → 12"
-              ],
-              [
-                "IP15-128",
-                "Sin cambio",
-                "SKU no encontrado"
-              ]
-            ],
-            "conclusion": "58 de 62 filas listas. Las 4 restantes necesitan revisión."
-          }
-        }
-      },
-      {
-        "id": "revision-verification",
-        "category": "Actualiza varios SKU",
-        "prompt": "Prepara nuevos precios y stock para estos 30 productos.",
-        "resultType": "workflow",
-        "resultTitle": "Los cambios de cada producto están listos para que los revises.",
-        "resultDescription": "Revisa cada SKU antes de aprobar. Después, MerChat comprueba qué cambios quedaron guardados y te muestra los pendientes.",
-        "preview": {
-          "label": "Cambios por producto",
-          "items": [
-            {
-              "value": "1",
-              "label": "SKU seleccionados"
-            },
-            {
-              "value": "2",
-              "label": "Nuevo precio y stock"
-            },
-            {
-              "value": "3",
-              "label": "Cambios confirmados"
-            }
-          ],
-          "status": "Verificación después de aprobar.",
-          "example": {
-            "columns": [
-              "Producto",
-              "Precio",
-              "Stock"
-            ],
-            "rows": [
-              [
-                "MBP-14",
-                "S/ 6,499 → 6,299",
-                "3 → 5"
-              ],
-              [
-                "A56-256",
-                "S/ 1,399 → 1,349",
-                "8 → 12"
-              ],
-              [
-                "IP15-128",
-                "S/ 2,799 → 2,699",
-                "6 → 10"
-              ]
-            ],
-            "conclusion": "Vista previa de 3 de tus 30 productos. Revisa antes de aplicar."
-          }
-        }
-      },
-      {
-        "id": "batch-campaign",
-        "category": "Aplica descuentos a varios productos",
-        "prompt": "Añade estos 21 productos a la campaña con 10% de descuento.",
-        "resultType": "promotion",
-        "resultTitle": "Apliqué el descuento a los 21 productos después de tu aprobación.",
-        "resultDescription": "Apruebas los precios antes de aplicarlos.",
-        "preview": {
-          "label": "10% de descuento",
-          "items": [
-            {
-              "value": "21",
-              "label": "Productos"
-            },
-            {
-              "value": "21/21",
-              "label": "Revisados"
-            }
-          ],
-          "status": "Descuentos aplicados después de aprobar",
-          "example": {
-            "columns": [
-              "Producto",
-              "Antes",
-              "Con 10% menos"
-            ],
-            "rows": [
-              [
-                "Samsung Galaxy A56",
-                "S/ 1,399",
-                "S/ 1,259.10"
-              ],
-              [
-                "iPhone 15",
-                "S/ 2,799",
-                "S/ 2,519.10"
-              ],
-              [
-                "MacBook Pro 14″",
-                "S/ 6,499",
-                "S/ 5,849.10"
-              ]
-            ],
-            "conclusion": "21 de 21 descuentos aplicados después de tu aprobación."
-          }
-        }
-      },
-      {
-        "id": "photo-order",
-        "category": "Ordena tus fotos",
-        "prompt": "Quiero cambiar el orden de las fotos de esta publicación.",
-        "resultType": "gallery",
-        "resultTitle": "El nuevo orden está listo para que lo apruebes.",
-        "resultDescription": "Puedes arrastrar las fotos en el chat.",
-        "preview": {
-          "label": "Orden de las fotos",
-          "items": [],
-          "status": "Pendiente de aprobación.",
-          "example": {
-            "columns": [
-              "Posición",
-              "Antes",
-              "Propuesta"
-            ],
-            "rows": [
-              [
-                "1",
-                "Producto abierto",
-                "Foto lateral"
-              ],
-              [
-                "2",
-                "Foto de teclado",
-                "Producto abierto"
-              ],
-              [
-                "3",
-                "Foto lateral",
-                "Foto de teclado"
-              ]
-            ],
-            "conclusion": "La foto lateral pasa a ser la principal. Revisa el nuevo orden.",
-            "media": "gallery"
-          }
-        }
-      },
-      {
         "id": "find-product-photos",
         "category": "Busca fotos para tu producto",
         "prompt": "Ayúdame a buscar fotos de este modelo para mi publicación.",
@@ -393,6 +205,197 @@
             ],
             "conclusion": "La guía de MerChat ayuda a tu IA a buscar. Revisa modelo y permisos de uso.",
             "media": "gallery"
+          }
+        }
+      },
+      {
+        "id": "selling-fees",
+        "category": "Calcula la ganancia neta",
+        "prompt": "¿Cuánto ganaría al vender este equipo después de descontar mi costo y las comisiones?",
+        "resultType": "report",
+        "resultTitle": "Calculé cuánto te quedaría después del costo y las comisiones.",
+        "resultDescription": "Combino tu costo con las comisiones que informa Mercado Libre.",
+        "preview": {
+          "label": "Desglose de la venta",
+          "items": [
+            {
+              "value": "1",
+              "label": "Precio de venta"
+            },
+            {
+              "value": "2",
+              "label": "Tu costo"
+            },
+            {
+              "value": "3",
+              "label": "Comisiones de Mercado Libre"
+            }
+          ],
+          "status": "Costos aportados por ti · Ganancia estimada.",
+          "example": {
+            "columns": [
+              "Detalle",
+              "Importe"
+            ],
+            "rows": [
+              [
+                "Precio de venta",
+                "S/ 1,500"
+              ],
+              [
+                "Tu costo",
+                "− S/ 1,000"
+              ],
+              [
+                "Comisión del ejemplo",
+                "− S/ 180"
+              ]
+            ],
+            "conclusion": "Ganancia estimada: S/ 320. Otros gastos no incluidos."
+          }
+        }
+      },
+      {
+        "id": "batch-campaign",
+        "category": "Agrega productos a una promoción",
+        "prompt": "Agrega estos 21 productos a la promoción de temporada.",
+        "resultType": "promotion",
+        "resultTitle": "Preparé los productos para agregarlos a la promoción.",
+        "resultDescription": "18 productos cumplen las condiciones. Revisa la lista y confirma cuáles agregar.",
+        "preview": {
+          "label": "Promoción de temporada",
+          "items": [
+            {
+              "value": "21",
+              "label": "Productos"
+            },
+            {
+              "value": "18/21",
+              "label": "Listos para agregar"
+            }
+          ],
+          "status": "Pendiente de tu aprobación",
+          "example": {
+            "columns": [
+              "Producto",
+              "Precio",
+              "Estado"
+            ],
+            "rows": [
+              [
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "Listo para agregar"
+              ],
+              [
+                "iPhone 15",
+                "S/ 2,799",
+                "Listo para agregar"
+              ],
+              [
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "Revisar requisitos"
+              ]
+            ],
+            "conclusion": "18 productos listos para agregar; 3 necesitan revisión."
+          }
+        }
+      },
+      {
+        "id": "multi-country",
+        "category": "Gestiona tiendas en varios países",
+        "prompt": "Revisa las ventas de mis tiendas de Perú y Brasil por separado.",
+        "resultTitle": "Te muestro las ventas de cada tienda en su moneda.",
+        "resultDescription": "Puedes trabajar con tus cuentas conectadas de distintos países y elegir cuál consultar. Cada tienda conserva sus propios datos; las funciones disponibles dependen del país y de la cuenta.",
+        "resultType": "workflow",
+        "preview": {
+          "label": "Tus tiendas por país",
+          "items": [
+            {
+              "value": "1",
+              "label": "Tienda de Perú"
+            },
+            {
+              "value": "2",
+              "label": "Tienda de Brasil"
+            },
+            {
+              "value": "3",
+              "label": "Ventas en su moneda"
+            }
+          ],
+          "status": "Cuentas conectadas por ti · Según disponibilidad por país.",
+          "example": {
+            "columns": [
+              "Tienda",
+              "Ventas",
+              "Unidades"
+            ],
+            "rows": [
+              [
+                "Perú · Lima",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "Brasil · São Paulo",
+                "R$ 31,200",
+                "56"
+              ]
+            ],
+            "conclusion": "Cada tienda se revisa por separado. Los importes se mantienen en su moneda."
+          }
+        }
+      },
+      {
+        "id": "inventory-file",
+        "category": "Actualiza desde Excel",
+        "prompt": "Usa este Excel para preparar mis nuevos precios y stock.",
+        "resultType": "excel",
+        "resultTitle": "Preparé los cambios para que los apruebes.",
+        "resultDescription": "Hay 4 filas que necesitan revisión.",
+        "preview": {
+          "label": "Inventario.xlsx",
+          "items": [
+            {
+              "value": "62",
+              "label": "Filas revisadas"
+            },
+            {
+              "value": "58",
+              "label": "Cambios listos"
+            },
+            {
+              "value": "4",
+              "label": "Por revisar"
+            }
+          ],
+          "status": "Pendiente de aprobación.",
+          "example": {
+            "columns": [
+              "SKU",
+              "Precio",
+              "Stock"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "Sin cambio",
+                "SKU no encontrado"
+              ]
+            ],
+            "conclusion": "58 de 62 filas listas. Las 4 restantes necesitan revisión."
           }
         }
       },
@@ -598,49 +601,53 @@
         }
       },
       {
-        "id": "selling-fees",
-        "category": "Calcula la ganancia neta",
-        "prompt": "¿Cuánto ganaría al vender este equipo después de descontar mi costo y las comisiones?",
-        "resultType": "report",
-        "resultTitle": "Calculé cuánto te quedaría después del costo y las comisiones.",
-        "resultDescription": "Combino tu costo con las comisiones que informa Mercado Libre.",
+        "id": "excel-publication",
+        "category": "Publica desde Excel",
+        "prompt": "Prepara publicaciones con los productos de este Excel.",
+        "resultType": "workflow",
+        "resultTitle": "Preparé los borradores para que los revises.",
+        "resultDescription": "La IA lee el archivo y prepara cada publicación con MerChat. Te muestra los datos que faltan antes de publicar.",
         "preview": {
-          "label": "Desglose de la venta",
+          "label": "Publicaciones por revisar",
           "items": [
             {
               "value": "1",
-              "label": "Precio de venta"
+              "label": "Productos del Excel"
             },
             {
               "value": "2",
-              "label": "Tu costo"
+              "label": "Precio y stock"
             },
             {
               "value": "3",
-              "label": "Comisiones de Mercado Libre"
+              "label": "Datos que faltan"
             }
           ],
-          "status": "Costos aportados por ti · Ganancia estimada.",
+          "status": "Publicación con tu aprobación.",
           "example": {
             "columns": [
-              "Detalle",
-              "Importe"
+              "Producto",
+              "Precio",
+              "Estado"
             ],
             "rows": [
               [
-                "Precio de venta",
-                "S/ 1,500"
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "Listo para revisar"
               ],
               [
-                "Tu costo",
-                "− S/ 1,000"
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "Listo para revisar"
               ],
               [
-                "Comisión del ejemplo",
-                "− S/ 180"
+                "iPhone 15",
+                "S/ 2,799",
+                "Falta confirmar el color"
               ]
             ],
-            "conclusion": "Ganancia estimada: S/ 320. Otros gastos no incluidos."
+            "conclusion": "2 borradores listos; 1 necesita confirmar el color."
           }
         }
       },
@@ -994,53 +1001,53 @@
         }
       },
       {
-        "id": "payment-reconciliation",
-        "category": "Compara ventas y cobros",
-        "prompt": "Compara mis ventas con los cobros de Mercado Pago. ¿Hay diferencias?",
+        "id": "quality-report",
+        "category": "Detecta publicaciones por mejorar",
+        "prompt": "Revisa mis publicaciones y dime cuáles mejorar primero.",
         "resultType": "report",
-        "resultTitle": "Te muestro las ventas, los cobros y las diferencias por revisar.",
-        "resultDescription": "Comparo los registros disponibles y señalo las diferencias que necesitan revisión.",
+        "resultTitle": "Ordené las publicaciones por prioridad de mejora.",
+        "resultDescription": "Reúno calidad, visitas y ventas disponibles para ayudarte a priorizar. Las sugerencias se basan en esos datos.",
         "preview": {
-          "label": "Ventas vs. cobros",
+          "label": "Publicaciones por mejorar",
           "items": [
             {
               "value": "1",
-              "label": "Ventas del período"
+              "label": "Calidad y datos faltantes"
             },
             {
               "value": "2",
-              "label": "Cobros registrados"
+              "label": "Visitas y ventas"
             },
             {
               "value": "3",
-              "label": "Diferencias por revisar"
+              "label": "Mejoras sugeridas"
             }
           ],
-          "status": "Solo consulta · Según registros disponibles.",
+          "status": "Según datos disponibles · Cambios con tu aprobación.",
           "example": {
             "columns": [
-              "Pedido",
-              "Ventas",
-              "Cobro registrado"
+              "Producto",
+              "Problema",
+              "Acción sugerida"
             ],
             "rows": [
               [
-                "#1042",
-                "S/ 1,399",
-                "S/ 1,399"
+                "MacBook Pro 14″",
+                "Sin garantía indicada",
+                "Confirmar duración"
               ],
               [
-                "#1043",
-                "S/ 2,799",
-                "S/ 2,799"
+                "Samsung Galaxy A56",
+                "Capacidad sin completar",
+                "Añadir 256 GB"
               ],
               [
-                "#1044",
-                "S/ 1,399",
-                "No encontrado"
+                "iPhone 15",
+                "Solo una foto",
+                "Añadir otras vistas"
               ]
             ],
-            "conclusion": "El pedido #1044 necesita revisión: no encontré un cobro asociado."
+            "conclusion": "Primero completa los datos que faltan; después mejora las fotos."
           }
         }
       },
@@ -1139,57 +1146,6 @@
               ]
             ],
             "conclusion": "3 de las 4 publicaciones señaladas, con una mejora concreta para cada una."
-          }
-        }
-      },
-      {
-        "id": "quality-report",
-        "category": "Detecta publicaciones por mejorar",
-        "prompt": "Revisa mis publicaciones y dime cuáles mejorar primero.",
-        "resultType": "report",
-        "resultTitle": "Ordené las publicaciones por prioridad de mejora.",
-        "resultDescription": "Reúno calidad, visitas y ventas disponibles para ayudarte a priorizar. Las sugerencias se basan en esos datos.",
-        "preview": {
-          "label": "Publicaciones por mejorar",
-          "items": [
-            {
-              "value": "1",
-              "label": "Calidad y datos faltantes"
-            },
-            {
-              "value": "2",
-              "label": "Visitas y ventas"
-            },
-            {
-              "value": "3",
-              "label": "Mejoras sugeridas"
-            }
-          ],
-          "status": "Según datos disponibles · Cambios con tu aprobación.",
-          "example": {
-            "columns": [
-              "Producto",
-              "Problema",
-              "Acción sugerida"
-            ],
-            "rows": [
-              [
-                "MacBook Pro 14″",
-                "Sin garantía indicada",
-                "Confirmar duración"
-              ],
-              [
-                "Samsung Galaxy A56",
-                "Capacidad sin completar",
-                "Añadir 256 GB"
-              ],
-              [
-                "iPhone 15",
-                "Solo una foto",
-                "Añadir otras vistas"
-              ]
-            ],
-            "conclusion": "Primero completa los datos que faltan; después mejora las fotos."
           }
         }
       },
@@ -1368,52 +1324,6 @@
               ]
             ],
             "conclusion": "La tienda A vendió S/ 6,400 más que la tienda B."
-          }
-        }
-      },
-      {
-        "id": "multi-country",
-        "category": "Gestiona tiendas en varios países",
-        "prompt": "Revisa las ventas de mis tiendas de Perú y Brasil por separado.",
-        "resultTitle": "Te muestro las ventas de cada tienda en su moneda.",
-        "resultDescription": "Puedes trabajar con tus cuentas conectadas de distintos países y elegir cuál consultar. Cada tienda conserva sus propios datos; las funciones disponibles dependen del país y de la cuenta.",
-        "resultType": "workflow",
-        "preview": {
-          "label": "Tus tiendas por país",
-          "items": [
-            {
-              "value": "1",
-              "label": "Tienda de Perú"
-            },
-            {
-              "value": "2",
-              "label": "Tienda de Brasil"
-            },
-            {
-              "value": "3",
-              "label": "Ventas en su moneda"
-            }
-          ],
-          "status": "Cuentas conectadas por ti · Según disponibilidad por país.",
-          "example": {
-            "columns": [
-              "Tienda",
-              "Ventas",
-              "Unidades"
-            ],
-            "rows": [
-              [
-                "Perú · Lima",
-                "S/ 24,600",
-                "42"
-              ],
-              [
-                "Brasil · São Paulo",
-                "R$ 31,200",
-                "56"
-              ]
-            ],
-            "conclusion": "Cada tienda se revisa por separado. Los importes se mantienen en su moneda."
           }
         }
       },
