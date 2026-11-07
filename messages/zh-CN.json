@@ -55,53 +55,53 @@
         }
       },
       {
-        "id": "excel-publication",
-        "category": "从 Excel 创建商品",
-        "prompt": "用这个 Excel 里的商品准备上架。",
+        "id": "revision-verification",
+        "category": "批量更新 SKU",
+        "prompt": "为这 30 个商品准备新价格和库存。",
         "resultType": "workflow",
-        "resultTitle": "上架草稿已准备好，请你审核。",
-        "resultDescription": "AI 读取表格，通过 MerChat 逐个准备商品，并在发布前列出缺失信息。",
+        "resultTitle": "每个商品的变更已准备好，请审核。",
+        "resultDescription": "批准前逐一审核 SKU。随后 MerChat 检查哪些变更已保存，并列出待处理项。",
         "preview": {
-          "label": "待审核的上架草稿",
+          "label": "各商品的变更",
           "items": [
             {
               "value": "1",
-              "label": "表格中的商品"
+              "label": "选中的 SKU"
             },
             {
               "value": "2",
-              "label": "价格和库存"
+              "label": "新价格和库存"
             },
             {
               "value": "3",
-              "label": "缺失信息"
+              "label": "已确认的变更"
             }
           ],
-          "status": "经你批准后发布",
+          "status": "批准后核实结果",
           "example": {
             "columns": [
               "商品",
               "价格",
-              "状态"
+              "库存"
             ],
             "rows": [
               [
-                "MacBook Pro 14″",
-                "S/ 6,499",
-                "可供审核"
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
               ],
               [
-                "Samsung Galaxy A56",
-                "S/ 1,399",
-                "可供审核"
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
               ],
               [
-                "iPhone 15",
-                "S/ 2,799",
-                "待确认颜色"
+                "IP15-128",
+                "S/ 2,799 → 2,699",
+                "6 → 10"
               ]
             ],
-            "conclusion": "2 份草稿已准备好，1 份需要确认颜色。"
+            "conclusion": "显示 30 件商品中的 3 件，应用前请审核。"
           }
         }
       },
@@ -157,194 +157,6 @@
         }
       },
       {
-        "id": "inventory-file",
-        "category": "用 Excel 更新",
-        "prompt": "用这个 Excel 准备我的新价格和库存。",
-        "resultType": "excel",
-        "resultTitle": "更改已准备好，等你批准。",
-        "resultDescription": "有 4 行需要检查。",
-        "preview": {
-          "label": "库存.xlsx",
-          "items": [
-            {
-              "value": "62",
-              "label": "已检查行数"
-            },
-            {
-              "value": "58",
-              "label": "更改已准备好"
-            },
-            {
-              "value": "4",
-              "label": "待检查"
-            }
-          ],
-          "status": "等待批准",
-          "example": {
-            "columns": [
-              "SKU",
-              "价格",
-              "库存"
-            ],
-            "rows": [
-              [
-                "MBP-14",
-                "S/ 6,499 → 6,299",
-                "3 → 5"
-              ],
-              [
-                "A56-256",
-                "S/ 1,399 → 1,349",
-                "8 → 12"
-              ],
-              [
-                "IP15-128",
-                "不变",
-                "未找到 SKU"
-              ]
-            ],
-            "conclusion": "62 行中有 58 行已准备好，其余 4 行需要核对。"
-          }
-        }
-      },
-      {
-        "id": "revision-verification",
-        "category": "批量更新 SKU",
-        "prompt": "为这 30 个商品准备新价格和库存。",
-        "resultType": "workflow",
-        "resultTitle": "每个商品的变更已准备好，请审核。",
-        "resultDescription": "批准前逐一审核 SKU。随后 MerChat 检查哪些变更已保存，并列出待处理项。",
-        "preview": {
-          "label": "各商品的变更",
-          "items": [
-            {
-              "value": "1",
-              "label": "选中的 SKU"
-            },
-            {
-              "value": "2",
-              "label": "新价格和库存"
-            },
-            {
-              "value": "3",
-              "label": "已确认的变更"
-            }
-          ],
-          "status": "批准后核实结果",
-          "example": {
-            "columns": [
-              "商品",
-              "价格",
-              "库存"
-            ],
-            "rows": [
-              [
-                "MBP-14",
-                "S/ 6,499 → 6,299",
-                "3 → 5"
-              ],
-              [
-                "A56-256",
-                "S/ 1,399 → 1,349",
-                "8 → 12"
-              ],
-              [
-                "IP15-128",
-                "S/ 2,799 → 2,699",
-                "6 → 10"
-              ]
-            ],
-            "conclusion": "显示 30 件商品中的 3 件，应用前请审核。"
-          }
-        }
-      },
-      {
-        "id": "batch-campaign",
-        "category": "为多个商品设置折扣",
-        "prompt": "将这 21 个商品加入活动，设置 10% 的折扣。",
-        "resultType": "promotion",
-        "resultTitle": "经你批准，已为这 21 个商品设置折扣。",
-        "resultDescription": "价格经你批准后才会生效。",
-        "preview": {
-          "label": "10% 折扣",
-          "items": [
-            {
-              "value": "21",
-              "label": "商品"
-            },
-            {
-              "value": "21/21",
-              "label": "已核对"
-            }
-          ],
-          "status": "折扣经批准后已生效",
-          "example": {
-            "columns": [
-              "商品",
-              "变更前",
-              "优惠 10% 后"
-            ],
-            "rows": [
-              [
-                "Samsung Galaxy A56",
-                "S/ 1,399",
-                "S/ 1,259.10"
-              ],
-              [
-                "iPhone 15",
-                "S/ 2,799",
-                "S/ 2,519.10"
-              ],
-              [
-                "MacBook Pro 14″",
-                "S/ 6,499",
-                "S/ 5,849.10"
-              ]
-            ],
-            "conclusion": "经你批准后，21 项折扣全部应用。"
-          }
-        }
-      },
-      {
-        "id": "photo-order",
-        "category": "调整照片顺序",
-        "prompt": "我想调整这个商品的照片顺序。",
-        "resultType": "gallery",
-        "resultTitle": "新顺序已准备好，等你批准。",
-        "resultDescription": "你可以在聊天中拖动照片。",
-        "preview": {
-          "label": "照片顺序",
-          "items": [],
-          "status": "等待批准",
-          "example": {
-            "columns": [
-              "位置",
-              "变更前",
-              "拟变更"
-            ],
-            "rows": [
-              [
-                "1",
-                "打开的商品",
-                "侧面照片"
-              ],
-              [
-                "2",
-                "键盘照片",
-                "打开的商品"
-              ],
-              [
-                "3",
-                "侧面照片",
-                "键盘照片"
-              ]
-            ],
-            "conclusion": "侧面照片将成为主图，请审核新顺序。",
-            "media": "gallery"
-          }
-        }
-      },
-      {
         "id": "find-product-photos",
         "category": "查找商品照片",
         "prompt": "帮我查找这个型号的照片，用于商品页面。",
@@ -393,6 +205,197 @@
             ],
             "conclusion": "MerChat 指南帮助你的 AI 搜索，请核对型号和使用权限。",
             "media": "gallery"
+          }
+        }
+      },
+      {
+        "id": "selling-fees",
+        "category": "计算净利润",
+        "prompt": "卖出这台设备，扣除我的成本和销售费用后能赚多少？",
+        "resultType": "report",
+        "resultTitle": "已计算扣除成本和销售费用后的预估余额。",
+        "resultDescription": "结合你提供的成本和 Mercado Libre 提供的费用。",
+        "preview": {
+          "label": "销售金额拆分",
+          "items": [
+            {
+              "value": "1",
+              "label": "销售价格"
+            },
+            {
+              "value": "2",
+              "label": "你的成本"
+            },
+            {
+              "value": "3",
+              "label": "Mercado Libre 费用"
+            }
+          ],
+          "status": "成本由你提供 · 利润为估算",
+          "example": {
+            "columns": [
+              "详情",
+              "金额"
+            ],
+            "rows": [
+              [
+                "售价",
+                "S/ 1,500"
+              ],
+              [
+                "你的成本",
+                "− S/ 1,000"
+              ],
+              [
+                "示例佣金",
+                "− S/ 180"
+              ]
+            ],
+            "conclusion": "预计利润：S/ 320，未计入其他费用。"
+          }
+        }
+      },
+      {
+        "id": "batch-campaign",
+        "category": "将商品添加到促销活动",
+        "prompt": "将这 21 个商品加入季节促销活动。",
+        "resultType": "promotion",
+        "resultTitle": "已准备好待加入促销活动的商品。",
+        "resultDescription": "其中 18 个商品符合条件。请检查列表并确认要加入的商品。",
+        "preview": {
+          "label": "季节促销",
+          "items": [
+            {
+              "value": "21",
+              "label": "商品"
+            },
+            {
+              "value": "18/21",
+              "label": "可加入"
+            }
+          ],
+          "status": "等待你确认",
+          "example": {
+            "columns": [
+              "商品",
+              "价格",
+              "状态"
+            ],
+          "rows": [
+            [
+              "Samsung Galaxy A56",
+              "S/ 1,399",
+              "可加入"
+            ],
+            [
+              "iPhone 15",
+              "S/ 2,799",
+              "可加入"
+            ],
+            [
+              "MacBook Pro 14″",
+              "S/ 6,499",
+              "检查条件"
+            ]
+          ],
+            "conclusion": "18 个商品可加入；另有 3 个需要检查。"
+          }
+        }
+      },
+      {
+        "id": "multi-country",
+        "category": "管理不同国家的店铺",
+        "prompt": "分别查看我在秘鲁和巴西店铺的销售。",
+        "resultTitle": "以下是各店铺以各自货币显示的销售。",
+        "resultDescription": "可使用你在不同国家已连接的账户，选择要查看的店铺。各店铺的数据保持独立，可用功能取决于国家和账户。",
+        "resultType": "workflow",
+        "preview": {
+          "label": "按国家查看店铺",
+          "items": [
+            {
+              "value": "1",
+              "label": "秘鲁店铺"
+            },
+            {
+              "value": "2",
+              "label": "巴西店铺"
+            },
+            {
+              "value": "3",
+              "label": "以当地货币显示的销售"
+            }
+          ],
+          "status": "你已连接的账户 · 功能因国家而异。",
+          "example": {
+            "columns": [
+              "店铺",
+              "销售额",
+              "数量"
+            ],
+            "rows": [
+              [
+                "秘鲁 · 利马",
+                "S/ 24,600",
+                "42"
+              ],
+              [
+                "巴西 · 圣保罗",
+                "R$ 31,200",
+                "56"
+              ]
+            ],
+            "conclusion": "分别查看每家店铺，金额保留各自货币。"
+          }
+        }
+      },
+      {
+        "id": "inventory-file",
+        "category": "用 Excel 更新",
+        "prompt": "用这个 Excel 准备我的新价格和库存。",
+        "resultType": "excel",
+        "resultTitle": "更改已准备好，等你批准。",
+        "resultDescription": "有 4 行需要检查。",
+        "preview": {
+          "label": "库存.xlsx",
+          "items": [
+            {
+              "value": "62",
+              "label": "已检查行数"
+            },
+            {
+              "value": "58",
+              "label": "更改已准备好"
+            },
+            {
+              "value": "4",
+              "label": "待检查"
+            }
+          ],
+          "status": "等待批准",
+          "example": {
+            "columns": [
+              "SKU",
+              "价格",
+              "库存"
+            ],
+            "rows": [
+              [
+                "MBP-14",
+                "S/ 6,499 → 6,299",
+                "3 → 5"
+              ],
+              [
+                "A56-256",
+                "S/ 1,399 → 1,349",
+                "8 → 12"
+              ],
+              [
+                "IP15-128",
+                "不变",
+                "未找到 SKU"
+              ]
+            ],
+            "conclusion": "62 行中有 58 行已准备好，其余 4 行需要核对。"
           }
         }
       },
@@ -598,49 +601,53 @@
         }
       },
       {
-        "id": "selling-fees",
-        "category": "计算净利润",
-        "prompt": "卖出这台设备，扣除我的成本和销售费用后能赚多少？",
-        "resultType": "report",
-        "resultTitle": "已计算扣除成本和销售费用后的预估余额。",
-        "resultDescription": "结合你提供的成本和 Mercado Libre 提供的费用。",
+        "id": "excel-publication",
+        "category": "从 Excel 创建商品",
+        "prompt": "用这个 Excel 里的商品准备上架。",
+        "resultType": "workflow",
+        "resultTitle": "上架草稿已准备好，请你审核。",
+        "resultDescription": "AI 读取表格，通过 MerChat 逐个准备商品，并在发布前列出缺失信息。",
         "preview": {
-          "label": "销售金额拆分",
+          "label": "待审核的上架草稿",
           "items": [
             {
               "value": "1",
-              "label": "销售价格"
+              "label": "表格中的商品"
             },
             {
               "value": "2",
-              "label": "你的成本"
+              "label": "价格和库存"
             },
             {
               "value": "3",
-              "label": "Mercado Libre 费用"
+              "label": "缺失信息"
             }
           ],
-          "status": "成本由你提供 · 利润为估算",
+          "status": "经你批准后发布",
           "example": {
             "columns": [
-              "详情",
-              "金额"
+              "商品",
+              "价格",
+              "状态"
             ],
             "rows": [
               [
-                "售价",
-                "S/ 1,500"
+                "MacBook Pro 14″",
+                "S/ 6,499",
+                "可供审核"
               ],
               [
-                "你的成本",
-                "− S/ 1,000"
+                "Samsung Galaxy A56",
+                "S/ 1,399",
+                "可供审核"
               ],
               [
-                "示例佣金",
-                "− S/ 180"
+                "iPhone 15",
+                "S/ 2,799",
+                "待确认颜色"
               ]
             ],
-            "conclusion": "预计利润：S/ 320，未计入其他费用。"
+            "conclusion": "2 份草稿已准备好，1 份需要确认颜色。"
           }
         }
       },
@@ -994,53 +1001,53 @@
         }
       },
       {
-        "id": "payment-reconciliation",
-        "category": "比较销售与收款",
-        "prompt": "比较我的销售与 Mercado Pago 收款，有差异吗？",
+        "id": "quality-report",
+        "category": "找出待改善的商品页面",
+        "prompt": "检查我的商品页面，告诉我优先改善哪些。",
         "resultType": "report",
-        "resultTitle": "以下是销售、收款及待检查的差异。",
-        "resultDescription": "比较可用记录，并标出需要检查的差异。",
+        "resultTitle": "已按改善优先级排列商品页面。",
+        "resultDescription": "汇总可用的质量、访问和销售数据，帮助你确定优先级，并据此提出建议。",
         "preview": {
-          "label": "销售与收款",
+          "label": "待改善的商品页面",
           "items": [
             {
               "value": "1",
-              "label": "期间销售"
+              "label": "质量和缺失信息"
             },
             {
               "value": "2",
-              "label": "已记录收款"
+              "label": "访问和销售"
             },
             {
               "value": "3",
-              "label": "待检查差异"
+              "label": "改善建议"
             }
           ],
-          "status": "仅查询 · 取决于可用记录",
+          "status": "根据可用数据 · 变更需要批准",
           "example": {
             "columns": [
-              "订单",
-              "销售额",
-              "已记录收款"
+              "商品",
+              "问题",
+              "建议操作"
             ],
             "rows": [
               [
-                "#1042",
-                "S/ 1,399",
-                "S/ 1,399"
+                "MacBook Pro 14″",
+                "未注明保修",
+                "确认时长"
               ],
               [
-                "#1043",
-                "S/ 2,799",
-                "S/ 2,799"
+                "Samsung Galaxy A56",
+                "缺少存储容量",
+                "填写 256 GB"
               ],
               [
-                "#1044",
-                "S/ 1,399",
-                "未找到"
+                "iPhone 15",
+                "仅有一张照片",
+                "添加其他角度"
               ]
             ],
-            "conclusion": "订单 #1044 需要核对：未找到关联收款。"
+            "conclusion": "先补全缺失信息，再改善照片。"
           }
         }
       },
@@ -1139,57 +1146,6 @@
               ]
             ],
             "conclusion": "展示 4 条待检查商品信息中的 3 条，每条都有具体建议。"
-          }
-        }
-      },
-      {
-        "id": "quality-report",
-        "category": "找出待改善的商品页面",
-        "prompt": "检查我的商品页面，告诉我优先改善哪些。",
-        "resultType": "report",
-        "resultTitle": "已按改善优先级排列商品页面。",
-        "resultDescription": "汇总可用的质量、访问和销售数据，帮助你确定优先级，并据此提出建议。",
-        "preview": {
-          "label": "待改善的商品页面",
-          "items": [
-            {
-              "value": "1",
-              "label": "质量和缺失信息"
-            },
-            {
-              "value": "2",
-              "label": "访问和销售"
-            },
-            {
-              "value": "3",
-              "label": "改善建议"
-            }
-          ],
-          "status": "根据可用数据 · 变更需要批准",
-          "example": {
-            "columns": [
-              "商品",
-              "问题",
-              "建议操作"
-            ],
-            "rows": [
-              [
-                "MacBook Pro 14″",
-                "未注明保修",
-                "确认时长"
-              ],
-              [
-                "Samsung Galaxy A56",
-                "缺少存储容量",
-                "填写 256 GB"
-              ],
-              [
-                "iPhone 15",
-                "仅有一张照片",
-                "添加其他角度"
-              ]
-            ],
-            "conclusion": "先补全缺失信息，再改善照片。"
           }
         }
       },
@@ -1368,52 +1324,6 @@
               ]
             ],
             "conclusion": "店铺 A 比店铺 B 多销售 S/ 6,400。"
-          }
-        }
-      },
-      {
-        "id": "multi-country",
-        "category": "管理不同国家的店铺",
-        "prompt": "分别查看我在秘鲁和巴西店铺的销售。",
-        "resultTitle": "以下是各店铺以各自货币显示的销售。",
-        "resultDescription": "可使用你在不同国家已连接的账户，选择要查看的店铺。各店铺的数据保持独立，可用功能取决于国家和账户。",
-        "resultType": "workflow",
-        "preview": {
-          "label": "按国家查看店铺",
-          "items": [
-            {
-              "value": "1",
-              "label": "秘鲁店铺"
-            },
-            {
-              "value": "2",
-              "label": "巴西店铺"
-            },
-            {
-              "value": "3",
-              "label": "以当地货币显示的销售"
-            }
-          ],
-          "status": "你已连接的账户 · 功能因国家而异。",
-          "example": {
-            "columns": [
-              "店铺",
-              "销售额",
-              "数量"
-            ],
-            "rows": [
-              [
-                "秘鲁 · 利马",
-                "S/ 24,600",
-                "42"
-              ],
-              [
-                "巴西 · 圣保罗",
-                "R$ 31,200",
-                "56"
-              ]
-            ],
-            "conclusion": "分别查看每家店铺，金额保留各自货币。"
           }
         }
       },
