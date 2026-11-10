@@ -550,53 +550,53 @@
         }
       },
       {
-        "id": "margin-diagnosis",
-        "category": "Revisa tus ganancias",
-        "prompt": "Con mis ventas, costos y anuncios, ¿qué productos me dejan poca ganancia?",
-        "resultType": "diagnosis",
-        "resultTitle": "Encontré 3 productos cuya ganancia conviene revisar.",
-        "resultDescription": "Te sugiero qué revisar en cada uno.",
+        "id": "inventory-report",
+        "category": "Pide un reporte de stock",
+        "prompt": "Resume el stock de mis productos y dime qué reponer primero.",
+        "resultType": "report",
+        "resultTitle": "Te muestro cuánto stock tienes y qué conviene reponer primero.",
+        "resultDescription": "Comparo el stock disponible con tus ventas. La duración estimada depende de que el ritmo de ventas se mantenga.",
         "preview": {
-          "label": "3 productos para revisar",
+          "label": "Stock y reposición",
           "items": [
             {
-              "value": "Producto A",
-              "label": "Posible ganancia baja"
+              "value": "1",
+              "label": "Stock por SKU"
             },
             {
-              "value": "Producto B",
-              "label": "Anuncios costosos"
+              "value": "2",
+              "label": "Ventas recientes"
             },
             {
-              "value": "Producto C",
-              "label": "Ganancia por confirmar"
+              "value": "3",
+              "label": "Prioridad de reposición"
             }
           ],
-          "status": "Costos aportados por el vendedor.",
+          "status": "Duración estimada si continúa el ritmo de ventas.",
           "example": {
             "columns": [
               "Producto",
-              "Ganancia",
-              "Qué revisar"
+              "Stock",
+              "Duración estimada"
             ],
             "rows": [
               [
-                "Samsung Galaxy A56",
-                "S/ 42",
-                "Costo del producto"
-              ],
-              [
                 "Audífonos Bluetooth",
-                "S/ 8",
-                "Gasto en anuncios"
+                "5",
+                "≈ 6 días"
               ],
               [
-                "MacBook Pro 14″",
-                "Por calcular",
-                "Falta tu costo"
+                "Samsung Galaxy A56",
+                "12",
+                "≈ 20 días"
+              ],
+              [
+                "iPhone 15",
+                "10",
+                "≈ 25 días"
               ]
             ],
-            "conclusion": "Ganancia por unidad: dos márgenes bajos y un costo pendiente."
+            "conclusion": "Repón primero los audífonos: tienen la menor cobertura estimada."
           }
         }
       },
@@ -1715,57 +1715,6 @@
         }
       },
       {
-        "id": "inventory-report",
-        "category": "Pide un reporte de stock",
-        "prompt": "Resume el stock de mis productos y dime qué reponer primero.",
-        "resultType": "report",
-        "resultTitle": "Te muestro cuánto stock tienes y qué conviene reponer primero.",
-        "resultDescription": "Comparo el stock disponible con tus ventas. La duración estimada depende de que el ritmo de ventas se mantenga.",
-        "preview": {
-          "label": "Stock y reposición",
-          "items": [
-            {
-              "value": "1",
-              "label": "Stock por SKU"
-            },
-            {
-              "value": "2",
-              "label": "Ventas recientes"
-            },
-            {
-              "value": "3",
-              "label": "Prioridad de reposición"
-            }
-          ],
-          "status": "Duración estimada si continúa el ritmo de ventas.",
-          "example": {
-            "columns": [
-              "Producto",
-              "Stock",
-              "Duración estimada"
-            ],
-            "rows": [
-              [
-                "Audífonos Bluetooth",
-                "5",
-                "≈ 6 días"
-              ],
-              [
-                "Samsung Galaxy A56",
-                "12",
-                "≈ 20 días"
-              ],
-              [
-                "iPhone 15",
-                "10",
-                "≈ 25 días"
-              ]
-            ],
-            "conclusion": "Repón primero los audífonos: tienen la menor cobertura estimada."
-          }
-        }
-      },
-      {
         "id": "volume-promotion",
         "category": "Crea descuentos por cantidad",
         "prompt": "Prepara un descuento para quienes compren 3 unidades de estos productos.",
@@ -2012,7 +1961,7 @@
           "Publica desde una foto, Excel o conversación",
           "Busca fotos o crea imágenes para tu publicación",
           "Genera títulos y descripciones atractivas",
-          "Completa y verifica las características",
+          "Completa y verifica las características de tus productos",
           "Revisa todo antes de publicar"
         ]
       ],
@@ -2100,12 +2049,12 @@
         "cta": "Gratis por 14 días",
         "items": [
           "Todo lo incluido en MerChat Básico",
+          "Gestiona hasta 3 cuentas y opera desde una publicación hasta cientos de productos.",
           "Publica conversando, desde fotos o Excel",
           "Busca o genera imágenes para tus productos",
           "Crea títulos, descripciones y completa características",
           "Actualiza precios, stock y promociones en lote",
-          "Gestiona publicaciones, ventas, envíos y preguntas",
-          "Gestiona hasta 3 cuentas y opera desde una publicación hasta cientos de productos."
+          "Gestiona publicaciones, ventas, envíos y preguntas"
         ],
         "billingPeriod": "/mes"
       },
@@ -2293,9 +2242,10 @@
     "noCard": "Sin tarjeta",
     "howItWorks": "Explora MerChat",
     "exploreFeatures": "Lo que puedes hacer con merchat",
-    "featuresTitle": "Lo que puedes hacer con merchat",
+    "featuresTitle": "Tu negocio, más simple con IA",
+    "featuresDescription": "Simplifica la gestión de tu negocio. Administra productos, actualiza precios, consulta tus ventas y toma mejores decisiones con ayuda de la inteligencia artificial.",
     "showcaseTitle": "Una pregunta. Mucho más que una respuesta.",
-    "stepsTitle": "Cómo funciona",
+    "stepsTitle": "Cómo empezar",
     "stepsIntro": "Crea tu cuenta, conecta Mercado Libre y usa merchat como tu asistente desde la herramienta de IA que prefieras.",
     "chatgptGuideLabel": "Guía para conectar merchat a ChatGPT",
     "trustTitle": "Tu cuenta y tus datos permanecen protegidos",
@@ -2310,8 +2260,8 @@
     "carouselPrevious": "Ver ejemplos anteriores",
     "carouselNext": "Ver ejemplos siguientes",
     "animationLabel": "Ejemplo animado de una conversación con merchat",
-    "navHow": "Cómo funciona",
-    "navFeatures": "Qué puedes hacer",
+    "navHow": "Cómo empezar",
+    "navFeatures": "Funcionalidades",
     "navPricing": "Precios",
     "navTrust": "Seguridad",
     "navFaq": "FAQ",

@@ -550,53 +550,53 @@
         }
       },
       {
-        "id": "margin-diagnosis",
-        "category": "检查利润",
-        "prompt": "根据我的销售、成本和广告，哪些商品利润较低？",
-        "resultType": "diagnosis",
-        "resultTitle": "发现 3 个值得检查利润的商品。",
-        "resultDescription": "这里有每件商品的检查建议。",
+        "id": "inventory-report",
+        "category": "获取库存报告",
+        "prompt": "汇总商品库存，并告诉我优先补哪些货。",
+        "resultType": "report",
+        "resultTitle": "以下是现有库存及建议优先补货的商品。",
+        "resultDescription": "比较现有库存和销售情况。预计可售天数以销售速度保持不变为前提。",
         "preview": {
-          "label": "3 件商品需要审核",
+          "label": "库存和补货",
           "items": [
             {
-              "value": "商品 A",
-              "label": "利润可能偏低"
+              "value": "1",
+              "label": "各 SKU 的库存"
             },
             {
-              "value": "商品 B",
-              "label": "广告费用偏高"
+              "value": "2",
+              "label": "近期销量"
             },
             {
-              "value": "商品 C",
-              "label": "利润待确认"
+              "value": "3",
+              "label": "补货优先级"
             }
           ],
-          "status": "成本由卖家提供",
+          "status": "预计可售天数以销量保持不变为前提",
           "example": {
             "columns": [
               "商品",
-              "利润",
-              "需检查"
+              "库存",
+              "预计可售时间"
             ],
             "rows": [
               [
-                "Samsung Galaxy A56",
-                "S/ 42",
-                "商品成本"
-              ],
-              [
                 "蓝牙耳机",
-                "S/ 8",
-                "广告支出"
+                "5",
+                "约 6 天"
               ],
               [
-                "MacBook Pro 14″",
-                "待计算",
-                "缺少你的成本"
+                "Samsung Galaxy A56",
+                "12",
+                "约 20 天"
+              ],
+              [
+                "iPhone 15",
+                "10",
+                "约 25 天"
               ]
             ],
-            "conclusion": "每件利润：两件利润较低，一件缺少成本。"
+            "conclusion": "先补充耳机库存：其预计可售时间最短。"
           }
         }
       },
@@ -1715,57 +1715,6 @@
         }
       },
       {
-        "id": "inventory-report",
-        "category": "获取库存报告",
-        "prompt": "汇总商品库存，并告诉我优先补哪些货。",
-        "resultType": "report",
-        "resultTitle": "以下是现有库存及建议优先补货的商品。",
-        "resultDescription": "比较现有库存和销售情况。预计可售天数以销售速度保持不变为前提。",
-        "preview": {
-          "label": "库存和补货",
-          "items": [
-            {
-              "value": "1",
-              "label": "各 SKU 的库存"
-            },
-            {
-              "value": "2",
-              "label": "近期销量"
-            },
-            {
-              "value": "3",
-              "label": "补货优先级"
-            }
-          ],
-          "status": "预计可售天数以销量保持不变为前提",
-          "example": {
-            "columns": [
-              "商品",
-              "库存",
-              "预计可售时间"
-            ],
-            "rows": [
-              [
-                "蓝牙耳机",
-                "5",
-                "约 6 天"
-              ],
-              [
-                "Samsung Galaxy A56",
-                "12",
-                "约 20 天"
-              ],
-              [
-                "iPhone 15",
-                "10",
-                "约 25 天"
-              ]
-            ],
-            "conclusion": "先补充耳机库存：其预计可售时间最短。"
-          }
-        }
-      },
-      {
         "id": "volume-promotion",
         "category": "创建数量折扣",
         "prompt": "为购买这些商品 3 件的顾客准备折扣。",
@@ -2009,38 +1958,44 @@
         "/images/feature-icons/publishing-v3-transparent.png",
         "几分钟内完成发布",
         [
-          "通过对话创建刊登",
-          "从照片发布",
-          "补充并验证技术信息"
+          "通过照片、Excel 或对话发布商品",
+          "查找照片或为商品刊登创建图片",
+          "生成吸引人的标题和描述",
+          "补全并核实商品信息",
+          "发布前检查所有内容"
         ]
       ],
       [
         "/images/feature-icons/market-research.png",
-        "优化商品价格",
+        "提升经营收益",
         [
-          "比较你的价格",
-          "计算折扣",
-          "创建促销",
-          "将商品加入促销"
+          "比较类似商品的价格",
+          "计算利润、成本和佣金",
+          "评估折扣，避免损失利润空间",
+          "查看并启用促销",
+          "通过 Excel 更新价格"
         ]
       ],
       [
         "/images/feature-icons/order-management.png",
         "掌控业务运营",
         [
-          "在 Excel 中计算利润",
-          "更新价格和库存",
-          "查看最近的销售",
-          "找出畅销与滞销商品"
+          "了解业务当前需要处理什么",
+          "查看并管理商品刊登、销售、库存、订单、配送等",
+          "查看待回复的问题",
+          "整理商品目录和 SKU",
+          "使用 Excel 表格向店铺导入和导出信息"
         ]
       ],
       [
         "/images/feature-icons/sales-insights.png",
         "分析销售表现",
         [
-          "找出没有销量的商品",
-          "优化商品刊登",
-          "生成季度诊断"
+          "发现提升销量的机会",
+          "找出需要改进的商品刊登",
+          "比较不同时间段的销售情况",
+          "查看广告活动和广告效果",
+          "生成销售、利润和库存报告"
         ]
       ]
     ],
@@ -2094,12 +2049,12 @@
         "cta": "免费试用 14 天",
         "items": [
           "包含 Merchat 基础版的全部功能",
+          "最多管理 3 个账户，从单个商品刊登到数百件商品",
           "通过对话、照片或 Excel 创建商品刊登",
           "查找或生成商品图片",
           "生成标题和描述，并补全商品属性",
           "批量更新价格、库存和促销",
-          "管理商品刊登、销售、配送和买家问题",
-          "最多管理 3 个账户，从单个商品刊登到数百件商品"
+          "管理商品刊登、销售、配送和买家问题"
         ],
         "billingPeriod": "/月"
       },
@@ -2287,9 +2242,10 @@
     "noCard": "无需银行卡",
     "howItWorks": "探索 MerChat",
     "exploreFeatures": "探索你能做什么",
-    "featuresTitle": "用 merchat 可以做什么",
+    "featuresTitle": "AI 让生意经营更简单",
+    "featuresDescription": "借助人工智能，让业务管理更简单。管理商品、更新价格、查看销售情况，并做出更明智的决策。",
     "showcaseTitle": "一个问题。不止一个答案。",
-    "stepsTitle": "使用方法",
+    "stepsTitle": "开始使用",
     "stepsIntro": "创建账户、连接 Mercado Libre，并从你喜欢的 AI 工具中使用 merchat 作为助手。",
     "chatgptGuideLabel": "连接 merchat 与 ChatGPT 指南",
     "trustTitle": "你的账户和数据始终受到保护",
@@ -2304,7 +2260,7 @@
     "carouselPrevious": "查看上一个示例",
     "carouselNext": "查看下一个示例",
     "animationLabel": "与 merchat 对话的动画示例",
-    "navHow": "使用方法",
+    "navHow": "如何开始",
     "navFeatures": "功能",
     "navPricing": "价格",
     "navTrust": "安全",
