@@ -550,53 +550,53 @@
         }
       },
       {
-        "id": "margin-diagnosis",
-        "category": "Review your profits",
-        "prompt": "Based on my sales, costs and ads, which products earn me little profit?",
-        "resultType": "diagnosis",
-        "resultTitle": "I found 3 products whose profit is worth reviewing.",
-        "resultDescription": "Here is what to check for each one.",
+        "id": "inventory-report",
+        "category": "Get a stock report",
+        "prompt": "Summarize my products’ stock and tell me what to restock first.",
+        "resultType": "report",
+        "resultTitle": "Here is your stock and what is worth restocking first.",
+        "resultDescription": "I compare available stock with your sales. Estimated coverage assumes the sales pace continues.",
         "preview": {
-          "label": "3 products to review",
+          "label": "Stock and restocking",
           "items": [
             {
-              "value": "Product A",
-              "label": "Profit may be low"
+              "value": "1",
+              "label": "Stock by SKU"
             },
             {
-              "value": "Product B",
-              "label": "Costly ads"
+              "value": "2",
+              "label": "Recent sales"
             },
             {
-              "value": "Product C",
-              "label": "Profit unconfirmed"
+              "value": "3",
+              "label": "Restocking priority"
             }
           ],
-          "status": "Costs supplied by the seller",
+          "status": "Estimated coverage if sales pace continues",
           "example": {
             "columns": [
               "Product",
-              "Profit",
-              "What to check"
+              "Stock",
+              "Estimated coverage"
             ],
             "rows": [
               [
-                "Samsung Galaxy A56",
-                "S/ 42",
-                "Product cost"
-              ],
-              [
                 "Bluetooth headphones",
-                "S/ 8",
-                "Ad spend"
+                "5",
+                "≈ 6 days"
               ],
               [
-                "MacBook Pro 14″",
-                "To calculate",
-                "Your cost is missing"
+                "Samsung Galaxy A56",
+                "12",
+                "≈ 20 days"
+              ],
+              [
+                "iPhone 15",
+                "10",
+                "≈ 25 days"
               ]
             ],
-            "conclusion": "Profit per unit: two low margins and one missing cost."
+            "conclusion": "Restock headphones first: they have the shortest estimated coverage."
           }
         }
       },
@@ -1715,57 +1715,6 @@
         }
       },
       {
-        "id": "inventory-report",
-        "category": "Get a stock report",
-        "prompt": "Summarize my products’ stock and tell me what to restock first.",
-        "resultType": "report",
-        "resultTitle": "Here is your stock and what is worth restocking first.",
-        "resultDescription": "I compare available stock with your sales. Estimated coverage assumes the sales pace continues.",
-        "preview": {
-          "label": "Stock and restocking",
-          "items": [
-            {
-              "value": "1",
-              "label": "Stock by SKU"
-            },
-            {
-              "value": "2",
-              "label": "Recent sales"
-            },
-            {
-              "value": "3",
-              "label": "Restocking priority"
-            }
-          ],
-          "status": "Estimated coverage if sales pace continues",
-          "example": {
-            "columns": [
-              "Product",
-              "Stock",
-              "Estimated coverage"
-            ],
-            "rows": [
-              [
-                "Bluetooth headphones",
-                "5",
-                "≈ 6 days"
-              ],
-              [
-                "Samsung Galaxy A56",
-                "12",
-                "≈ 20 days"
-              ],
-              [
-                "iPhone 15",
-                "10",
-                "≈ 25 days"
-              ]
-            ],
-            "conclusion": "Restock headphones first: they have the shortest estimated coverage."
-          }
-        }
-      },
-      {
         "id": "volume-promotion",
         "category": "Create quantity discounts",
         "prompt": "Prepare a discount for customers buying 3 units of these products.",
@@ -2009,38 +1958,44 @@
         "/images/feature-icons/publishing-v3-transparent.png",
         "Publish in minutes",
         [
-          "Create a listing through conversation",
-          "Publish from a photo",
-          "Complete and verify technical details"
+          "Publish from a photo, Excel, or conversation",
+          "Find photos or create images for your listing",
+          "Generate compelling titles and descriptions",
+          "Complete and verify your product details",
+          "Review everything before publishing"
         ]
       ],
       [
         "/images/feature-icons/market-research.png",
-        "Improve your prices",
+        "Improve your revenue",
         [
-          "Compare your prices",
-          "Calculate discounts",
-          "Create promotions",
-          "Add products to promotions"
+          "Compare prices with similar products",
+          "Calculate profits, costs, and fees",
+          "Evaluate discounts without losing margin",
+          "Review and activate promotions",
+          "Update prices from Excel"
         ]
       ],
       [
         "/images/feature-icons/order-management.png",
         "Control your operation",
         [
-          "Calculate profit in Excel",
-          "Update prices and stock",
-          "Check your latest sales",
-          "Identify best and lowest sellers"
+          "Discover what your business needs today",
+          "View and manage listings, sales, stock, orders, shipping, and more",
+          "Review unanswered questions",
+          "Organize your catalog and SKUs",
+          "Use Excel spreadsheets to import and export information to your store"
         ]
       ],
       [
         "/images/feature-icons/sales-insights.png",
         "Analyze your sales",
         [
-          "Find products that are not selling",
-          "Optimize listings",
-          "Generate a quarterly diagnosis"
+          "Identify opportunities to sell more",
+          "Find listings that need improvement",
+          "Compare sales across periods",
+          "Review campaigns and advertising results",
+          "Generate sales, profit, and stock reports"
         ]
       ]
     ],
@@ -2094,12 +2049,12 @@
         "cta": "Try it free for 14 days",
         "items": [
           "Everything in Merchat Basic",
+          "Manage up to 3 accounts, from a single listing to hundreds of products",
           "Create listings by chatting, from photos, or from Excel",
           "Find or generate images for your products",
           "Create titles and descriptions, and complete product attributes",
           "Update prices, stock, and promotions in bulk",
-          "Manage listings, sales, shipping, and questions",
-          "Manage up to 3 accounts, from a single listing to hundreds of products"
+          "Manage listings, sales, shipping, and questions"
         ],
         "billingPeriod": "/month"
       },
@@ -2287,9 +2242,10 @@
     "noCard": "No card required",
     "howItWorks": "Explore MerChat",
     "exploreFeatures": "Explore what you can do",
-    "featuresTitle": "What you can do with merchat",
+    "featuresTitle": "Your business, made simpler with AI",
+    "featuresDescription": "Simplify your business management. Manage products, update prices, check your sales, and make better decisions with the help of artificial intelligence.",
     "showcaseTitle": "One question. Much more than an answer.",
-    "stepsTitle": "How it works",
+    "stepsTitle": "How to get started",
     "stepsIntro": "Create your account, connect Mercado Libre, and use merchat as your assistant from the AI tool you prefer.",
     "chatgptGuideLabel": "Guide to connect merchat to ChatGPT",
     "trustTitle": "Your account and data stay protected",
@@ -2304,8 +2260,8 @@
     "carouselPrevious": "View previous examples",
     "carouselNext": "View next examples",
     "animationLabel": "Animated example of a conversation with merchat",
-    "navHow": "How it works",
-    "navFeatures": "What you can do",
+    "navHow": "How to get started",
+    "navFeatures": "Features",
     "navPricing": "Pricing",
     "navTrust": "Security",
     "navFaq": "FAQ",

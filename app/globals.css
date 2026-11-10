@@ -2751,9 +2751,13 @@ main .functions-group section#resultados { padding-block: 32px 56px; scroll-marg
 .hero-scroll-cue:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
 #capacidades { scroll-margin-top:76px; }
 main #funciones.functions-group #capacidades { padding-block:56px 56px; }
+#capacidades .section-title { margin-bottom:16px; }
+#capacidades .features-intro { max-width:780px; margin:0 auto 52px; text-align:center; font-size:18px; line-height:1.5; color:var(--muted); text-wrap:balance; }
 @media (max-width:640px) {
   .hero-scroll-cue { margin-block:20px 8px; }
   main #funciones.functions-group #capacidades { padding-block:40px 44px; }
+  #capacidades .section-title { margin-bottom:14px; }
+  #capacidades .features-intro { max-width:34ch; margin-bottom:36px; font-size:17px; }
 }
 
 /* A restrained Uiverse-inspired light sweep on the primary signup actions. */
