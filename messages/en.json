@@ -2003,22 +2003,22 @@
       [
         "1",
         "Create your account",
-        "Sign up and prepare your workspace."
+        "Signing up is easy with your Google account."
       ],
       [
         "2",
         "Connect Mercado Libre",
-        "Authorize access to check your products, listings, and sales."
+        "merchat connects to your Mercado Libre accounts through the official process."
       ],
       [
         "3",
-        "Install your merchat assistant",
-        "Connect it with ChatGPT, Claude, or another compatible tool."
+        "Connect MerChat to your AI",
+        "Use MerChat directly from ChatGPT, Claude, or other compatible tools."
       ],
       [
         "4",
         "Manage your business",
-        "Ask, publish, and manage your operation from a conversation."
+        "Check, publish, and manage your business directly through a conversation."
       ]
     ],
     "plans": [

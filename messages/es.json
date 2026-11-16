@@ -2003,22 +2003,22 @@
       [
         "1",
         "Crea tu cuenta",
-        "Regístrate y prepara tu espacio de trabajo."
+        "El registro es sencillo con tu cuenta de Google."
       ],
       [
         "2",
         "Conecta Mercado Libre",
-        "Autoriza el acceso para consultar tus productos, publicaciones y ventas."
+        "MerChat se conecta de forma oficial con tus cuentas de Mercado Libre."
       ],
       [
         "3",
-        "Instala merchat en tu IA",
-        "Conéctalo con ChatGPT, Claude u otra herramienta compatible."
+        "Conecta MerChat a tu IA",
+        "Usa MerChat directamente desde ChatGPT, Claude u otras herramientas compatibles."
       ],
       [
         "4",
         "Gestiona tu negocio",
-        "Pregunta, publica y gestiona tu operación desde una conversación."
+        "Consulta, publica y administra tu negocio directamente desde una conversación."
       ]
     ],
     "plans": [
