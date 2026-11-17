@@ -8,6 +8,13 @@ import { siteConfig } from "@/config/site";
 import { BrandLogo } from "@/components/BrandLogo";
 import { localeCookieMaxAge, localeCookieName, localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
 
+const socialIcons = {
+  Facebook: "M14 22v-9h3l.5-3.5H14V7.3c0-1 .3-1.8 1.8-1.8H18V2.3c-.4-.1-1.5-.3-2.7-.3C12.4 2 10.5 3.7 10.5 7v2.5H7V13h3.5v9H14Z",
+  X: "M17.3 3h3.1l-6.8 7.8 8 10.2h-6.3l-4.9-6.3L4.9 21H1.8l7.2-8.3L1.4 3h6.4l4.4 5.8L17.3 3ZM16 19.2h1.7L6.9 4.7H5.1L16 19.2Z",
+  Instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z",
+  TikTok: "M14 2h3.5c.2 2.6 1.7 4.2 4.5 4.4V10a9 9 0 0 1-4.5-1.5v7.2a6.3 6.3 0 1 1-6.3-6.3c.4 0 .7 0 1.1.1v3.6a2.9 2.9 0 1 0 1.7 2.6V2Z",
+} satisfies Record<keyof typeof siteConfig.socials, string>;
+
 type HeroIconName = "sparkle" | "arrow" | "shield" | "lock" | "check" | "publish" | "clock" | "confirm" | "send" | "double-check" | "globe";
 
 function HeroIcon({ name, size = 18 }: { name: HeroIconName; size?: number }) {
@@ -575,6 +582,18 @@ export default function LandingPage() {
         <div className="footer-main">
           <div className="footer-brand-block">
             <BrandLogo className="footer-brand" ariaLabel={siteConfig.name} />
+            <div className="footer-socials">
+              {(Object.keys(socialIcons) as Array<keyof typeof socialIcons>).map((name) => {
+                const href = siteConfig.socials[name];
+                const icon = <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={socialIcons[name]} /></svg>;
+
+                return href ? (
+                  <a key={name} href={href} aria-label={name}>{icon}</a>
+                ) : (
+                  <span key={name} role="img" aria-label={name}>{icon}</span>
+                );
+              })}
+            </div>
           </div>
           <nav className="footer-nav" aria-label={ui.footerNav}>
             <div className="footer-column">
