@@ -590,8 +590,8 @@ export default function LandingPage() {
             </div>
             <div className="footer-column">
               <h2>{ui.footerLegal}</h2>
-              <span className="footer-item"><span>{ui.footerTerms}</span></span>
-              <span className="footer-item"><span>{ui.footerPrivacy}</span></span>
+              <a href={siteConfig.termsUrl} target="_blank" rel="noopener noreferrer"><span>{ui.footerTerms}</span></a>
+              <a href={siteConfig.privacyUrl} target="_blank" rel="noopener noreferrer"><span>{ui.footerPrivacy}</span></a>
             </div>
           </nav>
         </div>
