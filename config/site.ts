@@ -6,6 +6,12 @@ export const siteConfig = {
   chatgptGuideUrl: "https://ml-automation-iota.vercel.app/guia-chatgpt",
   termsUrl: "https://ml-automation-iota.vercel.app/terminos",
   privacyUrl: "https://ml-automation-iota.vercel.app/privacidad",
+  socials: {
+    Facebook: "https://www.facebook.com/profile.php?id=61595486866330",
+    X: "",
+    Instagram: "https://www.instagram.com/merchat.ai/",
+    TikTok: "",
+  },
   brand: {
     logo: "/brand/merchat-logo.png",
     icon: "/brand/merchat-chat-icon.png",

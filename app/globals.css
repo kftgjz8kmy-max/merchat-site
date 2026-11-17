@@ -1753,6 +1753,42 @@ main section[id]:not(#inicio) {
   object-position: left center;
 }
 
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.footer-socials > :is(a, span) {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid #e6ebf3;
+  border-radius: 50%;
+  color: #27344b;
+}
+
+.footer-socials svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-socials > span {
+  color: #65738a;
+}
+
+.footer-socials > a:is(:hover, :focus-visible) {
+  color: var(--blue);
+  border-color: currentColor;
+}
+
+.footer-socials > a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
 .footer-brand-block p {
   max-width: 210px;
   margin: 0;
