@@ -91,7 +91,7 @@ function mlAutomationHref(href: string, locale: AppLocale) {
   return target.toString();
 }
 
-function Button({ children, outline = false, href = siteConfig.whatsappUrl, icon = false, animated = false, hoverEffect = false }: { children: React.ReactNode; outline?: boolean; href?: string; icon?: boolean; animated?: boolean; hoverEffect?: boolean }) {
+function Button({ children, outline = false, href, icon = false, animated = false, hoverEffect = false }: { children: React.ReactNode; outline?: boolean; href: string; icon?: boolean; animated?: boolean; hoverEffect?: boolean }) {
   return <a className={`button ${outline ? "button-outline" : ""} ${animated ? "button-animated" : ""} ${hoverEffect ? "button-hover-effect" : ""}`} href={href}>{animated ? <span className="button-animated-content">{children}{icon && <HeroIcon name="arrow" size={17} />}</span> : <>{children}{icon && <HeroIcon name="arrow" size={17} />}</>}</a>;
 }
 
@@ -577,7 +577,7 @@ export default function LandingPage() {
 
       <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
 
-      <section id="ia-negocios" className="closing shell"><div><h2>{ui.closingTitle} <em>{ui.closingEmphasis}</em></h2><p>{ui.closingBody}</p><Button>{ui.closingCta}</Button><small>{ui.closingTags}</small></div><div className="device-scene"><div className="laptop"><div className="screen"><b>{siteConfig.name}</b><strong>{ui.deviceCustomAi}</strong><div className="mini-line" /></div></div><div className="phone"><b>{ui.deviceProjects}</b><span>{ui.deviceActive}</span></div><i /><i /></div></section>
+      <section id="ia-negocios" className="closing shell"><div><h2>{ui.closingTitle} <em>{ui.closingEmphasis}</em></h2><p>{ui.closingBody}</p><Button href={mlAutomationHref(siteConfig.contactUrl, locale)}>{ui.closingCta}</Button><small>{ui.closingTags}</small></div><div className="device-scene"><div className="laptop"><div className="screen"><b>{siteConfig.name}</b><strong>{ui.deviceCustomAi}</strong><div className="mini-line" /></div></div><div className="phone"><b>{ui.deviceProjects}</b><span>{ui.deviceActive}</span></div><i /><i /></div></section>
       <footer className="site-footer shell">
         <div className="footer-main">
           <div className="footer-brand-block">
@@ -605,7 +605,7 @@ export default function LandingPage() {
             <div className="footer-column">
               <h2>{ui.footerSolutions}</h2>
               <a href="#ia-negocios"><span>{ui.footerAi}</span></a>
-              <a href={siteConfig.whatsappUrl}><span>{ui.footerContact}</span></a>
+              <a href={mlAutomationHref(siteConfig.contactUrl, locale)}><span>{ui.footerContact}</span></a>
             </div>
             <div className="footer-column">
               <h2>{ui.footerLegal}</h2>
