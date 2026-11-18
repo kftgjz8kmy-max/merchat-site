@@ -3234,3 +3234,34 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 }
 
 #planes .annual-plan-column .price-card.featured li:not(.annual-account-feature) { font-weight: 400; }
+
+/* Match the full-color illustrations in the capabilities section. */
+#como-funciona .step-symbol {
+  --onboarding-icon-size: 80px;
+  width: var(--onboarding-icon-size);
+  height: var(--onboarding-icon-size);
+  margin-bottom: 20px;
+}
+
+#como-funciona .onboarding-glyph {
+  display: block;
+  width: var(--onboarding-icon-size);
+  height: var(--onboarding-icon-size);
+}
+
+@media (min-width: 721px) {
+  #como-funciona > div::before {
+    top: 39px;
+    inset-inline: calc(12.5% + 38px);
+  }
+
+  #como-funciona > div::after {
+    top: 36px;
+    height: 8px;
+    background:
+      radial-gradient(circle at 25% 50%, var(--yellow) 0 3px, transparent 4px),
+      radial-gradient(circle at 50% 50%, var(--yellow) 0 3px, transparent 4px),
+      radial-gradient(circle at 75% 50%, var(--yellow) 0 3px, transparent 4px);
+    filter: none;
+  }
+}
