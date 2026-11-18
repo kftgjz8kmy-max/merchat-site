@@ -116,10 +116,10 @@ const brandFeatureIcons = [
 ] as const;
 
 const stepIconSources = [
-  "/brand/illustrations/account.svg",
-  "/brand/illustrations/connect.svg",
-  "/brand/illustrations/assistant.svg",
-  "/brand/illustrations/business.svg",
+  "/brand/illustrations/onboarding-create-account-premium.webp",
+  "/brand/illustrations/onboarding-connect-marketplace-premium.webp",
+  "/brand/illustrations/onboarding-connect-ai-premium.webp",
+  "/brand/illustrations/onboarding-manage-business-premium.webp",
 ] as const;
 
 const trustIconSources = [
@@ -130,7 +130,41 @@ const trustIconSources = [
 ] as const;
 
 function StepIcon({ step }: { step: number }) {
-  return <img className="step-icon-image" src={stepIconSources[step] ?? stepIconSources[0]} alt="" width="48" height="48" />;
+  return (
+    <>
+      {step === 0 && (
+        <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="merchat-onboarding-palette" colorInterpolationFilters="sRGB">
+              {/* Use channel differences to isolate the colored enamel and retain the shading. */}
+              <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -4 0 4 0 -.42" result="blueMask" />
+              <feComposite in="blueMask" in2="SourceAlpha" operator="in" result="blueCoverage" />
+              {/* Map the light and shadow to the same ramp as the capabilities icons. */}
+              <feColorMatrix in="SourceGraphic" values="0 0 1.9 0 -.64  0 0 1.9 0 -.64  0 0 1.9 0 -.64  0 0 0 0 1" result="blueTone" />
+              <feComponentTransfer in="blueTone" result="brandBlue">
+                <feFuncR type="table" tableValues=".063 .09 .255" />
+                <feFuncG type="table" tableValues=".227 .408 .596" />
+                <feFuncB type="table" tableValues=".898 1 1" />
+              </feComponentTransfer>
+              <feComposite in="brandBlue" in2="blueCoverage" operator="in" result="blueEnamel" />
+              <feComposite in="blueEnamel" in2="SourceGraphic" operator="atop" result="withBlue" />
+              <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 4 -4 0 -.65" result="yellowMask" />
+              <feComposite in="yellowMask" in2="SourceAlpha" operator="in" result="yellowCoverage" />
+              <feColorMatrix in="SourceGraphic" values="0 2.4 0 0 -1.11  0 2.4 0 0 -1.11  0 2.4 0 0 -1.11  0 0 0 0 1" result="yellowTone" />
+              <feComponentTransfer in="yellowTone" result="brandYellow">
+                <feFuncR type="table" tableValues="1 1 1" />
+                <feFuncG type="table" tableValues=".647 .855 .941" />
+                <feFuncB type="table" tableValues=".067 .141 .443" />
+              </feComponentTransfer>
+              <feComposite in="brandYellow" in2="yellowCoverage" operator="in" result="yellowEnamel" />
+              <feComposite in="yellowEnamel" in2="withBlue" operator="atop" />
+            </filter>
+          </defs>
+        </svg>
+      )}
+      <img className="onboarding-glyph" src={stepIconSources[step] ?? stepIconSources[0]} alt="" width="80" height="80" style={{ filter: "url(#merchat-onboarding-palette)" }} />
+    </>
+  );
 }
 
 const productPhotos = ["open", "keyboard", "side", "closed"] as const;
