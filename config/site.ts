@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "merchat",
   description: "El asistente de IA para gestionar Mercado Libre.",
-  whatsappUrl: "https://wa.me/51999999999?text=Hola%2C%20quiero%20conocer%20merchat",
+  contactUrl: "https://ml-automation-iota.vercel.app/contacto",
   trialUrl: "https://ml-automation-iota.vercel.app/prueba-gratis",
   chatgptGuideUrl: "https://ml-automation-iota.vercel.app/guia-chatgpt",
   termsUrl: "https://ml-automation-iota.vercel.app/terminos",
