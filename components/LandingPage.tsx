@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 import { getLanding, getUi, landing as spanishLanding, type UseCaseCard } from "@/config/landing";
 import { siteConfig } from "@/config/site";
 import { BrandLogo } from "@/components/BrandLogo";
+import { ClosingHeadline, OneMindShowcase, oneMindHeadlineTiming } from "@/components/OneMindShowcase";
 import { localeCookieMaxAge, localeCookieName, localeOptions, localePaths, type AppLocale } from "@/i18n/locales";
 
 const socialIcons = {
@@ -14,6 +15,235 @@ const socialIcons = {
   Instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z",
   TikTok: "M14 2h3.5c.2 2.6 1.7 4.2 4.5 4.4V10a9 9 0 0 1-4.5-1.5v7.2a6.3 6.3 0 1 1-6.3-6.3c.4 0 .7 0 1.1.1v3.6a2.9 2.9 0 1 0 1.7 2.6V2Z",
 } satisfies Record<keyof typeof siteConfig.socials, string>;
+
+function useOneMindBanner() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [introFinished, setIntroFinished] = useState(false);
+  const [introActive, setIntroActive] = useState(false);
+  const [introPaused, setIntroPaused] = useState(false);
+  const [introRun, setIntroRun] = useState(0);
+  const introToggle = useRef<(() => void) | null>(null);
+
+  const restartIntro = useCallback(() => {
+    // A replay opens on the static title card when the viewer requests reduced motion.
+    setIntroFinished(window.matchMedia("(prefers-reduced-motion: reduce)").matches || !sectionRef.current?.animate);
+    setIntroActive(true);
+    setIntroPaused(false);
+    setIntroRun(run => run + 1);
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const frame = section?.querySelector<HTMLIFrameElement>(".one-mind-intro");
+    const slot = section?.querySelector<HTMLElement>(".one-mind-logo-slot");
+    const headline = section?.querySelector<HTMLElement>(".closing-headline");
+    if (!section || !frame || !slot || !headline || !("IntersectionObserver" in window)) return;
+
+    const options = new URLSearchParams(window.location.search);
+    const mode = options.get("one-mind");
+    const original = mode === "original";
+    const timeline = mode === "timeline";
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const entrance = options.get("entrada");
+    const ideaEntrance = options.get("idea");
+    section.dataset.ideaEntrance =
+      ideaEntrance === "lift" || ideaEntrance === "soft" || ideaEntrance === "focus" || ideaEntrance === "typing"
+        ? ideaEntrance
+        : original ? "lift" : "focus";
+    section.dataset.headlineEntrance =
+      entrance === "soft" || entrance === "focus" || entrance === "rise" || entrance === "typing"
+        ? entrance
+        : original ? "soft" : "typing";
+
+    if (mode === "sequence" || timeline) section.dataset.bannerPreview = mode;
+    if (mode === "compare") {
+      section.dataset.bannerPreview = "compare";
+      frame.src = "/animations/one-mind/index.html?static=1";
+      let timer: number | undefined;
+      const play = () => {
+        window.clearTimeout(timer);
+        section.dataset.bannerPhase = "comparison-reset";
+        timer = window.setTimeout(() => {
+          section.dataset.bannerPhase = "comparison";
+        }, 200);
+      };
+      const replay = (event: MessageEvent) => {
+        if (event.source === window.parent && event.origin === window.location.origin && event.data === "one-mind:replay") play();
+      };
+      if (!motion.matches || options.get("play") === "1") play();
+      window.addEventListener("message", replay);
+      return () => {
+        window.clearTimeout(timer);
+        window.removeEventListener("message", replay);
+        delete section.dataset.bannerPhase;
+        delete section.dataset.bannerPreview;
+        delete section.dataset.headlineEntrance;
+        delete section.dataset.ideaEntrance;
+      };
+    }
+
+    if (motion.matches || !frame.animate) {
+      if (timeline) section.setAttribute("data-preview-intro-ready", "");
+      if (introRun === 0) return;
+      introToggle.current = () => setIntroPaused(paused => !paused);
+      return () => { introToggle.current = null; };
+    }
+
+    section.dataset.bannerPhase = "intro";
+    let dock: Animation | undefined;
+    let fallback: Animation | undefined;
+    let paused = timeline && introRun === 0 && options.get("play") !== "1";
+    section.toggleAttribute("data-intro-paused", paused);
+    const animations = new Set<Animation>();
+
+    const track = (animation: Animation) => {
+      animations.add(animation);
+      if (paused) animation.pause();
+      return animation;
+    };
+
+    const wait = (duration: number, next: () => void) => {
+      const timer = track(section.animate([], duration));
+      void timer.finished.then(() => {
+        animations.delete(timer);
+        next();
+      }, () => undefined);
+      return timer;
+    };
+
+    const tellLogo = () => {
+      frame.contentWindow?.postMessage(paused ? "one-mind:pause" : "one-mind:resume", "*");
+    };
+
+    introToggle.current = () => {
+      paused = !paused;
+      section.toggleAttribute("data-intro-paused", paused);
+      for (const animation of animations) {
+        if (paused && animation.playState === "running") animation.pause();
+        if (!paused && animation.playState === "paused") animation.play();
+      }
+      tellLogo();
+      setIntroPaused(paused);
+    };
+
+    const cancelAnimations = () => {
+      for (const animation of animations) animation.cancel();
+      animations.clear();
+    };
+
+    const complete = (phase: "revealed" | "settled" | "static") => {
+      section.dataset.bannerPhase = phase;
+      cancelAnimations();
+      section.style.removeProperty("--one-title-offset");
+      section.removeAttribute("data-intro-paused");
+      setIntroActive(false);
+      setIntroPaused(false);
+    };
+
+    const receive = (event: MessageEvent) => {
+      if (event.source !== frame.contentWindow) return;
+      if (event.data === "one-mind:ready") {
+        if (timeline) section.setAttribute("data-preview-intro-ready", "");
+        if (section.dataset.bannerPhase === "intro") setIntroActive(true);
+        setIntroPaused(paused);
+        tellLogo();
+        return;
+      }
+      if (event.data !== "one-mind:complete") return;
+      if (section.dataset.bannerPhase !== "intro") return;
+
+      const origin = frame.getBoundingClientRect();
+      const target = slot.getBoundingClientRect();
+      // The intro settles into the same SVG viewBox as the slot while the iframe moves.
+      const logoScale = ({ width, height }: { width: number; height: number }) =>
+        Math.min(width / 648, height * 0.864 / 668);
+      const scale = logoScale(target) / logoScale(origin);
+      const dx = target.left + target.width / 2 - origin.left - origin.width / 2;
+      const dy = target.top + target.height / 2 - origin.top - origin.height / 2;
+      const finalPose = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      const stage = section.getBoundingClientRect();
+      const title = headline.getBoundingClientRect();
+      const featureScale = 1.26;
+      const titleOffset = stage.top + stage.height / 2 - (title.top + title.height / 2);
+      const featurePose = `translate(${dx}px, ${dy + titleOffset}px) scale(${scale * featureScale})`;
+
+      section.dataset.bannerPhase = "docking";
+      dock = track(frame.animate([
+        { transform: "translate(0, 0) scale(1)" },
+        { transform: original ? finalPose : featurePose },
+      ], {
+        duration: original ? 860 : 1080,
+        easing: original ? "cubic-bezier(.34,.04,.18,1)" : "cubic-bezier(.32,.10,.22,1)",
+        fill: "forwards",
+      }));
+      if (original) {
+        void dock.finished.then(() => complete("revealed"), () => undefined);
+        return;
+      }
+
+      const startTitle = () => {
+        section.style.setProperty("--one-title-offset", `${titleOffset}px`);
+        section.dataset.bannerPhase = "title";
+        wait(oneMindHeadlineTiming.hold, () => {
+          if (mode !== "sequence") {
+            if (fallback) {
+              fallback.cancel();
+              animations.delete(fallback);
+            }
+            setIntroFinished(true);
+            return;
+          }
+          section.dataset.bannerPhase = "lifting";
+          const liftOptions = { duration: oneMindHeadlineTiming.lift, easing: "cubic-bezier(.38,.04,.23,1)", fill: "forwards" } as const;
+          const previousDock = dock;
+          dock = track(frame.animate([{ transform: featurePose }, { transform: finalPose }], liftOptions));
+          if (previousDock) {
+            previousDock.cancel();
+            animations.delete(previousDock);
+          }
+          track(headline.animate([{ translate: `0 ${titleOffset}px` }, { translate: "0 0" }], liftOptions));
+          void dock.finished.then(() => complete("settled"), () => undefined);
+        });
+      };
+      void dock.finished.then(() => {
+        if (section.dataset.bannerPhase !== "docking") return;
+        wait(oneMindHeadlineTiming.leadIn, startTitle);
+      }, () => undefined);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio < 0.45) return;
+      observer.disconnect();
+      if (section.dataset.bannerPhase === "intro") {
+        setIntroActive(true);
+        fallback = wait(14000, () => complete("static"));
+      }
+    }, { threshold: 0.45 });
+
+    const onMotionChange = () => {
+      if (motion.matches) complete("static");
+    };
+    window.addEventListener("message", receive);
+    motion.addEventListener("change", onMotionChange);
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("message", receive);
+      motion.removeEventListener("change", onMotionChange);
+      introToggle.current = null;
+      cancelAnimations();
+      section.removeAttribute("data-intro-paused");
+      section.removeAttribute("data-preview-intro-ready");
+      section.style.removeProperty("--one-title-offset");
+      delete section.dataset.bannerPhase;
+      delete section.dataset.bannerPreview;
+      delete section.dataset.headlineEntrance;
+      delete section.dataset.ideaEntrance;
+    };
+  }, [introRun]);
+
+  return { sectionRef, introFinished, introActive, introPaused, introRun, introToggle, restartIntro };
+}
 
 type HeroIconName = "sparkle" | "arrow" | "shield" | "lock" | "check" | "publish" | "clock" | "confirm" | "send" | "double-check" | "globe";
 
@@ -261,6 +491,13 @@ function getShowcaseLoopWidth(carousel: HTMLDivElement) {
 }
 
 export default function LandingPage() {
+  const { sectionRef: oneMindBannerRef, introFinished, introActive, introPaused, introRun, introToggle, restartIntro } = useOneMindBanner();
+  const [oneMindShowcaseOpen, setOneMindShowcaseOpen] = useState(false);
+  const openOneMindShowcase = useCallback(() => setOneMindShowcaseOpen(true), []);
+  const replayOneMind = useCallback(() => {
+    setOneMindShowcaseOpen(false);
+    restartIntro();
+  }, [restartIntro]);
   const locale = useLocale() as AppLocale;
   const localizedLanding = getLanding(locale);
   const ui = getUi(locale);
@@ -611,7 +848,36 @@ export default function LandingPage() {
 
       <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
 
-      <section id="ia-negocios" className="closing shell"><div><h2>{ui.closingTitle} <em>{ui.closingEmphasis}</em></h2><p>{ui.closingBody}</p><Button href={mlAutomationHref(siteConfig.contactUrl, locale)}>{ui.closingCta}</Button><small>{ui.closingTags}</small></div><div className="device-scene"><div className="laptop"><div className="screen"><b>{siteConfig.name}</b><strong>{ui.deviceCustomAi}</strong><div className="mini-line" /></div></div><div className="phone"><b>{ui.deviceProjects}</b><span>{ui.deviceActive}</span></div><i /><i /></div></section>
+      <section id="ia-negocios" className="closing shell" ref={oneMindBannerRef} data-showcase-open={oneMindShowcaseOpen}>
+        <OneMindShowcase
+          sectionRef={oneMindBannerRef}
+          open={oneMindShowcaseOpen}
+          introFinished={introFinished}
+          introActive={introActive}
+          introPaused={introPaused}
+          onToggleIntro={() => introToggle.current?.()}
+          onReplay={replayOneMind}
+          onOpen={openOneMindShowcase}
+          ui={ui}
+          locale={locale}
+          contactUrl={mlAutomationHref(siteConfig.contactUrl, locale)}
+        >
+          <iframe
+            key={introRun}
+            className="one-mind-intro"
+            src="/animations/one-mind/index.html?banner=1"
+            title="ONE MIND"
+            sandbox="allow-scripts"
+            loading="lazy"
+          />
+          <div className="closing-content">
+            <div className="one-mind-logo-slot" aria-hidden="true" />
+            <ClosingHeadline title={ui.closingTitle} emphasis={ui.closingEmphasis} />
+            <p>{ui.closingBody}</p>
+            <Button href={mlAutomationHref(siteConfig.contactUrl, locale)}>{ui.closingCta} <HeroIcon name="arrow" size={22} /></Button>
+          </div>
+        </OneMindShowcase>
+      </section>
       <footer className="site-footer shell">
         <div className="footer-main">
           <div className="footer-brand-block">
