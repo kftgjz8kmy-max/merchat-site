@@ -1984,7 +1984,9 @@ main section[id]:not(#inicio) {
 .chatgpt-guide-link {
   display: block;
   width: fit-content;
-  margin: 12px auto 0;
+  margin-top: 12px;
+  margin-right: auto;
+  margin-left: auto;
   color: var(--blue);
   font-size: 14px;
   font-weight: 600;
@@ -3237,7 +3239,7 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
 
 /* Match the full-color illustrations in the capabilities section. */
 #como-funciona .step-symbol {
-  --onboarding-icon-size: 80px;
+  --onboarding-icon-size: 64px;
   width: var(--onboarding-icon-size);
   height: var(--onboarding-icon-size);
   margin-bottom: 20px;
@@ -3264,4 +3266,266 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
       radial-gradient(circle at 75% 50%, var(--yellow) 0 3px, transparent 4px);
     filter: none;
   }
+}
+
+/* The opening stage docks into the reserved mark at the head of the banner. */
+main section#ia-negocios.closing {
+  --one-inset: clamp(24px, 4.4vw, 60px);
+  --one-top: clamp(24px, 3.4vw, 42px);
+  --one-mark-width: 106px;
+  --one-mark-height: 124px;
+  --one-face-fill: radial-gradient(ellipse 68% 76% at 50% 43%, #fff 0% 58%, #fafbff 78%, #edf1ff 100%);
+  --one-face-rim: inset 0 0 0 1px rgb(74 93 168 / 8%), inset 0 0 36px rgb(92 112 205 / 12%);
+  position: relative;
+  display: block;
+  isolation: isolate;
+  padding: 0;
+  overflow: clip;
+  background: transparent;
+  box-shadow: none;
+}
+
+#ia-negocios .one-mind-intro {
+  position: absolute;
+  z-index: 2;
+  top: var(--one-top);
+  left: calc(50% - var(--one-mark-width) / 2);
+  display: block;
+  width: var(--one-mark-width);
+  height: var(--one-mark-height);
+  border: 0;
+  pointer-events: none;
+}
+
+#ia-negocios:is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 100%;
+}
+
+#ia-negocios .closing-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--one-top) var(--one-inset) clamp(38px, 5vw, 65px);
+  text-align: center;
+}
+
+#ia-negocios .one-mind-logo-slot {
+  width: var(--one-mark-width);
+  height: var(--one-mark-height);
+  margin-inline: auto;
+}
+
+#ia-negocios [data-one-mind-front] .closing-headline {
+  max-width: 100%;
+  margin: 4px auto 0;
+  color: #12163d;
+  font-size: clamp(15px, 4.5vw, 54px);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+#ia-negocios .closing-content > p {
+  max-width: 56ch;
+  margin: 20px auto 23px;
+  color: #22254c;
+}
+
+#ia-negocios .closing-content > .button {
+  min-height: 52px;
+  padding-inline: 23px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(105deg, #315cf2 0%, #6638ed 55%, #a43dcc 100%);
+  color: #fff;
+  box-shadow: 0 9px 24px rgb(90 46 196 / 20%);
+}
+
+#ia-negocios .closing-content > .button:hover {
+  box-shadow: 0 12px 28px rgb(90 46 196 / 31%);
+}
+
+.closing-headline-idea {
+  display: inline-block;
+}
+
+#ia-negocios {
+  --one-idea-animation: closing-idea-arrive;
+  --one-result-animation: closing-result-dissolve;
+}
+
+#ia-negocios[data-idea-entrance="soft"] { --one-idea-animation: closing-result-dissolve; }
+#ia-negocios[data-idea-entrance="focus"] { --one-idea-animation: closing-result-focus; }
+#ia-negocios[data-idea-entrance="typing"] { --one-idea-animation: none; }
+
+#ia-negocios[data-headline-entrance="focus"] {
+  --one-result-animation: closing-result-focus;
+}
+
+#ia-negocios[data-headline-entrance="rise"] {
+  --one-result-animation: closing-result-rise;
+}
+
+#ia-negocios[data-headline-entrance="typing"] {
+  --one-result-animation: none;
+}
+
+.closing-headline-result {
+  display: inline-block;
+  color: #5126ad;
+}
+
+.closing-headline-result > span {
+  display: block;
+}
+
+/* Isolate the actual banner inside the opt-in comparison preview. */
+main:has(#ia-negocios[data-banner-preview]) {
+  padding-top: 0;
+}
+
+main:has(#ia-negocios[data-banner-preview]) > :not(.post-pricing-background),
+.post-pricing-background:has(#ia-negocios[data-banner-preview]) > :not(#ia-negocios) {
+  display: none;
+}
+
+main:has(#ia-negocios[data-banner-preview]) > .post-pricing-background {
+  display: flow-root;
+  padding-block: 20px;
+  background: transparent;
+}
+
+main section#ia-negocios.closing[data-banner-preview] {
+  margin-block: 0;
+}
+
+html:has(#ia-negocios[data-banner-preview="timeline"]) {
+  background: transparent;
+  overflow: hidden;
+}
+
+html:has(#ia-negocios[data-banner-preview="timeline"]) body { background: transparent; }
+html:has(#ia-negocios[data-banner-preview="timeline"]) nextjs-portal { display: none; }
+
+main:has(#ia-negocios[data-banner-preview="timeline"]) > .post-pricing-background { padding: 0; }
+
+main section#ia-negocios.closing[data-banner-preview="timeline"] {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+#ia-negocios[data-banner-phase="comparison-reset"] .closing-headline {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #ia-negocios[data-banner-phase="title"] [data-one-mind-front]::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 40% 55% at 50% 39%, rgb(104 103 235 / 10%), transparent 75%);
+    animation: closing-handoff-light 1040ms ease-in-out both;
+  }
+
+  #ia-negocios:is([data-banner-phase="intro"], [data-banner-phase="docking"]) .closing-content:not(:focus-within) {
+    opacity: 0;
+  }
+
+  #ia-negocios:is([data-banner-phase="title"], [data-banner-phase="lifting"]) [data-one-mind-front] .closing-headline {
+    translate: 0 var(--one-title-offset, 0px);
+  }
+
+  #ia-negocios:is([data-banner-phase="title"], [data-banner-phase="lifting"]) .closing-content:not(:focus-within) > :is(p, .button) {
+    opacity: 0;
+  }
+}
+
+#ia-negocios.closing[data-intro-paused] [data-one-mind-front]::before,
+#ia-negocios.closing[data-intro-paused] .closing-content * {
+  animation-play-state: paused;
+}
+
+/* The comparison also plays on explicit request with reduced motion enabled. */
+#ia-negocios :is([data-outro-headline], :is([data-banner-phase="title"], [data-banner-phase="lifting"], [data-banner-phase="settled"], [data-banner-phase="revealed"], [data-banner-phase="comparison"]) [data-one-mind-front] .closing-headline) .closing-headline-idea {
+  animation-name: var(--one-idea-animation);
+  animation-duration: 740ms;
+  animation-timing-function: cubic-bezier(.24, .62, .26, 1);
+  animation-fill-mode: both;
+}
+
+#ia-negocios :is([data-outro-headline], :is([data-banner-phase="title"], [data-banner-phase="lifting"], [data-banner-phase="settled"], [data-banner-phase="revealed"], [data-banner-phase="comparison"]) [data-one-mind-front] .closing-headline) .closing-headline-result > span {
+  animation-name: var(--one-result-animation);
+  animation-duration: 740ms;
+  animation-timing-function: cubic-bezier(.24, .62, .26, 1);
+  animation-delay: var(--one-phrase-delay);
+  animation-fill-mode: both;
+}
+
+#ia-negocios[data-idea-entrance="typing"] :is([data-outro-headline], :is([data-banner-phase="title"], [data-banner-phase="lifting"], [data-banner-phase="settled"], [data-banner-phase="revealed"], [data-banner-phase="comparison"]) [data-one-mind-front] .closing-headline) .closing-headline-idea > span,
+#ia-negocios[data-headline-entrance="typing"] :is([data-outro-headline], :is([data-banner-phase="title"], [data-banner-phase="lifting"], [data-banner-phase="settled"], [data-banner-phase="revealed"], [data-banner-phase="comparison"]) [data-one-mind-front] .closing-headline) .closing-headline-result > span > span {
+  animation-name: closing-result-dissolve;
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+#ia-negocios [data-outro-headline] span { animation-play-state: paused; }
+#ia-negocios [data-headline-pending="true"] { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  #ia-negocios [data-outro-headline] span { animation: none !important; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #ia-negocios[data-banner-phase="revealed"] .closing-content > p {
+    animation: closing-idea-arrive 520ms ease-out 1140ms both;
+  }
+
+  #ia-negocios[data-banner-phase="revealed"] .closing-content > .button {
+    animation: closing-idea-arrive 520ms ease-out 1320ms both;
+  }
+
+  #ia-negocios[data-banner-phase="settled"] .closing-content > p {
+    animation: closing-idea-arrive 480ms ease-out both;
+  }
+
+  #ia-negocios[data-banner-phase="settled"] .closing-content > .button {
+    animation: closing-idea-arrive 480ms ease-out 150ms both;
+  }
+}
+
+@keyframes closing-idea-arrive {
+  from { opacity: 0; transform: translateY(.24em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes closing-handoff-light {
+  0%, 100% { opacity: 0; }
+  28% { opacity: 0.75; }
+}
+
+@keyframes closing-result-dissolve {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes closing-result-focus {
+  from { opacity: 0; filter: blur(.16em); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@keyframes closing-result-rise {
+  from { opacity: 0; transform: translateY(.22em); clip-path: inset(45% -.1em -.2em); }
+  to { opacity: 1; transform: translateY(0); clip-path: inset(-.12em -.1em -.2em); }
+}
+
+@media (max-width: 760px) {
+  #ia-negocios:is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
+    top: 9%;
+    height: min(70%, 88vw);
+  }
+
 }
