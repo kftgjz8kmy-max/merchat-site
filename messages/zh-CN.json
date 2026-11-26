@@ -2358,6 +2358,8 @@
     "oneMindConfirmed": "预约已确认",
     "oneMindPause": "暂停动画",
     "oneMindFullscreen": "全屏观看视频",
+    "oneMindBannerFullscreen": "全屏观看动画",
+    "oneMindExitFullscreen": "退出全屏",
     "oneMindMuteMusic": "关闭音乐",
     "oneMindPlayWithMusic": "从头开始播放并开启音乐",
     "oneMindResume": "继续动画",

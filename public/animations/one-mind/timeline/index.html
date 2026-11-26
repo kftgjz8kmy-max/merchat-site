@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vista previa de animación · ONE MIND</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      color: #15183d;
+      background: #f8f8fc;
+      font: 16px/1.45 system-ui, sans-serif;
+      margin: 0;
+    }
+    main { width: min(1120px, calc(100% - 32px)); margin: auto; padding-block: clamp(24px, 6vw, 64px); }
+    h1 { font-size: clamp(1.45rem, 4vw, 2.2rem); letter-spacing: -.035em; margin: 0 0 18px; }
+    .player { overflow: hidden; border: 1px solid #e0ddef; border-radius: 22px; background: #fff; box-shadow: 0 14px 36px #24165b0b; }
+    #preview { display: block; width: 100%; height: 492px; border: 0; background: #f6f5fc; }
+    button { cursor: pointer; color: inherit; font: inherit; }
+    button:focus-visible, input:focus-visible { outline: 2px solid #7450bd; outline-offset: 3px; }
+    button:disabled { cursor: default; opacity: .55; }
+    .transport { display: flex; gap: 8px; align-items: center; padding: 12px 16px; }
+    .icon-button {
+      border: 1px solid #e1d9f2;
+      background: #f7f3ff;
+      color: #5126ad;
+      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+    .icon-button:hover:enabled { background: #ece3fc; }
+    .icon-button svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    #play { background: #5126ad; color: white; border-color: #5126ad; }
+    #play:hover:enabled { background: #3d1a86; }
+    #play [data-icon="play"], #play [data-icon="pause"] { display: none; }
+    #play[data-playing="false"] [data-icon="play"], #play[data-playing="true"] [data-icon="pause"] { display: block; }
+    #play [data-icon="play"] { fill: currentColor; }
+    input[type="range"] {
+      --played: 0%;
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      width: 100%;
+      min-width: 0;
+      height: 38px;
+      background: transparent;
+      cursor: pointer;
+      margin: 0 4px;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 5px;
+      border-radius: 99px;
+      background: linear-gradient(to right, #7040c7 var(--played), #e6dff2 var(--played));
+    }
+    input[type="range"]::-moz-range-track { height: 5px; border-radius: 99px; background: #e6dff2; }
+    input[type="range"]::-moz-range-progress { height: 5px; border-radius: 99px; background: #7040c7; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      margin-top: -5px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #6135b1;
+      background: #6135b1;
+    }
+    input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #6135b1; background: #6135b1; }
+    output { color: #514668; font-size: .8rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .chapters { display: flex; gap: 7px; flex-wrap: wrap; padding: 0 16px 15px; }
+    .chapters button { padding: 5px 10px; border: 1px solid #eee8f6; border-radius: 9px; background: #faf8fe; font-size: .82rem; }
+    .chapters button:hover, .chapters button[aria-current="step"] { border-color: #d7c8f0; background: #f0e8fb; color: #5126ad; }
+    #error { color: #9a2844; font-size: .87rem; margin: 0; padding: 0 16px 14px; }
+    @media (max-width: 540px) {
+      main { width: calc(100% - 22px); }
+      .player { border-radius: 15px; }
+      .transport { gap: 5px; padding: 8px 10px; flex-wrap: wrap; }
+      .chapters { padding-inline: 10px; }
+      .icon-button { width: 38px; height: 38px; }
+      output { font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ONE MIND · Vista previa de animación</h1>
+    <div class="player">
+      <iframe id="preview" src="/?one-mind=timeline#ia-negocios" title="Animación en vivo de ONE MIND" allow="autoplay; fullscreen"></iframe>
+      <div class="transport">
+        <button type="button" class="icon-button" id="play" aria-label="Reproducir" title="Reproducir" data-playing="false" disabled>
+          <svg data-icon="play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg>
+          <svg data-icon="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14m6-14v14"/></svg>
+        </button>
+        <button type="button" class="icon-button" id="reset" aria-label="Volver al inicio" title="Volver al inicio" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14m13-13-9 6 9 6Z"/></svg>
+        </button>
+        <input type="range" id="position" aria-label="Capítulo de la animación" min="0" max="5" value="0" step="1" disabled>
+        <output id="clock" for="position" aria-live="off">Logo</output>
+      </div>
+      <div class="chapters" id="chapters" role="group" aria-label="Escenas de la animación"></div>
+      <p id="error" hidden role="status"></p>
+    </div>
+  </main>
+  <script>
+    const preview = document.querySelector("#preview");
+    const play = document.querySelector("#play");
+    const reset = document.querySelector("#reset");
+    const position = document.querySelector("#position");
+    const status = document.querySelector("#clock");
+    const chapters = document.querySelector("#chapters");
+    const error = document.querySelector("#error");
+    const scenes = [
+      { id: "logo", label: "Logo" },
+      { id: "store", label: "Sitios Interactivos" },
+      { id: "booking", label: "Aplicaciones Web" },
+      { id: "chat", label: "Agentes" },
+      { id: "video", label: "Contenido IA" },
+      { id: "outro", label: "Cierre" },
+    ];
+
+    let banner;
+    let observer;
+    let resizeObserver;
+    let run = 0;
+    const playback = () => banner?.querySelector("[data-playback]");
+
+    function reload(autoplay = false) {
+      observer?.disconnect();
+      resizeObserver?.disconnect();
+      banner = undefined;
+      sync();
+      preview.src = `/?one-mind=timeline&run=${++run}${autoplay ? "&play=1" : ""}#ia-negocios`;
+    }
+
+    function jump(index) {
+      const scene = scenes[index];
+      if (!scene || !banner?.hasAttribute("data-preview-ready")) return;
+      if (scene.id === "logo") {
+        reload(playback()?.dataset.playback === "playing");
+      } else {
+        banner.dispatchEvent(new preview.contentWindow.CustomEvent("one-mind-preview-chapter", { detail: scene.id }));
+      }
+    }
+
+    for (const [index, scene] of scenes.entries()) {
+      scene.button = document.createElement("button");
+      scene.button.type = "button";
+      scene.button.textContent = scene.label;
+      scene.button.addEventListener("click", () => jump(index));
+      chapters.append(scene.button);
+    }
+
+    function sync() {
+      const ready = banner?.hasAttribute("data-preview-ready");
+      const open = banner?.dataset.showcaseOpen === "true";
+      const control = playback();
+      const playing = control?.dataset.playback === "playing";
+      const ended = control?.dataset.playback === "ended";
+      play.disabled = !ready || !(open || banner.hasAttribute("data-preview-intro-ready"));
+      reset.disabled = position.disabled = !ready;
+      play.dataset.playing = String(playing);
+      play.title = playing ? "Pausar" : ended ? "Volver a reproducir" : "Reproducir";
+      play.setAttribute("aria-label", play.title);
+
+      const chapterId = !open ? "logo" : banner.querySelector('[data-outro-active="true"]') ? "outro"
+        : banner.querySelector('[data-preview-chapter][aria-pressed="true"]')?.dataset.previewChapter;
+      const active = Math.max(0, scenes.findIndex(scene => scene.id === chapterId));
+      position.value = String(active);
+      position.style.setProperty("--played", `${active / (scenes.length - 1) * 100}%`);
+      position.setAttribute("aria-valuetext", scenes[active].label);
+      status.value = scenes[active].label;
+      for (const [index, scene] of scenes.entries()) {
+        scene.button.disabled = !ready;
+        if (index === active) scene.button.setAttribute("aria-current", "step");
+        else scene.button.removeAttribute("aria-current");
+      }
+    }
+
+    function connect() {
+      observer?.disconnect();
+      resizeObserver?.disconnect();
+      try {
+        banner = preview.contentDocument.querySelector("#ia-negocios");
+      } catch {
+        banner = undefined;
+      }
+      if (!banner) {
+        error.textContent = "No se pudo abrir la animación en vivo.";
+        error.hidden = false;
+        sync();
+        return;
+      }
+      error.hidden = true;
+      const fitPreview = () => { preview.style.height = `${Math.ceil(banner.getBoundingClientRect().height)}px`; };
+      resizeObserver = new ResizeObserver(fitPreview);
+      resizeObserver.observe(banner);
+      observer = new MutationObserver(sync);
+      observer.observe(banner, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        attributeFilter: ["data-preview-ready", "data-preview-intro-ready", "data-playback", "data-showcase-open", "data-outro-active", "aria-pressed"],
+      });
+      fitPreview();
+      sync();
+    }
+
+    play.addEventListener("click", () => playback()?.click());
+    reset.addEventListener("click", () => reload());
+    position.addEventListener("input", () => jump(position.valueAsNumber));
+    preview.addEventListener("load", connect);
+    sync();
+    if (preview.contentDocument?.getElementById("ia-negocios")) connect();
+  </script>
+</body>
+</html>

@@ -2358,6 +2358,8 @@
     "oneMindConfirmed": "Appointment confirmed",
     "oneMindPause": "Pause animation",
     "oneMindFullscreen": "Watch video fullscreen",
+    "oneMindBannerFullscreen": "Watch animation fullscreen",
+    "oneMindExitFullscreen": "Exit fullscreen",
     "oneMindMuteMusic": "Mute music",
     "oneMindPlayWithMusic": "Play from the beginning with music",
     "oneMindResume": "Resume animation",
