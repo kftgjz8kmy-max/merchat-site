@@ -712,7 +712,7 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
 }
 
 export function OneMindShowcase({
-  sectionRef, open, introFinished, introActive, introPaused, onToggleIntro, onOpen, onReplay,
+  sectionRef, open, introFinished, introActive, introPaused, onToggleIntro, onStartWithAudio, onOpen, onReplay,
   ui, locale, contactUrl, children,
 }: {
   sectionRef: RefObject<HTMLElement | null>;
@@ -721,6 +721,7 @@ export function OneMindShowcase({
   introActive: boolean;
   introPaused: boolean;
   onToggleIntro: () => void;
+  onStartWithAudio: () => void;
   onOpen: () => void;
   onReplay: () => void;
   ui: LandingUi;
@@ -740,6 +741,9 @@ export function OneMindShowcase({
   const musicChapterSeek = useRef(false);
   const chapterLogo = useRef<HTMLImageElement>(null);
   const [sound, setSound] = useState<"on" | "off" | "blocked">("on");
+  const [sharedStart, setSharedStart] = useState<"normal" | "pending" | "blocked" | "started">("normal");
+  const startingSharedAudio = useRef(false);
+  const awaitingSharedAudio = sharedStart === "pending" || sharedStart === "blocked";
   const introHold = useRef(240);
   const { cue, elapsed, playing, atEnd, run, seek, setPlaying } = useSceneClock(open && examplesReady, visible && activeTab);
   const closing = open && cue >= closingStart;
@@ -822,7 +826,12 @@ export function OneMindShowcase({
     const section = sectionRef.current;
     if (!section) return;
     if (!("IntersectionObserver" in window)) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.intersectionRatio >= 0.4), { threshold: 0.4 });
+    const shared = new URLSearchParams(location.search).get("one-mind") === "fullscreen";
+    const observer = new IntersectionObserver(([entry]) => {
+      const inView = entry.intersectionRatio >= 0.4;
+      if (inView && shared) setSharedStart(current => current === "normal" ? "pending" : current);
+      setVisible(inView);
+    }, { threshold: 0.4 });
     observer.observe(section);
     const tabVisibility = () => setActiveTab(!document.hidden);
     tabVisibility();
@@ -844,6 +853,24 @@ export function OneMindShowcase({
       if (error.name === "NotAllowedError") setSound(current => current === "on" ? "blocked" : current);
     });
   }, []);
+
+  const startSharedAnimation = useCallback(() => {
+    const audio = soundtrack.current;
+    if (!audio || startingSharedAudio.current) return;
+
+    startingSharedAudio.current = true;
+    void audio.play().then(() => {
+      onStartWithAudio();
+      setSharedStart("started");
+    }, () => {
+      startingSharedAudio.current = false;
+      setSharedStart("blocked");
+    });
+  }, [onStartWithAudio]);
+
+  useEffect(() => {
+    if (sharedStart === "pending" && visible && activeTab) startSharedAnimation();
+  }, [sharedStart, visible, activeTab, startSharedAnimation]);
 
   const syncShowcaseMusic = useEffectEvent(() => {
     const audio = soundtrack.current;
@@ -873,9 +900,10 @@ export function OneMindShowcase({
   }, [open, examplesReady, run, sound]);
 
   useEffect(() => {
+    if (awaitingSharedAudio) return;
     if (sound === "on" && visible && activeTab && playback === "playing") playMusic();
     else soundtrack.current?.pause();
-  }, [sound, visible, activeTab, playback, playMusic]);
+  }, [awaitingSharedAudio, sound, visible, activeTab, playback, playMusic]);
 
   useEffect(() => {
     if (!introFinished || introPaused || open || !visible || !activeTab) return;
@@ -1077,7 +1105,13 @@ export function OneMindShowcase({
         {open && scene === 2 && <ClosingScene time={closingTime} ui={ui} contactUrl={contactUrl} chapterLogo={chapterLogo} />}
       </div>
     </div>
-    <button type="button" className={`${styles.playback} ${styles.soundControl}`} aria-label={soundLabel} title={soundLabel} onClick={toggleSound}>
+    {sharedStart === "blocked" && <div className={styles.sharedStart}>
+      <button type="button" onClick={startSharedAnimation}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7z" /></svg>
+        {ui.oneMindPlayWithMusic}
+      </button>
+    </div>}
+    <button type="button" className={`${styles.playback} ${styles.soundControl}`} aria-label={soundLabel} title={soundLabel} hidden={awaitingSharedAudio} onClick={toggleSound}>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4 9v6h4l5 4V5L8 9H4Z" />
         {sound === "on" ? <path d="M16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10" /> : <path d="m16 10 5 5m0-5-5 5" />}
@@ -1087,6 +1121,7 @@ export function OneMindShowcase({
       type="button"
       className={styles.playback}
       data-playback={playback}
+      hidden={awaitingSharedAudio}
       aria-controls="ia-negocios"
       aria-label={playbackLabel}
       title={playbackLabel}

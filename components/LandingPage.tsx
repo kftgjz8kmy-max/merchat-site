@@ -92,7 +92,7 @@ function useOneMindBanner() {
     section.dataset.bannerPhase = "intro";
     let dock: Animation | undefined;
     let fallback: Animation | undefined;
-    let paused = timeline && introRun === 0 && options.get("play") !== "1";
+    let paused = introRun === 0 && (mode === "fullscreen" || (timeline && options.get("play") !== "1"));
     section.toggleAttribute("data-intro-paused", paused);
     const animations = new Set<Animation>();
 
@@ -527,6 +527,10 @@ export default function LandingPage() {
     setOneMindShowcaseOpen(false);
     restartIntro();
   }, [restartIntro]);
+  const startOneMindWithAudio = useCallback(() => {
+    if (introToggle.current) introToggle.current();
+    else restartIntro();
+  }, [introToggle, restartIntro]);
   const locale = useLocale() as AppLocale;
   const localizedLanding = getLanding(locale);
   const ui = getUi(locale);
@@ -885,6 +889,7 @@ export default function LandingPage() {
           introActive={introActive}
           introPaused={introPaused}
           onToggleIntro={() => introToggle.current?.()}
+          onStartWithAudio={startOneMindWithAudio}
           onReplay={replayOneMind}
           onOpen={openOneMindShowcase}
           ui={ui}
