@@ -8,10 +8,16 @@
     html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: transparent; }
     canvas, svg { position: absolute; inset: 0; width: 100%; height: 100%; }
     svg { inset: 6.8% 0; height: 86.4%; }
+    .waiting-for-rebuild svg { visibility: hidden; }
     .playing svg { inset: 0; height: 100%; }
     canvas { pointer-events: none; }
     @media (prefers-reduced-motion: reduce) { canvas { display: none; } }
   </style>
+  <script>
+    if (new URLSearchParams(location.search).has("rebuild")) {
+      document.documentElement.classList.add("waiting-for-rebuild");
+    }
+  </script>
   <script defer src="intro.js"></script>
 </head>
 <body>

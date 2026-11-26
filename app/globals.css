@@ -3297,6 +3297,27 @@ main section#ia-negocios.closing {
   pointer-events: none;
 }
 
+main section#ia-negocios.closing:is(:fullscreen, [data-banner-expanded], [data-banner-preview="fullscreen"]) {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  overflow: clip;
+  background: var(--one-face-fill);
+  --one-control-end: max(clamp(8px, 1.6vw, 20px), env(safe-area-inset-right));
+  --one-control-bottom: max(clamp(8px, 1.6vw, 20px), env(safe-area-inset-bottom));
+}
+
+main section#ia-negocios.closing[data-banner-expanded] {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+}
+
+html[data-one-mind-expanded] { overflow: hidden; }
+
 #ia-negocios:is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
   inset: 0 auto auto 0;
   width: 100%;
@@ -3379,7 +3400,7 @@ main section#ia-negocios.closing {
   display: block;
 }
 
-/* Isolate the actual banner inside the opt-in comparison preview. */
+/* Isolate the actual banner in previews and shared playback. */
 main:has(#ia-negocios[data-banner-preview]) {
   padding-top: 0;
 }
@@ -3399,15 +3420,17 @@ main section#ia-negocios.closing[data-banner-preview] {
   margin-block: 0;
 }
 
-html:has(#ia-negocios[data-banner-preview="timeline"]) {
+html:has(#ia-negocios:is([data-banner-preview="timeline"], [data-banner-preview="fullscreen"])) {
   background: transparent;
   overflow: hidden;
 }
 
-html:has(#ia-negocios[data-banner-preview="timeline"]) body { background: transparent; }
-html:has(#ia-negocios[data-banner-preview="timeline"]) nextjs-portal { display: none; }
+html:has(#ia-negocios:is([data-banner-preview="timeline"], [data-banner-preview="fullscreen"])) body { background: transparent; }
+html:has(#ia-negocios:is([data-banner-preview="timeline"], [data-banner-preview="fullscreen"])) nextjs-portal { display: none; }
 
-main:has(#ia-negocios[data-banner-preview="timeline"]) > .post-pricing-background { padding: 0; }
+main:has(#ia-negocios:is([data-banner-preview="timeline"], [data-banner-preview="fullscreen"])) > .post-pricing-background { padding: 0; }
+
+body:has(#ia-negocios[data-banner-preview="fullscreen"]) .header { display: none; }
 
 main section#ia-negocios.closing[data-banner-preview="timeline"] {
   width: 100%;
@@ -3528,4 +3551,8 @@ main section#ia-negocios.closing[data-banner-preview="timeline"] {
     height: min(70%, 88vw);
   }
 
+  #ia-negocios:is(:fullscreen, [data-banner-expanded], [data-banner-preview="fullscreen"]):is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
+    top: calc((100% - min(82%, 118vw)) / 2);
+    height: min(82%, 118vw);
+  }
 }

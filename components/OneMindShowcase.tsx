@@ -21,8 +21,12 @@ const clips = [
   { slug: "production-cars", group: "production", nameKey: "oneMindCarsClip" },
 ] as const;
 const clipDuration = 3000;
-const clipEnds = clips.map((_, index) => (index + 1) * clipDuration);
-const galleryEnd = clips.length * clipDuration;
+const lastClipDuration = 4500;
+const galleryPortraitHold = 2500;
+const galleryZoomDuration = 820;
+const galleryOpeningDuration = galleryPortraitHold + galleryZoomDuration;
+const galleryEnd = galleryOpeningDuration + (clips.length - 1) * clipDuration + lastClipDuration;
+const clipEnds = clips.map((_, index) => index === clips.length - 1 ? galleryEnd : galleryOpeningDuration + (index + 1) * clipDuration);
 const bookingStart = 3250;
 const bookingSwipeDuration = 540;
 const chapterFadeDuration = 440;
@@ -55,8 +59,8 @@ const sceneStarts = [bookingStart + 4400 + chapterFadeDuration, chatHistoryStart
 }, [0]);
 const sceneContentEnds = sceneStarts.slice(1).map(end => end - chapterFadeDuration);
 const closingStart = sceneStarts[2] + demoStarts[2] + galleryEnd + 1000;
-const closingGalleryFadeStart = closingStart - 740;
-const closingGalleryFadeEnd = closingStart - 90;
+const closingGallerySlideStart = closingStart - 740;
+const closingGallerySlideEnd = closingStart - 90;
 // The opening renderer finishes lighting the contour at 6,200 ms.
 const closingRebuildEnd = 6200;
 const closingPlaceEnd = closingRebuildEnd + 540;
@@ -65,17 +69,16 @@ const closingHeadlineStart = closingPlaceEnd + oneMindHeadlineTiming.leadIn;
 const closingLiftStart = closingHeadlineStart + oneMindHeadlineTiming.hold;
 const closingLiftEnd = closingLiftStart + oneMindHeadlineTiming.lift;
 const closingBodyStart = closingLiftEnd + 120;
-const closingBodyEnd = closingBodyStart + 440;
+const closingBodyEnd = closingBodyStart + 1500;
 const closingActionStart = closingBodyEnd + 650;
 const closingActionPeak = closingActionStart + 270;
 const closingCopyEnd = closingActionStart + 480;
 const closingPulseStart = closingCopyEnd + 200;
 const closingPulseEnd = closingPulseStart + 1210;
 const showcaseEnd = closingStart + closingPulseEnd + 1;
-const soundtrackEnd = 79.46;
-const closingGalleryFadeCues = Array.from(
-  { length: Math.ceil((closingGalleryFadeEnd - closingGalleryFadeStart) / 16) },
-  (_, index) => closingGalleryFadeStart + index * 16,
+const closingGallerySlideCues = Array.from(
+  { length: Math.ceil((closingGallerySlideEnd - closingGallerySlideStart) / 16) },
+  (_, index) => closingGallerySlideStart + index * 16,
 );
 const closingCues = [
   ...Array.from({ length: Math.ceil(closingPulseEnd / 16) }, (_, index) => index * 16),
@@ -86,26 +89,25 @@ const cues = [...demoCues.flatMap((beats, index) => [
   sceneStarts[index] + titleDock[index],
   ...beats.map(beat => sceneStarts[index] + demoStarts[index] + beat),
   ...(index < 2 ? [sceneContentEnds[index]] : []),
-]), ...closingGalleryFadeCues, closingGalleryFadeEnd, ...closingCues.map(at => closingStart + at)];
+]), ...closingGallerySlideCues, closingGallerySlideEnd, ...closingCues.map(at => closingStart + at)];
 const mediaPath = "/animations/one-mind/showcase/";
 const dates = Array.from({ length: 7 }, (_, index) => new Date(Date.UTC(2026, 4, 18 + index)));
 const times = ["09:00", "10:30", "14:00"];
 
 function useSceneClock(open: boolean, visible: boolean) {
   const elapsed = useRef(0);
-  const limit = useRef(showcaseEnd);
   const [cue, setCue] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const [run, setRun] = useState(0);
 
-  function seek(scene: number, isolated: boolean, reducedMotion: boolean, exampleOffset = 0) {
+  function seek(scene: number, reducedMotion: boolean, exampleOffset = 0) {
     const closing = scene === 3;
     const end = closing || scene === 2 ? showcaseEnd : sceneContentEnds[scene];
-    limit.current = isolated ? end : showcaseEnd;
     elapsed.current = reducedMotion ? end - 1 : closing ? closingStart : sceneStarts[scene];
     if (!reducedMotion && !closing && exampleOffset) elapsed.current += demoStarts[scene] + exampleOffset;
     if (reducedMotion && scene === 0 && !exampleOffset) elapsed.current = demoStarts[0] + storeAdded;
+    if (reducedMotion && scene === 2) elapsed.current = sceneStarts[2] + demoStarts[2];
     setCue(cues.findLast(at => at <= elapsed.current) ?? 0);
     setAtEnd(reducedMotion);
     setPlaying(!reducedMotion);
@@ -119,14 +121,14 @@ function useSceneClock(open: boolean, visible: boolean) {
     let previousCue = cues.findLast(at => at <= elapsed.current);
 
     function advance(now: number) {
-      elapsed.current = Math.min(limit.current - 1, elapsed.current + (previous === undefined ? 0 : now - previous));
+      elapsed.current = Math.min(showcaseEnd - 1, elapsed.current + (previous === undefined ? 0 : now - previous));
       previous = now;
       const nextCue = cues.findLast(at => at <= elapsed.current);
       if (nextCue !== previousCue) {
         previousCue = nextCue;
         setCue(nextCue ?? 0);
       }
-      if (elapsed.current >= limit.current - 1) {
+      if (elapsed.current >= showcaseEnd - 1) {
         setPlaying(false);
         setAtEnd(true);
       } else {
@@ -138,7 +140,7 @@ function useSceneClock(open: boolean, visible: boolean) {
     return () => cancelAnimationFrame(frame);
   }, [open, visible, playing, run]);
 
-  return { cue, playing, atEnd, run, seek, setPlaying };
+  return { cue, elapsed, playing, atEnd, run, seek, setPlaying };
 }
 
 const storePhotos = [mediaPath + "urban-sneaker-profile.webp", mediaPath + "urban-sneaker-angle.webp"];
@@ -403,16 +405,43 @@ type FullscreenVideo = HTMLVideoElement & {
   webkitEnterFullscreen?: () => void;
 };
 
-function VideoScene({ ui, active, visible, onSelect, onBrowse, onEnd, onExpand, run }: {
-  ui: LandingUi; active: number; visible: boolean;
+function VideoScene({ ui, active, visible, animateOpening, onSelect, onBrowse, onEnd, onExpand, run }: {
+  ui: LandingUi; active: number; visible: boolean; animateOpening: boolean;
   onSelect: (index: number) => void; onBrowse: () => void; onEnd: () => void; onExpand: () => void; run: number;
 }) {
   const showingAvatars = clips[active].group === "avatar";
+  const [openingFinished, setOpeningFinished] = useState(false);
+  const opening = animateOpening && !openingFinished && active === 0;
+  const chapterRef = useRef<HTMLDivElement>(null);
+  const openingClipRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<FullscreenVideo>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const positioned = useRef(false);
   const browsing = useRef(false);
   const scrollEnd = useRef<number | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    const chapter = chapterRef.current;
+    const clip = openingClipRef.current;
+    if (!opening || !chapter || !clip) return;
+
+    function measure() {
+      if (!chapter || !clip) return;
+      const area = chapter.getBoundingClientRect();
+      const slot = clip.getBoundingClientRect();
+      const focus = Number(getComputedStyle(clip).getPropertyValue("--avatar-focus"));
+      chapter.style.setProperty("--opening-width", `${area.width / focus}px`);
+      chapter.style.setProperty("--opening-height", `${area.height / focus}px`);
+      chapter.style.setProperty("--opening-x", `${area.left + area.width / 2 - slot.left - slot.width / 2}px`);
+      chapter.style.setProperty("--opening-y", `${area.top + area.height / 2 - slot.top - slot.height / 2}px`);
+    }
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(chapter);
+    observer.observe(clip);
+    return () => observer.disconnect();
+  }, [opening]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -494,18 +523,23 @@ function VideoScene({ ui, active, visible, onSelect, onBrowse, onEnd, onExpand, 
   }
 
   return (
-    <div className={styles.videoChapter}>
+    <div ref={chapterRef} className={styles.videoChapter} data-gallery-opening={opening}
+      style={opening ? {
+        "--gallery-portrait-hold": `${galleryPortraitHold}ms`,
+        "--gallery-zoom-duration": `${galleryZoomDuration}ms`,
+      } as CSSProperties : undefined}>
       <div className={styles.videoLabels}>
         <h3 data-current={showingAvatars} aria-hidden={!showingAvatars}>{ui.oneMindAvatarTitle}</h3>
         <h3 data-current={!showingAvatars} aria-hidden={showingAvatars}>{ui.oneMindProductionTitle}</h3>
       </div>
       <div className={styles.carousel}>
-        <button className={styles.avatarArrow} type="button" aria-label={ui.oneMindPreviousAvatar} disabled={active === 0} onClick={() => choose(active - 1)}>
+        <button className={styles.avatarArrow} type="button" aria-label={ui.oneMindPreviousAvatar} inert={opening} disabled={active === 0} onClick={() => choose(active - 1)}>
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg>
         </button>
         <div
           ref={trackRef}
           className={styles.gallery}
+          inert={opening}
           role="group"
           aria-label={ui.oneMindVideos}
           onScroll={handleScroll}
@@ -518,10 +552,13 @@ function VideoScene({ ui, active, visible, onSelect, onBrowse, onEnd, onExpand, 
             return (
               <div
                 key={clip.slug}
+                ref={index === 0 ? openingClipRef : undefined}
                 className={styles.clip}
                 data-selected={active === index}
               >
-                <div className={styles.clipVisual}>
+                <div className={styles.clipVisual} onAnimationEnd={opening && index === 0 ? event => {
+                  if (event.target === event.currentTarget) setOpeningFinished(true);
+                } : undefined}>
                   <button className={styles.clipSelect} type="button" aria-label={`${ui.oneMindPlayClip} ${label}`}
                     aria-pressed={active === index} onClick={() => choose(index)} />
                   {active === index ? (
@@ -540,7 +577,7 @@ function VideoScene({ ui, active, visible, onSelect, onBrowse, onEnd, onExpand, 
             );
           })}
         </div>
-        <button className={styles.avatarArrow} type="button" aria-label={ui.oneMindNextAvatar} disabled={active === clips.length - 1} onClick={() => choose(active + 1)}>
+        <button className={styles.avatarArrow} type="button" aria-label={ui.oneMindNextAvatar} inert={opening} disabled={active === clips.length - 1} onClick={() => choose(active + 1)}>
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg>
         </button>
       </div>
@@ -568,12 +605,13 @@ export function ClosingHeadline({ title, emphasis, className, headline, time }: 
   title: string; emphasis: string; className?: string; headline?: RefObject<HTMLHeadingElement | null>;
   time?: number;
 }) {
+  const animationTime = time === undefined ? undefined : Math.min(Math.max(0, time), oneMindHeadlineTiming.hold);
   useLayoutEffect(() => {
-    if (time === undefined || !headline?.current) return;
+    if (animationTime === undefined || !headline?.current) return;
     for (const animation of headline.current.getAnimations({ subtree: true })) {
-      animation.currentTime = Math.max(0, time);
+      animation.currentTime = animationTime;
     }
-  }, [headline, time]);
+  }, [headline, animationTime]);
 
   return (
     <h2 ref={headline} className={`closing-headline${className ? ` ${className}` : ""}`}
@@ -597,20 +635,10 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
   const headline = useRef<HTMLHeadingElement>(null);
   const [logoReady, setLogoReady] = useState(false);
   const started = time >= 0;
-  useLayoutEffect(() => {
-    const target = stage.current;
-    const title = headline.current;
-    if (!target || !title || !started) return;
-    const measure = () => {
-      target.style.setProperty("--slogan-space", `${title.offsetHeight / 2 + 10}px`);
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(target);
-    observer.observe(title);
-    return () => observer.disconnect();
-  }, [started]);
-  useLayoutEffect(() => {
+  const logoTime = time >= closingPlaceEnd && time < closingLiftStart ? closingPlaceEnd
+    : time >= closingLiftEnd && time < closingPulseStart ? closingLiftEnd
+    : time;
+  const syncLogo = useEffectEvent(() => {
     if (!logoReady || !started || !stage.current || !pose.current || !chapterLogo.current) return;
     const area = stage.current.getBoundingClientRect();
     const mark = pose.current.getBoundingClientRect();
@@ -623,12 +651,32 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
       x: (mark.left + mark.width / 2 - area.left) / area.width,
       y: (mark.top + mark.height / 2 - area.top) / area.height,
       width: mark.width / area.width,
-      originX: (origin.left + origin.width * .8 - area.left) / area.width,
-      originY: (origin.top + origin.height * .4 - area.top) / area.height,
+      originX: (origin.left + origin.width * .46 - area.left) / area.width,
+      originY: (origin.top + origin.height * .39 - area.top) / area.height,
+      originWidth: origin.width / area.width,
     }, "*");
-  }, [chapterLogo, logoReady, started, time]);
+  });
+  useLayoutEffect(() => {
+    const target = stage.current;
+    const title = headline.current;
+    if (!target || !title || !started) return;
+    const measure = () => {
+      target.style.setProperty("--slogan-space", `${title.offsetHeight / 2 + 10}px`);
+      syncLogo();
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(target);
+    observer.observe(title);
+    return () => observer.disconnect();
+  }, [started]);
+  useLayoutEffect(() => {
+    syncLogo();
+  }, [logoReady, started, logoTime]);
 
-  const reveal = closingProgress(time, closingBodyStart, closingBodyEnd);
+  const bodyReveal = closingProgress(time, closingBodyStart, closingBodyEnd);
+  const bodySweeping = bodyReveal > 0 && bodyReveal < 1;
+  const bodyEdge = `${bodyReveal * 118 - 18}%`;
   const action = closingProgress(time, closingActionStart, closingActionStart + 190);
   const actionRise = closingProgress(time, closingActionStart, closingActionPeak);
   const actionSettle = closingProgress(time, closingActionPeak, closingCopyEnd);
@@ -640,7 +688,6 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
       style={{
         "--outro-place": closingProgress(time, closingRebuildEnd, closingPlaceEnd),
         "--outro-lift": closingProgress(time, closingLiftStart, closingLiftEnd),
-        "--outro-white": closingProgress(time, 0, 650),
       } as CSSProperties}>
       <div ref={pose} className={styles.outroMark} aria-hidden="true" />
       <iframe ref={logo} className={styles.outroLogo} src="/animations/one-mind/index.html?rebuild=1"
@@ -649,7 +696,12 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
         <ClosingHeadline title={ui.closingTitle} emphasis={ui.closingEmphasis} className={styles.outroHeadline}
           headline={headline} time={time - closingHeadlineStart} />
         <div className={styles.outroDetails}>
-          <p style={{ opacity: reveal }} aria-hidden={reveal < 1}>{ui.closingBody}</p>
+          <p className={styles.outroBody} data-sweeping={bodySweeping}
+            style={{ visibility: bodyReveal === 0 ? "hidden" : undefined, "--body-edge": bodyEdge } as CSSProperties}
+            aria-hidden={bodyReveal < 1}>
+            <span className={styles.outroBodyInk}>{ui.closingBody}</span>
+            {bodySweeping && <span className={styles.outroBodyTrace} aria-hidden="true">{ui.closingBody}</span>}
+          </p>
           <div inert={time < closingCopyEnd} style={{ opacity: action, scale: actionScale, translate: `0 ${actionOffset}px` }}>
             <a href={contactUrl} className="button">{ui.closingCta}<span aria-hidden="true">→</span></a>
           </div>
@@ -682,13 +734,16 @@ export function OneMindShowcase({
   const [clipPlayback, setClipPlayback] = useState<"playing" | "paused" | "ended">("paused");
   const [clipRun, setClipRun] = useState(0);
   const [examplesReady, setExamplesReady] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const soundtrack = useRef<HTMLAudioElement>(null);
+  const musicChapterSeek = useRef(false);
   const chapterLogo = useRef<HTMLImageElement>(null);
   const [sound, setSound] = useState<"on" | "off" | "blocked">("on");
   const introHold = useRef(240);
-  const { cue, playing, atEnd, run, seek, setPlaying } = useSceneClock(open && examplesReady, visible && activeTab);
+  const { cue, elapsed, playing, atEnd, run, seek, setPlaying } = useSceneClock(open && examplesReady, visible && activeTab);
   const closing = open && cue >= closingStart;
-  const galleryFading = cue >= closingGalleryFadeStart;
+  const gallerySliding = cue >= closingGallerySlideStart;
   const closingTime = cue - closingStart;
   const scene = cue >= sceneStarts[2] ? 2 : cue >= sceneStarts[1] ? 1 : 0;
   const chapterCue = cue - sceneStarts[scene];
@@ -716,11 +771,52 @@ export function OneMindShowcase({
     : playback === "ended" ? ui.oneMindReplay
       : open || introActive ? ui.oneMindResume : ui.oneMindOpen;
   const soundLabel = sound === "on" ? ui.oneMindMuteMusic : ui.oneMindPlayWithMusic;
+  const fullscreenLabel = fullscreen || expanded ? ui.oneMindExitFullscreen : ui.oneMindBannerFullscreen;
   const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealExamples = useCallback(() => {
     setExamplesReady(reducedMotion());
     onOpen();
   }, [onOpen]);
+
+  useEffect(() => {
+    const sync = () => setFullscreen(document.fullscreenElement === sectionRef.current);
+    document.addEventListener("fullscreenchange", sync);
+    return () => document.removeEventListener("fullscreenchange", sync);
+  }, [sectionRef]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !expanded) return;
+    const exit = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setExpanded(false);
+    };
+    section.setAttribute("data-banner-expanded", "");
+    document.documentElement.setAttribute("data-one-mind-expanded", "");
+    document.addEventListener("keydown", exit);
+    return () => {
+      section.removeAttribute("data-banner-expanded");
+      document.documentElement.removeAttribute("data-one-mind-expanded");
+      document.removeEventListener("keydown", exit);
+    };
+  }, [expanded, sectionRef]);
+
+  async function toggleFullscreen() {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (expanded) {
+      setExpanded(false);
+    } else if (document.fullscreenElement === section) {
+      await document.exitFullscreen();
+    } else if (document.fullscreenEnabled && section.requestFullscreen) {
+      try {
+        await section.requestFullscreen();
+      } catch {
+        setExpanded(true);
+      }
+    } else {
+      setExpanded(true);
+    }
+  }
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -740,27 +836,41 @@ export function OneMindShowcase({
   const playMusic = useCallback((restart = false) => {
     const audio = soundtrack.current;
     if (!audio) return;
-    if (restart) audio.currentTime = 0;
+    if (restart) {
+      audio.playbackRate = 1;
+      audio.currentTime = 0;
+    }
     void audio.play().catch(error => {
       if (error.name === "NotAllowedError") setSound(current => current === "on" ? "blocked" : current);
     });
   }, []);
 
-  const syncClosingMusic = useEffectEvent(() => {
+  const syncShowcaseMusic = useEffectEvent(() => {
     const audio = soundtrack.current;
-    if (!audio) return;
-    const target = soundtrackEnd - (showcaseEnd - 1 - cue) / 1000;
-    if (Math.abs(audio.currentTime - target) > .12) audio.currentTime = target;
+    const remaining = (showcaseEnd - 1 - elapsed.current) / 1000;
+    if (!audio || !Number.isFinite(audio.duration) || remaining <= 0) return;
+
+    // A chapter jump can reposition the track. Automatic scene transitions keep playing through.
+    if (musicChapterSeek.current) {
+      musicChapterSeek.current = false;
+      audio.currentTime = Math.max(0, audio.duration - remaining);
+    }
+    const rate = Math.min(1.15, Math.max(.85, (audio.duration - audio.currentTime) / remaining));
+    if (Math.abs(audio.playbackRate - rate) > .001) audio.playbackRate = rate;
   });
 
   useEffect(() => {
     const audio = soundtrack.current;
-    if (!audio || !closing || sound !== "on" || !visible || !activeTab || playback !== "playing") return;
-    const align = () => syncClosingMusic();
+    if (!audio || !open || !examplesReady || sound !== "on") return;
+    const align = () => syncShowcaseMusic();
     align();
+    audio.addEventListener("loadedmetadata", align);
     audio.addEventListener("playing", align);
-    return () => audio.removeEventListener("playing", align);
-  }, [closing, run, sound, visible, activeTab, playback]);
+    return () => {
+      audio.removeEventListener("loadedmetadata", align);
+      audio.removeEventListener("playing", align);
+    };
+  }, [open, examplesReady, run, sound]);
 
   useEffect(() => {
     if (sound === "on" && visible && activeTab && playback === "playing") playMusic();
@@ -797,16 +907,17 @@ export function OneMindShowcase({
     return () => preference.removeEventListener("change", revealWithoutMotion);
   }, [open, examplesReady]);
 
-  function selectScene(index: number, isolated: boolean, instant = reducedMotion(), exampleOffset = 0) {
+  function selectScene(index: number, instant = reducedMotion(), exampleOffset = 0) {
+    musicChapterSeek.current = true;
     setManualClip(null);
-    seek(index, isolated, instant, exampleOffset);
+    seek(index, instant, exampleOffset);
   }
 
   const selectPreviewChapter = useEffectEvent((id: string) => {
     const chapter = chapterLinks.find(link => link.id === id);
     if (!chapter && id !== "outro") return;
     if (!open && introActive && !introPaused) onToggleIntro();
-    selectScene(chapter?.scene ?? 3, false, reducedMotion(), chapter?.offset);
+    selectScene(chapter?.scene ?? 3, reducedMotion(), chapter?.offset);
     setExamplesReady(true);
     onOpen();
   });
@@ -826,7 +937,8 @@ export function OneMindShowcase({
   function replayBanner() {
     introHold.current = reducedMotion() ? 900 : 240;
     setExamplesReady(false);
-    selectScene(0, false, false);
+    selectScene(0, false);
+    musicChapterSeek.current = false;
     onReplay();
   }
 
@@ -846,7 +958,7 @@ export function OneMindShowcase({
       if (sound === "on" && playback === "paused") playMusic();
       if (introActive) onToggleIntro();
       else {
-        selectScene(0, false);
+        selectScene(0);
         revealExamples();
       }
       return;
@@ -882,13 +994,14 @@ export function OneMindShowcase({
           id="one-mind-examples"
           className={styles.panel}
           hidden={!open}
-          inert={!examplesReady || galleryFading}
-          data-outro-fading={galleryFading}
+          inert={!examplesReady || gallerySliding}
+          data-outro-sliding={gallerySliding}
           style={{
             "--chapter-fade-duration": `${chapterFadeDuration}ms`,
-            ...(galleryFading ? {
-              "--outro-gallery-opacity": 1 - closingProgress(cue, closingGalleryFadeStart, closingGalleryFadeEnd),
-              "--outro-row-logo-opacity": 1 - closingProgress(closingTime, 220, 780),
+            ...(gallerySliding ? {
+              "--outro-gallery-slide": closingProgress(cue, closingGallerySlideStart, closingGallerySlideEnd),
+              "--outro-row-logo-opacity": 1 - closingProgress(closingTime, 525, 1425),
+              "--outro-white": closingProgress(closingTime, 0, 650),
             } : {}),
           } as CSSProperties}
           onAnimationEnd={event => {
@@ -928,6 +1041,7 @@ export function OneMindShowcase({
                     <VideoScene
                       ui={ui}
                       active={activeClip}
+                      animateOpening={!atEnd && !reducedMotion()}
                       visible={examplesReady && visible && activeTab && (manualClip === null ? playing && demoCue < galleryEnd : clipPlayback === "playing")}
                       run={clipRun}
                       onBrowse={() => setPlaying(false)}
@@ -953,7 +1067,7 @@ export function OneMindShowcase({
                 <img ref={chapterLogo} className={styles.chapterLogo} src="/animations/one-mind/logo.webp"
                   alt="" width={214} height={222} />
                 {chapterLinks.map(({ id, label, scene: index, offset, active }) => (
-                  <button key={id} type="button" data-preview-chapter={id} aria-pressed={active} onClick={() => selectScene(index, true, reducedMotion(), offset)}>{label}</button>
+                  <button key={id} type="button" data-preview-chapter={id} aria-pressed={active} onClick={() => selectScene(index, reducedMotion(), offset)}>{label}</button>
                 ))}
               </div>
               {scene < 2 && atEnd && <a href={contactUrl} className={styles.contact}>{ui.closingCta}<span aria-hidden="true">→</span></a>}
@@ -982,6 +1096,13 @@ export function OneMindShowcase({
         {playback === "playing" ? <path d="M9 5v14m6-14v14" /> :
           playback === "ended" ? <path d="M4 5v5h5M4.4 10a8 8 0 1 1 1.5 7.2" /> :
             <path d="m9 5 11 7-11 7Z" />}
+      </svg>
+    </button>
+    <button type="button" className={styles.playback}
+      aria-label={fullscreenLabel} title={fullscreenLabel} onClick={toggleFullscreen}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        {fullscreen || expanded ? <path d="M4 9h5V4m6 0v5h5m0 6h-5v5m-6 0v-5H4" /> :
+          <path d="M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5" />}
       </svg>
     </button>
   </>);

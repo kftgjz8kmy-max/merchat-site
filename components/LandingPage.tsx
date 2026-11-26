@@ -55,7 +55,7 @@ function useOneMindBanner() {
         ? entrance
         : original ? "soft" : "typing";
 
-    if (mode === "sequence" || timeline) section.dataset.bannerPreview = mode;
+    if (mode === "sequence" || mode === "fullscreen" || timeline) section.dataset.bannerPreview = mode;
     if (mode === "compare") {
       section.dataset.bannerPreview = "compare";
       frame.src = "/animations/one-mind/index.html?static=1";
@@ -140,71 +140,99 @@ function useOneMindBanner() {
       setIntroPaused(false);
     };
 
+    const measureDock = () => {
+      const stage = section.getBoundingClientRect();
+      const frameParent = frame.offsetParent?.getBoundingClientRect() ?? stage;
+      const titleParent = headline.offsetParent?.getBoundingClientRect() ?? stage;
+      const target = slot.getBoundingClientRect();
+      const width = frame.offsetWidth;
+      const height = frame.offsetHeight;
+      const logoScale = (width: number, height: number) => Math.min(width / 648, height * 0.864 / 668);
+      const scale = logoScale(target.width, target.height) / logoScale(width, height);
+      const dx = target.left + target.width / 2 - frameParent.left - frame.offsetLeft - width / 2;
+      const dy = target.top + target.height / 2 - frameParent.top - frame.offsetTop - height / 2;
+      const titleOffset = stage.top + stage.height / 2 - titleParent.top - headline.offsetTop - headline.offsetHeight / 2;
+      return {
+        finalPose: `translate(${dx}px, ${dy}px) scale(${scale})`,
+        featurePose: `translate(${dx}px, ${dy + titleOffset}px) scale(${scale * 1.26})`,
+        titleOffset,
+      };
+    };
+    const dockKeyframes = ({ finalPose, featurePose }: ReturnType<typeof measureDock>): Keyframe[] => [
+      { transform: "translate(0px, 0px) scale(1)" },
+      { transform: original ? finalPose : featurePose },
+    ];
+    let titleLift: Animation | undefined;
+    const resizeDock = new ResizeObserver(() => {
+      const phase = section.dataset.bannerPhase;
+      if (!(dock?.effect instanceof KeyframeEffect) || section.dataset.showcaseOpen === "true") return;
+      if (phase !== "docking" && phase !== "title" && phase !== "lifting") return;
+      const geometry = measureDock();
+      const { finalPose, featurePose, titleOffset } = geometry;
+      if (phase === "lifting") {
+        dock.effect.setKeyframes([{ transform: featurePose }, { transform: finalPose }]);
+        if (titleLift?.effect instanceof KeyframeEffect) {
+          titleLift.effect.setKeyframes([{ translate: `0 ${titleOffset}px` }, { translate: "0 0" }]);
+        }
+      } else {
+        dock.effect.setKeyframes(dockKeyframes(geometry));
+      }
+      if (phase !== "docking") section.style.setProperty("--one-title-offset", `${titleOffset}px`);
+    });
+    resizeDock.observe(section);
+    resizeDock.observe(frame);
+    resizeDock.observe(headline);
+
+    const startTitle = () => {
+      const { titleOffset } = measureDock();
+      section.style.setProperty("--one-title-offset", `${titleOffset}px`);
+      section.dataset.bannerPhase = "title";
+      wait(oneMindHeadlineTiming.hold, () => {
+        if (mode !== "sequence") {
+          if (fallback) {
+            fallback.cancel();
+            animations.delete(fallback);
+          }
+          setIntroFinished(true);
+          return;
+        }
+        section.dataset.bannerPhase = "lifting";
+        const { finalPose, featurePose, titleOffset } = measureDock();
+        const liftOptions = { duration: oneMindHeadlineTiming.lift, easing: "cubic-bezier(.38,.04,.23,1)", fill: "forwards" } as const;
+        const previousDock = dock;
+        dock = track(frame.animate([{ transform: featurePose }, { transform: finalPose }], liftOptions));
+        if (previousDock) {
+          previousDock.cancel();
+          animations.delete(previousDock);
+        }
+        titleLift = track(headline.animate([{ translate: `0 ${titleOffset}px` }, { translate: "0 0" }], liftOptions));
+        void dock.finished.then(() => complete("settled"), () => undefined);
+      });
+    };
+
     const receive = (event: MessageEvent) => {
       if (event.source !== frame.contentWindow) return;
+      const phase = section.dataset.bannerPhase;
       if (event.data === "one-mind:ready") {
         if (timeline) section.setAttribute("data-preview-intro-ready", "");
-        if (section.dataset.bannerPhase === "intro") setIntroActive(true);
+        if (phase === "intro") setIntroActive(true);
         setIntroPaused(paused);
         tellLogo();
         return;
       }
-      if (event.data !== "one-mind:complete") return;
-      if (section.dataset.bannerPhase !== "intro") return;
+      if (event.data !== "one-mind:complete" || phase !== "intro") return;
 
-      const origin = frame.getBoundingClientRect();
-      const target = slot.getBoundingClientRect();
-      // The intro settles into the same SVG viewBox as the slot while the iframe moves.
-      const logoScale = ({ width, height }: { width: number; height: number }) =>
-        Math.min(width / 648, height * 0.864 / 668);
-      const scale = logoScale(target) / logoScale(origin);
-      const dx = target.left + target.width / 2 - origin.left - origin.width / 2;
-      const dy = target.top + target.height / 2 - origin.top - origin.height / 2;
-      const finalPose = `translate(${dx}px, ${dy}px) scale(${scale})`;
-      const stage = section.getBoundingClientRect();
-      const title = headline.getBoundingClientRect();
-      const featureScale = 1.26;
-      const titleOffset = stage.top + stage.height / 2 - (title.top + title.height / 2);
-      const featurePose = `translate(${dx}px, ${dy + titleOffset}px) scale(${scale * featureScale})`;
-
+      const geometry = measureDock();
       section.dataset.bannerPhase = "docking";
-      dock = track(frame.animate([
-        { transform: "translate(0, 0) scale(1)" },
-        { transform: original ? finalPose : featurePose },
-      ], {
-        duration: original ? 860 : 1080,
-        easing: original ? "cubic-bezier(.34,.04,.18,1)" : "cubic-bezier(.32,.10,.22,1)",
+      dock = track(frame.animate(dockKeyframes(geometry), {
+        duration: original ? 860 : 1120,
+        easing: original ? "cubic-bezier(.34,.04,.18,1)" : "cubic-bezier(.42,0,.65,1)",
         fill: "forwards",
       }));
       if (original) {
         void dock.finished.then(() => complete("revealed"), () => undefined);
         return;
       }
-
-      const startTitle = () => {
-        section.style.setProperty("--one-title-offset", `${titleOffset}px`);
-        section.dataset.bannerPhase = "title";
-        wait(oneMindHeadlineTiming.hold, () => {
-          if (mode !== "sequence") {
-            if (fallback) {
-              fallback.cancel();
-              animations.delete(fallback);
-            }
-            setIntroFinished(true);
-            return;
-          }
-          section.dataset.bannerPhase = "lifting";
-          const liftOptions = { duration: oneMindHeadlineTiming.lift, easing: "cubic-bezier(.38,.04,.23,1)", fill: "forwards" } as const;
-          const previousDock = dock;
-          dock = track(frame.animate([{ transform: featurePose }, { transform: finalPose }], liftOptions));
-          if (previousDock) {
-            previousDock.cancel();
-            animations.delete(previousDock);
-          }
-          track(headline.animate([{ translate: `0 ${titleOffset}px` }, { translate: "0 0" }], liftOptions));
-          void dock.finished.then(() => complete("settled"), () => undefined);
-        });
-      };
       void dock.finished.then(() => {
         if (section.dataset.bannerPhase !== "docking") return;
         wait(oneMindHeadlineTiming.leadIn, startTitle);
@@ -228,6 +256,7 @@ function useOneMindBanner() {
     observer.observe(frame);
     return () => {
       observer.disconnect();
+      resizeDock.disconnect();
       window.removeEventListener("message", receive);
       motion.removeEventListener("change", onMotionChange);
       introToggle.current = null;

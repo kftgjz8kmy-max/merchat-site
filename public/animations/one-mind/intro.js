@@ -34,8 +34,8 @@
     light.querySelector("use").removeAttribute("mask");
     light.setAttribute("filter", "url(#contour-lamp-halo)");
   }
-  const contourLength = sweep.getTotalLength();
-  sweep.setAttribute("stroke-dasharray", `${contourLength} ${contourLength}`);
+  const contourLength = contourStyle === "lapiz" ? sweep.getTotalLength() : 0;
+  if (contourLength) sweep.setAttribute("stroke-dasharray", `${contourLength} ${contourLength}`);
 
   const formationEnd = 3820;
   const originalPlacementEnd = 4230;
@@ -66,7 +66,8 @@
   const waveBlue = document.querySelector("#contour-wave-blue");
   const wavePink = document.querySelector("#contour-wave-pink");
   const waveCore = document.querySelector("#contour-wave-core");
-  const wavePoints = currentBannerIntro || rebuild ? sampleWave(document.querySelector("#contour-wave-axis")) : [];
+  let wavePoints;
+  let waveVisible = false;
   const mindLetters = staggeredMind ? [...mind.querySelectorAll("path")].map((letter, index) => {
     const mask = mindInk.parentElement.cloneNode(true);
     const [fill, tip] = mask.children;
@@ -85,7 +86,7 @@
     return seed / 4294967296;
   };
 
-  function traceGlyph(glyph) {
+  function traceGlyph(glyph, box) {
     if (glyph.localName === "path") return new Path2D(glyph.getAttribute("d"));
     const outline = new Path2D();
     if (glyph.localName === "polygon") {
@@ -96,8 +97,7 @@
       }
       outline.closePath();
     } else {
-      const { x, y, width, height } = glyph.getBBox();
-      outline.rect(x, y, width, height);
+      outline.rect(box.x, box.y, box.width, box.height);
     }
     return outline;
   }
@@ -111,18 +111,27 @@
     // Keep the clipped edges quiet until they join the letterforms.
     const edgeFragment = box.height < 5.3 || box.width < 3.2;
     const x = Math.cos(angle) * radius * 0.67;
+    const drift = random() - 0.5;
+    const color = colors[Math.round(clamp(x + 0.5) * (colors.length - 1))];
+    const fill = glyph.getAttribute("fill");
     return {
       x,
       y: Math.sin(angle) * radius * 0.80,
       depth,
-      drift: random() - 0.5,
+      drift,
+      release: depth * 530 + (drift + 0.5) * 170,
+      perspective: 0.26 + 1.08 * depth ** 2,
+      proximity: depth ** 3,
       opacity: (0.18 + random() * 0.54) * (edgeFragment ? 0.12 : 1),
-      color: colors[Math.round(clamp(x + 0.5) * (colors.length - 1))],
-      outline: traceGlyph(glyph),
-      fill: glyph.getAttribute("fill"),
-      rgb: glyph.getAttribute("fill").slice(1).match(/../g).map(channel => parseInt(channel, 16)),
+      color,
+      fieldFill: `rgb(${color.join(",")})`,
+      outline: traceGlyph(glyph, box),
+      fill,
+      rgb: fill.slice(1).match(/../g).map(channel => parseInt(channel, 16)),
       stroke: glyph.getAttribute("stroke"),
       strokeWidth: Number(glyph.getAttribute("stroke-width")),
+      halfWidth: box.width / 2,
+      halfHeight: box.height / 2,
       targetX: box.x + box.width / 2,
       targetY: box.y + box.height / 2,
     };
@@ -132,6 +141,9 @@
   let width = 1;
   let height = 1;
   let pixelRatio = 1;
+  let sized = false;
+  let fieldPainted = false;
+  let needsDraw = false;
   let frame = 0;
   let started = false;
   let complete = false;
@@ -141,23 +153,37 @@
   let observer;
 
   function resize() {
-    width = Math.max(1, document.documentElement.clientWidth);
-    height = Math.max(1, document.documentElement.clientHeight);
-    pixelRatio = Math.min(devicePixelRatio || 1, 2.5);
+    const nextWidth = Math.max(1, document.documentElement.clientWidth);
+    const nextHeight = Math.max(1, document.documentElement.clientHeight);
+    const nextRatio = Math.min(devicePixelRatio || 1, 2.5);
+    if (sized && nextWidth === width && nextHeight === height && nextRatio === pixelRatio) return false;
+    sized = true;
+    width = nextWidth;
+    height = nextHeight;
+    pixelRatio = nextRatio;
     canvas.width = Math.round(width * pixelRatio);
     canvas.height = Math.round(height * pixelRatio);
+    fieldPainted = false;
     mark.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    return true;
   }
 
+  const layerPoses = new WeakMap();
   function setLayer(layer, scale, x, y, alpha) {
-    layer.setAttribute("transform", `translate(${x} ${y}) scale(${scale})`);
-    layer.setAttribute("opacity", alpha);
+    const pose = layerPoses.get(layer);
+    if (alpha !== pose?.alpha) layer.setAttribute("opacity", alpha);
+    if ((alpha > 0 || !pose) && (scale !== pose?.scale || x !== pose?.x || y !== pose?.y)) {
+      layer.setAttribute("transform", `translate(${x} ${y}) scale(${scale})`);
+      layerPoses.set(layer, { scale, x, y, alpha });
+    } else if (pose) pose.alpha = alpha;
   }
 
   function drawField(time, wordPose, composition) {
+    if (time >= formationEnd && !fieldPainted) return;
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     context.clearRect(0, 0, width, height);
-    if (time >= formationEnd) return;
+    fieldPainted = time < formationEnd;
+    if (!fieldPainted) return;
 
     const fade = 1 - smooth(phase(time, 1450, 3150));
     if (!inBanner && !composition) {
@@ -172,29 +198,45 @@
     const retreat = 1.18 - 0.34 * smooth(phase(time, 200, 2800));
     const fieldSize = Math.min(width, height * 2.15) * 0.009;
     const ink = smooth(phase(time, 2600, 3360));
+    const originX = width * (composition?.originX ?? 0.5);
+    const originY = height * (composition?.originY ?? 0.5);
+    const originWidth = width * (composition?.originWidth ?? 0);
     context.miterLimit = 10;
+    let filter = "none";
     for (const particle of ink === 1 ? glyphs : particles) {
-      const { depth, drift, targetX, targetY } = particle;
-      const release = depth * 530 + (drift + 0.5) * 170;
+      const { depth, drift, release, targetX, targetY } = particle;
       const emission = composition ? smooth(phase(time, release, release + 180)) : 1;
       if (emission === 0) continue;
       const spread = composition ? smooth(phase(time, release + 70, release + 1150)) : 1;
-      const perspective = (0.26 + 1.08 * depth ** 2) * retreat;
-      const launchX = width * (composition?.originX ?? 0.5) + 12 + particle.x * 28;
-      const launchY = height * (composition?.originY ?? 0.5) - 8 + particle.y * 24;
+      const perspective = particle.perspective * retreat;
+      const launchX = originX + particle.x * originWidth * 0.45;
+      const launchY = originY + particle.y * originWidth * 0.14;
       const fieldX = mix(launchX, width * (0.5 + particle.x * perspective + drift * time / 14500), spread);
       const fieldY = mix(launchY, height * (0.5 + particle.y * perspective - drift * time / 11500), spread);
       const converge = smooth(phase(time, 850 + depth * 340, 2860 + depth * 280));
       const x = mix(fieldX, wordPose.x + targetX * wordPose.scale, converge);
       const y = mix(fieldY, wordPose.y + targetY * wordPose.scale, converge);
-      const scale = mix(mix(1.35, 0.38 + fieldSize * depth ** 3, spread), wordPose.scale, converge);
+      const scale = mix(mix(1.35, 0.38 + fieldSize * particle.proximity, spread), wordPose.scale, converge);
+      const blur = depth > 0.95 ? (depth - 0.95) * 58 * (1 - converge) : 0;
+      if (ink === 0) {
+        // Keep the filter halo and antialiasing inside the visibility bounds.
+        const padding = blur * 4 + 2;
+        const extentX = particle.halfWidth * scale + padding;
+        const extentY = particle.halfHeight * scale + padding;
+        if (x + extentX < 0 || x - extentX > width || y + extentY < 0 || y - extentY > height) continue;
+      }
       context.setTransform(scale * pixelRatio, 0, 0, scale * pixelRatio,
         (x - targetX * scale) * pixelRatio, (y - targetY * scale) * pixelRatio);
-      context.fillStyle = ink === 1 ? particle.fill : `rgb(${particle.color.map((channel, index) => Math.round(mix(channel, particle.rgb[index], ink))).join(",")})`;
+      context.fillStyle = ink === 0 ? particle.fieldFill
+        : ink === 1 ? particle.fill
+        : `rgb(${particle.color.map((channel, index) => Math.round(mix(channel, particle.rgb[index], ink))).join(",")})`;
       const visibility = Math.min(1, particle.opacity * (1.85 - .85 * spread));
       context.globalAlpha = emission * mix(visibility, 1, converge);
-      const blur = depth > 0.95 ? (depth - 0.95) * 58 * (1 - converge) : 0;
-      context.filter = blur > 0.7 ? `blur(${blur}px)` : "none";
+      const nextFilter = blur > 0.7 ? `blur(${blur}px)` : "none";
+      if (nextFilter !== filter) {
+        context.filter = nextFilter;
+        filter = nextFilter;
+      }
       context.fill(particle.outline);
       if (ink > 0) {
         context.globalAlpha *= ink;
@@ -204,7 +246,7 @@
       }
     }
     context.globalAlpha = 1;
-    context.filter = "none";
+    if (filter !== "none") context.filter = "none";
   }
 
   function illuminateContour(time, scale, x, y) {
@@ -273,8 +315,11 @@
 
   function illuminateWave(beat, intensity, scale, x, y) {
     if (!intensity) {
-      waveLight.setAttribute("visibility", "hidden");
-      waveRest.removeAttribute("opacity");
+      if (waveVisible) {
+        waveLight.setAttribute("visibility", "hidden");
+        waveRest.removeAttribute("opacity");
+        waveVisible = false;
+      }
       return;
     }
 
@@ -314,7 +359,10 @@
     waveRest.setAttribute("opacity", 1 - 0.68 * intensity);
     waveColor.setAttribute("opacity", mix(0.22, 0.87, intensity));
     setLayer(waveLight, scale, x, y, intensity);
-    waveLight.removeAttribute("visibility");
+    if (!waveVisible) {
+      waveLight.removeAttribute("visibility");
+      waveVisible = true;
+    }
   }
 
   function pulseIntensity(beat) {
@@ -322,6 +370,10 @@
   }
 
   function draw(time, composition) {
+    // Prepare the wave during the logo hold, after the binary canvas has finished.
+    if (!wavePoints && (currentBannerIntro || rebuild) && time >= contourSettled) {
+      wavePoints = sampleWave(document.querySelector("#contour-wave-axis"));
+    }
     const introScale = composition
       ? width * composition.width / (724 / 1.2)
       : Math.min(height * 0.79 / logo.height, width * 0.72 / logo.width);
@@ -382,9 +434,9 @@
   }
 
   const resizeObserver = new ResizeObserver(() => {
-    if (complete) return;
-    resize();
+    if (complete || !resize()) return;
     if (!started || paused) draw(elapsed);
+    else needsDraw = true;
   });
 
   function finish() {
@@ -415,10 +467,13 @@
 
   function tick(now) {
     if (paused || complete) return;
+    const previousTime = elapsed;
     if (previousFrame !== undefined) elapsed += now - previousFrame;
     previousFrame = now;
     if (elapsed >= duration) return finish();
-    draw(elapsed);
+    const holding = currentBannerIntro && previousTime >= contourSettled && elapsed < waveStart;
+    if (needsDraw || (elapsed !== previousTime && !holding)) draw(elapsed);
+    needsDraw = false;
     // Let the parent shrink the iframe while the mark settles into its static viewBox.
     if (currentBannerIntro && elapsed >= waveEnd) startBannerDock();
     frame = requestAnimationFrame(tick);
@@ -438,21 +493,22 @@
   document.body.classList.add("playing");
   if (rebuild) {
     let composition;
-    mark.setAttribute("visibility", "hidden");
     const render = () => {
       if (!composition) return;
-      if (width !== document.documentElement.clientWidth || height !== document.documentElement.clientHeight) resize();
       draw(motion.matches ? contourSettled : clamp(composition.progress) * contourSettled, composition);
-      mark.removeAttribute("visibility");
+      document.documentElement.classList.remove("waiting-for-rebuild");
     };
     window.addEventListener("message", event => {
       if (event.source !== parent || event.origin !== location.origin || event.data?.type !== "one-mind:rebuild") return;
-      const { progress, pulse, x, y, width, originX, originY } = event.data;
-      if (![progress, pulse, x, y, width, originX, originY].every(Number.isFinite)) return;
+      const { progress, pulse, x, y, width, originX, originY, originWidth } = event.data;
+      if (![progress, pulse, x, y, width, originX, originY, originWidth].every(Number.isFinite)) return;
       composition = event.data;
+      if (!sized) resize();
       render();
     });
-    new ResizeObserver(render).observe(document.documentElement);
+    new ResizeObserver(() => {
+      if (composition && resize()) render();
+    }).observe(document.documentElement);
     motion.addEventListener("change", render);
     return;
   }

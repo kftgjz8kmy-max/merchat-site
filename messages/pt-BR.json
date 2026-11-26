@@ -2358,6 +2358,8 @@
     "oneMindConfirmed": "Agendamento confirmado",
     "oneMindPause": "Pausar animação",
     "oneMindFullscreen": "Ver vídeo em tela cheia",
+    "oneMindBannerFullscreen": "Ver animação em tela cheia",
+    "oneMindExitFullscreen": "Sair da tela cheia",
     "oneMindMuteMusic": "Silenciar música",
     "oneMindPlayWithMusic": "Reproduzir do início com música",
     "oneMindResume": "Continuar animação",

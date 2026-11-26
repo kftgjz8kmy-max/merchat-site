@@ -2358,6 +2358,8 @@
     "oneMindConfirmed": "Cita confirmada",
     "oneMindPause": "Pausar animación",
     "oneMindFullscreen": "Ver video en pantalla completa",
+    "oneMindBannerFullscreen": "Ver animación en pantalla completa",
+    "oneMindExitFullscreen": "Salir de pantalla completa",
     "oneMindMuteMusic": "Silenciar música",
     "oneMindPlayWithMusic": "Reproducir desde el inicio con música",
     "oneMindResume": "Continuar animación",
