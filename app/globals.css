@@ -3268,6 +3268,26 @@ main #funciones.functions-group #capacidades { padding-block:56px 56px; }
   }
 }
 
+main .one-mind-services {
+  padding-block-end: clamp(24px, 4vw, 42px);
+  text-align: center;
+}
+
+.one-mind-services .section-title {
+  max-width: 30ch;
+  margin-block-end: 14px;
+  font-size: clamp(28px, 3.2vw, 38px);
+  line-height: 1.16;
+}
+
+.one-mind-services p {
+  max-width: 64ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.6;
+}
+
 /* The opening stage docks into the reserved mark at the head of the banner. */
 main section#ia-negocios.closing {
   --one-inset: clamp(24px, 4.4vw, 60px);
