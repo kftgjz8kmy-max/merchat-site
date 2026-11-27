@@ -827,11 +827,15 @@ export function OneMindShowcase({
     if (!section) return;
     if (!("IntersectionObserver" in window)) return;
     const shared = new URLSearchParams(location.search).get("one-mind") === "fullscreen";
+    const enterThreshold = 0.4;
+    const exitThreshold = 0.25;
+    let inView = false;
     const observer = new IntersectionObserver(([entry]) => {
-      const inView = entry.intersectionRatio >= 0.4;
+      // The examples can make the banner taller without the viewer scrolling.
+      inView = entry.intersectionRatio >= (inView ? exitThreshold : enterThreshold);
       if (inView && shared) setSharedStart(current => current === "normal" ? "pending" : current);
       setVisible(inView);
-    }, { threshold: 0.4 });
+    }, { threshold: [exitThreshold, enterThreshold] });
     observer.observe(section);
     const tabVisibility = () => setActiveTab(!document.hidden);
     tabVisibility();

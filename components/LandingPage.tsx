@@ -819,7 +819,7 @@ export default function LandingPage() {
   return <main>
     <header className="header shell">
       <a href="#inicio" className="brand" aria-label={siteConfig.name}><BrandLogo className="brand-logo-full" /></a>
-      <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#funciones", ui.navFeatures], ["#como-funciona", ui.navHow], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-negocios", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-negocios" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
+      <nav className={mobileMenuOpen ? "mobile-nav-open" : ""}>{[["#funciones", ui.navFeatures], ["#como-funciona", ui.navHow], ["#planes", ui.navPricing], ["#seguridad", ui.navTrust], ["#faq", ui.navFaq], ["#ia-a-la-medida", ui.navSolutions]].map(([href, label]) => <a className={activeSection === href.slice(1) ? "is-active" : undefined} aria-current={activeSection === href.slice(1) ? "location" : undefined} key={href} href={href} onClick={navigateToSection}>{label}{href === "#ia-a-la-medida" && <img className="nav-lightbulb" style={{ transform: "translateY(-2px)" }} src="/images/lightbulb-idea.png" alt="" aria-hidden="true" width="18" height="18" />}</a>)}</nav>
       <LanguageSwitcher selectorLabel={ui.languageSelector} currentLanguageLabel={ui.currentLanguage} />
       <Button hoverEffect href={mlAutomationHref(`${siteConfig.trialUrl}?plan=starter`, locale)}>{ui.startFree}</Button>
       <button className="mobile-menu" type="button" aria-label={ui.menu} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((open) => !open)}><span /><span /><span /></button>
@@ -881,6 +881,11 @@ export default function LandingPage() {
 
       <section id="faq" className="faq shell"><SectionTitle>{ui.faqTitle}</SectionTitle><div className="faq-grid">{localizedLanding.faqs.map(([question, answer]) => <article key={question}><details name="faq"><summary><span>{question}</span><span className="faq-toggle" aria-hidden="true" /></summary><div className="faq-answer"><p><FaqAnswer answer={answer} /></p></div></details></article>)}</div></section>
 
+      <section id="ia-a-la-medida" className="one-mind-services shell" aria-labelledby="one-mind-services-title">
+        <SectionTitle id="one-mind-services-title">{ui.oneMindServicesTitle}</SectionTitle>
+        <p>{ui.oneMindServicesDescription}</p>
+      </section>
+
       <section id="ia-negocios" className="closing shell" ref={oneMindBannerRef} data-showcase-open={oneMindShowcaseOpen}>
         <OneMindShowcase
           sectionRef={oneMindBannerRef}
@@ -938,7 +943,7 @@ export default function LandingPage() {
             </div>
             <div className="footer-column">
               <h2>{ui.footerSolutions}</h2>
-              <a href="#ia-negocios"><span>{ui.footerAi}</span></a>
+              <a href="#ia-a-la-medida"><span>{ui.footerAi}</span></a>
               <a href={mlAutomationHref(siteConfig.contactUrl, locale)}><span>{ui.footerContact}</span></a>
             </div>
             <div className="footer-column">
