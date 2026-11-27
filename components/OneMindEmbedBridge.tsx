@@ -12,9 +12,12 @@ export function OneMindEmbedBridge({ sectionRef }: { sectionRef: RefObject<HTMLE
 
     const sendLayout = () => {
       if (!parentOrigin || document.fullscreenElement || section.hasAttribute("data-banner-expanded")) return;
+      const { width, height, left } = section.getBoundingClientRect();
       window.parent.postMessage({
         type: "one-mind:layout",
-        height: Math.ceil(section.getBoundingClientRect().height),
+        width,
+        height,
+        left,
       }, parentOrigin);
     };
 
@@ -38,11 +41,13 @@ export function OneMindEmbedBridge({ sectionRef }: { sectionRef: RefObject<HTMLE
     observer.observe(section);
     section.addEventListener("click", forwardContact, true);
     window.addEventListener("message", receive);
+    window.addEventListener("resize", sendLayout);
     document.addEventListener("fullscreenchange", sendLayout);
     return () => {
       observer.disconnect();
       section.removeEventListener("click", forwardContact, true);
       window.removeEventListener("message", receive);
+      window.removeEventListener("resize", sendLayout);
       document.removeEventListener("fullscreenchange", sendLayout);
     };
   }, [sectionRef]);
