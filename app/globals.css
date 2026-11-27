@@ -3567,12 +3567,12 @@ main section#ia-negocios.closing[data-banner-preview="timeline"] {
 
 @media (max-width: 760px) {
   #ia-negocios:is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
-    top: 9%;
+    inset-block: 0;
     height: min(70%, 88vw);
+    margin-block: auto;
   }
 
   #ia-negocios:is(:fullscreen, [data-banner-expanded], [data-banner-preview="fullscreen"]):is([data-banner-phase="intro"], [data-banner-phase="docking"], [data-banner-phase="title"], [data-banner-phase="lifting"]) .one-mind-intro {
-    top: calc((100% - min(82%, 118vw)) / 2);
     height: min(82%, 118vw);
   }
 }
