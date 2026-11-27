@@ -203,7 +203,7 @@ function StoreScene({ ui, locale, cue, clock, moving, onInteract }: {
   const second = product === 1;
   const expanded = manualExpansion ?? (selectedProduct === null && cue >= storeExpand && cue < storeCollapse);
   const productNames = [ui.oneMindStoreProduct, ui.oneMindSportSneaker];
-  const photos = ["urban-sneaker-profile.webp", "sport-sneaker-reference.webp"];
+  const photos = ["urban-sneaker-profile-cutout.webp", "sport-sneaker-reference.webp"];
   const cartProduct = cartOverride === undefined ? (cue >= storeAdded ? 1 : null) : cartOverride;
   const added = cartProduct === product;
 
@@ -321,7 +321,7 @@ function StoreScene({ ui, locale, cue, clock, moving, onInteract }: {
           </div>
           {!second && (
             <img className={styles.storeProductPhoto}
-              src={mediaPath + (selectedProduct === 0 || cue >= storeFirstSelected ? "urban-sneaker-angle.webp" : photos[0])}
+              src={mediaPath + (selectedProduct === 0 || cue >= storeFirstSelected ? "urban-sneaker-angle-cutout.webp" : photos[0])}
               alt={productNames[0]} width={420} height={300} />
           )}
         </div>
@@ -481,7 +481,7 @@ function SceneHeading({ title, spread, docked, showDemo }: {
 
     function fitLine() {
       if (!line || !viewport || !line.offsetWidth) return;
-      lineScale.current = Math.min(1, (viewport.clientWidth - 8) / line.offsetWidth);
+      lineScale.current = Math.min(1, viewport.clientWidth / line.offsetWidth);
       line.style.setProperty("--line-scale", String(lineScale.current));
     }
 

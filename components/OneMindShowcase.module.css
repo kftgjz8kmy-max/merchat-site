@@ -472,6 +472,7 @@
 }
 
 .productMedia {
+  --shoe-viewer-background: #fff;
   display: grid;
   min-width: 0;
   gap: 5px;
@@ -484,8 +485,7 @@
   aspect-ratio: 7 / 5;
   object-fit: contain;
   border-radius: 12px;
-  background: #fff;
-  filter: brightness(1.1);
+  background: var(--shoe-viewer-background);
 }
 
 .storeProducts {
@@ -522,7 +522,7 @@
   z-index: 1;
   overflow: hidden;
   border-radius: 12px;
-  background: #fff;
+  background: var(--shoe-viewer-background);
   transform-origin: left center;
   transition: transform 300ms cubic-bezier(.22,.75,.24,1), box-shadow 300ms ease;
 }
@@ -1235,14 +1235,36 @@
 }
 
 @container one-mind (width <= 680px) {
-  .screen { --panel-inline-pad: 14px; --opening-height: 518px; }
-  .panel { padding-block: 21px 15px; }
-  .stage { grid-template-columns: minmax(0, 1fr); gap: 15px; align-content: start; }
+  .screen {
+    --panel-inline-pad: 14px;
+    --opening-height: clamp(580px, calc(100cqi + 205px), 630px);
+    block-size: var(--opening-height);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .panel:not([hidden]) { grid-template-rows: minmax(0, 1fr) auto; }
+
+  :global(#ia-negocios) .frontContent :global(.closing-headline) {
+    font-size: clamp(1.55rem, 7.1cqi, 2.5rem);
+  }
+
+  .writtenTitle {
+    width: calc(100cqi - 2 * var(--panel-inline-pad));
+    inset-inline-end: 50%;
+    translate: 50% -50%;
+    font-size: clamp(1.7rem, 7.9cqi, 2.85rem);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .writtenLine { width: 100%; text-wrap: balance; }
+  .panel { padding-block: 16px 12px; }
+  .stage { grid-template-columns: minmax(0, 1fr); gap: 11px; align-content: start; }
   .stageCopy {
     --heading-center-y: 164px;
     grid-area: 1 / 1;
-    min-height: 104px;
-    padding: 20px 6px 0;
+    min-height: 88px;
+    padding: 14px 6px 0;
   }
   .screen { --chapter-mark: 30px; }
   .outro {
@@ -1250,18 +1272,18 @@
     --rise: 44px;
     --slogan-space: 35px;
   }
-  .outroCopy .outroHeadline { font-size: clamp(1.35rem, 6.2cqi, 1.85rem); }
+  .outroCopy .outroHeadline { font-size: clamp(1.55rem, 7.1cqi, 2.5rem); }
   .outroDetails { margin-top: 12px; }
-  .outroDetails p { font-size: .95rem; }
-  .panel .stageCopy h2 { font-size: clamp(1.35rem, 6cqi, 2.38rem); max-width: 22ch; }
-  .window { grid-area: 2 / 1; border-radius: 18px; min-height: 294px; }
+  .outroDetails p { font-size: 1rem; }
+  .panel .stageCopy h2 { font-size: clamp(1.45rem, 6.7cqi, 2.45rem); max-width: 22ch; }
+  .window { grid-area: 2 / 1; border-radius: 18px; min-height: 276px; }
   .store, .booking { border-radius: 13px; }
   .booking { padding-inline: 10px; }
   .controls { gap: 5px; margin-top: 10px; padding-inline-end: 0; padding-block-end: 44px; }
   .controls button { min-height: 40px; }
   .controls .contact { margin-inline-start: 0; }
   .stage[data-chapter="2"] {
-    --avatar-slot: clamp(88px, 35cqi, 158px);
+    --avatar-slot: clamp(88px, 32cqi, 139px);
     --avatar-gap: 7px;
     --avatar-padding: calc(var(--avatar-slot) * .47 + 8px);
     --avatar-focus: 1.52;
