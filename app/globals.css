@@ -3576,3 +3576,12 @@ main section#ia-negocios.closing[data-banner-preview="timeline"] {
     height: min(82%, 118vw);
   }
 }
+
+/* The embedded document keeps the landing's banner width and intrinsic height. */
+html:has(.one-mind-embed),
+html:has(.one-mind-embed) body,
+main.one-mind-embed,
+.one-mind-embed .post-pricing-background { background: transparent; }
+
+main.one-mind-embed { padding-top: 0; }
+main.one-mind-embed section#ia-negocios { margin-block-end: 0; }
