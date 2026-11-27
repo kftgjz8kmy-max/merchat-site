@@ -1052,8 +1052,8 @@ export function OneMindShowcase({
               <div className={styles.stageCopy} data-docked={chapterCue >= titleDock[scene]} data-copy-ready={showDemo}>
                 <SceneHeading title={titles[scene]} spread={titleWrite[scene]} docked={chapterCue >= titleDock[scene]} showDemo={showDemo} />
               </div>
-              <div className={styles.window} data-visible={showDemo}>
-                {showDemo && <div className={styles.scene} data-scene={scene}>
+              <div className={styles.window} data-visible={showDemo} inert={!showDemo}>
+                {(showDemo || scene === 1) && <div className={styles.scene} data-scene={scene}>
                   {scene === 0 && (
                     <div
                       className={styles.exampleFrame}
