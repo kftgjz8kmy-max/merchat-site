@@ -852,7 +852,7 @@ function ClosingScene({ time, ui, contactUrl, chapterLogo }: {
 
 export function OneMindShowcase({
   sectionRef, open, introFinished, introActive, introPaused, onToggleIntro, onStartWithAudio, onOpen, onReplay,
-  ui, locale, contactUrl, children,
+  ui, locale, contactUrl, children, embedded = false,
 }: {
   sectionRef: RefObject<HTMLElement | null>;
   open: boolean;
@@ -867,6 +867,7 @@ export function OneMindShowcase({
   locale: string;
   contactUrl: string;
   children: ReactNode;
+  embedded?: boolean;
 }) {
   const [visible, setVisible] = useState(false);
   const [activeTab, setActiveTab] = useState(true);
@@ -1099,7 +1100,7 @@ export function OneMindShowcase({
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section || new URLSearchParams(location.search).get("one-mind") !== "timeline") return;
+    if (!section || (!embedded && new URLSearchParams(location.search).get("one-mind") !== "timeline")) return;
     const jump = (event: Event) => selectPreviewChapter((event as CustomEvent<string>).detail);
     section.addEventListener("one-mind-preview-chapter", jump);
     section.setAttribute("data-preview-ready", "");
@@ -1107,7 +1108,7 @@ export function OneMindShowcase({
       section.removeEventListener("one-mind-preview-chapter", jump);
       section.removeAttribute("data-preview-ready");
     };
-  }, [sectionRef]);
+  }, [embedded, sectionRef]);
 
   function replayBanner() {
     introHold.current = reducedMotion() ? 900 : 240;
