@@ -85,6 +85,8 @@ const closingCopyEnd = closingActionStart + 480;
 const closingPulseStart = closingCopyEnd + 200;
 const closingPulseEnd = closingPulseStart + 1210;
 const showcaseEnd = closingStart + closingPulseEnd + 1;
+// Set the speed before playback so the intro and examples share one uninterrupted track.
+const soundtrackRate = 0.914;
 const closingGallerySlideCues = Array.from(
   { length: Math.ceil((closingGallerySlideEnd - closingGallerySlideStart) / 16) },
   (_, index) => closingGallerySlideStart + index * 16,
@@ -992,10 +994,9 @@ export function OneMindShowcase({
   const playMusic = useCallback((restart = false) => {
     const audio = soundtrack.current;
     if (!audio) return;
-    if (restart) {
-      audio.playbackRate = 1;
-      audio.currentTime = 0;
-    }
+    if (restart) audio.currentTime = 0;
+    if (!audio.paused && !restart) return;
+    if (restart || audio.currentTime === 0) audio.playbackRate = soundtrackRate;
     void audio.play().catch(error => {
       if (error.name === "NotAllowedError") setSound(current => current === "on" ? "blocked" : current);
     });
@@ -1006,6 +1007,7 @@ export function OneMindShowcase({
     if (!audio || startingSharedAudio.current) return;
 
     startingSharedAudio.current = true;
+    if (audio.currentTime === 0) audio.playbackRate = soundtrackRate;
     void audio.play().then(() => {
       onStartWithAudio();
       setSharedStart("started");
@@ -1022,15 +1024,10 @@ export function OneMindShowcase({
   const syncShowcaseMusic = useEffectEvent(() => {
     const audio = soundtrack.current;
     const remaining = (showcaseEnd - 1 - elapsed.current) / 1000;
-    if (!audio || !Number.isFinite(audio.duration) || remaining <= 0) return;
+    if (!musicChapterSeek.current || !audio || !Number.isFinite(audio.duration) || remaining <= 0) return;
 
-    // A chapter jump can reposition the track. Automatic scene transitions keep playing through.
-    if (musicChapterSeek.current) {
-      musicChapterSeek.current = false;
-      audio.currentTime = Math.max(0, audio.duration - remaining);
-    }
-    const rate = Math.min(1.15, Math.max(.85, (audio.duration - audio.currentTime) / remaining));
-    if (Math.abs(audio.playbackRate - rate) > .001) audio.playbackRate = rate;
+    musicChapterSeek.current = false;
+    audio.currentTime = Math.max(0, audio.duration - remaining * audio.playbackRate);
   });
 
   useEffect(() => {
