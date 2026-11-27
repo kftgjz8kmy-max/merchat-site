@@ -4,6 +4,7 @@
 import { Fragment, useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import type { LandingUi } from "@/config/landing";
 import { siteConfig } from "@/config/site";
+import type { loadSneaker } from "./oneMindSneaker";
 import styles from "./OneMindShowcase.module.css";
 
 const titleWrite = [1100, 1340, 1340];
@@ -27,12 +28,20 @@ const galleryZoomDuration = 820;
 const galleryOpeningDuration = galleryPortraitHold + galleryZoomDuration;
 const galleryEnd = galleryOpeningDuration + (clips.length - 1) * clipDuration + lastClipDuration;
 const clipEnds = clips.map((_, index) => index === clips.length - 1 ? galleryEnd : galleryOpeningDuration + (index + 1) * clipDuration);
-const bookingStart = 3250;
+const storeMotionDuration = 5440;
+const bookingStart = storeMotionDuration + 1050;
 const bookingSwipeDuration = 540;
 const chapterFadeDuration = 440;
 const chapterRowDelay = 650;
-const storeViewChanged = 680;
-const storeAdded = 1500;
+// These offsets also mark the clicks and drag gesture in the store pointer keyframes.
+const storeFirstSelected = 540;
+const storeSecondSelected = 1540;
+const storeExpand = 1940;
+const storeRotationStart = 2280;
+const storeCollapse = 4370;
+const storeRotationDuration = 1840;
+const storeFullTurn = 360;
+const storeAdded = 4890;
 const chatTyping = 420;
 const chatTypingEnd = 2100;
 const chatSend = 2250;
@@ -52,7 +61,7 @@ const chatCues = [
   ]),
   ...Array.from({ length: chatScrollDuration / 16 }, (_, index) => chatTurn + (index + 1) * 16),
 ].sort((first, second) => first - second);
-const demoCues = [[0, chapterRowDelay, storeViewChanged, storeAdded, bookingStart, bookingStart + bookingSwipeDuration, bookingStart + 950, bookingStart + 1900, bookingStart + 2860], chatCues, [0, ...clipEnds]];
+const demoCues = [[0, storeFirstSelected, chapterRowDelay, storeSecondSelected, storeExpand, storeRotationStart, storeCollapse, storeAdded, bookingStart, bookingStart + bookingSwipeDuration, bookingStart + 950, bookingStart + 1900, bookingStart + 2860], chatCues, [0, ...clipEnds]];
 const sceneStarts = [bookingStart + 4400 + chapterFadeDuration, chatHistoryStart + chatReviewDuration + chapterFadeDuration].reduce((starts, duration, index) => {
   starts.push(starts[index] + demoStarts[index] + duration);
   return starts;
@@ -91,6 +100,21 @@ const cues = [...demoCues.flatMap((beats, index) => [
   ...(index < 2 ? [sceneContentEnds[index]] : []),
 ]), ...closingGallerySlideCues, closingGallerySlideEnd, ...closingCues.map(at => closingStart + at)];
 const mediaPath = "/animations/one-mind/showcase/";
+let sneakerAssets: Promise<[typeof import("./oneMindSneaker"), ArrayBuffer]> | undefined;
+
+function preloadSneaker() {
+  return sneakerAssets ??= Promise.all([
+    import("./oneMindSneaker"),
+    fetch(mediaPath + "sport-sneaker.glb").then(response => {
+      if (!response.ok) throw new Error("Could not load sneaker model");
+      return response.arrayBuffer();
+    }),
+  ]).catch(error => {
+    sneakerAssets = undefined;
+    throw error;
+  });
+}
+
 const dates = Array.from({ length: 7 }, (_, index) => new Date(Date.UTC(2026, 4, 18 + index)));
 const times = ["09:00", "10:30", "14:00"];
 
@@ -143,74 +167,189 @@ function useSceneClock(open: boolean, visible: boolean) {
   return { cue, elapsed, playing, atEnd, run, seek, setPlaying };
 }
 
-const storePhotos = [mediaPath + "urban-sneaker-profile.webp", mediaPath + "urban-sneaker-angle.webp"];
+function storeAngle(time: number) {
+  const progress = Math.max(0, Math.min(1, (time - storeRotationStart) / storeRotationDuration));
+  return storeFullTurn * (progress * progress * (3 - 2 * progress));
+}
 
 function PointerIcon() {
   return <svg viewBox="0 0 20 24"><path d="M2 2v17l4.5-4.3 3.4 7 3-1.5-3.4-6.7 6.4-.4Z" /></svg>;
 }
 
-function StoreScene({ ui, locale, cue, moving, onInteract }: { ui: LandingUi; locale: string; cue: number; moving: boolean; onInteract: () => void }) {
-  const [selectedView, setSelectedView] = useState<number | null>(null);
-  const [cartOverride, setCartOverride] = useState<boolean | null>(null);
+type SneakerOrientation = { yaw: number; pitch: number };
+const initialSneakerOrientation = { yaw: 0, pitch: 0 };
+
+function StoreScene({ ui, locale, cue, clock, moving, onInteract }: {
+  ui: LandingUi; locale: string; cue: number; clock: RefObject<number>; moving: boolean; onInteract: () => void;
+}) {
+  const [selectedProduct, setSelectedProduct] = useState<0 | 1 | null>(null);
+  const [manualExpansion, setManualExpansion] = useState<boolean | null>(null);
+  const [selectedView, setSelectedView] = useState<SneakerOrientation | null>(null);
+  const [cartOverride, setCartOverride] = useState<0 | 1 | null | undefined>(undefined);
   const storeRef = useRef<HTMLDivElement>(null);
-  const viewTarget = useRef<HTMLButtonElement>(null);
+  const firstTarget = useRef<HTMLButtonElement>(null);
+  const secondTarget = useRef<HTMLButtonElement>(null);
+  const mediaTarget = useRef<HTMLDivElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const sneaker = useRef<Awaited<ReturnType<typeof loadSneaker>>>(null);
+  const drag = useRef<{ x: number; y: number; orientation: SneakerOrientation; wasExpanded: boolean; moved: boolean } | null>(null);
+  const orientation = useRef(initialSneakerOrientation);
   const cartTarget = useRef<HTMLButtonElement>(null);
-  const view = selectedView ?? Number(cue >= storeViewChanged);
-  const added = cartOverride ?? cue >= storeAdded;
+  const setOrientation = (value: SneakerOrientation) => {
+    onInteract();
+    setSelectedView(value);
+  };
+  const product = selectedProduct ?? (cue >= storeSecondSelected ? 1 : 0);
+  const second = product === 1;
+  const expanded = manualExpansion ?? (selectedProduct === null && cue >= storeExpand && cue < storeCollapse);
+  const productNames = [ui.oneMindStoreProduct, ui.oneMindSportSneaker];
+  const photos = ["urban-sneaker-profile.webp", "sport-sneaker-reference.webp"];
+  const cartProduct = cartOverride === undefined ? (cue >= storeAdded ? 1 : null) : cartOverride;
+  const added = cartProduct === product;
+
+  useEffect(() => {
+    const element = canvas.current;
+    if (!element) return;
+    let active = true;
+    void preloadSneaker().then(([{ loadSneaker }, data]) => {
+      if (active) return loadSneaker(element, data);
+    }).then(viewer => {
+      if (!viewer) return;
+      if (!active) {
+        viewer.dispose();
+        return;
+      }
+      sneaker.current = viewer;
+      viewer.draw(orientation.current.yaw, orientation.current.pitch);
+      element.dataset.modelReady = "true";
+    }).catch(() => {
+      if (active) element.dataset.modelReady = "false";
+    });
+    return () => {
+      active = false;
+      sneaker.current?.dispose();
+      sneaker.current = null;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!second) return;
+    let frame: number;
+    let previous: SneakerOrientation | undefined;
+    const paint = () => {
+      const pose = selectedView ?? { yaw: storeAngle(Math.max(cue, clock.current - demoStarts[0])), pitch: 0 };
+      orientation.current = pose;
+      if (pose.yaw !== previous?.yaw || pose.pitch !== previous?.pitch) {
+        sneaker.current?.draw(pose.yaw, pose.pitch);
+        previous = pose;
+      }
+      if (moving && selectedView === null && pose.yaw < storeFullTurn) frame = requestAnimationFrame(paint);
+    };
+    paint();
+    return () => cancelAnimationFrame(frame);
+  }, [clock, cue, moving, second, selectedView]);
 
   useLayoutEffect(() => {
     const store = storeRef.current;
-    const thumbnail = viewTarget.current;
+    const first = firstTarget.current;
+    const second = secondTarget.current;
+    const media = mediaTarget.current;
     const button = cartTarget.current;
-    if (!store || !thumbnail || !button) return;
+    if (!store || !first || !second || !media || !button) return;
     const placePointer = () => {
       const origin = store.getBoundingClientRect();
-      for (const [name, target] of [["view", thumbnail], ["cart", button]] as const) {
+      for (const [name, target] of [["first", first], ["second", second], ["view", media], ["cart", button]] as const) {
         const box = target.getBoundingClientRect();
-        store.style.setProperty(`--store-${name}-x`, `${box.left - origin.left + Math.min(box.width / 2, 30)}px`);
+        const x = name === "view" ? box.width * .30 : Math.min(box.width / 2, 30);
+        store.style.setProperty(`--store-${name}-x`, `${box.left - origin.left + x}px`);
         store.style.setProperty(`--store-${name}-y`, `${box.top - origin.top + box.height / 2}px`);
       }
+      store.style.setProperty("--store-view-travel", `${media.offsetWidth * .5}px`);
     };
     placePointer();
     const observer = new ResizeObserver(placePointer);
-    observer.observe(store);
-    observer.observe(button);
+    for (const element of [store, first, second, media, button]) observer.observe(element);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={storeRef} className={styles.store} data-store-added={added}>
+    <div ref={storeRef} className={styles.store} data-store-added={added} data-store-product={product}
+      style={{ "--store-motion-duration": `${storeMotionDuration}ms` } as CSSProperties}>
       <header>
         <strong>{ui.oneMindStoreTitle}</strong>
-        <span className={styles.cart} aria-label={ui.oneMindCart + ": " + Number(added)}>
+        <span className={styles.cart} aria-label={ui.oneMindCart + ": " + Number(cartProduct !== null)}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Zm4 1V6a3 3 0 0 1 6 0v3" /></svg>
-          <b>{Number(added)}</b>
+          <b>{Number(cartProduct !== null)}</b>
         </span>
       </header>
       <div className={styles.product}>
-        <div className={styles.productMedia}>
-          <img key={view} className={styles.productPhoto} src={storePhotos[view]} alt={ui.oneMindStoreProduct} width="640" height="512" />
-          <div className={styles.productViews}>
-            {storePhotos.map((photo, index) => (
-              <button key={photo} ref={index === 1 ? viewTarget : undefined} type="button" aria-label={`${ui.oneMindProductView} ${index + 1}`} aria-pressed={view === index} onClick={() => {
-                onInteract();
-                setSelectedView(index);
-              }}>
-                <img src={photo} alt="" width="36" height="28" />
+        <div ref={mediaTarget} className={styles.productMedia}>
+          <div className={styles.rotationStage} hidden={!second} data-expanded={expanded}>
+            <canvas ref={canvas} width={420} height={300} role="img" aria-label={productNames[1]}
+              onPointerDown={event => {
+                if (!event.isPrimary || event.button !== 0) return;
+                event.currentTarget.setPointerCapture(event.pointerId);
+                drag.current = { x: event.clientX, y: event.clientY, orientation: orientation.current, wasExpanded: expanded, moved: false };
+                setManualExpansion(true);
+                setOrientation(orientation.current);
+              }}
+              onPointerMove={event => {
+                if (drag.current && event.currentTarget.hasPointerCapture(event.pointerId)) {
+                  const dx = event.clientX - drag.current.x;
+                  const dy = event.clientY - drag.current.y;
+                  if (!drag.current.moved && Math.hypot(dx, dy) < 4) return;
+                  drag.current.moved = true;
+                  setOrientation({
+                    yaw: drag.current.orientation.yaw + dx * 2,
+                    pitch: drag.current.orientation.pitch + dy * 2,
+                  });
+                }
+              }}
+              onPointerUp={() => {
+                if (drag.current?.wasExpanded && !drag.current.moved) setManualExpansion(false);
+              }}
+              onLostPointerCapture={() => { drag.current = null; }}
+            />
+            <span className={styles.rotationBadge} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="9" />
+                <ellipse cx="12" cy="12" rx="4" ry="9" />
+                <path d="M3 12h18" />
+              </svg>
+              360°
+            </span>
+          </div>
+          {!second && (
+            <img className={styles.storeProductPhoto}
+              src={mediaPath + (selectedProduct === 0 || cue >= storeFirstSelected ? "urban-sneaker-angle.webp" : photos[0])}
+              alt={productNames[0]} width={420} height={300} />
+          )}
+        </div>
+        <div>
+          <div className={styles.storeProducts}>
+            {([0, 1] as const).map(index => (
+              <button type="button" key={index} ref={index === 0 ? firstTarget : secondTarget}
+                aria-label={productNames[index]} aria-pressed={product === index && (index === 1 || selectedProduct === 0 || cue >= storeFirstSelected)}
+                onClick={() => {
+                  onInteract();
+                  setSelectedProduct(index);
+                  setManualExpansion(null);
+                  setSelectedView(index === 1 ? initialSneakerOrientation : null);
+                }}>
+                <img src={mediaPath + photos[index]} width={40} height={30} alt="" />
               </button>
             ))}
           </div>
-        </div>
-        <div>
-          <strong>{ui.oneMindStoreProduct}</strong>
+          <strong>{productNames[product]}</strong>
           <span>{new Intl.NumberFormat(locale, { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(79)}</span>
           <button ref={cartTarget} type="button" className={styles.cartAction} aria-pressed={added} onClick={() => {
             onInteract();
-            setCartOverride(!added);
+            setManualExpansion(false);
+            setCartOverride(added ? null : product);
           }}>{added ? ui.oneMindAddedToCart : ui.oneMindAddToCart}</button>
         </div>
       </div>
-      {selectedView === null && cartOverride === null && (
+      {selectedProduct === null && selectedView === null && cartOverride === undefined && (
         <span className={`${styles.demoPointer} ${styles.storePointer}`} data-moving={moving} aria-hidden="true"><PointerIcon /></span>
       )}
     </div>
@@ -744,6 +883,10 @@ export function OneMindShowcase({
   const [sharedStart, setSharedStart] = useState<"normal" | "pending" | "blocked" | "started">("normal");
   const startingSharedAudio = useRef(false);
   const awaitingSharedAudio = sharedStart === "pending" || sharedStart === "blocked";
+  useEffect(() => {
+    if (introActive && !introPaused) void preloadSneaker().catch(() => undefined);
+  }, [introActive, introPaused]);
+
   const introHold = useRef(240);
   const { cue, elapsed, playing, atEnd, run, seek, setPlaying } = useSceneClock(open && examplesReady, visible && activeTab);
   const closing = open && cue >= closingStart;
@@ -1053,7 +1196,7 @@ export function OneMindShowcase({
                 <SceneHeading title={titles[scene]} spread={titleWrite[scene]} docked={chapterCue >= titleDock[scene]} showDemo={showDemo} />
               </div>
               <div className={styles.window} data-visible={showDemo} inert={!showDemo}>
-                {(showDemo || scene === 1) && <div className={styles.scene} data-scene={scene}>
+                {(showDemo || scene !== 2) && <div className={styles.scene} data-scene={scene}>
                   {scene === 0 && (
                     <div
                       className={styles.exampleFrame}
@@ -1061,7 +1204,7 @@ export function OneMindShowcase({
                       style={{ "--booking-swipe-duration": `${bookingSwipeDuration}ms` } as CSSProperties}
                     >
                       <div className={styles.exampleCard} data-example="store" data-active={!booking || swiping} inert={booking}>
-                        <StoreScene ui={ui} locale={locale} cue={demoCue} moving={!booking && advancing} onInteract={() => setPlaying(false)} />
+                        <StoreScene ui={ui} locale={locale} cue={demoCue} clock={elapsed} moving={showDemo && !booking && advancing} onInteract={() => setPlaying(false)} />
                       </div>
                       <div className={styles.exampleCard} data-example="booking" data-active={booking} inert={!booking}>
                         <BookingScene locale={locale} ui={ui} cue={demoCue - bookingStart} moving={booking && advancing} />

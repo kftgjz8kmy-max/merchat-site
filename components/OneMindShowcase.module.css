@@ -471,35 +471,102 @@
   padding-block-start: 12px;
 }
 
-.product .productPhoto {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1.25;
-  object-fit: contain;
-  border-radius: 12px;
-  background: #f5f4fb;
-}
-
 .productMedia {
   display: grid;
+  min-width: 0;
   gap: 5px;
 }
 
-.productViews { display: flex; gap: 5px; }
-.productViews button {
+.storeProductPhoto {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 5;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+  filter: brightness(1.1);
+}
+
+.storeProducts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.storeProducts button {
   display: grid;
   place-items: center;
-  min-width: 36px;
-  min-height: 29px;
-  padding: 0;
-  border: 1px solid #ded9ee;
-  border-radius: 6px;
-  background: #f7f5fb;
+  padding: 2px;
+  border: 1px solid #e1d9ee;
+  border-radius: 7px;
+  background: #f8f6fb;
   cursor: pointer;
 }
 
-.productViews button[aria-pressed="true"] { border-color: var(--demo-accent); background: #eee7fc; }
-.productViews img { display: block; width: 32px; height: 24px; object-fit: contain; }
+.storeProducts button[aria-pressed="true"] {
+  border-color: #6338b8;
+  background: #eee6fa;
+}
+
+.storeProducts img {
+  display: block;
+  width: clamp(28px, 6vw, 40px);
+  height: 26px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.rotationStage {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(.22,.75,.24,1), box-shadow 300ms ease;
+}
+
+.rotationStage[data-expanded="true"] {
+  transform: scale(1.26);
+  box-shadow: 0 8px 24px #29194621, 0 0 0 1px #eee9f6;
+}
+
+.rotationBadge {
+  position: absolute;
+  inset: auto auto 8px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: #f4effb;
+  color: #5126ad;
+  font-size: .65rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+}
+
+.rotationBadge svg { width: 13px; height: 13px; }
+
+.rotationStage[data-expanded="true"] .rotationBadge {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 120ms;
+}
+
+.rotationStage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+.rotationStage canvas:active { cursor: grabbing; }
 
 .product > div:not(.productMedia) {
   display: grid;
@@ -661,13 +728,14 @@
 .storePointer {
   right: auto;
   bottom: auto;
+  z-index: 2;
   animation-name: store-pointer;
-  animation-duration: 2050ms;
+  animation-duration: var(--store-motion-duration);
 }
 
 .storePointer svg {
   animation-name: store-click;
-  animation-duration: 2050ms;
+  animation-duration: var(--store-motion-duration);
 }
 
 /* The demo uses the same navy, blue and pale-blue surfaces as the hero conversation. */
@@ -1146,16 +1214,20 @@
 }
 
 @keyframes store-pointer {
-  0% { opacity: 0; left: calc(var(--store-view-x) + 58px); top: calc(var(--store-view-y) - 52px); }
-  12% { opacity: 1; }
-  29%, 39% { opacity: 1; left: var(--store-view-x); top: var(--store-view-y); }
-  68%, 84% { opacity: 1; left: var(--store-cart-x); top: var(--store-cart-y); }
+  0% { opacity: 0; left: calc(var(--store-first-x) + 36px); top: calc(var(--store-first-y) - 36px); }
+  9% { opacity: 1; }
+  9.93%, 20% { opacity: 1; left: var(--store-first-x); top: var(--store-first-y); }
+  28.31%, 31% { opacity: 1; left: var(--store-second-x); top: var(--store-second-y); }
+  35.66%, 41.91% { opacity: 1; left: var(--store-view-x); top: var(--store-view-y); }
+  41.91% { animation-timing-function: cubic-bezier(.3333, 0, .6667, 1); }
+  75.74%, 81.5% { opacity: 1; left: calc(var(--store-view-x) + var(--store-view-travel)); top: var(--store-view-y); }
+  89.89%, 94% { opacity: 1; left: var(--store-cart-x); top: var(--store-cart-y); }
   100% { opacity: 0; left: calc(var(--store-cart-x) + 10px); top: calc(var(--store-cart-y) + 12px); }
 }
 
 @keyframes store-click {
-  0%, 27%, 38%, 67%, 79%, 100% { scale: 1; }
-  33.17%, 73.17% { scale: .7; }
+  0%, 8%, 13%, 26%, 31%, 34%, 38%, 41%, 78%, 87%, 94%, 100% { scale: 1; }
+  9.93%, 28.31%, 35.66%, 41.91%, 75.74%, 89.89% { scale: .76; }
 }
 
 @container one-mind (width > 680px) {
