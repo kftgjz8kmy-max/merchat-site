@@ -1224,6 +1224,11 @@
   text-wrap: balance;
 }
 
+.stage[data-chapter="1"] [data-word-flight] .dockedTitle > span {
+  animation-name: dock-demo-title;
+  animation-delay: 0ms;
+}
+
 .stage[data-chapter="1"] .window {
   grid-area: 1 / 1;
   min-height: 0;

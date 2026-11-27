@@ -376,7 +376,7 @@
     }
     const introScale = composition
       ? width * composition.width / (724 / 1.2)
-      : Math.min(height * 0.79 / logo.height, width * 0.72 / logo.width);
+      : Math.min(height * 0.79 / logo.height, width * 0.72 / logo.width) * (inBanner ? 0.92 : 1);
     const restScale = Math.min(width / staticView.width, height * 0.864 / staticView.height);
     const rest = inBanner ? smooth(phase(time, restStart, duration)) : 0;
     const beat = composition ? (motion.matches ? 0 : clamp(composition.pulse))
