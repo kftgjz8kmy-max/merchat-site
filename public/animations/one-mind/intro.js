@@ -53,7 +53,6 @@
   const duration = currentBannerIntro
     ? waveEnd + restDuration
     : 5600 + nextLayerDelay;
-  const restStart = duration - restDuration;
   const staticView = { x: 227, y: 348, width: 648, height: 668 };
   const logo = { x: 551, y: 682.5, width: 584, height: 611 };
   const word = { x: 528, y: 615.5, width: 330, height: 101 };
@@ -374,16 +373,15 @@
     if (!wavePoints && (currentBannerIntro || rebuild) && time >= contourSettled) {
       wavePoints = sampleWave(document.querySelector("#contour-wave-axis"));
     }
+    const restScale = Math.min(width / staticView.width, height * 0.864 / staticView.height);
     const introScale = composition
       ? width * composition.width / (724 / 1.2)
-      : Math.min(height * 0.79 / logo.height, width * 0.72 / logo.width) * (inBanner ? 0.92 : 1);
-    const restScale = Math.min(width / staticView.width, height * 0.864 / staticView.height);
-    const rest = inBanner ? smooth(phase(time, restStart, duration)) : 0;
+      : inBanner ? restScale : Math.min(height * 0.79 / logo.height, width * 0.72 / logo.width);
     const beat = composition ? (motion.matches ? 0 : clamp(composition.pulse))
       : currentBannerIntro ? phase(time, waveStart, waveEnd) : 0;
     const pulse = pulseIntensity(beat);
-    const finalScale = mix(introScale, restScale, rest) * (1 + 0.10 * pulse);
-    const centerY = mix(logo.y, staticView.y + staticView.height / 2, rest);
+    const finalScale = introScale * (1 + 0.10 * pulse);
+    const centerY = inBanner ? staticView.y + staticView.height / 2 : logo.y;
     const initialScale = Math.min(width * 0.9 / word.width, height * 0.74 / word.height);
     const x = width * (composition?.x ?? 0.5) - logo.x * finalScale;
     const y = height * (composition?.y ?? 0.5) - centerY * finalScale;
@@ -474,7 +472,7 @@
     const holding = currentBannerIntro && previousTime >= contourSettled && elapsed < waveStart;
     if (needsDraw || (elapsed !== previousTime && !holding)) draw(elapsed);
     needsDraw = false;
-    // Let the parent shrink the iframe while the mark settles into its static viewBox.
+    // Start the parent transition at the end of the pulse.
     if (currentBannerIntro && elapsed >= waveEnd) startBannerDock();
     frame = requestAnimationFrame(tick);
   }
