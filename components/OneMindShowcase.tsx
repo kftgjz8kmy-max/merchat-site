@@ -541,6 +541,10 @@ function SceneHeading({ title, spread, docked, showDemo }: {
   );
 }
 
+function showcaseVideoSource(clip: (typeof clips)[number]) {
+  return mediaPath + clip.slug + ("shortSource" in clip ? ".mp4" : "-10s.mp4");
+}
+
 type FullscreenVideo = HTMLVideoElement & {
   webkitSupportsFullscreen?: boolean;
   webkitEnterFullscreen?: () => void;
@@ -555,7 +559,7 @@ function VideoScene({ ui, active, visible, animateOpening, onSelect, onBrowse, o
   const opening = animateOpening && !openingFinished && active === 0;
   const chapterRef = useRef<HTMLDivElement>(null);
   const openingClipRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<FullscreenVideo>(null);
+  const videosRef = useRef(new Map<number, FullscreenVideo>());
   const trackRef = useRef<HTMLDivElement>(null);
   const positioned = useRef(false);
   const browsing = useRef(false);
@@ -612,14 +616,14 @@ function VideoScene({ ui, active, visible, animateOpening, onSelect, onBrowse, o
   useEffect(() => () => window.clearTimeout(scrollEnd.current), []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (visible) void video.play().catch(() => {});
-    else video.pause();
+    const video = videosRef.current.get(active);
+    if (!video || !visible) return;
+    void video.play().catch(() => {});
+    return () => video.pause();
   }, [active, visible, run]);
 
   function expandClip() {
-    const video = videoRef.current;
+    const video = videosRef.current.get(active);
     if (!video) return;
 
     if (document.fullscreenEnabled && video.requestFullscreen) {
@@ -702,13 +706,18 @@ function VideoScene({ ui, active, visible, animateOpening, onSelect, onBrowse, o
                 } : undefined}>
                   <button className={styles.clipSelect} type="button" aria-label={`${ui.oneMindPlayClip} ${label}`}
                     aria-pressed={active === index} onClick={() => choose(index)} />
-                  {active === index ? (
+                  {active === index || index === active + 1 ? (
                     <>
-                      <video ref={videoRef} key={run} src={source + ("shortSource" in clip ? ".mp4" : "-10s.mp4")} poster={source + ".jpg"} muted playsInline preload="metadata" aria-label={label} onEnded={onEnd} />
-                      <button className={styles.clipFullscreen} type="button" onClick={expandClip}
+                      <video key={run} ref={video => {
+                        if (video) videosRef.current.set(index, video);
+                        else videosRef.current.delete(index);
+                      }} src={showcaseVideoSource(clip)} poster={source + ".jpg"} muted playsInline preload="auto"
+                        aria-label={active === index ? label : undefined} aria-hidden={active !== index}
+                        onEnded={active === index ? onEnd : undefined} />
+                      {active === index && <button className={styles.clipFullscreen} type="button" onClick={expandClip}
                         aria-label={ui.oneMindFullscreen} title={ui.oneMindFullscreen}>
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5" /></svg>
-                      </button>
+                      </button>}
                     </>
                   ) : (
                     <img src={source + ".jpg"} alt="" loading="lazy" />
@@ -1181,6 +1190,9 @@ export function OneMindShowcase({
           }}
         >
           {open && <>
+            {advancing && scene === 1 && demoCue >= chatHistoryStart - 5500 && (
+              <video hidden aria-hidden="true" muted playsInline preload="auto" src={showcaseVideoSource(clips[0])} />
+            )}
             <div
               className={styles.stage}
               data-chapter={scene}
@@ -1193,7 +1205,7 @@ export function OneMindShowcase({
                 <SceneHeading title={titles[scene]} spread={titleWrite[scene]} docked={chapterCue >= titleDock[scene]} showDemo={showDemo} />
               </div>
               <div className={styles.window} data-visible={showDemo} inert={!showDemo}>
-                {(showDemo || scene !== 2) && <div className={styles.scene} data-scene={scene}>
+                <div className={styles.scene} data-scene={scene}>
                   {scene === 0 && (
                     <div
                       className={styles.exampleFrame}
@@ -1214,7 +1226,7 @@ export function OneMindShowcase({
                       ui={ui}
                       active={activeClip}
                       animateOpening={!atEnd && !reducedMotion()}
-                      visible={examplesReady && visible && activeTab && (manualClip === null ? playing && demoCue < galleryEnd : clipPlayback === "playing")}
+                      visible={showDemo && examplesReady && visible && activeTab && (manualClip === null ? playing && demoCue < galleryEnd : clipPlayback === "playing")}
                       run={clipRun}
                       onBrowse={() => setPlaying(false)}
                       onEnd={() => setClipPlayback("ended")}
@@ -1231,7 +1243,7 @@ export function OneMindShowcase({
                       }}
                     />
                   )}
-                </div>}
+                </div>
               </div>
             </div>
             <div className={styles.controls} data-chapters-visible={showChapters} inert={!showChapters}>
